@@ -64,6 +64,7 @@ export const App = () => {
               )
             }
           />
+          <Route path="/home" element={<HomePage />} />
           <Route
             path="/login"
             element={
@@ -87,7 +88,7 @@ export const App = () => {
 
       <div className="mainContainer">
         <h2>
-          Ці елументи думонструють загальні стилі та іконки на сайті, під час
+          Ці елементи демонструють загальні стилі та іконки на сайті, під час
           роботи, видалити
         </h2>
         <div className={css.appContainer}>
