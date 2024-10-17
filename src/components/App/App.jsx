@@ -64,6 +64,7 @@ export const App = () => {
               )
             }
           />
+          <Route path="/home" element={<HomePage />} />
           <Route
             path="/login"
             element={
