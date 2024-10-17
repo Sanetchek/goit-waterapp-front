@@ -1,15 +1,15 @@
 import React from 'react';
-import DailyNorma from '../../components/DailyNorma';
-import WaterRatioPanel from '../../components/WaterRatioPanel';
-import TodayWaterList from '../../components/TodayWaterList';
-import MonthStatsTable from '../../components/MonthStatsTable';
+import DailyNorma from '../../components/DailyNorma/DailyNorma.jsx';
+import WaterRatioPanel from '../../components/WaterRatioPanel/WaterRatioPanel.jsx';
+import TodayWaterList from '../../components/TodayWaterList/TodayWaterList.jsx';
+import MonthStatsTable from '../../components/MonthStatsTable/MonthStatsTable.jsx';
 import './HomePage.css';
 
 export default function HomePage(params) {
   return (
     <div className={css.homePage}>
-      <DailyNorma />
       HomePage
+      <DailyNorma />
       <WaterRatioPanel />
       <TodayWaterList />
       <MonthStatsTable />
