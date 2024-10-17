@@ -13,24 +13,22 @@ export default function HomePage() {
       <div className={css.image}>
         <picture>
           <source
-            srcset="./img/about-me/foto-x1.jpg 1x, ./img/about-me/foto-x2.jpg 2x"
+            srcset="../../img/BotleHomescreen@1x-dec-min.jpg 1x, ../../img/Botle Home screen@2x-dec-min.jpg 2x"
             media="(min-width: 1280px)"
           />
           <source
-            srcset="
-            ./img/about-me/foto-tablet-x1.jpg 1x,
-            ./img/about-me/foto-tablet-x2.jpg 2x
-          "
+            srcset="../../img/Frame@1x-tablet-min.jpg 1x, ../../img/Frame@2x-tablet-min.jpg 2x"
             media="(min-width: 768px)"
           />
           <source
-            srcset="
-            ./img/about-me/foto-mobil-x1.jpg 1x,
-            ./img/about-me/foto-mobil-x1.jpg 2x
-          "
+            srcset="../../img/Frame@1x-mobile-min.jpg 1x, ../../img/Frame@2x-mobile-min.jpg 2x"
             media="(max-width: 768px)"
           />
-          <img class="foto" src="./img/about-me/foto-x1.jpg" alt="foto" />
+          <img
+            class="foto"
+            src="../../img/BotleHomescreen@1x-dec-min.jpg 1x"
+            alt="foto"
+          />
         </picture>
       </div>
       <WaterRatioPanel />
