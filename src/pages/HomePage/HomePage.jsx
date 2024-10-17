@@ -1,4 +1,5 @@
 import React from 'react';
+// import { useSelector } from 'react-redux';
 import DailyNorma from '../../components/DailyNorma/DailyNorma.jsx';
 import WaterRatioPanel from '../../components/WaterRatioPanel/WaterRatioPanel.jsx';
 import TodayWaterList from '../../components/TodayWaterList/TodayWaterList.jsx';
@@ -6,46 +7,39 @@ import MonthStatsTable from '../../components/MonthStatsTable/MonthStatsTable.js
 import css from './HomePage.module.css';
 
 export default function HomePage() {
+  // const isAuthenticated = useSelector(state => state.auth.isAuthenticated); // Перевірка статусу авторизації
+
+  // if (!isAuthenticated) {
+  //   return <h2>You must be logged in to view this page.</h2>; // Відображення повідомлення для неавторизованих користувачів
+  // }
   return (
     <div className={css.container}>
-      HomePage
-      <DailyNorma />
+      <h1 className={css.title}>HomePage</h1>
+      <DailyNorma className={css.norma} />
       <div className={css.image}>
         <picture>
           <source
-            srcset="../../img/BotleHomescreen@1x-dec-min.jpg 1x, ../../img/Botle Home screen@2x-dec-min.jpg 2x"
+            srcset="../../assets/images/BotleHomescreen@1x-dec-min.jpg 1x, ../../assets/images/BotleHomescreen@2x-dec-min.jpg 2x"
             media="(min-width: 1280px)"
           />
           <source
-            srcset="../../img/Frame@1x-tablet-min.jpg 1x, ../../img/Frame@2x-tablet-min.jpg 2x"
+            srcset="../../assets/images/Frame@1x-tablet-min.jpg 1x, ../../assets/images/Frame@2x-tablet-min.jpg 2x"
             media="(min-width: 768px)"
           />
           <source
-            srcset="../../img/Frame@1x-mobile-min.jpg 1x, ../../img/Frame@2x-mobile-min.jpg 2x"
+            srcset="../../assets/images/Frame@1x-mobile-min.jpg 1x, ../../assets/images/Frame@2x-mobile-min.jpg 2x"
             media="(max-width: 768px)"
           />
           <img
-            class="foto"
-            src="../../img/BotleHomescreen@1x-dec-min.jpg 1x"
+            className={css.foto}
+            src="../../assets/images/BotleHomescreen@1x-dec-min.jpg"
             alt="foto"
           />
         </picture>
       </div>
-      <WaterRatioPanel />
+      <WaterRatioPanel className={css.ratio} />
       <TodayWaterList />
       <MonthStatsTable />
     </div>
   );
 }
-
-// import { FcContacts } from "react-icons/fc";
-// import css from "./HomePage.module.css";
-
-// export default function Home() {
-//   return (
-//     <div className={css.container}>
-//       <FcContacts className={css.icon} />
-//       <h1 className={css.title}>Welcome to Phone book</h1>
-//     </div>
-//   );
-// }
