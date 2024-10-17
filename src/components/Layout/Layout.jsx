@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import AppBar from "../AppBar/AppBar";
 
 import css from "./Layout.module.css";
