@@ -1,0 +1,30 @@
+/* .home-page {
+  display: flex;
+  /* margin-top: 30px;
+
+
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px; */
+*/ .home-page {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Для планшетів (від 768px до 1439px) */
+@media screen and (min-width: 768px) {
+  .home-page {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Для десктопів (понад 1440px) */
+@media screen and (min-width: 1440px) {
+  .home-page {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+  }
+}

@@ -1,14 +1,15 @@
 import React from 'react';
-import DailyNorma from './components/DailyNorma';
-import WaterRatioPanel from './components/WaterRatioPanel';
-import TodayWaterList from './components/TodayWaterList';
-import MonthStatsTable from './components/MonthStatsTable';
+import DailyNorma from '../../components/DailyNorma';
+import WaterRatioPanel from '../../components/WaterRatioPanel';
+import TodayWaterList from '../../components/TodayWaterList';
+import MonthStatsTable from '../../components/MonthStatsTable';
+import './HomePage.css';
 
 export default function HomePage(params) {
   return (
-    <div>
-      HomePage
+    <div className={css.homePage}>
       <DailyNorma />
+      HomePage
       <WaterRatioPanel />
       <TodayWaterList />
       <MonthStatsTable />
