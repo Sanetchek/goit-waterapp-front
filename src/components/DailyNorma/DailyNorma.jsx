@@ -3,7 +3,7 @@ import DailyNormaModal from '../../components/DailyNormaModal/DailyNormaModa.jsx
 import css from './DailyNorma.module.css';
 
 export default function DailyNorma() {
-  const [dailyNorm, setDailyNorm] = useState(5.0);
+  const [dailyNorm, setDailyNorm] = useState(2.0);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleEditClick = () => {
@@ -16,8 +16,10 @@ export default function DailyNorma() {
 
   return (
     <div className={css.normaContainer}>
-      <h2>Розрахована денна норма: {dailyNorm} л</h2>
-      <button onClick={handleEditClick}>Edit</button>
+      <h2 className={css.title}>My daily norma </h2>
+      <div className={css.normWater}>
+        {dailyNorm}L <button onClick={handleEditClick}>Edit</button>
+      </div>
       {isModalOpen && (
         <DailyNormaModal onClose={closeModal} setDailyNorm={setDailyNorm} />
       )}
