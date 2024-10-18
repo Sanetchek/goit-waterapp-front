@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import DailyNormaModal from '../../components/DailyNormaModal/DailyNormaModa.jsx';
+import DailyNormaModal from '../DailyNormaModal/DailyNormaModal.jsx';
 import css from './DailyNorma.module.css';
 
 export default function DailyNorma() {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import TodayListModal from '../../components/TodayListModal/TodayListModal.jsx';
+import TodayListModal from '../TodayWaterList/TodayWaterList';
 import css from './WaterRatioPanel.module.css';
 
 export default function WaterRatioPanel({ dailyNorm }) {

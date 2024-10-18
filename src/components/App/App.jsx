@@ -17,7 +17,7 @@ import {
 } from '../../redux/auth/selectors'; // Import the selector
 
 import Modal from '../Modal/Modal'; // Move this import here
-import DailyNormaModal from 'components/DailyNormaModal/DailyNormaModal';
+import DailyNormaModal from '../DailyNormaModal/DailyNormaModal';
 
 const WellcomePage = lazy(() =>
   import('../../pages/WellcomePage/WellcomePage')
@@ -110,7 +110,7 @@ export const App = () => {
           <button className="btn-text1">Sign in</button>
           <button className="btn-text2">Add water</button>
           </div>
-          
+
           <div className={css.appContainer}>
           <button className={css.editBtn} onClick={openModal}>
             Edit
