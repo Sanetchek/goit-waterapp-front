@@ -109,9 +109,9 @@ export const App = () => {
           <button className="btn btn-red">Delete</button>
           <button className="btn-text1">Sign in</button>
           <button className="btn-text2">Add water</button>
-          </div>
+        </div>
 
-          <div className={css.appContainer}>
+        <div className={css.appContainer}>
           <button className={css.editBtn} onClick={openModal}>
             Edit
           </button>
