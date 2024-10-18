@@ -1,3 +1,3 @@
-export default function DailyNorma() {
+export default function DailyNormaModal() {
   return;
 }
