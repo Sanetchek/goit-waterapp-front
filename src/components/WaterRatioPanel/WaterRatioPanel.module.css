@@ -65,3 +65,10 @@ button:hover {
 .addButton:hover {
   background-color: #45a049;
 } */
+/* Для планшетів (від 768px до 1439px) */
+@media screen and (min-width: 768px) {
+}
+
+/* Для десктопів (понад 1440px) */
+@media screen and (min-width: 1440px) {
+}

@@ -1,79 +1,30 @@
-/* .container {
+.container {
   display: flex;
-
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
   gap: 16px;
-  padding: 16px 20px 16px 20px;
 }
 
- .title {
+.title {
+  display: none; /* Приховує елемент */
 }
-.norma {
-}
-.image {
-}
+/* .dailyNorma {
+  margin-left: auto;
+} */
+/* .image {
+} */
 .foto {
   border-radius: 20px;
   width: 320px;
   height: 374px;
   margin-bottom: 40px;
-} */
+}
 
 /* Для планшетів (від 768px до 1439px) */
-/* @media screen and (min-width: 768px) {
-  .container {
-    grid-template-columns: 1fr;
-  }
-} */
+@media screen and (min-width: 768px) {
+}
 
 /* Для десктопів (понад 1440px) */
-/* @media screen and (min-width: 1440px) {
-  .container {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
-  }
-} */
-
-/* Для мобільних та планшетів ЖПТ*/
-/* .home-container {
-  padding: 16px;
+@media screen and (min-width: 1440px) {
 }
-
-.grid-container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-} */
-
-/* Для десктопів */
-/* @media (min-width: 1024px) {
-  .grid-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-  }
-
-  .daily-norma,
-  .water-ratio-panel,
-  .today-water-list,
-  .month-stats-table {
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-  }
-}
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-}
-
-.foto {
-  max-width: 100%;
-  height: auto;
-  margin: 20px 0;
-} */
