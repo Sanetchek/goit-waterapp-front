@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/824.a601ca88.chunk.js","mappings":"4KAAe,SAASA,EAAaC,GACnC,OAAOC,EAAAA,EAAAA,KAAA,OAAAC,SAAK,+BACd,C","sources":["pages/WellcomePage/WellcomePage.jsx"],"sourcesContent":["export default function WellcomePage(params) {\n  return <div>Welcome to the application!</div>;\n};\n"],"names":["WellcomePage","params","_jsx","children"],"sourceRoot":""}
