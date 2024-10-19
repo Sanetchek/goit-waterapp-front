@@ -2,13 +2,14 @@ import React from 'react';
 import DailyNorma from '../../components/DailyNorma/DailyNorma.jsx';
 // import WaterRatioPanel from '../../components/WaterRatioPanel/WaterRatioPanel.jsx';
 // import TodayWaterList from '../../components/TodayWaterList/TodayWaterList.jsx';
-import MonthStatsTable from '../../components/MonthStatsTable/MonthStatsTable.jsx';
+// import MonthStatsTable from '../../components/MonthStatsTable/MonthStatsTable.jsx';
 import css from './HomePage.module.css';
 import botleImage from '../../assets/images/BotleHomescreen@1x-dec-min.jpg';
 import tabletImage1x from '../../assets/images/Frame@1x-tablet-min.jpg';
 import tabletImage2x from '../../assets/images/Frame@2x-tablet-min.jpg';
 import mobileImage1x from '../../assets/images/Frame@1x-mobile-min.jpg';
 import mobileImage2x from '../../assets/images/Frame@2x-mobile-min.jpg';
+import WaterListWithCalendar from 'components/WaterListWithCalendar/WaterListWithCalendar.jsx';
 
 export default function HomePage() {
   // const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
@@ -36,7 +37,7 @@ export default function HomePage() {
       </div>
       {/* <WaterRatioPanel />
       <TodayWaterList /> */}
-      <MonthStatsTable />
+      <WaterListWithCalendar />
     </div>
   );
 }
