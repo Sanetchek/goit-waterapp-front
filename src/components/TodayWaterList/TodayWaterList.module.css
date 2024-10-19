@@ -1,0 +1,112 @@
+li {
+  list-style: none;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+}
+
+.listContainer {
+  max-height: 260px;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.emptyState {
+  height: 200px;
+}
+
+.addButtonContainer {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+
+.addButton .icon {
+  font-size: 16px;
+  vertical-align: middle;
+}
+
+.addButton {
+  display: inline-flex;
+  align-items: center;
+  border: none;
+  background: none;
+  color: #407bff;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 5px;
+  line-height: 1;
+  padding: 0;
+  outline: none;
+}
+
+.addButton:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.addText {
+  color: #407bff;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.25;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+.buttonContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  padding: 5px;
+}
+
+.scrollContainer {
+  overflow-y: auto;
+  flex: 1;
+  padding-right: 5px;
+}
+
+.scrollContainer::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scrollContainer::-webkit-scrollbar-track {
+  background: #d7e3ff;
+}
+
+.scrollContainer::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #9ebbff, #8db5e0);
+  border-radius: 4px;
+  width: 6px;
+}
+
+.scrollContainer::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #8db5e0, #9ebbff);
+}
+
+@media (min-width: 768px) {
+  .addText {
+    font-size: 18px;
+    line-height: 1.33;
+    margin-top: 5px;
+  }
+  .addButton {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .addText {
+    margin-top: 3px;
+  }
+}
