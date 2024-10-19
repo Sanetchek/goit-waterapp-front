@@ -26,21 +26,16 @@ const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
 const RegistrationPage = lazy(() =>
   import('../../pages/RegistrationPage/RegistrationPage')
 );
-const LoginPage = lazy(() => import('../../pages/LoginPage/LoginPage'));
+const SigninPage = lazy(() => import('../../pages/SigninPage/SigninPage'));
 const NotFoundPage = lazy(() =>
   import('../../pages/NotFoundPage/NotFoundPage')
 );
 
 export const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [passwordVisible, setPasswordVisible] = useState(false);
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
   const isLoggedIn = useSelector(selectIsAuthenticated); // Get logged-in status
-
-  const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible);
-  };
 
   useEffect(() => {
     dispatch(refreshUser());
@@ -69,7 +64,7 @@ export const App = () => {
           <Route
             path="/login"
             element={
-              <RestrictedRoute component={<LoginPage />} redirectTo="/" />
+              <RestrictedRoute component={<SigninPage />} redirectTo="/" />
             }
           />
           <Route
@@ -102,23 +97,23 @@ export const App = () => {
               <p>This is the modal content!</p>
             </Modal>
           )}
-          </div>
+        </div>
 
         <div>
           <button className="btn">Cancel</button>
           <button className="btn btn-red">Delete</button>
           <button className="btn-text1">Sign in</button>
           <button className="btn-text2">Add water</button>
-          </div>
-          
-          <div className={css.appContainer}>
+        </div>
+
+        <div className={css.appContainer}>
           <button className={css.editBtn} onClick={openModal}>
             Edit
           </button>
 
           {isModalOpen && (
             <Modal title="My daily norma" onClose={closeModal}>
-                <DailyNormaModal onClose={closeModal} />
+              <DailyNormaModal onClose={closeModal} />
             </Modal>
           )}
         </div>
@@ -190,31 +185,6 @@ export const App = () => {
             <br />
             <br />
 
-            {/* Password Input */}
-            <label htmlFor="passwordInput">Password:</label>
-            <div className="passwordWrap">
-              <input
-                type={passwordVisible ? 'text' : 'password'}
-                id="passwordInput"
-                name="passwordInput"
-                placeholder="Enter password"
-                className="error"
-              />
-              <span onClick={togglePasswordVisibility} className="passwordEye">
-                {passwordVisible ? (
-                  <svg className="icon-eye-slash" width="24" height="24">
-                    <use href={`${snippets}#icon-eye-slash`}></use>
-                  </svg>
-                ) : (
-                  <svg className="icon-eye" width="24" height="24">
-                    <use href={`${snippets}#icon-eye`}></use>
-                  </svg>
-                )}
-              </span>
-            </div>
-            <br />
-            <br />
-
             {/* Telephone Input */}
             <label htmlFor="telInput">Telephone:</label>
             <input
@@ -268,17 +238,6 @@ export const App = () => {
             {/* Week Input */}
             <label htmlFor="weekInput">Week:</label>
             <input type="week" id="weekInput" name="weekInput" />
-            <br />
-            <br />
-
-            {/* Email Input */}
-            <label htmlFor="emailInput">Email:</label>
-            <input
-              type="email"
-              id="emailInput"
-              name="emailInput"
-              placeholder="Enter your email"
-            />
             <br />
             <br />
 
