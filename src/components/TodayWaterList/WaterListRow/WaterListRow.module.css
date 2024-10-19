@@ -1,0 +1,91 @@
+li {
+  list-style: none;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px 5px 5px;
+  border-bottom: 1px solid #d7e3ff;
+  transition: background-color 0.3s ease;
+}
+
+.listItem:hover {
+  background-color: #eef2ff;
+}
+
+.icon {
+  margin-right: 12px;
+  color: #407bff;
+  width: 16px;
+  height: 21px;
+}
+
+.volume {
+  margin-right: 16px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.33;
+  color: #407bff;
+}
+
+.time {
+  margin-right: auto;
+  font-size: 12px;
+  color: #333;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 2;
+}
+
+button.editButton,
+button.deleteButton {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+}
+
+.editButton,
+.deleteButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+.editButton .editIcon {
+  color: #9ebbff;
+  width: 12px;
+  height: 12px;
+  transition: color 0.3s ease;
+}
+
+.editButton:hover .editIcon {
+  color: #407bff;
+}
+
+.deleteButton .deleteIcon {
+  color: #ef5050;
+  width: 12px;
+  height: 12px;
+  transition: color 0.3s ease;
+}
+
+.deleteButton:hover .deleteIcon {
+  color: #d32f2f;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: none;
+}

@@ -1,10 +1,10 @@
 import React from 'react';
 // import { useSelector } from 'react-redux';
 import DailyNorma from '../../components/DailyNorma/DailyNorma.jsx';
-import WaterRatioPanel from '../../components/WaterRatioPanel/WaterRatioPanel.jsx';
-import TodayWaterList from '../../components/TodayWaterList/TodayWaterList.jsx';
-import MonthStatsTable from '../../components/MonthStatsTable/MonthStatsTable.jsx';
+// import WaterRatioPanel from '../../components/WaterRatioPanel/WaterRatioPanel.jsx';
+
 import css from './HomePage.module.css';
+import WaterListWithCalendar from 'components/WaterListWithCalendar/WaterListWithCalendar.jsx';
 
 export default function HomePage() {
   // const isAuthenticated = useSelector(state => state.auth.isAuthenticated); // Перевірка статусу авторизації
@@ -37,9 +37,9 @@ export default function HomePage() {
           />
         </picture>
       </div>
-      <WaterRatioPanel className={css.ratio} />
-      <TodayWaterList />
-      <MonthStatsTable />
+      {/* <WaterRatioPanel className={css.ratio} /> */}
+
+      <WaterListWithCalendar />
     </div>
   );
 }
