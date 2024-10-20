@@ -65,7 +65,7 @@ export const App = () => {
             element={
               <RestrictedRoute
                 component={<SignupPage onSuccess={handleSuccess} />}
-                redirectTo="/"
+                redirectTo="/signin"
               />
             }
           />

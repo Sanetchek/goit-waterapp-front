@@ -25,7 +25,7 @@ label {
   text-align: left;
 }
 
-input {
+.customInput {
   width: 280px;
   height: 44px;
   padding: 12px 10px;

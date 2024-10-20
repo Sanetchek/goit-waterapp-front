@@ -19,16 +19,19 @@ const AuthForm = ({ onSuccess }) => {
 
   const handleSubmit = async values => {
     try {
-      const response = await fetch('http://localhost:3000/api/auth/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: values.email,
-          password: values.password,
-        }),
-      });
+      const response = await fetch(
+        'https://waterapp-hfy2.onrender.com/api-docs/auth/signup',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: values.email,
+            password: values.password,
+          }),
+        }
+      );
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -69,7 +72,13 @@ const AuthForm = ({ onSuccess }) => {
           <h1 className={styles.signUpTitle}>Sign Up</h1>
           <label>
             Enter your email
-            <Field type="email" name="email" placeholder="E-mail" required />
+            <Field
+              type="email"
+              name="email"
+              placeholder="E-mail"
+              className={styles.customInput}
+              required
+            />
             <ErrorMessage
               name="email"
               component="div"
@@ -83,6 +92,7 @@ const AuthForm = ({ onSuccess }) => {
                 type={showPassword ? 'text' : 'password'}
                 name="password"
                 placeholder="Password"
+                className={styles.customInput}
                 required
               />
               <img
@@ -105,6 +115,7 @@ const AuthForm = ({ onSuccess }) => {
                 type={showRepeatPassword ? 'text' : 'password'}
                 name="repeatPassword"
                 placeholder="Repeat password"
+                className={styles.customInput}
                 required
               />
               <img
@@ -121,8 +132,12 @@ const AuthForm = ({ onSuccess }) => {
             />
           </label>
           {error && <div className={styles.errorMessage}>{error}</div>}
-          <button type="submit">Sign Up</button>
-          <Link to="/signin">Sign in</Link>
+          <button type="submit" className={styles.submitButton}>
+            Sign Up
+          </button>
+          <Link to="/signin" className={styles.signInLink}>
+            Sign in
+          </Link>
         </Form>
       )}
     </Formik>

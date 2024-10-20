@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { toast } from 'react-hot-toast';
 
 axios.defaults.baseURL = 'https://waterapp-hfy2.onrender.com/';
 
@@ -15,6 +16,7 @@ export const register = createAsyncThunk(
       setAuthHead(response.data.token);
       return response.data;
     } catch (error) {
+      toast.error('Registration failed. Please try again.');
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -26,9 +28,15 @@ export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
     setAuthHead(response.data.token);
     return response.data;
   } catch (error) {
-    return thunkAPI.rejectWithValue(error.message);
+    const errorMessage =
+      error.response?.data?.message || 'Login failed, try again.';
+    toast.error(errorMessage);
+    return thunkAPI.rejectWithValue(errorMessage);
   }
 });
+
+// Додаємо експорт signin для сумісності
+export const signin = login;
 
 export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
@@ -46,6 +54,10 @@ export const refreshUser = createAsyncThunk(
     const reduxState = thunkAPI.getState();
     const token = reduxState.auth.token;
 
+    if (!token) {
+      return thunkAPI.rejectWithValue('No valid token');
+    }
+
     setAuthHead(token);
 
     try {
@@ -54,11 +66,5 @@ export const refreshUser = createAsyncThunk(
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
-  },
-  {
-    condition: (_, thunkAPI) => {
-      const reduxState = thunkAPI.getState();
-      return reduxState.auth.token !== null;
-    },
   }
 );

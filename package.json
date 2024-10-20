@@ -2,7 +2,7 @@
   "name": "react-homework-template",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://goitacademy.github.io/react-homework-template/",
+  "homepage": "https://goit-waterapp-front.vercel.app/",
   "dependencies": {
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
@@ -21,6 +21,7 @@
     "formik": "^2.4.6",
     "nanoid": "^5.0.7",
     "react": "^18.3.1",
+    "react-custom-scrollbars-2": "^4.5.0",
     "react-dom": "^18.3.1",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^5.2.1",

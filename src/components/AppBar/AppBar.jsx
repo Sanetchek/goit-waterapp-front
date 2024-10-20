@@ -17,6 +17,9 @@ export default function AppBar({ username }) {
 
       <nav className={css.nav}>
         <NavLink to="/" className={buildLinkClass}>
+          Wellcome
+        </NavLink>
+        <NavLink to="/home" className={buildLinkClass}>
           Home
         </NavLink>
         <NavLink to="/signin" className={buildLinkClass}>
