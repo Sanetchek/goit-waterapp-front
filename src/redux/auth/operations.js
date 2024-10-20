@@ -1,13 +1,12 @@
-import axios from "axios";
-import {
-  createAsyncThunk
-} from '@reduxjs/toolkit'
+import axios from 'axios';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import toast from 'react-hot-toast';
 
-axios.defaults.baseURL = "https://connections-api.goit.global/";
+axios.defaults.baseURL = 'https://waterapp-hfy2.onrender.com/';
 
-const setAuthHead = (token) => {
+const setAuthHead = token => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-}
+};
 
 export const register = createAsyncThunk(
   'auth/register',
@@ -21,38 +20,35 @@ export const register = createAsyncThunk(
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
-  },
-)
+  }
+);
 
-export const login = createAsyncThunk(
-  'auth/login',
-  async (user, thunkAPI) => {
-    try {
-      const response = await axios.post('/users/login', user);
+export const signin = createAsyncThunk('auth/login', async (user, thunkAPI) => {
+  try {
+    const response = await axios.post('/auth/login', user);
 
-      setAuthHead(response.data.token);
+    setAuthHead(response.data.token);
 
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  },
-)
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message || 'Login failed, try again.';
+    toast.error(errorMessage);
+    return thunkAPI.rejectWithValue(errorMessage);
+  }
+});
 
-export const logout = createAsyncThunk(
-  'auth/logout',
-  async (_, thunkAPI) => {
-    try {
-      const response = await axios.post('/users/logout');
+export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+  try {
+    const response = await axios.post('/users/logout');
 
-      setAuthHead("");
+    setAuthHead('');
 
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  },
-)
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
 
 export const refreshUser = createAsyncThunk(
   'auth/refresh',
@@ -73,6 +69,6 @@ export const refreshUser = createAsyncThunk(
     condition: (_, thunkAPI) => {
       const reduxState = thunkAPI.getState();
       return reduxState.auth.token !== null;
-    }
+    },
   }
-)
+);

@@ -22,13 +22,12 @@ const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
 const RegistrationPage = lazy(() =>
   import('../../pages/RegistrationPage/RegistrationPage')
 );
-const LoginPage = lazy(() => import('../../pages/LoginPage/LoginPage'));
+const SigninPage = lazy(() => import('../../pages/SigninPage/SigninPage'));
 const NotFoundPage = lazy(() =>
   import('../../pages/NotFoundPage/NotFoundPage')
 );
 
 export const App = () => {
-  const [passwordVisible, setPasswordVisible] = useState(false);
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
   const isLoggedIn = useSelector(selectIsAuthenticated); // Get logged-in status
@@ -60,7 +59,7 @@ export const App = () => {
           <Route
             path="/login"
             element={
-              <RestrictedRoute component={<LoginPage />} redirectTo="/" />
+              <RestrictedRoute component={<SigninPage />} redirectTo="/" />
             }
           />
           <Route
