@@ -1,0 +1,116 @@
+h1,
+h2,
+h3 {
+  margin: 0;
+  padding: 0;
+}
+p {
+  margin: 0;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.boxComsamption {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  align-items: flex-start;
+}
+.headerWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 246px;
+  width: 100%;
+}
+.header {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.14286;
+  letter-spacing: -0.03em;
+  color: #2f2f2f;
+}
+.subHeader {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.25;
+  color: #2f2f2f;
+}
+.trackerBenefitsBox {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  max-width: 216px;
+}
+
+.benefitsSubHeader {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.1;
+  color: #2f2f2f;
+}
+.benefitsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.benefitItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.benefitText {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.25;
+  color: #2f2f2f;
+}
+.benefitIcon {
+  display: block;
+  flex-shrink: 0;
+  fill: #407bff;
+}
+.tryBtn {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.25;
+  text-align: center;
+  color: #fff;
+
+  border-radius: 10px;
+  padding: 8px 30px;
+
+  width: 280px;
+
+  box-shadow: 0 4px 8px 0 rgba(64, 123, 255, 0.34);
+  background: #407bff;
+  border: none;
+  cursor: pointer;
+}
+.tryBtn:hover {
+  box-shadow: 0 4px 14px 0 rgba(64, 123, 255, 0.54);
+}
+
+/* @media screen and (min-width: 768px) {
+  .mainContainer {
+    max-width: 768px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .mainContainer {
+    max-width: 1440px;
+    padding-left: 112px;
+    padding-right: 112px;
+  }
+} */
