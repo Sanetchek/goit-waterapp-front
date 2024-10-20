@@ -12,16 +12,20 @@ export default function DailyNorma() {
 
   const closeModal = () => {
     setIsModalOpen(false);
+  }
+  const handleSave = (newNorm) => {
+    setDailyNorm(newNorm);
+    setIsModalOpen(false);
   };
 
   return (
     <div className={css.normaContainer}>
-      <h2 className={css.title}>My daily norma </h2>
+      <h2 className={css.title}>My daily norma</h2>
       <div className={css.normWater}>
-        {dailyNorm}L <button onClick={handleEditClick}>Edit</button>
+        {dailyNorm}L <button className={css.editBtn} onClick={handleEditClick}>Edit</button>
       </div>
       {isModalOpen && (
-        <DailyNormaModal onClose={closeModal} setDailyNorm={setDailyNorm} />
+        <DailyNormaModal onClose={closeModal} onSave={handleSave} />
       )}
     </div>
   );
