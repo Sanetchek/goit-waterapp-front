@@ -1,0 +1,57 @@
+.signupPage {
+  display: flex;
+  width: 280px;
+  position: relative;
+}
+
+.waterBottle {
+  position: absolute;
+  bottom: 0;
+  right: 10px;
+  max-width: 300px;
+  height: auto;
+  opacity: 0.8;
+}
+
+@media (min-width: 768px) {
+  .signupPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin-top: 40px;
+    margin-bottom: 156px;
+    width: 336px;
+  }
+
+  .waterBottle {
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+    max-width: 300px;
+    height: auto;
+    opacity: 0.8;
+  }
+}
+
+@media (min-width: 1440px) {
+  .signupPage {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-top: 148px;
+  }
+
+  .waterBottle {
+    position: relative;
+    width: auto;
+    max-width: 300px;
+    height: auto;
+    opacity: 0.8;
+    margin-left: 20px;
+    max-width: 916px;
+  }
+}
