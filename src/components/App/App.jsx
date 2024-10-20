@@ -72,7 +72,7 @@ export const App = () => {
             }
           />
           <Route
-            path="/register"
+            path="/signup"
             element={
               <RestrictedRoute
                 component={<RegistrationPage />}
