@@ -3,6 +3,7 @@ import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import styles from './MonthStatsTable.module.css';
 import clsx from 'clsx';
 import Loading from '../Loading/Loading';
+import DaysGeneralStats from '../DaysGeneralStats/DaysGeneralStats'; // імпорт
 
 const fetchDataForMonth = (year, month) => {
   return new Promise(resolve => {
@@ -11,6 +12,9 @@ const fetchDataForMonth = (year, month) => {
       const data = Array.from({ length: daysInMonth }, (_, i) => ({
         id: i + 1,
         percentage: Math.floor(Math.random() * 101),
+        date: `${i + 1}/${month + 1}/${year}`, // Додає дату
+        dailyNorm: 2, // Денна норма води
+        servings: Math.floor(Math.random() * 10), // Додає к-сть порцій
       }));
       resolve(data);
     }, 1000);
@@ -23,6 +27,7 @@ const MonthStatsTable = () => {
   const [currentMonth, setCurrentMonth] = useState(today.getMonth());
   const [currentMonthData, setCurrentMonthData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedDayData, setSelectedDayData] = useState(null); // Для вибору дня
 
   useEffect(() => {
     setIsLoading(true);
@@ -51,6 +56,14 @@ const MonthStatsTable = () => {
         return newMonth;
       });
     }
+  };
+
+const handleDayClick = day => {
+    setSelectedDayData(day); // Вибраний день
+  };
+
+  const closeModal = () => {
+    setSelectedDayData(null); // Закриття модального вікна
   };
 
   return (
@@ -93,7 +106,8 @@ const MonthStatsTable = () => {
                   [styles.zeroPercentage]: day.percentage === 0,
                 });
                 return (
-                  <li key={day.id} className={styles.dayWrapper}>
+                  <li key={day.id} className={styles.dayWrapper} onClick={() => handleDayClick(day)} // Відкриття модалки
+                  >
                     <div className={circleClass}>
                       <p className={styles.calendarDay}>{day.id}</p>
                     </div>
@@ -105,6 +119,12 @@ const MonthStatsTable = () => {
           )}
         </div>
       </div>
+       {selectedDayData && (
+        <DaysGeneralStats
+    selectedDayData={selectedDayData} // Передавання данних
+    onClose={closeModal}
+  />
+      )}
     </>
   );
 };

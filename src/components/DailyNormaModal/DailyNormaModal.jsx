@@ -25,7 +25,11 @@ export default function DailyNormaModal ({ onClose, onSave }) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    onSave(waterResult)
+    if (waterToDrink.trim() === "") {
+      onSave(waterResult)
+    } else {
+      onSave(waterToDrink)
+    }
   };
 
   return (<div className={css.modalBackdrop} onClick={onClose}>
@@ -45,7 +49,7 @@ export default function DailyNormaModal ({ onClose, onSave }) {
         <InputField label="Your weight in kilograms:" value={weight} setValue={setWeight} />
         <InputField label="The time of active participation in hours:" value={activityTime} setValue={setActivityTime} />
         <WaterResult result={waterResult} />
-        <InputResult value={waterToDrink} setValue={setWaterToDrink} />
+      <InputResult value={waterToDrink} setValue={setWaterToDrink} />
             <button className={css.btnSave} onClick={handleSubmit}>Save</button>
     </div>
     </div>)}
