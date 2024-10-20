@@ -1,0 +1,53 @@
+li {
+  list-style: none;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+.container {
+  width: 280px;
+  margin: 0 auto;
+  padding: 24px 12px;
+  background-color: #ecf2ff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(236, 242, 255, 0.8);
+  display: flex;
+  flex-direction: column;
+}
+
+.todayText {
+  text-align: left;
+  margin-bottom: 16px;
+  color: #2f2f2f;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.waterList {
+  margin-bottom: 24px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    min-width: 700px;
+    padding: 32px 24px;
+    border-radius: 16px;
+  }
+
+  .todayText {
+    font-size: 26px;
+    margin-bottom: 16px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+    min-width: 600px;
+    border-radius: 20px;
+  }
+}
