@@ -36,9 +36,6 @@ export const App = () => {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
-
   return isRefreshing ? (
     <Loading />
   ) : (
