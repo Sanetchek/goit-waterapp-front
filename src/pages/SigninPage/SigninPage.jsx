@@ -1,3 +1,3 @@
 export default function LoginPage(params) {
-  return <div>LoginPage</div>;
-};
+  return <div>SigninPage</div>;
+}
