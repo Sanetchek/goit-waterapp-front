@@ -52,9 +52,8 @@ export const App = () => {
               )
             }
           />
-          <Route path="/home" element={<HomePage />} />
           <Route
-            path="/login"
+            path="/signin"
             element={
               <RestrictedRoute component={<SigninPage />} redirectTo="/" />
             }
