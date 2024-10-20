@@ -1,0 +1,29 @@
+.mainContainer {
+  max-width: 320px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 40px;
+  margin-left: auto;
+  margin-right: auto;
+
+  background-image: url('../../../public/images/main-Imgs/Main-bg-mobile@2x.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
+}
+
+/* @media screen and (min-width: 768px) {
+  .mainContainer {
+    max-width: 768px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .mainContainer {
+    max-width: 1440px;
+    padding-left: 112px;
+    padding-right: 112px;
+  }
+} */
