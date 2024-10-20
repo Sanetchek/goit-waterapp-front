@@ -47,6 +47,10 @@ h2{
         box-shadow: 0 4px 8px 0 rgba(64, 123, 255, 0.34);
 }
 
+.modalContent{
+    max-width: 256px;
+}
+
 /* Для планшетів (від 768px до 1439px) */
 @media screen and (min-width: 768px) {
     .btnSave {display: block;
@@ -55,10 +59,15 @@ h2{
             font-size: 18px;
             margin-left: auto;
         }
+        .modalContent{
+    max-width: 704px;
+}
 }
 
 
 /* Для десктопів (понад 1440px) */
 @media screen and (min-width: 1440px) {
-
+.modalContent {
+        max-width: 592px;
+    }   
 }
