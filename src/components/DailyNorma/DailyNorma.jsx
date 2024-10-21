@@ -15,7 +15,7 @@ export default function DailyNorma() {
   };
 
   return (
-    <div className={css.normaContainer}>
+    <div className={css.modalContainer}>
       <h2 className={css.title}>My daily norma </h2>
       <div className={css.normWater}>
         {dailyNorm}L <button onClick={handleEditClick}>Edit</button>
