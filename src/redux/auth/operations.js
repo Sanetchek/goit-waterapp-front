@@ -8,11 +8,11 @@ const setAuthHead = token => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
-export const register = createAsyncThunk(
+export const signup = createAsyncThunk(
   'auth/register',
   async (newUser, thunkAPI) => {
     try {
-      const response = await axios.post('/signup', newUser);
+      const response = await axios.post('auth/register', newUser);
       setAuthHead(response.data.token);
       return response.data;
     } catch (error) {
@@ -22,25 +22,24 @@ export const register = createAsyncThunk(
   }
 );
 
-export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
+export const signin = createAsyncThunk('auth/login', async (user, thunkAPI) => {
   try {
-    const response = await axios.post('/signin', user);
+    const response = await axios.post('auth/login', user);
     setAuthHead(response.data.token);
+    console.log(response.data)
     return response.data;
   } catch (error) {
     const errorMessage =
       error.response?.data?.message || 'Login failed, try again.';
     toast.error(errorMessage);
+    console.log(errorMessage)
     return thunkAPI.rejectWithValue(errorMessage);
   }
 });
 
-// Додаємо експорт signin для сумісності
-export const signin = login;
-
 export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
-    const response = await axios.post('/logout');
+    const response = await axios.post('auth/logout');
     setAuthHead('');
     return response.data;
   } catch (error) {
