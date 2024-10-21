@@ -3,28 +3,45 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 16px;
+  /* gap: 16px; */
+  margin-bottom: 12px;
 }
 
 .title {
-  display: none; /* Приховує елемент */
-}
-/* .dailyNorma {
-  margin-left: auto;
-} */
-/* .image {
-} */
-.foto {
-  border-radius: 20px;
-  width: 320px;
-  height: 374px;
-  margin-bottom: 40px;
+  display: none;
 }
 
-/* Для планшетів (від 768px до 1439px) */
+.imageModal {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+.photo {
+  width: 280px;
+  height: 208px;
+}
+
 @media screen and (min-width: 768px) {
+  .imageModal {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+  }
+  .photo {
+    width: 518px;
+    height: 386px;
+  }
 }
 
-/* Для десктопів (понад 1440px) */
 @media screen and (min-width: 1440px) {
+  .container {
+    display: flex;
+    justify-content: flex-start; /* Зсуває блоки вліво */
+    align-items: flex-start; /* Вирівнює блоки по верхній частині */
+  }
+
+  .photo {
+    width: 738px;
+    height: 548px;
+  }
 }
