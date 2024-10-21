@@ -3,8 +3,8 @@ import './Modal.module.css';
 
 const Modal = ({ day, onClose }) => {
   return (
-    <div className="modal-backdrop" onClick={onClose}>
-      <div className="modal-content" onClick={e => e.stopPropagation()}>
+    <div className="modalBackdrop" onClick={onClose}>
+      <div className="modalContent" onClick={e => e.stopPropagation()}>
         <h3>{day.id}</h3>
         <p>
           Daily norma: <strong>{day.dailyNorm} L</strong>
@@ -15,7 +15,9 @@ const Modal = ({ day, onClose }) => {
         <p>
           How many servings of water: <strong>{day.servings}</strong>
         </p>
-        <button onClick={onClose}>Close</button>
+        <button className="modalBtn" onClick={onClose}>
+          Close
+        </button>
       </div>
     </div>
   );
