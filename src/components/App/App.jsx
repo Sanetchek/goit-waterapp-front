@@ -7,7 +7,6 @@ import { Toaster } from 'react-hot-toast';
 import Loading from '../Loading/Loading';
 import Layout from '../Layout/Layout';
 import RestrictedRoute from '../RestrictedRoute/RestrictedRoute';
-// import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import { refreshUser } from '../../redux/auth/operations';
 import {
   selectIsRefreshing,
@@ -67,7 +66,7 @@ export const App = () => {
             element={
               <RestrictedRoute
                 component={<SignupPage onSuccess={handleSuccess} />}
-                redirectTo="/signin"
+                redirectTo="/"
               />
             }
           />
