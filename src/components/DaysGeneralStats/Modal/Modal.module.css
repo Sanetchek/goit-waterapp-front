@@ -17,7 +17,7 @@
     text-align: center;
 }
 
-button {
-    margin-top: 20px;
-    padding: 10px 20px;
+button.modalBtn {
+  margin-top: 20px;
+  padding: 10px 20px;
 }
