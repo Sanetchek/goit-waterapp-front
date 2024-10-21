@@ -1,9 +1,7 @@
-import React, { Suspense, lazy, useState, useEffect } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-
-import css from './App.module.css';
 
 import Loading from '../Loading/Loading';
 import Layout from '../Layout/Layout';
