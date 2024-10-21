@@ -22,9 +22,9 @@ ul {
 
 .icon {
   margin-right: 12px;
-  color: #407bff;
   width: 16px;
   height: 21px;
+  fill: #407bff;
 }
 
 .volume {
