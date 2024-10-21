@@ -6,15 +6,14 @@ import { NavLink } from 'react-router-dom';
 
 import css from './AppBar.module.css';
 
-export default function AppBar() {
+export default function AppBar({ username }) {
   const isAuthenticated = useSelector(selectIsAuthenticated);
 
-  // Function to build class names for NavLink
   const buildLinkClass = ({ isActive }) => (isActive ? css.active : css.link);
 
   return (
     <header className={css.appBar}>
-      <img src={logo} alt="" />
+      <img src={logo} alt="Logo" />
 
       <nav className={css.nav}>
         <NavLink to="/" className={buildLinkClass}>
@@ -23,15 +22,17 @@ export default function AppBar() {
         <NavLink to="/home" className={buildLinkClass}>
           Home
         </NavLink>
-        <NavLink to="/login" className={buildLinkClass}>
-          Login
+        <NavLink to="/signin" className={buildLinkClass}>
+          Sign in
         </NavLink>
-        <NavLink to="/register" className={buildLinkClass}>
-          Registration
+        <NavLink to="/signup" className={buildLinkClass}>
+          Sign up
         </NavLink>
       </nav>
 
-      {isAuthenticated ? 'Sign In' : 'David'}
+      <div className={css.userStatus}>
+        {isAuthenticated ? `Welcome, ${username}!` : 'Please sign in'}
+      </div>
     </header>
   );
 }

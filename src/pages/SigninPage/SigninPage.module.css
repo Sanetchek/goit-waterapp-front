@@ -1,0 +1,106 @@
+.container {
+  max-width: 375px;
+  margin-left: auto;
+  margin-right: auto;
+  background-image: url('../../assets/images/SigninPage/fone-mb-1x.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  height: 570px;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 2dppx),
+(min-resolution: 192dpi) {
+  .container {
+    background-image: url('../../assets/images/SigninPage/fone-mb-2x.jpg');
+  }
+}
+
+.titel {
+  margin: 0;
+  padding-bottom: 16px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 1.23077;
+  color: #2f2f2f;
+}
+
+.frame {
+  padding-top: 66px;
+  text-align: center;
+  width: 280px;
+  object-fit: cover;
+}
+
+@media screen and (min-width: 768px) {
+  .titel {
+    padding-top: 40px;
+  }
+
+  .modal {
+    position: relative;
+    z-index: 1;
+  }
+
+  .container {
+    display: flex;
+    background-image: url('../../assets/images/SigninPage/fone-tab-1x.jpg');
+    z-index: -1;
+    align-items: center;
+  }
+
+  @media screen and (-webkit-min-device-pixel-ratio: 2),
+  (min-resolution: 2dppx),
+  (min-resolution: 192dpi) {
+    .container {
+      background-image: url('../../assets/images/SigninPage/fone-tab-2x.jpg');
+    }
+  }
+
+  .frame {
+    width: 736px;
+    height: 548px;
+    position: absolute;
+    left: 112px;
+    z-index: 0;
+    padding-top: 52px;
+    object-fit: contain;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .frame {
+    width: 916px;
+    height: 618px;
+    padding-top: 20px;
+    right: 51px;
+    left: 0;
+    top: 40px;
+  }
+
+  .container {
+    flex-direction: row-reverse;
+    background-image: url('../../assets/images/SigninPage/fone-1x.jpg');
+  }
+
+  @media screen and (-webkit-min-device-pixel-ratio: 2),
+  (min-resolution: 2dppx),
+  (min-resolution: 192dpi) {
+    .container {
+      background-image: url('../../assets/images/SigninPage/fone-2x.jpg');
+    }
+  }
+
+  .titel {
+    padding-top: 113px;
+  }
+
+  .modal {
+    padding-right: 198px;
+  }
+}
