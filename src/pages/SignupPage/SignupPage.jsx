@@ -1,21 +1,24 @@
 import React from 'react';
 import AuthForm from './AuthForm';
 import styles from './SignupPage.module.css';
+import waterBottleImage from '../../assets/images/Water bottle.svg';
 
 const SignupPage = () => {
   const handleSuccess = () => {
-    console.log('Реєстрація успішна');
+    console.log('Registration successful');
   };
 
   return (
-    <div className={styles.signupPage}>
-      <AuthForm onSuccess={handleSuccess} />
+    <section className={styles.container}>
+      <div className={styles.signupPage}>
+        <AuthForm onSuccess={handleSuccess} />
+      </div>
       <img
-        src={`${process.env.PUBLIC_URL}/assets/src/assets/images/water-bottle.png`}
-        alt="Water bottle"
         className={styles.waterBottle}
+        src={waterBottleImage}
+        alt="Water bottle"
       />
-    </div>
+    </section>
   );
 };
 

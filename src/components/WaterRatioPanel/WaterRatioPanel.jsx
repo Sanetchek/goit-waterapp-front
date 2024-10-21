@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import icon from '../../assets/images/sippets.svg';
 import TodayListModal from '../TodayWaterList/TodayWaterList';
 import css from './WaterRatioPanel.module.css';
 
-export default function WaterRatioPanel({ dailyNorm }) {
+export default function WaterRatioPanel({ dailyNorm = 2000 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [waterConsumed, setWaterConsumed] = useState(0);
 
@@ -14,19 +15,58 @@ export default function WaterRatioPanel({ dailyNorm }) {
     setIsModalOpen(false);
   };
 
-  const progress = dailyNorm > 0 ? (waterConsumed / dailyNorm) * 100 : 0;
+  const addWater = amount => {
+    setWaterConsumed(prev => prev + Number(amount));
+    closeModal();
+  };
+
+  const waterRatio = Math.min(
+    Math.round((waterConsumed / dailyNorm) * 100),
+    100
+  );
 
   return (
-    <div className={css.panelContainer}>
-      <h2>
-        Випита вода: {waterConsumed} л / {dailyNorm} л
-      </h2>
-      <div className={css.scale}>
-        <div className={css.progress} style={{ width: `${progress}%` }}></div>
+    <div className={css.box}>
+      <div className={css.panelContainer}>
+        <div className={css.sliderContainer}>
+          <label className={css.label} htmlFor="waterRange">
+            Today
+          </label>
+          <input
+            type="range"
+            id="waterRange"
+            min="0"
+            max="100"
+            value={waterConsumed > 0 ? waterRatio : 0}
+            className={css.slider}
+            style={{
+              background: `linear-gradient(to right, #9ebbff ${waterRatio}%, #d7e3ff ${waterRatio}%)`,
+            }}
+            readOnly
+            // onChange={e => setWaterConsumed((e.target.value / 100) * dailyNorm)}
+          />
+        </div>
+        <div className={css.valueContainer}>
+          <div className={css.borderWrapper}>
+            <span className={css.percent}>0%</span>
+            {waterConsumed > 0 && (
+              <span className={`${css.percent} ${css.percentToday}`}>
+                {waterRatio}%
+              </span>
+            )}
+            <span className={css.percent}>100%</span>
+          </div>
+        </div>
       </div>
-      <button onClick={handleAddWaterClick}>Add Water</button>
+      <button className={css.addWaterButton} onClick={handleAddWaterClick}>
+        <svg className={css.icon} width="24" height="24">
+          <use href={`${icon}#icon-plus-circle`}></use>
+        </svg>
+        Add Water
+      </button>
+
       {isModalOpen && (
-        <TodayListModal onClose={closeModal} onAddWater={setWaterConsumed} />
+        <TodayListModal onClose={closeModal} onAddWater={addWater} />
       )}
     </div>
   );

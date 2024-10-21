@@ -1,16 +1,31 @@
+.container {
+  max-width: 375px;
+  margin-left: auto;
+  margin-right: auto;
+  background-image: url('../../assets/images/fone-mob1x.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  height: 570px;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 2),
+  (min-resolution: 2dppx),
+  (min-resolution: 192dpi) {
+  .container {
+    background-image: url('../../assets/images/fone-mob2x.jpg');
+  }
+}
+
 .signupPage {
   display: flex;
-  width: 280px;
-  position: relative;
 }
 
 .waterBottle {
-  position: absolute;
-  bottom: 0;
-  right: 10px;
-  max-width: 300px;
-  height: auto;
-  opacity: 0.8;
+  width: 280px;
+  height: 210px;
 }
 
 @media (min-width: 768px) {
@@ -22,15 +37,31 @@
     margin-top: 40px;
     margin-bottom: 156px;
     width: 336px;
+    padding-left: 36px;
+    z-index: 1;
+  }
+
+  .container {
+    display: flex;
+    background-image: url('../../assets/images/fon-tab1x.jpg');
+    z-index: -1;
+  }
+  @media screen and (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 2dppx),
+    (min-resolution: 192dpi) {
+    .container {
+      background-image: url('../../assets/images/fon-tab2x.jpg');
+    }
   }
 
   .waterBottle {
+    width: 736px;
+    height: 548px;
     position: absolute;
-    bottom: 0;
-    right: 10px;
-    max-width: 300px;
-    height: auto;
-    opacity: 0.8;
+    left: 112px;
+    z-index: 0;
+    padding-top: 52px;
+    object-fit: contain;
   }
 }
 
@@ -45,13 +76,15 @@
     padding-top: 148px;
   }
 
-  .waterBottle {
-    position: relative;
-    width: auto;
-    max-width: 300px;
-    height: auto;
-    opacity: 0.8;
-    margin-left: 20px;
-    max-width: 916px;
+  .container {
+    flex-direction: row-reverse;
+    background-image: url('../../assets/images/fon1x.jpg');
+  }
+  @media screen and (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 2dppx),
+    (min-resolution: 192dpi) {
+    .container {
+      background-image: url('../../assets/images/fon2x.jpg');
+    }
   }
 }
