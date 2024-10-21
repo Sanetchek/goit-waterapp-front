@@ -7,7 +7,7 @@ const InputResult = ({value, setValue,}) => {
             <label className={css.label}>Write down how much water you will drink:
             <input className={css.input} type="text"
                 value={value}
-                onChange={(e) => setValue(e.target.value)}
+                    onChange={(e) => setValue(e.target.value)}
                 />
                 </label>
         </div>
