@@ -6,8 +6,6 @@ import { Navigate } from 'react-router-dom';
 export default function RestrictedRoute({ component, redirectTo, ...rest }) {
   const isLoggedin = useSelector(selectIsAuthenticated);
 
-  console.log('Checking Restricted Route: ', isLoggedin);
-
   return isLoggedin ? (
     <Navigate to={redirectTo} />
   ) : (

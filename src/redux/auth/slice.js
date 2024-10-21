@@ -1,5 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { register, signin, logout, refreshUser } from './operations';
+import {
+  signup,
+  signin,
+  logout,
+  refreshUser
+} from './operations';
 
 const slice = createSlice({
   name: 'auth',
@@ -16,17 +21,17 @@ const slice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(register.pending, state => {
+      .addCase(signup.pending, state => {
         state.isRefreshing = true;
         state.isLoggedIn = false;
       })
-      .addCase(register.fulfilled, (state, action) => {
+      .addCase(signup.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })
-      .addCase(register.rejected, state => {
+      .addCase(signup.rejected, state => {
         state.isRefreshing = false;
         state.error = true;
       })

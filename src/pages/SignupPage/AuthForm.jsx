@@ -1,50 +1,34 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { useDispatch } from 'react-redux';
+import { signup } from '../../redux/auth/operations';
 import * as Yup from 'yup';
 import styles from './AuthForm.module.css';
 import EyeIcon from '../../assets/images/eye-icon.svg';
 
-const AuthForm = ({ onSuccess }) => {
-  const [error, setError] = useState(null);
+const AuthForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const getUsernameFromEmail = email => {
     const [username] = email.split('@');
-    console.log(`Extracted username: ${username}`);
     return username;
   };
 
-  const handleSubmit = async values => {
-    try {
-      const response = await fetch(
-        'https://waterapp-hfy2.onrender.com/api-docs/auth/signup',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email: values.email,
-            password: values.password,
-          }),
-        }
-      );
+  const handleSubmit = async (values, actions) => {
+    const { repeatPassword, ...restValues } = values;
+    const username = getUsernameFromEmail(restValues.email);
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Something went wrong');
-      }
+    const updatedValues = {
+      ...restValues,
+      name: username,
+    };
 
-      const username = getUsernameFromEmail(values.email);
-      onSuccess(username);
-
-      navigate('/signin');
-    } catch (error) {
-      setError(error.message || 'Connection issues with the server');
-    }
+    console.log(updatedValues);
+    dispatch(signup(updatedValues));
+    actions.resetForm();
   };
 
   const validationSchema = Yup.object({
@@ -131,7 +115,6 @@ const AuthForm = ({ onSuccess }) => {
               className={styles.errorMessage}
             />
           </label>
-          {error && <div className={styles.errorMessage}>{error}</div>}
           <button type="submit" className={styles.submitButton}>
             Sign Up
           </button>

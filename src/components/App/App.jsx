@@ -7,7 +7,7 @@ import { Toaster } from 'react-hot-toast';
 import Loading from '../Loading/Loading';
 import Layout from '../Layout/Layout';
 import RestrictedRoute from '../RestrictedRoute/RestrictedRoute';
-import PrivateRoute from '../PrivateRoute/PrivateRoute';
+// import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import { refreshUser } from '../../redux/auth/operations';
 import {
   selectIsRefreshing,
@@ -49,7 +49,7 @@ export const App = () => {
             path="/"
             element={
               isLoggedIn ? (
-                <PrivateRoute component={<HomePage />} redirectTo="/login" />
+                <HomePage />
               ) : (
                 <WellcomePage />
               )
