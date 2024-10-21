@@ -13,7 +13,7 @@ const AuthForm = ({ onSuccess }) => {
 
   const getUsernameFromEmail = email => {
     const [username] = email.split('@');
-    console.log(`Отримане ім'я користувача: ${username}`);
+    console.log(`Extracted username: ${username}`);
     return username;
   };
 
@@ -35,7 +35,7 @@ const AuthForm = ({ onSuccess }) => {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || 'Щось пішло не так');
+        throw new Error(errorData.message || 'Something went wrong');
       }
 
       const username = getUsernameFromEmail(values.email);
@@ -43,18 +43,18 @@ const AuthForm = ({ onSuccess }) => {
 
       navigate('/signin');
     } catch (error) {
-      setError(error.message || 'Проблеми з підключенням до сервера');
+      setError(error.message || 'Connection issues with the server');
     }
   };
 
   const validationSchema = Yup.object({
     email: Yup.string()
-      .email('Неправильний формат електронної пошти')
-      .required("Обов'язкове поле"),
-    password: Yup.string().required("Обов'язкове поле"),
+      .email('Invalid email format')
+      .required('This field is required'),
+    password: Yup.string().required('This field is required'),
     repeatPassword: Yup.string()
-      .oneOf([Yup.ref('password'), null], 'Паролі мають співпадати')
-      .required("Обов'язкове поле"),
+      .oneOf([Yup.ref('password'), null], 'Passwords must match')
+      .required('This field is required'),
   });
 
   return (
