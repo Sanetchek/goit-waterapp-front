@@ -93,7 +93,11 @@ const handleDayClick = day => {
       </div>
 
       <div className={styles.calendarContainer}>
-        <div className={styles.containerDay}>
+        <div
+          className={clsx(styles.containerDay, {
+            [styles.loadingContainer]: isLoading,
+          })}
+        >
           {isLoading ? (
             <Loading />
           ) : (
