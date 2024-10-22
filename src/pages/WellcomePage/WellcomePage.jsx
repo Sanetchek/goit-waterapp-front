@@ -2,8 +2,10 @@ import Main from '../../components/Main/Main.jsx';
 import css from './WellcomePage.module.css';
 export default function WellcomePage(params) {
   return (
-    <div className={css.mainContainer}>
-      <Main />
-    </div>
+    <section className={css.mainContainer}>
+      <div className={css.mainWrapperBg}>
+        <Main />
+      </div>
+    </section>
   );
 }
