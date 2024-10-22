@@ -18,7 +18,7 @@ export default function HomePage() {
   // }
 
   return (
-    <div className={`${css.container} ${css.pageBackground}`}>
+    <div className={`${css.container} ${css.pageBackground} mainContainer`}>
       <div className={css.box}>
         <div className={css.imageModal}>
           <h1 className={css.title}>HomePage</h1>

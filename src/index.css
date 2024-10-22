@@ -131,6 +131,16 @@ select.error {
   cursor: pointer;
 }
 
+li {
+  list-style: none;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding-left: 0;
+}
+
 .mainContainer {
   max-width: 320px;
   padding-left: 20px;
