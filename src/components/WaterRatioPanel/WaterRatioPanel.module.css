@@ -1,3 +1,8 @@
+.box {
+  width: 100%;
+  margin-bottom: 40px;
+}
+
 .panelContainer {
   display: flex;
   flex-direction: column;
@@ -28,6 +33,7 @@
   border-radius: 5px;
   height: 8px;
   outline: none;
+  box-sizing: border-box;
 }
 
 .slider::-webkit-slider-thumb {
@@ -39,6 +45,7 @@
   background: white;
   border: 1px solid #407bff;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
 /* .slider::-webkit-slider-runnable-track {
@@ -97,6 +104,7 @@
 }
 
 .addWaterButton {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -130,10 +138,8 @@
 @media screen and (min-width: 768px) {
   .box {
     display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
   }
 
   .addWaterButton {
@@ -144,6 +150,11 @@
 
 @media screen and (min-width: 1440px) {
   .box {
-    width: 50%;
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+  }
+  .addWaterButton {
+    margin: 0 auto;
   }
 }

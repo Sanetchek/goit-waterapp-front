@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import icon from '../../assets/images/sippets.svg';
-import TodayListModal from '../TodayWaterList/TodayWaterList';
+import TodayListModal from '../TodayWaterList/TodayWaterList.jsx';
 import css from './WaterRatioPanel.module.css';
+import Modal from 'components/Modal/Modal.jsx';
+// onChange={e => setWaterConsumed((e.target.value / 100) * dailyNorm)}
 
 export default function WaterRatioPanel({ dailyNorm = 2000 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [waterConsumed, setWaterConsumed] = useState(0);
 
-  const handleAddWaterClick = () => {
+  const openModal = () => {
     setIsModalOpen(true);
   };
 
@@ -37,13 +39,12 @@ export default function WaterRatioPanel({ dailyNorm = 2000 }) {
             id="waterRange"
             min="0"
             max="100"
-            value={waterConsumed > 0 ? waterRatio : 0}
+            value={waterRatio}
             className={css.slider}
             style={{
               background: `linear-gradient(to right, #9ebbff ${waterRatio}%, #d7e3ff ${waterRatio}%)`,
             }}
             readOnly
-            // onChange={e => setWaterConsumed((e.target.value / 100) * dailyNorm)}
           />
         </div>
         <div className={css.valueContainer}>
@@ -58,7 +59,7 @@ export default function WaterRatioPanel({ dailyNorm = 2000 }) {
           </div>
         </div>
       </div>
-      <button className={css.addWaterButton} onClick={handleAddWaterClick}>
+      <button className={css.addWaterButton} onClick={openModal}>
         <svg className={css.icon} width="24" height="24">
           <use href={`${icon}#icon-plus-circle`}></use>
         </svg>
@@ -66,7 +67,12 @@ export default function WaterRatioPanel({ dailyNorm = 2000 }) {
       </button>
 
       {isModalOpen && (
-        <TodayListModal onClose={closeModal} onAddWater={addWater} />
+        <Modal title="Add Water" onClose={closeModal}>
+          <TodayListModal
+            onClose={closeModal}
+            onAddWater={addWater} // Передаємо функцію для додавання води
+          />
+        </Modal>
       )}
     </div>
   );

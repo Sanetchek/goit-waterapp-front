@@ -1,47 +1,60 @@
 .container {
+  width: 100%;
+  padding: 40px 32px;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  /* gap: 16px; */
-  margin-bottom: 12px;
+  align-items: center;
+  height: 100vh;
 }
 
+.pageBackground {
+  background-image: url('/src/assets/images/mob/background_element_home_screen_mob.png'),
+    url('/src/assets/images/mob/background_element_home_screen_mob@2x.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 100vh;
+  background-position: center top; /* Вирівнюємо зображення по центру зверху */
+}
 .title {
   display: none;
 }
 
-.imageModal {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-}
 .photo {
-  width: 280px;
-  height: 208px;
+  width: 100%;
 }
-
 @media screen and (min-width: 768px) {
-  .imageModal {
-    display: flex;
-    flex-direction: row;
-    margin: 0;
-  }
-  .photo {
-    width: 518px;
-    height: 386px;
+  .pageBackground {
+    background-image: url('/src/assets/images/tablet/background_element_home_screen_tablet.png'),
+      url('/src/assets/images/tablet/background_element_home_screen_tablet@2x.png');
   }
 }
 
 @media screen and (min-width: 1440px) {
   .container {
     display: flex;
-    justify-content: flex-start; /* Зсуває блоки вліво */
-    align-items: flex-start; /* Вирівнює блоки по верхній частині */
+    flex-direction: row;
+    /* align-items: stretch; */
+  }
+  .box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%; /* Висота 100% від батьківського контейнера */
   }
 
-  .photo {
-    width: 738px;
-    height: 548px;
+  .imageModal {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
   }
+
+  .pageBackground {
+    background-image: url('/src/assets/images/desktop/background_element_main_page.png'),
+      url('/src/assets/images/desktop/background_element_main_page@2x.png');
+  }
+
+  /* .photo {
+    height: 738px;
+  } */
 }
