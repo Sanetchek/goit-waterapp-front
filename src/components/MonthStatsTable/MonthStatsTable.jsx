@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import styles from './MonthStatsTable.module.css';
 import clsx from 'clsx';
 import Loading from '../Loading/Loading';
-import DaysGeneralStats from '../DaysGeneralStats/DaysGeneralStats'; // імпорт
+import DaysGeneralStats from '../DaysGeneralStats/DaysGeneralStats';
 
 const fetchDataForMonth = (year, month) => {
   return new Promise(resolve => {
@@ -12,9 +12,9 @@ const fetchDataForMonth = (year, month) => {
       const data = Array.from({ length: daysInMonth }, (_, i) => ({
         id: i + 1,
         percentage: Math.floor(Math.random() * 101),
-        date: `${i + 1}/${month + 1}/${year}`, // Додає дату
-        dailyNorm: 2, // Денна норма води
-        servings: Math.floor(Math.random() * 10), // Додає к-сть порцій
+        date: `${i + 1}/${month + 1}/${year}`, 
+        dailyNorm: 2, 
+        servings: Math.floor(Math.random() * 10),
       }));
       resolve(data);
     }, 1000);
@@ -23,11 +23,13 @@ const fetchDataForMonth = (year, month) => {
 
 const MonthStatsTable = () => {
   const today = new Date();
+  const calendarRef = useRef(null);
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
   const [currentMonth, setCurrentMonth] = useState(today.getMonth());
   const [currentMonthData, setCurrentMonthData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedDayData, setSelectedDayData] = useState(null); // Для вибору дня
+  const [selectedDayData, setSelectedDayData] = useState(null); 
+  const [popupPosition, setPopupPosition] = useState({ top: 0, left: 0 });
 
   useEffect(() => {
     setIsLoading(true);
@@ -58,13 +60,43 @@ const MonthStatsTable = () => {
     }
   };
 
-const handleDayClick = day => {
-    setSelectedDayData(day); // Вибраний день
+const handleDayClick = (day, event) => {
+  const calendarBounds = calendarRef.current.getBoundingClientRect();
+  const rect = event.target.getBoundingClientRect();
+ 
+  const popupWidth = 292;
+
+
+  let top = rect.top + window.scrollY - 250;
+  let left = rect.left + rect.width / 2 - 200;
+
+
+  if (left < calendarBounds.left - 40) {
+    left = calendarBounds.left - 40;
+  }
+
+
+  if (left + popupWidth > calendarBounds.right - 24) {
+    left = calendarBounds.right - 24 - popupWidth;
+  }
+
+
+     const selectedDate = new Date(currentYear, currentMonth, day.id);
+  const dayNumber = selectedDate.getDate();
+  const monthName = selectedDate.toLocaleString('en-US', { month: 'long' });
+
+
+
+
+    setPopupPosition({ top, left });
+    setSelectedDayData({ ...day, dayNumber, monthName });
+};
+
+
+  const closePopup = () => {
+    setSelectedDayData(null);
   };
 
-  const closeModal = () => {
-    setSelectedDayData(null); // Закриття модального вікна
-  };
 
   return (
     <>
@@ -92,7 +124,7 @@ const handleDayClick = day => {
         </div>
       </div>
 
-      <div className={styles.calendarContainer}>
+      <div ref={calendarRef} className={styles.calendarContainer}>
         <div
           className={clsx(styles.containerDay, {
             [styles.loadingContainer]: isLoading,
@@ -110,7 +142,7 @@ const handleDayClick = day => {
                   [styles.zeroPercentage]: day.percentage === 0,
                 });
                 return (
-                  <li key={day.id} className={styles.dayWrapper} onClick={() => handleDayClick(day)} // Відкриття модалки
+                  <li key={day.id} className={styles.dayWrapper} onClick={(e) => handleDayClick(day, e)}
                   >
                     <div className={circleClass}>
                       <p className={styles.calendarDay}>{day.id}</p>
@@ -125,8 +157,9 @@ const handleDayClick = day => {
       </div>
        {selectedDayData && (
         <DaysGeneralStats
-    selectedDayData={selectedDayData} // Передавання данних
-    onClose={closeModal}
+    selectedDayData={selectedDayData} 
+    onClose={closePopup}
+    position={popupPosition}
   />
       )}
     </>
