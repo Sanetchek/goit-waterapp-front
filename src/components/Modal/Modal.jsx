@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import css from './Modal.module.css'; // Import your CSS module
-import snippets from "../../assets/images/sippets.svg";
+import snippets from '../../assets/images/sippets.svg';
 
 const Modal = ({ title, children, onClose }) => {
   // Close modal when pressing the Esc key

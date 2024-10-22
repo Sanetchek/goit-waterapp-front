@@ -6,7 +6,7 @@ export default function SigninPage() {
   return (
     <section className={css.container}>
       <div className={css.modal}>
-        <h1 className={css.titel}>Sign In</h1>
+        <h1 className={css.title}>Sign In</h1>
         <SignInForm />
       </div>
 

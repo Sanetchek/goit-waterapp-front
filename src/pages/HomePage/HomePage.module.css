@@ -1,30 +1,59 @@
 .container {
+  width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  gap: 16px;
+  gap: 32px;
+}
+
+.pageBackground {
+  background-image: url('/src/assets/images/mob/background_element_home_screen_mob.png'),
+    url('/src/assets/images/mob/background_element_home_screen_mob@2x.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center top;
 }
 
 .title {
-  display: none; /* Приховує елемент */
+  display: none;
 }
-/* .dailyNorma {
-  margin-left: auto;
-} */
-/* .image {
-} */
-.foto {
-  border-radius: 20px;
-  width: 320px;
-  height: 374px;
-  margin-bottom: 40px;
-}
-
-/* Для планшетів (від 768px до 1439px) */
 @media screen and (min-width: 768px) {
+  .pageBackground {
+    background-image: url('/src/assets/images/tablet/background_element_home_screen_tablet.png'),
+      url('/src/assets/images/tablet/background_element_home_screen_tablet@2x.png');
+  }
 }
 
-/* Для десктопів (понад 1440px) */
 @media screen and (min-width: 1440px) {
+  .container {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .box {
+    position: relative;
+    width: 592px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 32px;
+    padding-bottom: 16px;
+  }
+
+  .imageModal {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .pageBackground {
+    background-image: url('/src/assets/images/desktop/background_element_main_page.png'),
+      url('/src/assets/images/desktop/background_element_main_page@2x.png');
+  }
+
+  .pageBackground {
+    background-image: url('/src/assets/images/desktop/background_element_main_page.png'),
+      url('/src/assets/images/desktop/background_element_main_page@2x.png');
+  }
 }

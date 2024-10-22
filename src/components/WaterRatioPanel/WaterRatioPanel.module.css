@@ -1,0 +1,158 @@
+.box {
+  width: 100%;
+}
+
+.panelContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+.label {
+  width: 100%;
+  text-align: left;
+  color: #3f87ff;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.33em;
+  margin-bottom: 8px;
+}
+
+.sliderContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 360px;
+  margin: 0 auto;
+  background: #d3d3d3;
+  border-radius: 5px;
+  height: 8px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: white;
+  border: 1px solid #407bff;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.valueContainer {
+  position: relative;
+  width: 100%;
+  margin-bottom: 10px;
+  /*ЗНАЧЕННЯ ЗА МАКЕТОМ 24РХ*/
+}
+
+.valueContainer::before,
+.valueContainer::after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  width: 1px;
+  height: 8px;
+  background-color: #d7e3ff;
+}
+
+.valueContainer::before {
+  left: 0;
+  top: 4px;
+}
+
+.valueContainer::after {
+  right: 0;
+  top: 4px;
+}
+
+.borderWrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 16px;
+}
+
+.percent {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.33em;
+  text-align: center;
+  color: #3f87ff;
+  margin-top: 5px;
+}
+
+.percentToday {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.25em;
+  text-align: center;
+}
+
+.addWaterButton {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  line-height: 1.25em;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 10px;
+  padding: 10px 20px;
+  background-color: #407bff;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.addWaterButton:hover {
+  background-color: #305edc;
+  box-shadow: 0 4px 8px 0 rgba(64, 123, 255, 0.34);
+}
+
+.icon {
+  fill: white;
+  stroke: white;
+  stroke-width: 2px;
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+@media screen and (min-width: 768px) {
+  .box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .addWaterButton {
+    margin-left: 12px;
+    max-height: 45px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .box {
+    display: flex;
+    flex-direction: row;
+    gap: 23px;
+  }
+
+  .addWaterButton {
+    margin: 0 auto;
+    max-width: 178px;
+  }
+}
