@@ -7,7 +7,6 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  position: relative;
 }
 
 .label {
@@ -28,13 +27,13 @@
 
 .slider {
   -webkit-appearance: none;
-  width: 360px;
-  margin: 0 auto;
+  width: 100%;
   background: #d3d3d3;
   border-radius: 5px;
   height: 8px;
   outline: none;
   box-sizing: border-box;
+  position: relative;
 }
 
 .slider::-webkit-slider-thumb {
@@ -50,30 +49,9 @@
 }
 
 .valueContainer {
-  position: relative;
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   /*ЗНАЧЕННЯ ЗА МАКЕТОМ 24РХ*/
-}
-
-.valueContainer::before,
-.valueContainer::after {
-  content: '';
-  position: absolute;
-  bottom: 100%;
-  width: 1px;
-  height: 8px;
-  background-color: #d7e3ff;
-}
-
-.valueContainer::before {
-  left: 0;
-  top: 4px;
-}
-
-.valueContainer::after {
-  right: 0;
-  top: 4px;
 }
 
 .borderWrapper {
@@ -82,16 +60,34 @@
   width: 100%;
   margin-top: 16px;
 }
+.afterBefor {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
 
 .percent {
+  content: '';
+  position: absolute;
   font-weight: 400;
   font-size: 12px;
   line-height: 1.33em;
   text-align: center;
   color: #3f87ff;
-  margin-top: 5px;
+  margin-top: 20px;
+  left: -6px;
+  top: -12px;
+  margin-bottom: 12px;
 }
 
+.devider {
+  content: '';
+  position: absolute;
+  width: 1px;
+  height: 4px;
+  color: #d7e3ff;
+  top: -12px;
+}
 .percentToday {
   font-weight: 500;
   font-size: 16px;
@@ -100,6 +96,7 @@
 }
 
 .addWaterButton {
+  margin-top: 16px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -139,7 +136,7 @@
   }
 
   .addWaterButton {
-    margin-left: 12px;
+    margin-left: 32px;
     max-height: 45px;
   }
 }
@@ -147,12 +144,13 @@
 @media screen and (min-width: 1440px) {
   .box {
     display: flex;
-    flex-direction: row;
+
     gap: 23px;
+    align-items: center;
   }
 
   .addWaterButton {
     margin: 0 auto;
-    max-width: 178px;
+    /* max-width: 178px; */
   }
 }
