@@ -1,20 +1,10 @@
-li {
-  list-style: none;
-}
-
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding-left: 0;
-}
-
 .listItem {
   display: flex;
   align-items: center;
 }
 
 .listContainer {
-  max-height: 260px;
+  max-height: 216px;
   border-radius: 8px;
   overflow: hidden;
   display: flex;
