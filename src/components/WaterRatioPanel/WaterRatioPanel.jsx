@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import icon from '../../assets/images/sippets.svg';
-import TodayListModal from '../TodayWaterList/TodayWaterList.jsx';
+import TodayListModal from '../TodayListModal/TodayListModal';
 import css from './WaterRatioPanel.module.css';
 import Modal from 'components/Modal/Modal.jsx';
 
@@ -77,10 +77,7 @@ export default function WaterRatioPanel({ dailyNorm = 2000 }) {
 
       {isModalOpen && (
         <Modal title="Add Water" onClose={closeModal}>
-          <TodayListModal
-            onClose={closeModal}
-            onAddWater={addWater} // Передаємо функцію для додавання води
-          />
+          <TodayListModal />
         </Modal>
       )}
     </div>
