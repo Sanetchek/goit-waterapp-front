@@ -3,7 +3,7 @@ import AppBar from '../AppBar/AppBar';
 import css from './Layout.module.css';
 const Layout = ({ children, username }) => {
   return (
-    <div className={css.dark}>
+    <div className={`${css.layout} ${css.light}`}>
       <AppBar username={username} />
       <main>{children}</main>
     </div>
