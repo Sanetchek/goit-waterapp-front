@@ -1,3 +1,7 @@
+.box {
+  width: 100%;
+}
+
 .panelContainer {
   display: flex;
   flex-direction: column;
@@ -15,6 +19,7 @@
   line-height: 1.33em;
   margin-bottom: 8px;
 }
+
 .sliderContainer {
   display: flex;
   flex-direction: column;
@@ -23,7 +28,8 @@
 
 .slider {
   -webkit-appearance: none;
-  width: 100%;
+  width: 360px;
+  margin: 0 auto;
   background: #d3d3d3;
   border-radius: 5px;
   height: 8px;
@@ -41,17 +47,11 @@
   cursor: pointer;
 }
 
-/* .slider::-webkit-slider-runnable-track {
-  background: linear-gradient(
-    to right,
-    #407bff ${props => props.waterRatio}%,
-    #d3d3d3 ${props => props.waterRatio}%
-  ); /* Градієнт з кольорами */
-
 .valueContainer {
   position: relative;
   width: 100%;
-  margin-bottom: 10px; /*ЗНАЧЕННЯ ЗА МАКЕТОМ 24РХ*/
+  margin-bottom: 10px;
+  /*ЗНАЧЕННЯ ЗА МАКЕТОМ 24РХ*/
 }
 
 .valueContainer::before,
@@ -68,6 +68,7 @@
   left: 0;
   top: 4px;
 }
+
 .valueContainer::after {
   right: 0;
   top: 4px;
@@ -144,6 +145,13 @@
 
 @media screen and (min-width: 1440px) {
   .box {
-    width: 50%;
+    display: flex;
+    flex-direction: row;
+    gap: 23px;
+  }
+
+  .addWaterButton {
+    margin: 0 auto;
+    max-width: 178px;
   }
 }

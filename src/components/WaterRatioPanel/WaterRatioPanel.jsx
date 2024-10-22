@@ -48,13 +48,20 @@ export default function WaterRatioPanel({ dailyNorm = 2000 }) {
         </div>
         <div className={css.valueContainer}>
           <div className={css.borderWrapper}>
-            <span className={css.percent}>0%</span>
+            <span className={css.percent}>
+              <span className="devider">|</span>
+              <span className="waterPercent">0%</span>
+            </span>
             {waterConsumed > 0 && (
               <span className={`${css.percent} ${css.percentToday}`}>
-                {waterRatio}%
+                <span className="devider">|</span>
+                <span className="waterPercent">{waterRatio}%</span>
               </span>
             )}
-            <span className={css.percent}>100%</span>
+            <span className={css.percent}>
+              <span className="devider">|</span>
+              <span className="waterPercent">100%</span>
+            </span>
           </div>
         </div>
       </div>
