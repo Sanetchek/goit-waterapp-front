@@ -34,6 +34,7 @@
   border-radius: 5px;
   height: 8px;
   outline: none;
+  box-sizing: border-box;
 }
 
 .slider::-webkit-slider-thumb {
@@ -45,6 +46,7 @@
   background: white;
   border: 1px solid #407bff;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
 .valueContainer {
@@ -98,6 +100,7 @@
 }
 
 .addWaterButton {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -131,10 +134,8 @@
 @media screen and (min-width: 768px) {
   .box {
     display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
   }
 
   .addWaterButton {

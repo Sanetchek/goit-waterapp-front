@@ -1,16 +1,14 @@
 import React from 'react';
 import DailyNorma from '../../components/DailyNorma/DailyNorma.jsx';
-// import WaterRatioPanel from '../../components/WaterRatioPanel/WaterRatioPanel.jsx';
-// import TodayWaterList from '../../components/TodayWaterList/TodayWaterList.jsx';
-// import MonthStatsTable from '../../components/MonthStatsTable/MonthStatsTable.jsx';
+import WaterRatioPanel from '../../components/WaterRatioPanel/WaterRatioPanel.jsx';
 import css from './HomePage.module.css';
-import botleImage1x from '../../assets/images/BotleHomescreen@1x-dec-min.jpg';
-import botleImage2x from '../../assets/images/BotleHomescreen@2x-dec-min.jpg';
-import tabletImage1x from '../../assets/images/Frame@1x-tablet-min.jpg';
-import tabletImage2x from '../../assets/images/Frame@2x-tablet-min.jpg';
-import mobileImage1x from '../../assets/images/Frame@1x-mobile-min.jpg';
-import mobileImage2x from '../../assets/images/Frame@2x-mobile-min.jpg';
-import WaterListWithCalendar from 'components/WaterListWithCalendar/WaterListWithCalendar.jsx';
+import botleImage1x from '../../assets/images/desktop/botle_home_screen.png';
+import botleImage2x from '../../assets/images/desktop/botle_home_screen@2x.png';
+import tabletImage1x from '../../assets/images/tablet/bottle_home_screen_tablet.png';
+import tabletImage2x from '../../assets/images/tablet/bottle_home_screen_tablet@2x.png';
+import mobileImage1x from '../../assets/images/mob/bottle_home_screen_mob.png';
+import mobileImage2x from '../../assets/images/mob/bottle_home_screen_mob@2x.png';
+import WaterListWithCalendar from '../../components/WaterListWithCalendar/WaterListWithCalendar.jsx';
 
 export default function HomePage() {
   // const isAuthenticated = useSelector(state => state.auth.isAuthenticated);

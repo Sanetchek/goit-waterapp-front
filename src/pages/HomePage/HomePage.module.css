@@ -16,16 +16,10 @@
 .title {
   display: none;
 }
-
 @media screen and (min-width: 768px) {
-  .imageModal {
-    display: flex;
-    flex-direction: row;
-    margin: 0;
-  }
-  .photo {
-    width: 518px;
-    height: 386px;
+  .pageBackground {
+    background-image: url('/src/assets/images/tablet/background_element_home_screen_tablet.png'),
+      url('/src/assets/images/tablet/background_element_home_screen_tablet@2x.png');
   }
 }
 
@@ -46,9 +40,16 @@
     padding-bottom: 16px;
   }
 
-  .photo {
-    width: 738px;
-    height: 548px;
+  .imageModal {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .pageBackground {
+    background-image: url('/src/assets/images/desktop/background_element_main_page.png'),
+      url('/src/assets/images/desktop/background_element_main_page@2x.png');
   }
 
   .pageBackground {
