@@ -12,8 +12,9 @@ const fetchDataForMonth = (year, month) => {
       const data = Array.from({ length: daysInMonth }, (_, i) => ({
         id: i + 1,
         percentage: Math.floor(Math.random() * 101),
-        date: `${i + 1}/${month + 1}/${year}`, // Додає дату
-        dailyNorm: 2, // Денна норма води
+        date: `${i + 1}/${month + 1}/${year}`, 
+        dailyNorm: 2, 
+        servings: Math.floor(Math.random() * 10), 
       }));
       resolve(data);
     }, 1000);
@@ -27,9 +28,10 @@ const MonthStatsTable = () => {
   const [currentMonth, setCurrentMonth] = useState(today.getMonth());
   const [currentMonthData, setCurrentMonthData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedDayData, setSelectedDayData] = useState(null); // Для вибору дня
-  const [popupPosition, setPopupPosition] = useState({ top: 0, left: 0 }); // Для позиціонування pop-up
-  
+  const [selectedDayData, setSelectedDayData] = useState(null); 
+  const [popupPosition, setPopupPosition] = useState({ top: 0, left: 0 }); 
+
+
   useEffect(() => {
     setIsLoading(true);
     fetchDataForMonth(currentYear, currentMonth).then(data => {
@@ -59,22 +61,37 @@ const MonthStatsTable = () => {
     }
   };
 
-  const handleDayClick = (day, event) => {
+ const handleDayClick = (day, event) => {
+  const calendarBounds = calendarRef.current.getBoundingClientRect();
   const rect = event.target.getBoundingClientRect();
-    const top = rect.top + window.scrollY - 100;
-    const left = rect.left + rect.width / 2;
+  
+  const popupWidth = 292; 
+
+  let top = rect.top + window.scrollY - 250; 
+  let left = rect.left + rect.width / 2 - 200; 
+
+  if (left < calendarBounds.left - 40) {
+    left = calendarBounds.left - 40;
+  }
+
+  if (left + popupWidth > calendarBounds.right - 24) {
+    left = calendarBounds.right - 24 - popupWidth; 
+  }
 
      const selectedDate = new Date(currentYear, currentMonth, day.id);
   const dayNumber = selectedDate.getDate();
   const monthName = selectedDate.toLocaleString('en-US', { month: 'long' });
 
+
     setPopupPosition({ top, left });
-    setSelectedDayData({ ...day, dayNumber, monthName }); // Вибраний день
+    setSelectedDayData({ ...day, dayNumber, monthName }); 
 };
 
+
   const closePopup = () => {
-    setSelectedDayData(null); // Закриття попапу
+    setSelectedDayData(null);
   };
+
 
   return (
     <>
@@ -120,7 +137,7 @@ const MonthStatsTable = () => {
                   [styles.zeroPercentage]: day.percentage === 0,
                 });
                 return (
-                  <li key={day.id} className={styles.dayWrapper} onClick={(e) => handleDayClick(day, e)} // Відкриття попапу
+                  <li key={day.id} className={styles.dayWrapper} onClick={(e) => handleDayClick(day, e)} 
                   >
                     <div className={circleClass}>
                       <p className={styles.calendarDay}>{day.id}</p>
@@ -135,8 +152,8 @@ const MonthStatsTable = () => {
       </div>
        {selectedDayData && (
         <DaysGeneralStats
-    selectedDayData={selectedDayData} // Передавання данних
-   onClose={closePopup}
+    selectedDayData={selectedDayData} 
+          onClose={closePopup}
           position={popupPosition}
   />
       )}

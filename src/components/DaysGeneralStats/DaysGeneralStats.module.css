@@ -9,13 +9,13 @@
     transition: transform 0.3s ease-in-out;
 }
 
-.popupContent{
+.popupContent {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
-.title{
+.title {
     margin: 0;
     padding: 0;
     font-weight: 400;
@@ -24,7 +24,7 @@
     color: #407BFF;
 }
 
-.text{
+.text {
     margin: 0;
     padding: 0;
     font-weight: 400;
@@ -33,7 +33,7 @@
     color: #2F2F2F;
 }
 
-.span{
+.span {
     margin: 0;
     padding: 0;
     font-weight: 500;

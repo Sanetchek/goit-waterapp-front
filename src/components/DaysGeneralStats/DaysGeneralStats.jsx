@@ -1,7 +1,9 @@
 import React from 'react';
 import css from "./DaysGeneralStats.module.css"
 
+
 const DaysGeneralStats = ({ selectedDayData, onClose, position }) => {
+
 
   return (
     <div className={css.popup}
@@ -22,5 +24,6 @@ const DaysGeneralStats = ({ selectedDayData, onClose, position }) => {
     </div>
   );
 };
+
 
 export default DaysGeneralStats;
