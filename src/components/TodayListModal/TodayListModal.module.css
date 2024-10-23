@@ -1,198 +1,203 @@
 @media (min-width: 1440px) {
 
-    /* Desktop styles */
-    .modalContent {
-        max-width: 600px;
-    }
+  /* Desktop styles */
+  .modalContent {
+    max-width: 600px;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1439px) {
 
-    /* Tablet styles */
-    .modalContent {
-        max-width: 400px;
-    }
+  /* Tablet styles */
+  .modalContent {
+    max-width: 400px;
+  }
 }
 
 @media (max-width: 767px) {
 
-    /* Mobile styles */
-    .modalContent {
-        padding: 15px;
-    }
+  /* Mobile styles */
+  .modalContent {
+    padding: 15px;
+  }
 
-    .stepInput {
-        flex-direction: column;
-    }
+  .stepInput {
+    flex-direction: column;
+  }
 
-    .waterInput {
-        width: 100%;
-    }
+  .waterInput {
+    width: 100%;
+  }
 }
 
 .modalBackdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
 }
 
 .modalContent {
-    background: white;
-    padding: 20px;
-    border-radius:
-        8px;
-    max-width: 500px;
-    width: 100%;
+  background: white;
+  padding: 20px;
+  border-radius:
+    8px;
+  max-width: 500px;
+  width: 100%;
 }
 
 .previousData {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .editSection {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.11111;
+  color: #2f2f2f;
 }
 
 /* === Buttons + - === */
 .stepInput {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: #407BFF;
-    font-family: Roboto;
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 24px;
-    text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #407BFF;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: center;
 }
 
 .roundButton {
-    width: 40px;
-    /* Ширина і висота кнопок */
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #9EBBFF;
-    /* Колір рамки */
-    border-radius: 50%;
-    /* Заокруглення для створення кола */
-    background-color: transparent;
-    /* Прозорий фон */
-    font-size: 18px;
-    /* Розмір шрифту */
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+  width: 40px;
+  /* Ширина і висота кнопок */
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #9EBBFF;
+  /* Колір рамки */
+  border-radius: 50%;
+  /* Заокруглення для створення кола */
+  background-color: transparent;
+  /* Прозорий фон */
+  font-size: 18px;
+  /* Розмір шрифту */
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .roundButton:hover {
-    background-color: #e0eaff;
-    /* Легка зміна фону при наведенні */
+  background-color: #e0eaff;
+  /* Легка зміна фону при наведенні */
 }
 
 .waterInput {
-    width: 100%;
-    padding: 8px;
-    margin-top: 10px;
+  width: 100%;
+  padding: 8px;
+  margin-top: 10px;
 }
 
 .modalActions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
 }
 
-
-
 .saveButtonStyle {
-    width: 160px;
-    /* Set width */
-    height: 44px;
-    /* Set height */
-    background-color: #407BFF;
-    /* Set background color */
-    color: #FFFFFF;
-    /* Set text color */
-    cursor: pointer;
-    /* Remove hover cursor */
-    border-radius: 10px;
+  width: 160px;
+  /* Set width */
+  height: 44px;
+  /* Set height */
+  background-color: #407BFF;
+  /* Set background color */
+  color: #FFFFFF;
+  /* Set text color */
+  cursor: pointer;
+  /* Remove hover cursor */
+  border-radius: 10px;
 }
 
 .timeSelectBlock {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .amPmIndicator {
-    font-size: 16px;
-    font-weight: bold;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .modalClose svg {
-    fill: #407BFF;
+  fill: #407BFF;
 
 }
 
 .headerContainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-    /* Відступ під контейнером */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  /* Відступ під контейнером */
 }
 
 .modalTitle {
-    font-family: 'Roboto', sans-serif;
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 20px;
-    text-align: left;
-    margin: 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: left;
+  margin: 0;
 }
 
 .modalClose {
-    background: none;
-    border: none;
-    cursor: pointer;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 .waterInfoContainer {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    width: 254px;
-    height: 52px;
-    padding: 8px 24px;
-    gap: 8px;
-    border-radius: 10px 0px 0px 0px;
-    opacity: 1;
-    background-color: #ECF2FF;
-    color: #0d0e10;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 254px;
+  height: 52px;
+  padding: 8px 24px;
+  gap: 8px;
+  border-radius: 10px 0px 0px 0px;
+  opacity: 1;
+  background-color: #ECF2FF;
+  color: #0d0e10;
 
 }
 
 .icon {
-    fill: #407BFF;
+  fill: #407BFF;
 
 }
 
 .amPmIndicator {
-    margin-left: 1px;
-    font-family: Roboto;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 24px;
-    text-align: left;
-    color: #17191c;
+  margin-left: 1px;
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  color: #17191c;
 }
