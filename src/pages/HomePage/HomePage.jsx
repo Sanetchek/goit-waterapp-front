@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import DailyNorma from '../../components/DailyNorma/DailyNorma.jsx';
 import WaterRatioPanel from '../../components/WaterRatioPanel/WaterRatioPanel.jsx';
+import { useSelector } from 'react-redux';
+import * as selectors from '../../redux/auth/selectors.js';
 import css from './HomePage.module.css';
 import botleImage1x from '../../assets/images/desktop/botle_home_screen.png';
 import botleImage2x from '../../assets/images/desktop/botle_home_screen@2x.png';
@@ -9,13 +11,33 @@ import tabletImage2x from '../../assets/images/tablet/bottle_home_screen_tablet@
 import mobileImage1x from '../../assets/images/mob/bottle_home_screen_mob.png';
 import mobileImage2x from '../../assets/images/mob/bottle_home_screen_mob@2x.png';
 import WaterListWithCalendar from '../../components/WaterListWithCalendar/WaterListWithCalendar.jsx';
+import Modal from 'components/Modal/Modal.jsx';
+import TodayListModal from 'components/TodayListModal/TodayListModal.jsx';
 
 export default function HomePage() {
-  // const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+  const userDailyNormWater = useSelector(selectors.selectUserDailyNormWater);
 
-  // if (!isAuthenticated) {
-  //   return <h2>You must be logged in to view this page.</h2>;
-  // }
+  // Modal state and handlers
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [waterConsumed, setWaterConsumed] = useState(0);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const addWater = amount => {
+    setWaterConsumed(prev => prev + Number(amount));
+    closeModal();
+  };
+
+  const handleSave = data => {
+    console.log('Water data saved:', data);
+    addWater(data.waterVolume);
+  };
 
   return (
     <section id="homePage" className={css.pageBackground}>
@@ -40,11 +62,22 @@ export default function HomePage() {
               <img className={css.photo} src={botleImage1x} alt="foto" />
             </picture>
           </div>
-          <WaterRatioPanel />
+          <WaterRatioPanel
+            dailyNorm={userDailyNormWater}
+            openModal={openModal}
+            waterConsumed={waterConsumed}
+          />
         </div>
 
-        <WaterListWithCalendar />
+        {/* Pass openModal to WaterListWithCalendar */}
+        <WaterListWithCalendar openModal={openModal} />
       </div>
+
+      {isModalOpen && (
+        <Modal title="Add Water" onClose={closeModal}>
+          <TodayListModal title="Choose a value:" onSave={handleSave} />
+        </Modal>
+      )}
     </section>
   );
 }

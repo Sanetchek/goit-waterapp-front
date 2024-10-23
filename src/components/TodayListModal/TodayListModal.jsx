@@ -5,7 +5,7 @@ import * as selectors from '../../redux/auth/selectors.js';
 import css from './TodayListModal.module.css';
 import snippet from '../../assets/images/sippets.svg';
 
-const TodayListModal = ({ onSave, previousWaterData }) => {
+const TodayListModal = ({ title = '', onSave, previousWaterData }) => {
   const userDailyNormWater = useSelector(selectors.selectUserDailyNormWater);
   const initialWaterAmount = previousWaterData ? previousWaterData.amount : 0;
   const initialTime = previousWaterData
@@ -74,7 +74,7 @@ const TodayListModal = ({ onSave, previousWaterData }) => {
 
           <div className={css.editSection}>
             <input type="hidden" name="dailyNorm" />
-            <label>Correct entered data:</label>
+            <h3 className={css.title}>{title}</h3>
             <label>Amount of water:</label>
             <div className={css.stepInput}>
               <button
