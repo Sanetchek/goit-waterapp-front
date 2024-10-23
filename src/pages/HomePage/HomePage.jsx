@@ -10,7 +10,6 @@ import mobileImage1x from '../../assets/images/mob/bottle_home_screen_mob.png';
 import mobileImage2x from '../../assets/images/mob/bottle_home_screen_mob@2x.png';
 import WaterListWithCalendar from '../../components/WaterListWithCalendar/WaterListWithCalendar.jsx';
 
-
 export default function HomePage() {
   // const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 
@@ -43,6 +42,7 @@ export default function HomePage() {
         <WaterRatioPanel />
       </div>
       <WaterListWithCalendar />
+      
     </div>
   );
 }
