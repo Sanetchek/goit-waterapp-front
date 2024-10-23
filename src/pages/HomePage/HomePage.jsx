@@ -10,8 +10,6 @@ import mobileImage1x from '../../assets/images/mob/bottle_home_screen_mob.png';
 import mobileImage2x from '../../assets/images/mob/bottle_home_screen_mob@2x.png';
 import WaterListWithCalendar from '../../components/WaterListWithCalendar/WaterListWithCalendar.jsx';
 
-import { useState } from 'react';
-import UserLogoutModal from 'components/UserLogoutModal/UserLogoutModal.jsx';
 
 export default function HomePage() {
   // const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
@@ -19,12 +17,6 @@ export default function HomePage() {
   // if (!isAuthenticated) {
   //   return <h2>You must be logged in to view this page.</h2>;
   // }
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleDelete = () => {
-    console.log("Entry deleted");
-    setIsModalOpen(false); // Close modal after deletion
-  };
 
   return (
     <div className={`${css.container} ${css.pageBackground} mainContainer`}>
@@ -50,13 +42,6 @@ export default function HomePage() {
         </div>
         <WaterRatioPanel />
       </div>
-      <div>
-      <button onClick={() => setIsModalOpen(true)}>Open Modal</button>
-
-      {isModalOpen && (
-        <UserLogoutModal onClose={() => setIsModalOpen(false)} onDelete={handleDelete} />
-      )}
-    </div>
       <WaterListWithCalendar />
     </div>
   );
