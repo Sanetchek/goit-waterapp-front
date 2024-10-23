@@ -51,16 +51,19 @@ const AuthForm = () => {
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
-      {() => (
+      {({ errors, touched }) => (
         <Form className={styles.authForm}>
           <h1 className={styles.signUpTitle}>Sign Up</h1>
-          <label>
+
+          <label className={styles.fieldLabel}>
             Enter your email
             <Field
               type="email"
               name="email"
               placeholder="E-mail"
-              className={styles.customInput}
+              className={`${styles.customInput} ${
+                errors.email && touched.email ? styles.errorInput : ''
+              }`}
               required
             />
             <ErrorMessage
@@ -69,14 +72,17 @@ const AuthForm = () => {
               className={styles.errorMessage}
             />
           </label>
-          <label>
+
+          <label className={styles.fieldLabel}>
             Enter your password
             <div className={styles.passwordContainer}>
               <Field
                 type={showPassword ? 'text' : 'password'}
                 name="password"
                 placeholder="Password"
-                className={styles.customInput}
+                className={`${styles.customInput} ${
+                  errors.password && touched.password ? styles.errorInput : ''
+                }`}
                 required
               />
               <img
@@ -92,14 +98,19 @@ const AuthForm = () => {
               className={styles.errorMessage}
             />
           </label>
-          <label>
+
+          <label className={styles.fieldLabel}>
             Repeat password
             <div className={styles.passwordContainer}>
               <Field
                 type={showRepeatPassword ? 'text' : 'password'}
                 name="repeatPassword"
                 placeholder="Repeat password"
-                className={styles.customInput}
+                className={`${styles.customInput} ${
+                  errors.repeatPassword && touched.repeatPassword
+                    ? styles.errorInput
+                    : ''
+                }`}
                 required
               />
               <img
@@ -115,9 +126,11 @@ const AuthForm = () => {
               className={styles.errorMessage}
             />
           </label>
+
           <button type="submit" className={styles.submitButton}>
             Sign Up
           </button>
+
           <Link to="/signin" className={styles.signInLink}>
             Sign in
           </Link>

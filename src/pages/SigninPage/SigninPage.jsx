@@ -14,3 +14,16 @@ export default function SigninPage() {
     </section>
   );
 }
+
+// import React from 'react';
+// import AuthContainer from '../../components/AuthContainer/AuthContainer';
+// import SignInForm from '../../components/AuthForm/SigninPage/SigninForm';
+// import frameImage from '../../assets/images/SigninPage/Frame.svg';
+
+// const SigninPage = () => (
+//   <AuthContainer frameImage={frameImage}>
+//     <SignInForm />
+//   </AuthContainer>
+// );
+
+// export default SigninPage;
