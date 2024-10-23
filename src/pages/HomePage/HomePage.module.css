@@ -12,7 +12,7 @@
   background-image: url('/src/assets/images/mob/background_element_home_screen_mob.png'),
     url('/src/assets/images/mob/background_element_home_screen_mob@2x.png');
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
 }
 
 .title {

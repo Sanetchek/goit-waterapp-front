@@ -18,31 +18,33 @@ export default function HomePage() {
   // }
 
   return (
-    <div className={`${css.container} ${css.pageBackground} mainContainer`}>
-      <div className={css.box}>
-        <div className={css.imageModal}>
-          <h1 className={css.title}>HomePage</h1>
-          <DailyNorma />
-          <picture>
-            <source
-              srcSet={`${botleImage1x} 1x, ${botleImage2x} 2x`}
-              media="(min-width: 1440px)"
-            />
-            <source
-              srcSet={`${tabletImage1x} 1x, ${tabletImage2x} 2x`}
-              media="(min-width: 768px) and (max-width: 1439px)"
-            />
-            <source
-              srcSet={`${mobileImage1x} 1x, ${mobileImage2x} 2x`}
-              media="(max-width: 767px)"
-            />
-            <img className={css.photo} src={botleImage1x} alt="foto" />
-          </picture>
+    <section id="homePage" className={css.pageBackground}>
+      <div className={`${css.container} mainContainer`}>
+        <div className={css.box}>
+          <div className={css.imageModal}>
+            <h1 className={css.title}>HomePage</h1>
+            <DailyNorma />
+            <picture>
+              <source
+                srcSet={`${botleImage1x} 1x, ${botleImage2x} 2x`}
+                media="(min-width: 1440px)"
+              />
+              <source
+                srcSet={`${tabletImage1x} 1x, ${tabletImage2x} 2x`}
+                media="(min-width: 768px) and (max-width: 1439px)"
+              />
+              <source
+                srcSet={`${mobileImage1x} 1x, ${mobileImage2x} 2x`}
+                media="(max-width: 767px)"
+              />
+              <img className={css.photo} src={botleImage1x} alt="foto" />
+            </picture>
+          </div>
+          <WaterRatioPanel />
         </div>
-        <WaterRatioPanel />
-      </div>
 
-      <WaterListWithCalendar />
-    </div>
+        <WaterListWithCalendar />
+      </div>
+    </section>
   );
 }
