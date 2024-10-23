@@ -2,7 +2,7 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-hot-toast';
 
-axios.defaults.baseURL = 'http://localhost:5050/';
+axios.defaults.baseURL = 'https://waterapp-hfy2.onrender.com/';
 
 // Отримання усіх записів води
 export const fetchWaterVolumes = createAsyncThunk(
