@@ -1,0 +1,44 @@
+.normaContainer {
+  border: 1px solid #ecf2ff;
+  border-radius: 10px;
+  padding: 0px 20px 8px 20px;
+  max-width: 168px;
+  box-shadow: 0 4px 8px 0 rgba(158, 187, 255, 0.12);
+  background: #fff;
+}
+
+.title {
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.33em;
+  color: #2f2f2f;
+}
+
+.normWater {
+  display: flex;
+  gap: 12px;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 1em;
+  color: #407bff;
+}
+
+.editBtn {
+  font-weight: 400;
+  font-size: 16px;
+  width: 28px;
+  height: 20px;
+  color: #8baeff;
+  background: transparent;
+}
+
+@media screen and (min-width: 768px) {
+  .normaContainer {
+    position: absolute;
+    left: 10%;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+}

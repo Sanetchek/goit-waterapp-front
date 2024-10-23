@@ -1,5 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { register, signin, logout, refreshUser } from './operations';
+import {
+  createSlice
+} from '@reduxjs/toolkit';
+import {
+  signup,
+  signin,
+  logout,
+  refreshUser
+} from './operations';
 
 const slice = createSlice({
   name: 'auth',
@@ -7,6 +14,12 @@ const slice = createSlice({
     user: {
       name: null,
       email: null,
+      gender: null,
+      weight: null,
+      sportTime: null,
+      dailyNormWater: null,
+      themeColor: null,
+      avatar: null,
     },
     token: null,
     isLoggedIn: false,
@@ -16,55 +29,63 @@ const slice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(register.pending, state => {
+      .addCase(signup.pending, state => {
         state.isRefreshing = true;
-        state.isLoggedIn = false;
       })
-      .addCase(register.fulfilled, (state, action) => {
+      .addCase(signup.fulfilled, (state, action) => {
+        console.log('Signup fulfilled payload:', action.payload); // Check the response structure
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })
-      .addCase(register.rejected, state => {
+      .addCase(signup.rejected, (state, action) => {
         state.isRefreshing = false;
-        state.error = true;
+        state.error = action.payload || 'Signup failed';
       })
       .addCase(signin.pending, state => {
         state.isRefreshing = true;
-        state.isLoggedIn = false;
         state.loading = true;
-        state.error = false;
+        state.error = null;
       })
       .addCase(signin.fulfilled, (state, action) => {
+        console.log('Signin fulfilled payload:', action.payload); // Check the response structure
         state.loading = false;
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })
-      .addCase(signin.rejected, state => {
+      .addCase(signin.rejected, (state, action) => {
+        console.log('Signin rejected:', action.error); // Log the error for more detail
         state.loading = false;
         state.isRefreshing = false;
-        state.error = true;
+        state.error = action.payload || 'Signin failed';
       })
       .addCase(logout.pending, state => {
         state.isRefreshing = true;
-        state.isLoggedIn = false;
       })
       .addCase(logout.fulfilled, (state, action) => {
-        state.user = [];
+        state.user = {
+          name: null,
+          email: null,
+          gender: null,
+          weight: null,
+          sportTime: null,
+          dailyNormWater: null,
+          themeColor: null,
+          avatar: null,
+        };
         state.token = null;
         state.isLoggedIn = false;
         state.isRefreshing = false;
       })
-      .addCase(logout.rejected, state => {
+      .addCase(logout.rejected, (state, action) => {
         state.isRefreshing = false;
-        state.error = true;
+        state.error = action.payload || 'Logout failed';
       })
       .addCase(refreshUser.pending, state => {
         state.isRefreshing = true;
-        state.isLoggedIn = false;
       })
       .addCase(refreshUser.fulfilled, (state, action) => {
         state.user = action.payload;

@@ -1,19 +1,11 @@
-li {
-  list-style: none;
-}
-
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding-left: 0;
-}
-
 .listItem {
   display: flex;
+  height: 48px;
   align-items: center;
-  padding: 5px 10px 5px 5px;
+  padding-bottom: 12px;
   border-bottom: 1px solid #d7e3ff;
   transition: background-color 0.3s ease;
+  margin-bottom: 12px;
 }
 
 .listItem:hover {
@@ -22,12 +14,13 @@ ul {
 
 .icon {
   margin-right: 12px;
-  color: #407bff;
   width: 16px;
   height: 21px;
+  fill: #407bff;
 }
 
 .volume {
+  margin: 0;
   margin-right: 16px;
   font-weight: 400;
   font-size: 18px;
@@ -36,6 +29,7 @@ ul {
 }
 
 .time {
+  margin: 0;
   margin-right: auto;
   font-size: 12px;
   color: #333;

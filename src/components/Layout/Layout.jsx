@@ -1,13 +1,13 @@
-import React from "react";
-import AppBar from "../AppBar/AppBar";
-
-import css from "./Layout.module.css";
-
-export default function Layout({ children }) {
+import React from 'react';
+import AppBar from '../AppBar/AppBar';
+import css from './Layout.module.css';
+const Layout = ({ children, username }) => {
   return (
-    <>
-      <AppBar />
-      <main className={css.main}>{children}</main>
-    </>
+    <div className={`${css.layout} ${css.light}`}>
+      <AppBar username={username} />
+      <main>{children}</main>
+    </div>
   );
-}
+};
+
+export default Layout;

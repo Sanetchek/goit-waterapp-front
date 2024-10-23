@@ -1,5 +1,12 @@
-.main {
-  max-width: 1920px;
-  padding: 30px;
-  margin: 0 auto;
+.layout {
+  overflow-x: hidden;
+  height: 100vh;
+}
+
+.light {
+  background-color: #fff;
+}
+
+.dark {
+  background-color: #000;
 }

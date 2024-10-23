@@ -1,0 +1,129 @@
+.authForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 280px;
+  margin: 0 auto;
+  border-radius: 8px;
+}
+
+.signUpTitle {
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 32px;
+  text-align: left;
+  padding-top: 24px;
+  margin: 0;
+}
+
+.fieldLabel {
+  display: flex;
+  flex-direction: column;
+  color: #2f2f2f;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+}
+
+.customInput {
+  width: 280px;
+  height: 44px;
+  padding: 12px 10px;
+  gap: 10px;
+  border-radius: 6px;
+  border: 1px solid #d7e3ff;
+  color: #407bff;
+}
+
+.customInput:active,
+:focus {
+  border-color: #d7e3ff;
+  color: #407bff;
+  outline: none;
+}
+
+.submitButton {
+  padding: 8px 30px;
+  border-radius: 10px;
+  background: #407bff;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  cursor: pointer;
+  box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.35);
+}
+
+.signInLink {
+  line-height: 20px;
+  color: #407bff;
+  text-decoration: none;
+}
+
+.passwordContainer {
+  position: relative;
+  width: 100%;
+}
+
+.customInput {
+  padding-right: 36px;
+  box-sizing: border-box;
+}
+
+.errorInput {
+  border: 1px solid #ef5050;
+  color: #ef5050;
+}
+
+.errorMessage {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.28571;
+  color: #ef5050;
+}
+
+.eyeIcon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  opacity: 0.6;
+  transition: opacity 0.3s;
+}
+
+.eyeIcon:hover {
+  opacity: 1;
+}
+
+@media (min-width: 768px) {
+  .authForm {
+    width: 336px;
+  }
+
+  .signUpTitle {
+    padding-top: 40px;
+  }
+
+  .customInput {
+    width: 336px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .authForm {
+    width: 384px;
+    margin-left: auto;
+  }
+
+  .signUpTitle {
+    padding-top: 148px;
+  }
+
+  .customInput {
+    width: 384px;
+  }
+}

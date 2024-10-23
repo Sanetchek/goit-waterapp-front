@@ -6,6 +6,7 @@ body {
   font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: transparent !important;
 }
 
 code {
@@ -128,6 +129,16 @@ select.error {
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
+}
+
+li {
+  list-style: none;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding-left: 0;
 }
 
 .mainContainer {

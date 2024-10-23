@@ -1,0 +1,181 @@
+.boxComsamption {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  align-items: flex-start;
+}
+.headerWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 246px;
+  width: 100%;
+}
+.header {
+  margin: 0;
+  padding: 0;
+
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.14;
+  letter-spacing: -0.03em;
+}
+.subHeader {
+  margin: 0;
+  padding: 0;
+
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.25;
+}
+.trackerBenefitsBox {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  max-width: 216px;
+}
+
+.benefitsSubHeader {
+  margin: 0;
+  padding: 0;
+
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.1;
+  color: #2f2f2f;
+}
+.benefitsList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.benefitItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.benefitText {
+  margin: 0;
+
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.25;
+}
+.benefitIcon {
+  display: block;
+  flex-shrink: 0;
+  fill: #407bff;
+
+  width: 32px;
+  height: 32px;
+}
+.tryBtn {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.25;
+  text-align: center;
+  color: #fff;
+
+  border-radius: 10px;
+  padding: 8px 30px;
+
+  max-width: 280px;
+  width: 100%;
+
+  box-shadow: 0 4px 8px 0 rgba(64, 123, 255, 0.34);
+  background: #407bff;
+  border: none;
+  cursor: pointer;
+}
+.tryBtn:hover {
+  box-shadow: 0 4px 14px 0 rgba(64, 123, 255, 0.54);
+}
+
+@media screen and (min-width: 768px) {
+  .headerWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 439px;
+    width: 100%;
+  }
+  .header {
+    font-size: 36px;
+    line-height: 1.16;
+    letter-spacing: normal;
+  }
+  .subHeader {
+    font-size: 26px;
+    line-height: 1.23;
+  }
+
+  .trackerBenefitsBox {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    max-width: 704px;
+  }
+
+  .benefitsSubHeader {
+    font-size: 18px;
+    line-height: 1.1;
+  }
+
+  .benefitsList {
+    flex-direction: row;
+  }
+  .benefitItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    width: 224px;
+  }
+  .benefitIcon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .tryBtn {
+    font-size: 18px;
+    line-height: 1.33;
+
+    padding: 10px 30px;
+    max-width: 336px;
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .trackerBenefitsBox {
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 1.23;
+
+    max-width: 216px;
+  }
+
+  .benefitsSubHeader {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.1;
+    color: #2f2f2f;
+  }
+  .benefitsList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .tryBtn {
+    padding: 10px 30px;
+    max-width: 384px;
+    width: 100%;
+  }
+}

@@ -1,0 +1,161 @@
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { useDispatch } from 'react-redux';
+import { signup } from '../../redux/auth/operations';
+import * as Yup from 'yup';
+import { toast } from 'react-hot-toast';
+import styles from './AuthForm.module.css';
+import EyeIcon from '../../assets/images/eye-icon.svg';
+
+const AuthForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showRepeatPassword, setShowRepeatPassword] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false); // Loading state
+  const dispatch = useDispatch();
+
+  const getUsernameFromEmail = email => {
+    const [username] = email.split('@');
+    return username;
+  };
+
+  const handleSubmit = async (values, actions) => {
+    setIsSubmitting(true); // Set loading state when submitting
+    const { repeatPassword, ...restValues } = values;
+    const username = getUsernameFromEmail(restValues.email);
+
+    const updatedValues = {
+      ...restValues,
+      name: username,
+    };
+
+    try {
+      await dispatch(signup(updatedValues));
+      actions.resetForm();
+    } catch (error) {
+      toast.error('Signup failed. Please try again.');
+    } finally {
+      setIsSubmitting(false); // Reset loading state after submission
+    }
+  };
+
+  const validationSchema = Yup.object({
+    email: Yup.string()
+      .email('Invalid email format')
+      .required('This field is required'),
+    password: Yup.string().required('This field is required'),
+    repeatPassword: Yup.string()
+      .oneOf([Yup.ref('password'), null], 'Passwords must match')
+      .required('This field is required'),
+  });
+
+  return (
+    <Formik
+      initialValues={{
+        email: '',
+        password: '',
+        repeatPassword: '',
+      }}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+    >
+      {({ errors, touched }) => (
+        <Form className={styles.authForm}>
+          <h1 className={styles.signUpTitle}>Sign Up</h1>
+
+          <label className={styles.fieldLabel}>
+            Enter your email
+            <Field
+              type="email"
+              name="email"
+              placeholder="E-mail"
+              className={`${styles.customInput} ${
+                errors.email && touched.email ? styles.errorInput : ''
+              }`}
+              required
+            />
+            <ErrorMessage
+              name="email"
+              component="div"
+              className={styles.errorMessage}
+            />
+          </label>
+
+          <label className={styles.fieldLabel}>
+            Enter your password
+            <div className={styles.passwordContainer}>
+              <Field
+                type={showPassword ? 'text' : 'password'}
+                name="password"
+                placeholder="Password"
+                className={`${styles.customInput} ${
+                  errors.password && touched.password ? styles.errorInput : ''
+                }`}
+                required
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                aria-label={showPassword ? 'Hide password' : 'Show password'}
+                className={styles.eyeButton}
+              >
+                <img src={EyeIcon} alt="" className={styles.eyeIcon} />
+              </button>
+            </div>
+            <ErrorMessage
+              name="password"
+              component="div"
+              className={styles.errorMessage}
+            />
+          </label>
+
+          <label className={styles.fieldLabel}>
+            Repeat password
+            <div className={styles.passwordContainer}>
+              <Field
+                type={showRepeatPassword ? 'text' : 'password'}
+                name="repeatPassword"
+                placeholder="Repeat password"
+                className={`${styles.customInput} ${
+                  errors.repeatPassword && touched.repeatPassword
+                    ? styles.errorInput
+                    : ''
+                }`}
+                required
+              />
+              <button
+                type="button"
+                onClick={() => setShowRepeatPassword(!showRepeatPassword)}
+                aria-label={
+                  showRepeatPassword ? 'Hide password' : 'Show password'
+                }
+                className={styles.eyeButton}
+              >
+                <img src={EyeIcon} alt="" className={styles.eyeIcon} />
+              </button>
+            </div>
+            <ErrorMessage
+              name="repeatPassword"
+              component="div"
+              className={styles.errorMessage}
+            />
+          </label>
+
+          <button
+            type="submit"
+            className={styles.submitButton}
+            disabled={isSubmitting} // Disable button when submitting
+          >
+            {isSubmitting ? 'Signing Up...' : 'Sign Up'}
+          </button>
+
+          <Link to="/signin" className={styles.signInLink}>
+            Sign in
+          </Link>
+        </Form>
+      )}
+    </Formik>
+  );
+};
+
+export default AuthForm;

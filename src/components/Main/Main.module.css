@@ -1,0 +1,27 @@
+.mainBox {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+
+  max-width: 280px;
+}
+
+@media screen and (min-width: 768px) {
+  .mainBox {
+    max-width: 704px;
+    gap: 60px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .mainBox {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 81px;
+
+    max-width: 1014px;
+    max-height: 366px;
+  }
+}
