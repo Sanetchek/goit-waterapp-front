@@ -1,5 +1,5 @@
 import UserSettingsForm from '../UserSettingsForm/UserSettingsForm';
-import {icons} from '../../assets/images/sippets.svg'
+import {icons} from '../../assets/images/snippets.svg'
 import css from './UserSettingsModal.module.css';
 
 const UserSettingsModal = ({onClose}) => {

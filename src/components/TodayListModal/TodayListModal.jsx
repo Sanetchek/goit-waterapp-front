@@ -3,7 +3,7 @@ import { Formik, Form, Field } from 'formik';
 import { useSelector } from 'react-redux';
 import * as selectors from '../../redux/auth/selectors.js';
 import css from './TodayListModal.module.css';
-import snippet from '../../assets/images/sippets.svg';
+import snippet from '../../assets/images/snippets.svg';
 
 const TodayListModal = ({ title = '', onSave, previousWaterData }) => {
   const userDailyNormWater = useSelector(selectors.selectUserDailyNormWater);

@@ -1,7 +1,7 @@
 import { FaEdit } from 'react-icons/fa';
 import { CiTrash } from 'react-icons/ci';
 import styles from './WaterListRow.module.css';
-import icons from '../../../assets/images/sippets.svg';
+import icons from '../../../assets/images/snippets.svg';
 
 export default function WaterListRow({ rowData, onDelete }) {
   return (

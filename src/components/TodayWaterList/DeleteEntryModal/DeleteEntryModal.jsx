@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styles from './DeleteEntryModal.module.css';
-import snippets from '../../../assets/images/sippets.svg';
+import snippets from '../../../assets/images/snippets.svg';
 const DeleteEntryModal = ({ onCancel, onDelete }) => {
   useEffect(() => {
     const handleEsc = event => {
