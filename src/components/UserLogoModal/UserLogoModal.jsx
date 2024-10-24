@@ -5,10 +5,10 @@ import UserLogoutModal from '../UserLogoutModal/UserLogoutModal';
 
 const UserLogoModal = ({ onClose }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleDelete = () => {
-    console.log("Entry deleted");
-    setIsModalOpen(false); 
-  };
+  // const handleDelete = () => {
+  //   console.log("Entry deleted");
+  //   setIsModalOpen(false); 
+  // };
   return (
     <div className={css.dropdownMenu}>
       <ul className={css.listCon}>
@@ -26,7 +26,7 @@ const UserLogoModal = ({ onClose }) => {
         </li>
       </ul>
       {isModalOpen && (
-        <UserLogoutModal onClose={() => setIsModalOpen(false)} onDelete={handleDelete} />
+        <UserLogoutModal onClose={() => setIsModalOpen(false)} />
       )}
     </div>
   )
