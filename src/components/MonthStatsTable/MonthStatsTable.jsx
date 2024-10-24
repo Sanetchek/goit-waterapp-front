@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect,} from 'react';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import styles from './MonthStatsTable.module.css';
 import clsx from 'clsx';
@@ -23,13 +23,11 @@ const fetchDataForMonth = (year, month) => {
 
 const MonthStatsTable = () => {
   const today = new Date();
-  const calendarRef = useRef(null);
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
   const [currentMonth, setCurrentMonth] = useState(today.getMonth());
   const [currentMonthData, setCurrentMonthData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedDayData, setSelectedDayData] = useState(null); 
-  const [popupPosition, setPopupPosition] = useState({ top: 0, left: 0 });
+  const [selectedDayId, setSelectedDayId] = useState(null); 
 
   useEffect(() => {
     setIsLoading(true);
@@ -60,43 +58,26 @@ const MonthStatsTable = () => {
     }
   };
 
-const handleDayClick = (day, event) => {
-  const calendarBounds = calendarRef.current.getBoundingClientRect();
-  const rect = event.target.getBoundingClientRect();
- 
-  const popupWidth = 292;
-
-
-  let top = rect.top + window.scrollY - 250;
-  let left = rect.left + rect.width / 2 - 200;
-
-
-  if (left < calendarBounds.left - 40) {
-    left = calendarBounds.left - 40;
-  }
-
-
-  if (left + popupWidth > calendarBounds.right - 24) {
-    left = calendarBounds.right - 24 - popupWidth;
-  }
-
-
-     const selectedDate = new Date(currentYear, currentMonth, day.id);
+  const handleDayClick = (dayId) => {
+  const selectedDate = new Date(currentYear, currentMonth, dayId);
   const dayNumber = selectedDate.getDate();
-  const monthName = selectedDate.toLocaleString('en-US', { month: 'long' });
+    const monthName = selectedDate.toLocaleString('en-US', { month: 'long' });
+    
+    const selectedDayData = currentMonthData.find(day => day.id === dayId);
 
-
-
-
-    setPopupPosition({ top, left });
-    setSelectedDayData({ ...day, dayNumber, monthName });
+  if (selectedDayId?.dayId === dayId) {
+    setSelectedDayId(null); // Скинути вибір
+  } else {
+    setSelectedDayId({
+      dayId,
+      dayNumber,
+      monthName,
+      dailyNorm: selectedDayData.dailyNorm, // Додати dailyNorm
+      percentage: selectedDayData.percentage, // Додати percentage
+      servings: selectedDayData.servings, // Додати servings
+    });
+  }
 };
-
-
-  const closePopup = () => {
-    setSelectedDayData(null);
-  };
-
 
   return (
     <>
@@ -124,8 +105,8 @@ const handleDayClick = (day, event) => {
         </div>
       </div>
 
-      <div ref={calendarRef} className={styles.calendarContainer}>
-        <div
+      <div className={styles.calendarContainer}>
+        <div 
           className={clsx(styles.containerDay, {
             [styles.loadingContainer]: isLoading,
           })}
@@ -142,12 +123,15 @@ const handleDayClick = (day, event) => {
                   [styles.zeroPercentage]: day.percentage === 0,
                 });
                 return (
-                  <li key={day.id} className={styles.dayWrapper} onClick={(e) => handleDayClick(day, e)}
+                  <li key={day.id} className={styles.dayWrapper} onClick={() => handleDayClick(day.id)}
                   >
                     <div className={circleClass}>
                       <p className={styles.calendarDay}>{day.id}</p>
                     </div>
                     <p className={styles.percentageText}>{day.percentage}%</p>
+                    {selectedDayId && selectedDayId.dayId === day.id && (
+  <DaysGeneralStats selectedDayData={selectedDayId} />
+)}
                   </li>
                 );
               })}
@@ -155,13 +139,6 @@ const handleDayClick = (day, event) => {
           )}
         </div>
       </div>
-       {selectedDayData && (
-        <DaysGeneralStats
-    selectedDayData={selectedDayData} 
-    onClose={closePopup}
-    position={popupPosition}
-  />
-      )}
     </>
   );
 };
