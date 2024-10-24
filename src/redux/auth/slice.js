@@ -3,7 +3,8 @@ import {
   signup,
   signin,
   logout,
-  refreshUser
+  refreshUser,
+  forgotPassword,
 } from './operations';
 
 const slice = createSlice({
@@ -78,6 +79,21 @@ const slice = createSlice({
       })
       .addCase(refreshUser.rejected, state => {
         state.isRefreshing = false;
+      })
+      .addCase(forgotPassword.pending, state => {
+        state.isRefreshing = true;
+        state.isLoggedIn = false;
+        state.loading = true;
+        state.error = false;
+      })
+      .addCase(forgotPassword.fulfilled, state => {
+        state.loading = false;
+        state.isRefreshing = false;
+      })
+      .addCase(forgotPassword.rejected, (state, action) => {
+        state.loading = false;
+        state.isRefreshing = false;
+        state.error = action.payload;
       });
   },
 });

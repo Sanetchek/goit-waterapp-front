@@ -26,13 +26,13 @@ export const signin = createAsyncThunk('auth/login', async (user, thunkAPI) => {
   try {
     const response = await axios.post('auth/login', user);
     setAuthHead(response.data.token);
-    console.log(response.data)
+    console.log(response.data);
     return response.data;
   } catch (error) {
     const errorMessage =
       error.response?.data?.message || 'Login failed, try again.';
     toast.error(errorMessage);
-    console.log(errorMessage)
+    console.log(errorMessage);
     return thunkAPI.rejectWithValue(errorMessage);
   }
 });
@@ -64,6 +64,27 @@ export const refreshUser = createAsyncThunk(
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const forgotPassword = createAsyncThunk(
+  'auth/send-reset-email',
+  async (user, thunkAPI) => {
+    try {
+      const response = await axios.post('auth/send-reset-email', {
+        email: user.email,
+      });
+      setAuthHead(response.data.token);
+      toast.success('Reset password email was successfully sent.');
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      const errorMessage =
+        error.response?.data?.message || 'Reset password failed, try again.';
+      console.log(errorMessage);
+      toast.error(errorMessage);
+      return thunkAPI.rejectWithValue(errorMessage);
     }
   }
 );

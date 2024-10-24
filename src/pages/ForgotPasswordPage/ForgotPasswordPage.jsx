@@ -1,14 +1,14 @@
 import React from 'react';
 import AuthContainer from '../../components/AuthContainer/AuthContainer';
-import SignInForm from '../../components/AuthForm/SigninPage/SigninForm';
 import frameImage from '../../assets/images/Frame.svg';
-import css from './SigninPage.module.css';
+import css from '../SigninPage/SigninPage.module.css';
+import ForgotPasswordForm from 'components/AuthForm/ForgotPasswordPage/ForgotPasswordForm';
 
-export default function SigninPage() {
+export default function ForgotPasswordPage() {
   return (
     <AuthContainer frameImage={frameImage}>
       <div className={css.container}>
-        <SignInForm />
+        <ForgotPasswordForm />
       </div>
     </AuthContainer>
   );
