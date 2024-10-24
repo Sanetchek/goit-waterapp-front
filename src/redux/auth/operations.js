@@ -1,10 +1,6 @@
 import axios from 'axios';
-import {
-  createAsyncThunk
-} from '@reduxjs/toolkit';
-import {
-  toast
-} from 'react-hot-toast';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { toast } from 'react-hot-toast';
 
 axios.defaults.baseURL = 'https://waterapp-hfy2.onrender.com/';
 
@@ -20,7 +16,9 @@ export const signup = createAsyncThunk(
       setAuthHead(response.data.token);
       return response.data;
     } catch (error) {
-      const errorMessage = error.response?.data?.message || 'Registration failed. Please try again.';
+      const errorMessage =
+        error.response?.data?.message ||
+        'Registration failed. Please try again.';
       return thunkAPI.rejectWithValue(errorMessage);
     }
   }
@@ -66,7 +64,29 @@ export const refreshUser = createAsyncThunk(
       const response = await axios.post('auth/refresh');
       return response.data;
     } catch (error) {
-      const errorMessage = error.response?.data?.message || 'Token refresh failed';
+      const errorMessage =
+        error.response?.data?.message || 'Token refresh failed';
+      return thunkAPI.rejectWithValue(errorMessage);
+    }
+  }
+);
+
+export const forgotPassword = createAsyncThunk(
+  'auth/send-reset-email',
+  async (user, thunkAPI) => {
+    try {
+      const response = await axios.post('auth/send-reset-email', {
+        email: user.email,
+      });
+      setAuthHead(response.data.token);
+      toast.success('Reset password email was successfully sent.');
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      const errorMessage =
+        error.response?.data?.message || 'Reset password failed, try again.';
+      console.log(errorMessage);
+      toast.error(errorMessage);
       return thunkAPI.rejectWithValue(errorMessage);
     }
   }

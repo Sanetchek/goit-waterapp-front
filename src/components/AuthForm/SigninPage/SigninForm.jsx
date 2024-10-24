@@ -35,7 +35,8 @@ export default function SignInForm() {
       validationSchema={UserSchema}
     >
       {({ errors, touched }) => (
-        <Form>
+        <Form className={css.form}>
+          <h1 className={css.title}>Sign In</h1>
           <div className={css.field}>
             <label className={css.label}>Enter your email</label>
             <Field
@@ -88,9 +89,14 @@ export default function SignInForm() {
           <button className={css.button} type="submit">
             Sign In
           </button>
-          <Link className={css.link} to={'/signup'} state={location}>
-            Sign up
-          </Link>
+          <div className={css.link}>
+            <Link className={css.link} to={'/forgot-password'} state={location}>
+              Forgot password?
+            </Link>
+            <Link className={css.link} to={'/signup'} state={location}>
+              Sign up
+            </Link>
+          </div>
         </Form>
       )}
     </Formik>

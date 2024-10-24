@@ -1,7 +1,7 @@
 import React from 'react';
 import AuthContainer from '../../components/AuthContainer/AuthContainer';
 import AuthForm from './AuthForm';
-import frameImage from '../../assets/images/SigninPage/Frame.svg';
+import frameImage from '../../assets/images/Frame.svg';
 
 const SignupPage = () => {
   return (
