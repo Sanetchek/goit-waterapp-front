@@ -1,16 +1,16 @@
 .dropdownMenu {
     position: absolute;
-    top: 50px; 
-    right: 0;
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     width: 150px;
     z-index: 4;
     padding: 16px;
+    top: 30px; 
+    right: 0;
   }
   
-  ul {
+  .listCon {
     list-style: none;
     display: flex;
     flex-direction: column;

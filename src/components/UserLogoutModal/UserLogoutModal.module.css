@@ -54,6 +54,7 @@
         flex-wrap: wrap;
         justify-content: center;
         gap: 24px;
+        flex-direction: column-reverse;
     }
     .cancelButton {
         width: 232px;
@@ -71,6 +72,7 @@
     }
     .buttons {
         justify-content: right;
+        flex-direction: row;
     }
     .cancelButton {
         width: 160px;
