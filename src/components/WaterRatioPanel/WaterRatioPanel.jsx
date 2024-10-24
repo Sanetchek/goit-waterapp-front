@@ -1,5 +1,5 @@
 import React from 'react';
-import icon from '../../assets/images/sippets.svg';
+import icon from '../../assets/images/snippets.svg';
 import css from './WaterRatioPanel.module.css';
 
 export default function WaterRatioPanel({

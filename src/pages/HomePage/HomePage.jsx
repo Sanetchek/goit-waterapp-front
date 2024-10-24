@@ -13,9 +13,12 @@ import mobileImage2x from '../../assets/images/mob/bottle_home_screen_mob@2x.png
 import WaterListWithCalendar from '../../components/WaterListWithCalendar/WaterListWithCalendar.jsx';
 import Modal from 'components/Modal/Modal.jsx';
 import TodayListModal from 'components/TodayListModal/TodayListModal.jsx';
+import clsx from 'clsx';
 
 export default function HomePage() {
   const userDailyNormWater = useSelector(selectors.selectUserDailyNormWater);
+  const containerClass = clsx(css.homeContainer, css.pageBackground);
+  const contentClass = clsx('mainContainer', css.container);
 
   // Modal state and handlers
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -40,8 +43,8 @@ export default function HomePage() {
   };
 
   return (
-    <section id="homePage" className={css.pageBackground}>
-      <div className={`${css.container} mainContainer`}>
+    <section id="homePage" className={containerClass}>
+      <div className={contentClass}>
         <div className={css.box}>
           <div className={css.imageModal}>
             <h1 className={css.title}>HomePage</h1>
