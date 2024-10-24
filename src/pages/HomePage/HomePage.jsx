@@ -72,8 +72,6 @@ export default function HomePage() {
           />
         </div>
 
-        {/* Pass openModal to WaterListWithCalendar */}
-        <WaterListWithCalendar openModal={openModal} />
       </div>
 
       {isModalOpen && (
