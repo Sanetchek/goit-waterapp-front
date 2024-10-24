@@ -4,12 +4,14 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { useDispatch } from 'react-redux';
 import { signup } from '../../redux/auth/operations';
 import * as Yup from 'yup';
+import { toast } from 'react-hot-toast';
 import styles from './AuthForm.module.css';
 import EyeIcon from '../../assets/images/eye-icon.svg';
 
 const AuthForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false); // Loading state
   const dispatch = useDispatch();
 
   const getUsernameFromEmail = email => {
@@ -18,6 +20,7 @@ const AuthForm = () => {
   };
 
   const handleSubmit = async (values, actions) => {
+    setIsSubmitting(true); // Set loading state when submitting
     const { repeatPassword, ...restValues } = values;
     const username = getUsernameFromEmail(restValues.email);
 
@@ -26,9 +29,14 @@ const AuthForm = () => {
       name: username,
     };
 
-    console.log(updatedValues);
-    dispatch(signup(updatedValues));
-    actions.resetForm();
+    try {
+      await dispatch(signup(updatedValues));
+      actions.resetForm();
+    } catch (error) {
+      toast.error('Signup failed. Please try again.');
+    } finally {
+      setIsSubmitting(false); // Reset loading state after submission
+    }
   };
 
   const validationSchema = Yup.object({
@@ -85,12 +93,14 @@ const AuthForm = () => {
                 }`}
                 required
               />
-              <img
-                src={EyeIcon}
-                alt="Toggle password visibility"
+              <button
+                type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className={styles.eyeIcon}
-              />
+                aria-label={showPassword ? 'Hide password' : 'Show password'}
+                className={styles.eyeButton}
+              >
+                <img src={EyeIcon} alt="" className={styles.eyeIcon} />
+              </button>
             </div>
             <ErrorMessage
               name="password"
@@ -113,12 +123,16 @@ const AuthForm = () => {
                 }`}
                 required
               />
-              <img
-                src={EyeIcon}
-                alt="Toggle password visibility"
+              <button
+                type="button"
                 onClick={() => setShowRepeatPassword(!showRepeatPassword)}
-                className={styles.eyeIcon}
-              />
+                aria-label={
+                  showRepeatPassword ? 'Hide password' : 'Show password'
+                }
+                className={styles.eyeButton}
+              >
+                <img src={EyeIcon} alt="" className={styles.eyeIcon} />
+              </button>
             </div>
             <ErrorMessage
               name="repeatPassword"
@@ -127,8 +141,12 @@ const AuthForm = () => {
             />
           </label>
 
-          <button type="submit" className={styles.submitButton}>
-            Sign Up
+          <button
+            type="submit"
+            className={styles.submitButton}
+            disabled={isSubmitting} // Disable button when submitting
+          >
+            {isSubmitting ? 'Signing Up...' : 'Sign Up'}
           </button>
 
           <Link to="/signin" className={styles.signInLink}>

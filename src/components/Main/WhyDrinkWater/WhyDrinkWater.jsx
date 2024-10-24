@@ -1,5 +1,5 @@
 import css from './WhyDrinkWater.module.css';
-import snippets from '../../../assets/images/sippets.svg';
+import snippets from '../../../assets/images/snippets.svg';
 export default function WhyDrinkWater() {
   return (
     <div className={css.WhyDrinkWrapper}>

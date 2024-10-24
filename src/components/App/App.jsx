@@ -50,7 +50,6 @@ export const App = () => {
             path="/"
             element={isLoggedIn ? <HomePage /> : <WellcomePage />}
           />
-          <Route path="/home" element={<HomePage />} />
           <Route
             path="/signin"
             element={

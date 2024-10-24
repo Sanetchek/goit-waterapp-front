@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { signin } from '../../../redux/auth/operations';
 import { Link, useLocation } from 'react-router-dom';
 import css from './SigninForm.module.css';
-import snippets from '../../../assets/images/sippets.svg';
+import snippets from '../../../assets/images/snippets.svg';
 import * as Yup from 'yup';
 import { useState } from 'react';
 const UserSchema = Yup.object().shape({

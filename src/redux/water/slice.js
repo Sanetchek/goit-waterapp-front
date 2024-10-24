@@ -6,6 +6,7 @@ import {
   deleteWaterVolume,
   updateDailyWaterNorm,
 } from './operations';
+import { logout } from '../auth/operations';
 
 const waterSlice = createSlice({
   name: 'water',
@@ -68,6 +69,15 @@ const waterSlice = createSlice({
       })
       .addCase(updateDailyWaterNorm.fulfilled, (state, action) => {
         state.dailyNorm = action.payload.dailyNorm;
+      })
+      .addCase(logout.fulfilled, (state, action) => {
+        state.volumes = [];
+        state.dailyNorm = null;
+        state.isLoading = false;
+        state.error = null;
+        state.addWaterModalOpen = false;
+        state.editWaterModalOpen = false;
+        state.currentWaterVolume = null;
       });
   },
 });

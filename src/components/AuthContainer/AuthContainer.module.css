@@ -6,6 +6,7 @@
   max-width: 1440px;
   width: 100%;
   margin: 0 auto;
+  padding-top: 80px;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio: 2),
@@ -47,6 +48,7 @@
 
   .container {
     display: flex;
+    padding-top: 104px;
     padding-left: 32px;
     align-items: flex-start;
     background-image: url('../../assets/images/tablet/background-signin-1x.png');
@@ -80,6 +82,7 @@
     top: 40px;
   }
   .container {
+    padding-top: 80px;
     flex-direction: row-reverse;
     background-image: url('../../assets/images/desktop/Background-signin-1x.png');
   }
