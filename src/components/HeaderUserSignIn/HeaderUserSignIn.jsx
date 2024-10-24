@@ -1,13 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import css from './HeaderUserSignIn.module.css';
 import snippets from '../../assets/images/snippets.svg';
 import { useSelector } from 'react-redux';
 import * as selectors from '../../redux/auth/selectors.js';
 import clsx from 'clsx';
+import UserLogoModal from '../UserLogoModal/UserLogoModal';
 
 export default function HeaderUserSignIn() {
   const username = useSelector(selectors.selectUserName);
   const userAvatar = useSelector(selectors.selectUserAvatar);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const handleClose = () => {
+    setIsDropdownOpen(false);
+  };
 
   const svgClass = clsx('icon-chevron-down', css.svgChevron);
 
@@ -39,9 +44,12 @@ export default function HeaderUserSignIn() {
           </div>
         )}
       </span>
-      <svg className={svgClass} width="20" height="16">
+      <svg className={svgClass} width="20" height="16" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
         <use href={`${snippets}#icon-chevron-down`}></use>
       </svg>
+      {isDropdownOpen && (
+        <UserLogoModal onClose={handleClose} />
+      )}
     </div>
   );
 }
