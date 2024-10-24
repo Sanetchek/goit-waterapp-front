@@ -1,33 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { Formik, Form, Field } from 'formik';
+import { useSelector } from 'react-redux';
+import * as selectors from '../../redux/auth/selectors.js';
 import css from './TodayListModal.module.css';
-import snippet from '../../assets/images/sippets.svg';
+import snippet from '../../assets/images/snippets.svg';
 
-const TodayListModal = ({ onSave, previousWaterData }) => {
-  const [waterAmount, setWaterAmount] = useState(
-    previousWaterData ? previousWaterData.amount : 0
-  );
-  const [inputWaterAmount, setInputWaterAmount] = useState(waterAmount);
-  const [selectedTime, setSelectedTime] = useState(
-    previousWaterData ? previousWaterData.time : getCurrentTime()
-  );
-  const [amPm, setAmPm] = useState(
-    getAmPm(previousWaterData?.time || getCurrentTime())
-  );
+const TodayListModal = ({ title = '', onSave, previousWaterData }) => {
+  const userDailyNormWater = useSelector(selectors.selectUserDailyNormWater);
+  const initialWaterAmount = previousWaterData ? previousWaterData.amount : 0;
+  const initialTime = previousWaterData
+    ? previousWaterData.time
+    : getCurrentTime();
 
   function getCurrentTime() {
     const date = new Date();
     const minutes = Math.round(date.getMinutes() / 5) * 5;
     return `${date.getHours()}:${minutes < 10 ? `0${minutes}` : minutes}`;
   }
-
-  function getAmPm(time) {
-    const [hours] = time.split(':').map(Number);
-    return hours >= 12 ? 'PM' : 'AM';
-  }
-
-  useEffect(() => {
-    setAmPm(getAmPm(selectedTime));
-  }, [selectedTime]);
 
   const generateTimeOptions = () => {
     const options = [];
@@ -41,98 +30,112 @@ const TodayListModal = ({ onSave, previousWaterData }) => {
     return options;
   };
 
-  const handleInputChange = e => {
-    const value = Number(e.target.value);
-    setInputWaterAmount(value);
-    setWaterAmount(value);
-  };
-
-  const incrementWaterAmount = () => {
-    setWaterAmount(prev => {
-      const newAmount = prev + 50;
-      setInputWaterAmount(newAmount); // Sync inputWaterAmount
-      return newAmount;
-    });
-  };
-
-  const decrementWaterAmount = () => {
-    setWaterAmount(prev => {
-      const newAmount = prev > 0 ? prev - 50 : 0;
-      setInputWaterAmount(newAmount); // Sync inputWaterAmount
-      return newAmount;
-    });
-  };
-
-  const handleSave = () => {
-    const dataToSave = {
-      amount: waterAmount,
-      time: selectedTime,
-    };
-    onSave(dataToSave);
-  };
-
   return (
-    <div>
-      <div className={css.previousData}>
-        {previousWaterData ? (
-          <div className={css.waterInfoContainer}>
-            <svg className="icon-glass" width="24" height="24">
-              <use href={`${snippet}#icon-glass`}></use>
-            </svg>
-            {previousWaterData.amount} ml {previousWaterData.time}
-            <span className={css.amPmIndicator}>{amPm}</span>
+    <Formik
+      initialValues={{
+        waterVolume: initialWaterAmount,
+        selectedTime: initialTime,
+      }}
+      onSubmit={values => {
+        const currentDate = new Date();
+        const selectedDate = new Date(currentDate);
+        const [hours, minutes] = values.selectedTime.split(':').map(Number);
+        selectedDate.setHours(hours, minutes, 0, 0); // Set hours and minutes
+
+        // Adjust the date for the local timezone
+        const localDate = new Date(
+          selectedDate.getTime() - selectedDate.getTimezoneOffset() * 60000
+        );
+
+        const dataToSave = {
+          dailyNorm: userDailyNormWater, // Get the daily norm from Redux
+          waterVolume: values.waterVolume,
+          date: localDate.toISOString(), // Format date as ISO string in local timezone
+        };
+
+        onSave(dataToSave);
+      }}
+    >
+      {({ values, setFieldValue }) => (
+        <Form>
+          <div className={css.previousData}>
+            {previousWaterData && (
+              <div className={css.waterInfoContainer}>
+                <svg className="icon-glass" width="24" height="24">
+                  <use href={`${snippet}#icon-glass`}></use>
+                </svg>
+                {previousWaterData.amount} ml {previousWaterData.time}
+                <span className={css.amPmIndicator}>
+                  {getAmPm(previousWaterData.time)}
+                </span>
+              </div>
+            )}
           </div>
-        ) : (
-          <p>No notes yet</p>
-        )}
-      </div>
 
-      <div className={css.editSection}>
-        <label>Correct entered data:</label>
-        <label>Amount of water:</label>
-        <div className={css.stepInput}>
-          <button className={css.roundButton} onClick={decrementWaterAmount}>
-            -
-          </button>
-          <span>{waterAmount} ml</span>
-          <button className={css.roundButton} onClick={incrementWaterAmount}>
-            +
-          </button>
-        </div>
-        <div className={css.timeSelectBlock}>
-          <select
-            value={selectedTime}
-            onChange={e => setSelectedTime(e.target.value)}
-          >
-            {generateTimeOptions().map((time, index) => (
-              <option key={index} value={time}>
-                {time}
-              </option>
-            ))}
-          </select>
-        </div>
-        <label>Enter the value of the water used:</label>
-        <input
-          type="number"
-          value={inputWaterAmount}
-          onChange={handleInputChange} // Sync input change
-          className={css.waterInput}
-        />
-      </div>
+          <div className={css.editSection}>
+            <input type="hidden" name="dailyNorm" />
+            <h3 className={css.title}>{title}</h3>
+            <label>Amount of water:</label>
+            <div className={css.stepInput}>
+              <button
+                type="button"
+                className={css.roundButton}
+                onClick={() => {
+                  const newAmount = Math.max(0, values.waterVolume - 50);
+                  setFieldValue('waterVolume', newAmount);
+                }}
+              >
+                -
+              </button>
+              <span>{values.waterVolume} ml</span>
+              <button
+                type="button"
+                className={css.roundButton}
+                onClick={() => {
+                  const newAmount = values.waterVolume + 50;
+                  setFieldValue('waterVolume', newAmount);
+                }}
+              >
+                +
+              </button>
+            </div>
+            <div className={css.timeSelectBlock}>
+              <Field as="select" name="selectedTime">
+                {generateTimeOptions().map((time, index) => (
+                  <option key={index} value={time}>
+                    {time}
+                  </option>
+                ))}
+              </Field>
+            </div>
+            <label>Enter the value of the water used:</label>
+            <Field
+              type="number"
+              name="waterVolume"
+              className={css.waterInput}
+            />
+          </div>
 
-      <div className={css.modalActions}>
-        <div className={css.stepInput}>
-          <span>{waterAmount}ml</span>
-        </div>
-        <button
-          className={`${css.stepSave} ${css.saveButtonStyle}`}
-          onClick={handleSave}
-        >
-          Save
-        </button>
-      </div>
-    </div>
+          <div className={css.modalActions}>
+            <div className={css.stepInput}>
+              <span>{values.waterVolume} ml</span>
+            </div>
+            <button
+              type="submit"
+              className={`${css.stepSave} ${css.saveButtonStyle}`}
+            >
+              Save
+            </button>
+          </div>
+        </Form>
+      )}
+    </Formik>
   );
 };
 
 export default TodayListModal;
+
+function getAmPm(time) {
+  const [hours] = time.split(':').map(Number);
+  return hours >= 12 ? 'PM' : 'AM';
+}

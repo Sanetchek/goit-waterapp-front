@@ -3,9 +3,9 @@ import styles from './TodayWaterList.module.css';
 import waterData from './WaterData';
 import WaterListRow from './WaterListRow/WaterListRow';
 import { FaPlus } from 'react-icons/fa';
-import DeleteEntryModal from '../TodayWaterList/DeleteEntryModal/DeleteEntryModal';
+import DeleteEntryModal from './DeleteEntryModal/DeleteEntryModal';
 
-export default function TodayWaterList() {
+export default function TodayWaterList({ openModal }) {
   const [waterList, setWaterList] = useState(waterData);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [entryToDelete, setEntryToDelete] = useState(null);
@@ -40,7 +40,8 @@ export default function TodayWaterList() {
       {waterList.length === 0 ? (
         <div className={styles.emptyState}>
           <div className={styles.addButtonContainer}>
-            <button className={styles.addButton}>
+            {/* Use openModal to open the modal when "Add Water" is clicked */}
+            <button className={styles.addButton} onClick={openModal}>
               <FaPlus className="icon" />
               <span className={styles.addText}>Add water</span>
             </button>
@@ -48,7 +49,8 @@ export default function TodayWaterList() {
         </div>
       ) : (
         <div className={styles.addButtonContainer}>
-          <button className={styles.addButton}>
+          {/* Use openModal to open the modal */}
+          <button className={styles.addButton} onClick={openModal}>
             <FaPlus className="icon" />
             <span className={styles.addText}>Add water</span>
           </button>
