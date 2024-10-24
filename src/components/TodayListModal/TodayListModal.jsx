@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import * as selectors from '../../redux/auth/selectors.js';
 import css from './TodayListModal.module.css';
 import snippet from '../../assets/images/snippets.svg';
+import dayjs from 'dayjs';
 
 const TodayListModal = ({ title = '', onSave, previousWaterData }) => {
   const userDailyNormWater = useSelector(selectors.selectUserDailyNormWater);
@@ -13,9 +14,9 @@ const TodayListModal = ({ title = '', onSave, previousWaterData }) => {
     : getCurrentTime();
 
   function getCurrentTime() {
-    const date = new Date();
-    const minutes = Math.round(date.getMinutes() / 5) * 5;
-    return `${date.getHours()}:${minutes < 10 ? `0${minutes}` : minutes}`;
+    return dayjs()
+      .minute(Math.floor(dayjs().minute() / 5) * 5)
+      .format('HH:mm');
   }
 
   const generateTimeOptions = () => {
@@ -81,7 +82,7 @@ const TodayListModal = ({ title = '', onSave, previousWaterData }) => {
                 type="button"
                 className={css.roundButton}
                 onClick={() => {
-                  const newAmount = Math.max(0, values.waterVolume - 50);
+                  const newAmount = Math.max(0, values.waterVolume - 50); // Заборонити значення нижче 0
                   setFieldValue('waterVolume', newAmount);
                 }}
               >
@@ -92,13 +93,14 @@ const TodayListModal = ({ title = '', onSave, previousWaterData }) => {
                 type="button"
                 className={css.roundButton}
                 onClick={() => {
-                  const newAmount = values.waterVolume + 50;
+                  const newAmount = Math.min(5000, values.waterVolume + 50); // Заборонити значення більше 5000
                   setFieldValue('waterVolume', newAmount);
                 }}
               >
                 +
               </button>
             </div>
+            <label>Recording time:</label>
             <div className={css.timeSelectBlock}>
               <Field as="select" name="selectedTime">
                 {generateTimeOptions().map((time, index) => (
@@ -113,11 +115,32 @@ const TodayListModal = ({ title = '', onSave, previousWaterData }) => {
               type="number"
               name="waterVolume"
               className={css.waterInput}
+              min={0} // Заборонити від'ємне введення
+              max={5000} // Заборонити значення більше 5000
+              onFocus={e => {
+                if (e.target.value === '0') {
+                  setFieldValue('waterVolume', ''); // Очищати поле при фокусі, якщо значення 0
+                }
+              }}
+              onChange={e => {
+                let value = e.target.value;
+
+                // Дозволити порожнє значення
+                if (value === '') {
+                  setFieldValue('waterVolume', '');
+                  return;
+                }
+
+                // Перевірка на допустимий діапазон
+                value = Math.max(0, Math.min(5000, Number(value)));
+
+                setFieldValue('waterVolume', value);
+              }}
             />
           </div>
 
           <div className={css.modalActions}>
-            <div className={css.stepInput}>
+            <div className={css.stepInputDown}>
               <span>{values.waterVolume} ml</span>
             </div>
             <button
