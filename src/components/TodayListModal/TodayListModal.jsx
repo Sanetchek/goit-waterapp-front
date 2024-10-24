@@ -50,7 +50,7 @@ const TodayListModal = ({ title = '', onSave, previousWaterData }) => {
 
         const dataToSave = {
           dailyNorm: userDailyNormWater, // Get the daily norm from Redux
-          waterVolume: values.waterVolume,
+          amount: values.waterVolume,
           date: localDate.toISOString(), // Format date as ISO string in local timezone
         };
 
@@ -58,7 +58,7 @@ const TodayListModal = ({ title = '', onSave, previousWaterData }) => {
       }}
     >
       {({ values, setFieldValue }) => (
-        <Form>
+        <Form className={css.waterContent}>
           <div className={css.previousData}>
             {previousWaterData && (
               <div className={css.waterInfoContainer}>
@@ -110,7 +110,9 @@ const TodayListModal = ({ title = '', onSave, previousWaterData }) => {
                 ))}
               </Field>
             </div>
-            <label>Enter the value of the water used:</label>
+            <label className={css.namValue}>
+              Enter the value of the water used:
+            </label>
             <Field
               type="number"
               name="waterVolume"
@@ -143,12 +145,14 @@ const TodayListModal = ({ title = '', onSave, previousWaterData }) => {
             <div className={css.stepInputDown}>
               <span>{values.waterVolume} ml</span>
             </div>
-            <button
-              type="submit"
-              className={`${css.stepSave} ${css.saveButtonStyle}`}
-            >
-              Save
-            </button>
+            <div>
+              <button
+                type="submit"
+                className={`${css.stepSave} ${css.saveButtonStyle}`}
+              >
+                Save
+              </button>
+            </div>
           </div>
         </Form>
       )}

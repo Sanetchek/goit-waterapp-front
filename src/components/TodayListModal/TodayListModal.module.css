@@ -1,48 +1,80 @@
 @media (min-width: 1440px) {
 
   /* Desktop styles */
-  .modalContent {
-    min-width: 592px;
-
+  .waterContent {
+    min-width: 544px;
   }
 
   .modalActions {
     display: flex;
     justify-content: flex-end;
-    align-items: center;
     gap: 24px;
   }
 
   .saveButtonStyle {
     min-width: 160px;
     border-radius: 10px;
+    height: 44px;
+  }
+
+  .timeSelectBlock {
+    min-width: 100%;
+  }
+
+  .waterInput {
+    min-width: 100%;
+  }
+
+  .stepInputDown {
+    display: none;
+    align-items: flex-end;
+
   }
 }
 
 @media (min-width: 768px) and (max-width: 1439px) {
 
   /* Tablet styles */
-  .modalContent {
-    min-width: 704px;
+  .waterContent {
+    min-width: 656px;
   }
 
   .modalActions {
     display: flex;
     justify-content: flex-end;
-    align-items: center;
     gap: 24px;
   }
 
   .saveButtonStyle {
     min-width: 160px;
     border-radius: 10px;
+    height: 44px;
   }
 
+  .stepInputDown {
+    display: none;
+    align-items: flex-end;
+
+  }
+
+  .timeSelectBlock {
+    min-width: 100%;
+  }
+
+  .waterInput {
+    min-width: 100%;
+  }
 }
 
 @media (max-width: 767px) {
 
   /* Mobile styles */
+  .waterContent {
+    min-width: 232px;
+
+
+  }
+
   .saveButtonStyle {
     width: 100%;
     display: block;
@@ -51,10 +83,17 @@
   }
 }
 
+.namValue {
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: left;
+}
+
 .editSection {
   display: flex;
   flex-direction: column;
-  gap: 16px;
 }
 
 .correctData {
@@ -93,6 +132,24 @@
   font-weight: 700;
   line-height: 24px;
   text-align: center;
+  margin-top: 12px;
+  margin-bottom: 24px;
+}
+
+.timeSelectBlock {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 120px;
+  margin-top: 12px;
+  margin-bottom: 24px;
+}
+
+.waterInput {
+
+  margin-top: 16px;
+  max-width: 120px;
+  margin-bottom: 24px;
 }
 
 .roundButton {
@@ -127,28 +184,14 @@
 }
 
 .stepInputDown {
-  margin-top: 24px;
-  margin-bottom: 12px;
   display: flex;
+  margin-bottom: 12px;
   justify-content: center;
   color: #407BFF;
   font-family: Roboto;
   font-size: 18px;
   font-weight: 700;
   line-height: 24px;
-}
-
-.waterInput {
-  padding: 8px;
-  margin-top: 10px;
-  max-width: 120px;
-}
-
-.timeSelectBlock {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  max-width: 120px;
 }
 
 .waterInfoContainer {
@@ -162,29 +205,6 @@
   background-color: #ECF2FF;
 }
 
-.icon {
-  fill: #407BFF;
-}
-
-.amPmIndicator {
-  font-size: 12px;
-}
-
-.waterIndicator {
-  font-size: 18px;
-  color: #407BFF;
-  margin-right: 10px;
-}
-
-.stepOutput {
-  justify-content: center;
-  color: #407BFF;
-  font-family: Roboto;
-  font-size: 18px;
-  font-weight: 700;
-  margin-top: 24px;
-}
-
 .saveButtonStyle {
   background-color: #407BFF;
   color: #FFFFFF;
@@ -192,3 +212,22 @@
   border-radius: 10px;
   min-height: 36px;
 }
+
+/* .amPmIndicator {
+  font-size: 12px;
+} */
+
+/* .waterIndicator {
+  font-size: 18px;
+  color: #407BFF;
+  margin-right: 10px;
+} */
+
+/* .stepOutput {
+  justify-content: center;
+  color: #407BFF;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 24px;
+} */
