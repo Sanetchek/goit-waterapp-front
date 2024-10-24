@@ -77,7 +77,11 @@ export default function HomePage() {
 
       {isModalOpen && (
         <Modal title="Add Water" onClose={closeModal}>
-          <TodayListModal title="Choose a value:" onSave={handleSave} />
+          <TodayListModal
+            title="Choose a value:"
+            onSave={handleSave}
+            // previousWaterData={{ amount: 150, time: '14:00' }}
+          />
         </Modal>
       )}
     </section>
