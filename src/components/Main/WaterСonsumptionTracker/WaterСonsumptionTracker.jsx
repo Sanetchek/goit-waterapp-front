@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import css from './WaterСonsumptionTracker.module.css';
 import snippets from '../../../assets/images/snippets.svg';
 
