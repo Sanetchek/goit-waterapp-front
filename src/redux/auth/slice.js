@@ -33,7 +33,6 @@ const slice = createSlice({
         state.isRefreshing = true;
       })
       .addCase(signup.fulfilled, (state, action) => {
-        console.log('Signup fulfilled payload:', action.payload); // Check the response structure
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
@@ -49,7 +48,6 @@ const slice = createSlice({
         state.error = null;
       })
       .addCase(signin.fulfilled, (state, action) => {
-        console.log('Signin fulfilled payload:', action.payload); // Check the response structure
         state.loading = false;
         state.user = action.payload.user;
         state.token = action.payload.token;
@@ -57,7 +55,6 @@ const slice = createSlice({
         state.isRefreshing = false;
       })
       .addCase(signin.rejected, (state, action) => {
-        console.log('Signin rejected:', action.error); // Log the error for more detail
         state.loading = false;
         state.isRefreshing = false;
         state.error = action.payload || 'Signin failed';
@@ -88,7 +85,7 @@ const slice = createSlice({
         state.isRefreshing = true;
       })
       .addCase(refreshUser.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.user = action.payload.user;
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })

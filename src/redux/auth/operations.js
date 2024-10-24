@@ -63,7 +63,7 @@ export const refreshUser = createAsyncThunk(
     setAuthHead(token);
 
     try {
-      const response = await axios.get('auth/refresh'); // Fixed the typo here
+      const response = await axios.post('auth/refresh');
       return response.data;
     } catch (error) {
       const errorMessage = error.response?.data?.message || 'Token refresh failed';
