@@ -18,6 +18,7 @@ export default function DailyNormaModal ({ onClose, onSave }) {
   const [activityTime, setActivityTime] = useState('');
   const [waterResult, setWaterResult] = useState(0);
   const [waterToDrink, setWaterToDrink] = useState('');
+  const [inputError, setInputError] = useState(false);
 
     useEffect(() => {
         setWaterResult(calculateWaterNorma(gender, weight, activityTime));
@@ -25,11 +26,12 @@ export default function DailyNormaModal ({ onClose, onSave }) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (waterToDrink.trim() === "") {
-      onSave(waterResult)
-    } else {
-      onSave(waterToDrink)
+     if (waterToDrink.trim() === '') {
+      setInputError(true);
+      return;
     }
+    setInputError('');
+    onSave(parseFloat(waterToDrink));
   };
 
   return (<div className={css.modalBackdrop} onClick={onClose}>
@@ -50,6 +52,8 @@ export default function DailyNormaModal ({ onClose, onSave }) {
         <InputField label="The time of active participation in hours:" value={activityTime} setValue={setActivityTime} />
         <WaterResult result={waterResult} />
       <InputResult value={waterToDrink} setValue={setWaterToDrink} />
+      {inputError && (
+  <p className={css.errorMessage}>Please enter how much water you will drink</p>)}
             <button className={css.btnSave} onClick={handleSubmit}>Save</button>
     </div>
     </div>)}

@@ -8,6 +8,8 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 280px;
     transition: transform 0.3s ease-in-out;
+    height: 188px;
+    left: -120px;
 }
 
 
@@ -44,5 +46,10 @@
     color: #407BFF;
 }
 
+@media screen and (min-width: 768px) {
+    .popup{
+    width: 292px;
+    }
+}
 
 
