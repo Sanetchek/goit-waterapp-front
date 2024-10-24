@@ -49,6 +49,21 @@ h2{
 
 .modalContent{
     max-width: 256px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.errorMessage {
+    margin: 0;
+    position: absolute;
+    max-width: 248px;
+background-color: #ffdddd;
+    color: #d8000c;
+    padding: 5px 10px;
+    border: 1px solid #d8000c;
+    border-radius: 5px;
+    white-space: nowrap;
+    font-size: 12px;
 }
 
 /* Для планшетів (від 768px до 1439px) */
@@ -69,5 +84,6 @@ h2{
 @media screen and (min-width: 1440px) {
 .modalContent {
         max-width: 592px;
+
     }   
 }
