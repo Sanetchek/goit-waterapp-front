@@ -1,41 +1,49 @@
-import { useState, useEffect,} from 'react';
+import { useState, useEffect } from 'react';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import styles from './MonthStatsTable.module.css';
 import clsx from 'clsx';
 import Loading from '../Loading/Loading';
 import DaysGeneralStats from '../DaysGeneralStats/DaysGeneralStats';
 
-const fetchDataForMonth = (year, month) => {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      const daysInMonth = new Date(year, month + 1, 0).getDate();
-      const data = Array.from({ length: daysInMonth }, (_, i) => ({
-        id: i + 1,
-        percentage: Math.floor(Math.random() * 101),
-        date: `${i + 1}/${month + 1}/${year}`, 
-        dailyNorm: 2, 
-        servings: Math.floor(Math.random() * 10),
-      }));
-      resolve(data);
-    }, 1000);
-  });
-};
-
-const MonthStatsTable = () => {
+const MonthStatsTable = ({ waterConsumed, dailyNorm = 1500 }) => {
   const today = new Date();
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
   const [currentMonth, setCurrentMonth] = useState(today.getMonth());
   const [currentMonthData, setCurrentMonthData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedDayId, setSelectedDayId] = useState(null); 
+  const [selectedDayId, setSelectedDayId] = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
-    fetchDataForMonth(currentYear, currentMonth).then(data => {
-      setCurrentMonthData(data);
-      setIsLoading(false);
+    fetchDataForMonth(currentYear, currentMonth, waterConsumed, dailyNorm);
+  }, [currentYear, currentMonth, waterConsumed, dailyNorm]);
+
+  const fetchDataForMonth = (year, month, consumed, norm) => {
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const data = Array.from({ length: daysInMonth }, (_, i) => {
+      const dayWaterConsumption = consumed[i] || 0;
+      const percentage = Math.min(
+        Math.round((dayWaterConsumption / norm) * 100),
+        100
+      );
+
+      console.log(
+        `Day: ${
+          i + 1
+        }, Water Consumed: ${dayWaterConsumption}, Daily Norm: ${norm}, Percentage: ${percentage}`
+      );
+
+      return {
+        id: i + 1,
+        percentage,
+        date: `${i + 1}/${month + 1}/${year}`,
+        servings: Math.floor(dayWaterConsumption / 250),
+      };
     });
-  }, [currentYear, currentMonth]);
+
+    setCurrentMonthData(data);
+    setIsLoading(false);
+  };
 
   const handlePrevMonth = () => {
     setCurrentMonth(prev => {
@@ -58,26 +66,20 @@ const MonthStatsTable = () => {
     }
   };
 
-  const handleDayClick = (dayId) => {
-  const selectedDate = new Date(currentYear, currentMonth, dayId);
-  const dayNumber = selectedDate.getDate();
-    const monthName = selectedDate.toLocaleString('en-US', { month: 'long' });
-    
+  const handleDayClick = dayId => {
     const selectedDayData = currentMonthData.find(day => day.id === dayId);
-
-  if (selectedDayId?.dayId === dayId) {
-    setSelectedDayId(null); // Скинути вибір
-  } else {
-    setSelectedDayId({
-      dayId,
-      dayNumber,
-      monthName,
-      dailyNorm: selectedDayData.dailyNorm, // Додати dailyNorm
-      percentage: selectedDayData.percentage, // Додати percentage
-      servings: selectedDayData.servings, // Додати servings
-    });
-  }
-};
+    if (selectedDayId?.dayId === dayId) {
+      setSelectedDayId(null);
+    } else {
+      setSelectedDayId({
+        dayId,
+        dayNumber: selectedDayData.id,
+        dailyNorm: dailyNorm,
+        percentage: selectedDayData.percentage,
+        servings: selectedDayData.servings,
+      });
+    }
+  };
 
   return (
     <>
@@ -106,7 +108,7 @@ const MonthStatsTable = () => {
       </div>
 
       <div className={styles.calendarContainer}>
-        <div 
+        <div
           className={clsx(styles.containerDay, {
             [styles.loadingContainer]: isLoading,
           })}
@@ -123,15 +125,18 @@ const MonthStatsTable = () => {
                   [styles.zeroPercentage]: day.percentage === 0,
                 });
                 return (
-                  <li key={day.id} className={styles.dayWrapper} onClick={() => handleDayClick(day.id)}
+                  <li
+                    key={day.id}
+                    className={styles.dayWrapper}
+                    onClick={() => handleDayClick(day.id)}
                   >
                     <div className={circleClass}>
                       <p className={styles.calendarDay}>{day.id}</p>
                     </div>
                     <p className={styles.percentageText}>{day.percentage}%</p>
                     {selectedDayId && selectedDayId.dayId === day.id && (
-  <DaysGeneralStats selectedDayData={selectedDayId} />
-)}
+                      <DaysGeneralStats selectedDayData={selectedDayId} />
+                    )}
                   </li>
                 );
               })}

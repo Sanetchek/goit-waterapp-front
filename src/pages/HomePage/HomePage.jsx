@@ -17,12 +17,13 @@ import clsx from 'clsx';
 
 export default function HomePage() {
   const userDailyNormWater = useSelector(selectors.selectUserDailyNormWater);
+
   const containerClass = clsx(css.homeContainer, css.pageBackground);
   const contentClass = clsx('mainContainer', css.container);
 
   // Modal state and handlers
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [waterConsumed, setWaterConsumed] = useState(0);
+  const [waterConsumed, setWaterConsumed] = useState(Array(31).fill(0));
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -33,7 +34,12 @@ export default function HomePage() {
   };
 
   const addWater = amount => {
-    setWaterConsumed(prev => prev + Number(amount));
+    const dayIndex = new Date().getDate() - 1;
+    setWaterConsumed(prev => {
+      const newWaterConsumed = [...prev];
+      newWaterConsumed[dayIndex] += Number(amount);
+      return newWaterConsumed;
+    });
     closeModal();
   };
 
@@ -68,11 +74,15 @@ export default function HomePage() {
           <WaterRatioPanel
             dailyNorm={userDailyNormWater}
             openModal={openModal}
-            waterConsumed={waterConsumed}
+            waterConsumed={waterConsumed[new Date().getDate() - 1]}
           />
         </div>
         {/* Pass openModal to WaterListWithCalendar */}
-        <WaterListWithCalendar openModal={openModal} />
+        <WaterListWithCalendar
+          dailyNorm={userDailyNormWater}
+          openModal={openModal}
+          waterConsumed={waterConsumed}
+        />
       </div>
 
       {isModalOpen && (
