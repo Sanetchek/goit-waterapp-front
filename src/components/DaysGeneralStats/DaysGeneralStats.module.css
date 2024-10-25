@@ -1,6 +1,6 @@
 .popup {
     position: absolute;
-    top: -190px;
+    /* top: -190px; */
     background-color: #FFFFFF;
     border: 1px solid #ccc;
     border-radius: 10px;
@@ -9,9 +9,8 @@
     width: 280px;
     transition: transform 0.3s ease-in-out;
     height: 188px;
-    left: -120px;
+    /* left: -120px; */
 }
-
 
 .popupContent {
     display: flex;
