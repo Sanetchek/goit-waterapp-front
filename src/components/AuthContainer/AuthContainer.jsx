@@ -1,26 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './AuthContainer.module.css';
+import bottle from "../../assets/images/tablet/bottle_tablet.png";
+import bottlex2 from "../../assets/images/tablet/bottle_tablet@2x.png";
 
-const AuthContainer = ({
-  children,
-  frameImage,
-  frameAlt = 'Bottle of water',
-}) => {
+const AuthContainer = ({ children }) => {
   return (
     <section className={styles.container}>
       <div className={styles.modal}>{children}</div>
-      {frameImage && (
-        <img className={styles.frame} src={frameImage} alt={frameAlt} />
-      )}
+      <picture>
+        <source srcSet={`${bottlex2} 2x, ${bottle} 1x`} />
+        <img className={styles.frame} src={bottle} alt="signin" />
+      </picture>
     </section>
   );
-};
-
-AuthContainer.propTypes = {
-  children: PropTypes.node.isRequired,
-  frameImage: PropTypes.string.isRequired,
-  frameAlt: PropTypes.string,
 };
 
 export default AuthContainer;
