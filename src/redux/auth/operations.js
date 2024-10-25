@@ -3,6 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-hot-toast';
 
 axios.defaults.baseURL = 'https://waterapp-hfy2.onrender.com/';
+// axios.defaults.baseURL = 'http://localhost:5050/';
 
 const setAuthHead = token => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -52,21 +53,15 @@ export const refreshUser = createAsyncThunk(
   'auth/refresh',
   async (_, thunkAPI) => {
     const reduxState = thunkAPI.getState();
-    const token = reduxState.auth.token;
+    setAuthHead(reduxState.auth.token);
 
-    if (!token) {
-      return thunkAPI.rejectWithValue('No valid token');
-    }
-
-    setAuthHead(token);
-
-    try {
-      const response = await axios.post('auth/refresh');
-      return response.data;
-    } catch (error) {
-      const errorMessage =
-        error.response?.data?.message || 'Token refresh failed';
-      return thunkAPI.rejectWithValue(errorMessage);
+    const response = await axios.post('auth/refresh');
+    return response.data;
+  },
+  {
+    condition: (_, thunkAPI) => {
+      const reduxState = thunkAPI.getState();
+      return reduxState.auth.token !== null;
     }
   }
 );

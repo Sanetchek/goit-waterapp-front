@@ -12,17 +12,7 @@ import {
 const slice = createSlice({
   name: 'auth',
   initialState: {
-    user: {
-      _id: null,
-      name: null,
-      email: null,
-      gender: null,
-      weight: null,
-      sportTime: null,
-      dailyNormWater: null,
-      themeColor: null,
-      avatar: null,
-    },
+    user: {},
     token: null,
     isLoggedIn: false,
     isRefreshing: false,
@@ -65,17 +55,7 @@ const slice = createSlice({
         state.isRefreshing = true;
       })
       .addCase(logout.fulfilled, (state, action) => {
-        state.user = {
-          _id: null,
-          name: null,
-          email: null,
-          gender: null,
-          weight: null,
-          sportTime: null,
-          dailyNormWater: null,
-          themeColor: null,
-          avatar: null,
-        };
+        state.user = {};
         state.token = null;
         state.isLoggedIn = false;
         state.isRefreshing = false;
