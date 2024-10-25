@@ -6,7 +6,7 @@ import { signup } from '../../redux/auth/operations';
 import * as Yup from 'yup';
 import { toast } from 'react-hot-toast';
 import styles from './AuthForm.module.css';
-import EyeIcon from '../../assets/images/eye-icon.svg';
+import snippets from '../../assets/images/snippets.svg';
 
 const AuthForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -48,6 +48,14 @@ const AuthForm = () => {
       .oneOf([Yup.ref('password'), null], 'Passwords must match')
       .required('This field is required'),
   });
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleRepeatPasswordVisibility = () => {
+    setShowRepeatPassword(!showRepeatPassword);
+  };
 
   return (
     <Formik
@@ -93,14 +101,21 @@ const AuthForm = () => {
                 }`}
                 required
               />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                aria-label={showPassword ? 'Hide password' : 'Show password'}
-                className={styles.eyeButton}
-              >
-                <img src={EyeIcon} alt="" className={styles.eyeIcon} />
-              </button>
+              <span onClick={togglePasswordVisibility}>
+                {showPassword ? (
+                  <svg
+                    className="icon-eye-slash passwordEye"
+                    width="16"
+                    height="16"
+                  >
+                    <use href={`${snippets}#icon-eye-slash`}></use>
+                  </svg>
+                ) : (
+                  <svg className="icon-eye passwordEye" width="16" height="16">
+                    <use href={`${snippets}#icon-eye`}></use>
+                  </svg>
+                )}
+              </span>
             </div>
             <ErrorMessage
               name="password"
@@ -123,16 +138,21 @@ const AuthForm = () => {
                 }`}
                 required
               />
-              <button
-                type="button"
-                onClick={() => setShowRepeatPassword(!showRepeatPassword)}
-                aria-label={
-                  showRepeatPassword ? 'Hide password' : 'Show password'
-                }
-                className={styles.eyeButton}
-              >
-                <img src={EyeIcon} alt="" className={styles.eyeIcon} />
-              </button>
+              <span onClick={toggleRepeatPasswordVisibility}>
+                {showRepeatPassword ? (
+                  <svg
+                    className="icon-eye-slash passwordEye"
+                    width="16"
+                    height="16"
+                  >
+                    <use href={`${snippets}#icon-eye-slash`}></use>
+                  </svg>
+                ) : (
+                  <svg className="icon-eye passwordEye" width="16" height="16">
+                    <use href={`${snippets}#icon-eye`}></use>
+                  </svg>
+                )}
+              </span>
             </div>
             <ErrorMessage
               name="repeatPassword"
