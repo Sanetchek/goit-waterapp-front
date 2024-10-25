@@ -14,8 +14,6 @@
 
 .icon {
   margin-right: 12px;
-  width: 16px;
-  height: 21px;
   fill: #407bff;
 }
 
@@ -58,25 +56,21 @@ button.deleteButton {
 }
 
 .editButton .editIcon {
-  color: #9ebbff;
-  width: 16px;
-  height: 16px;
+  fill: #9ebbff;
   transition: color 0.3s ease;
 }
 
 .editButton:hover .editIcon {
-  color: #407bff;
+  fill: #407bff;
 }
 
 .deleteButton .deleteIcon {
-  color: #ef5050;
-  width: 16px;
-  height: 16px;
+  fill: #ef5050;
   transition: color 0.3s ease;
 }
 
 .deleteButton:hover .deleteIcon {
-  color: #d32f2f;
+  fill: #d32f2f;
 }
 
 button:focus {

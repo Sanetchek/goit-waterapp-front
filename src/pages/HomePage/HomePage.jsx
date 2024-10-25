@@ -1,26 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DailyNorma from '../../components/DailyNorma/DailyNorma.jsx';
 import WaterRatioPanel from '../../components/WaterRatioPanel/WaterRatioPanel.jsx';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchTodayWaterConsumption } from '../../redux/water/operations';
+import { addWaterVolume } from '../../redux/water/operations.js';
 import * as selectors from '../../redux/auth/selectors.js';
+
 import css from './HomePage.module.css';
+
 import botleImage1x from '../../assets/images/desktop/botle_home_screen.png';
 import botleImage2x from '../../assets/images/desktop/botle_home_screen@2x.png';
 import tabletImage1x from '../../assets/images/tablet/bottle_home_screen_tablet.png';
 import tabletImage2x from '../../assets/images/tablet/bottle_home_screen_tablet@2x.png';
 import mobileImage1x from '../../assets/images/mob/bottle_home_screen_mob.png';
 import mobileImage2x from '../../assets/images/mob/bottle_home_screen_mob@2x.png';
+
 import WaterListWithCalendar from '../../components/WaterListWithCalendar/WaterListWithCalendar.jsx';
 import Modal from 'components/Modal/Modal.jsx';
 import TodayListModal from 'components/TodayListModal/TodayListModal.jsx';
 import clsx from 'clsx';
-import { addWaterVolume } from '../../redux/water/operations.js';
 
 const DAY_COUNT = 31;
 
 export default function HomePage() {
   const userDailyNormWater = useSelector(selectors.selectUserDailyNormWater);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchTodayWaterConsumption());
+  }, [dispatch]);
 
   const containerClass = clsx(css.homeContainer, css.pageBackground);
   const contentClass = clsx('mainContainer', css.container);
