@@ -27,11 +27,11 @@ const MonthStatsTable = ({ waterConsumed, dailyNorm = 1500 }) => {
         100
       );
 
-      console.log(
-        `Day: ${
-          i + 1
-        }, Water Consumed: ${dayWaterConsumption}, Daily Norm: ${norm}, Percentage: ${percentage}`
-      );
+      // console.log(
+      //   `Day: ${
+      //     i + 1
+      //   }, Water Consumed: ${dayWaterConsumption}, Daily Norm: ${norm}, Percentage: ${percentage}`
+      // );
 
       return {
         id: i + 1,

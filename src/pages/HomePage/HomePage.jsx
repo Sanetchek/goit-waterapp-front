@@ -15,6 +15,8 @@ import Modal from 'components/Modal/Modal.jsx';
 import TodayListModal from 'components/TodayListModal/TodayListModal.jsx';
 import clsx from 'clsx';
 
+const DAY_COUNT = 31;
+
 export default function HomePage() {
   const userDailyNormWater = useSelector(selectors.selectUserDailyNormWater);
 
@@ -24,55 +26,65 @@ export default function HomePage() {
   // Modal state and handlers
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalOpenEdit, setIsModalOpenEdit] = useState(false);
-  const [waterConsumed, setWaterConsumed] = useState(Array(31).fill(0));
+  const [waterConsumed, setWaterConsumed] = useState(Array(DAY_COUNT).fill(0));
   const [currentVolume, setCurrentVolume] = useState(0);
 
-  const openModal = () => {
-    setIsModalOpen(true);
+  const toggleModal = setModalOpen => () => {
+    setModalOpen(prev => !prev);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const openModalEdit = volume => {
-    setCurrentVolume(volume);
-    setIsModalOpenEdit(true);
-  };
-
-  const closeModalEdit = () => {
-    setIsModalOpenEdit(false);
-    setCurrentVolume(0);
-  };
-
-  const addWater = amount => {
+  const handleWaterChange = (amount, isEdit = false) => {
     const dayIndex = new Date().getDate() - 1;
     setWaterConsumed(prev => {
       const newWaterConsumed = [...prev];
-      newWaterConsumed[dayIndex] += Number(amount);
+      newWaterConsumed[dayIndex] = isEdit
+        ? Number(amount)
+        : newWaterConsumed[dayIndex] + Number(amount);
       return newWaterConsumed;
     });
-    closeModal();
-  };
-
-  const editWater = amount => {
-    const dayIndex = new Date().getDate() - 1;
-    setWaterConsumed(prev => {
-      const newWaterConsumed = [...prev];
-      newWaterConsumed[dayIndex] = Number(amount);
-      return newWaterConsumed;
-    });
-    closeModalEdit();
+    if (isEdit) {
+      setCurrentVolume(0);
+    }
   };
 
   const handleSave = data => {
     console.log('Water data saved:', data);
-    addWater(data.waterVolume);
+    handleWaterChange(data.amount);
+    toggleModal(setIsModalOpen)();
   };
 
   const handleEditSave = data => {
     console.log('Water data edited:', data);
-    editWater(data.waterVolume);
+    handleWaterChange(data.amount, true);
+    toggleModal(setIsModalOpenEdit)();
+  };
+
+  const renderModal = () => {
+    if (isModalOpen) {
+      return (
+        <Modal title="Add Water" onClose={toggleModal(setIsModalOpen)}>
+          <TodayListModal title="Choose a value:" onSave={handleSave} />
+        </Modal>
+      );
+    }
+    if (isModalOpenEdit) {
+      return (
+        <Modal
+          title="Edit the entered amount of water"
+          onClose={toggleModal(setIsModalOpenEdit)}
+        >
+          <TodayListModal
+            title="Correct entered data:"
+            onSave={handleEditSave}
+            previousWaterData={{
+              amount: Number(currentVolume.volume),
+              time: currentVolume.time,
+            }}
+          />
+        </Modal>
+      );
+    }
+    return null;
   };
 
   return (
@@ -95,41 +107,26 @@ export default function HomePage() {
                 srcSet={`${mobileImage1x} 1x, ${mobileImage2x} 2x`}
                 media="(max-width: 767px)"
               />
-              <img className={css.photo} src={botleImage1x} alt="foto" />
+              <img className={css.photo} src={botleImage1x} alt="Bottle" />
             </picture>
           </div>
           <WaterRatioPanel
             dailyNorm={userDailyNormWater}
-            openModal={openModal}
+            openModal={toggleModal(setIsModalOpen)}
             waterConsumed={waterConsumed[new Date().getDate() - 1]}
           />
         </div>
         <WaterListWithCalendar
           dailyNorm={userDailyNormWater}
-          openModal={openModal}
+          openModal={toggleModal(setIsModalOpen)}
           waterConsumed={waterConsumed}
-          onEdit={openModalEdit}
+          onEdit={volume => {
+            setCurrentVolume(volume);
+            toggleModal(setIsModalOpenEdit)();
+          }}
         />
       </div>
-
-      {isModalOpen && (
-        <Modal title="Add Water" onClose={closeModal}>
-          <TodayListModal title="Choose a value:" onSave={handleSave} />
-        </Modal>
-      )}
-
-      {isModalOpenEdit && (
-        <Modal
-          title="Edit the entered amount of water"
-          onClose={closeModalEdit}
-        >
-          <TodayListModal
-            title="Correct entered data:"
-            onSave={handleEditSave}
-            initialValue={currentVolume}
-          />
-        </Modal>
-      )}
+      {renderModal()}
     </section>
   );
 }
