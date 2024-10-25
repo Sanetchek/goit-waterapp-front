@@ -1,0 +1,106 @@
+.container {
+  background-image: url('../../assets/images/mob/background_element_sign_in_mob.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 80px;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 2dppx),
+(min-resolution: 192dpi) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('../../assets/images/mob/background_element_sign_in_mob@2x.png');
+  }
+}
+
+.titel {
+  margin: 0;
+  padding-bottom: 16px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 1.23077;
+  color: #2f2f2f;
+}
+
+.frame {
+  text-align: center;
+  width: 280px;
+  object-fit: cover;
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (min-width: 768px) {
+  .modal {
+    position: relative;
+    z-index: 1;
+  }
+
+  .container {
+    display: flex;
+    padding-top: 104px;
+    padding-left: 32px;
+    align-items: flex-start;
+    background-image: url('../../assets/images/tablet/background-signin-1x.png');
+    z-index: -1;
+  }
+
+  @media screen and (-webkit-min-device-pixel-ratio: 2),
+  (min-resolution: 2dppx),
+  (min-resolution: 192dpi) {
+    .container {
+      background-image: url('../../assets/images/tablet/background-signin-2x.png');
+    }
+  }
+
+  .frame {
+    width: 736px;
+    height: 548px;
+    position: relative;
+    left: -230px;
+    z-index: 0;
+    padding-top: 52px;
+    object-fit: contain;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .frame {
+    width: 916px;
+    height: 618px;
+    padding-top: 20px;
+    right: 51px;
+    left: 0;
+    top: 40px;
+  }
+
+  .container {
+    padding-top: 80px;
+    flex-direction: row-reverse;
+    background-image: url('../../assets/images/desktop/Background-signin-1x.png');
+  }
+
+  @media screen and (-webkit-min-device-pixel-ratio: 2),
+  (min-resolution: 2dppx),
+  (min-resolution: 192dpi) {
+    .container {
+      background-image: url('../../assets/images/desktop/Background-signin-2x.png');
+    }
+  }
+
+  .modal {
+    margin-right: 198px;
+    width: 384px;
+  }
+}

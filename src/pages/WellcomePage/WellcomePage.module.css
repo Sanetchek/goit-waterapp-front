@@ -1,69 +1,63 @@
-.mainContainer {
-  max-width: 320px;
-  padding-left: 20px;
-  padding-right: 20px;
+.wellcomeContainer {
+  padding-top: 24px;
   padding-bottom: 40px;
-  margin-left: auto;
-  margin-right: auto;
-
   background-image: url('../../../public/images/Main-imgs/Main-bg-mobile.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: bottom;
 }
 
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .mainContainer {
+.mainWrapperBg {
+  display: flex;
+  justify-content: center;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+  .wellcomeContainer {
     background-image: url('../../../public/images/Main-imgs/Main-bg-mobile@2x.png');
   }
 }
 
 @media screen and (min-width: 768px) {
-  .mainContainer {
-    max-width: 768px;
-    padding-left: 32px;
-    padding-right: 32px;
+  .wellcomeContainer {
+    height: calc(100vh - 60px);
+    padding-top: 40px;
+    padding-bottom: 50px;
     background-image: url('../../../public/images/Main-imgs/Main-bd-tablet.png');
   }
 }
 
 @media (-webkit-min-device-pixel-ratio: 2),
-  (min-resolution: 192dpi) and (min-width: 768px) {
-  .mainContainer {
+(min-resolution: 192dpi) and (min-width: 768px) {
+  .wellcomeContainer {
     background-image: url('../../../public/images/Main-imgs/Main-bd-tablet@2x.png');
   }
 }
 
 @media screen and (min-width: 1440px) {
-  .mainContainer {
-    max-width: 1440px;
-    height: 864px;
-    padding-left: 16px;
-    padding-right: 16px;
-    padding-top: 110px;
-    padding-bottom: 110px;
-
+  .wellcomeContainer {
+    padding-top: 49px;
+    padding-bottom: 109px;
     display: flex;
     justify-content: center;
     align-items: center;
-
     background-image: url('../../../public/images/Main-imgs/Main-bd-desk.png');
     background-size: contain;
   }
 
   .mainWrapperBg {
     background-image: url('../../../public/images/Main-imgs/Main-bubbles-bg-desk.png');
-    width: 1404px;
-    height: 582px;
+    background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
     justify-content: center;
-    padding-top: 30px;
   }
 }
 
 @media (-webkit-min-device-pixel-ratio: 2),
-  (min-resolution: 192dpi) and (min-width: 1440px) {
-  .mainContainer {
+(min-resolution: 192dpi) and (min-width: 1440px) {
+  .wellcomeContainer {
     background-image: url('../../../public/images/Main-imgs/Main-bd-desk@2x.png');
   }
 

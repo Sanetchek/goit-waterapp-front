@@ -1,27 +1,12 @@
-import React, { useState } from 'react';
-import icon from '../../assets/images/sippets.svg';
-import TodayListModal from '../TodayWaterList/TodayWaterList.jsx';
+import React from 'react';
+import icon from '../../assets/images/snippets.svg';
 import css from './WaterRatioPanel.module.css';
-import Modal from 'components/Modal/Modal.jsx';
 
-export default function WaterRatioPanel({ dailyNorm = 2000 }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [waterConsumed, setWaterConsumed] = useState(0);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const addWater = amount => {
-    setWaterConsumed(prev => prev + Number(amount));
-    closeModal();
-  };
-
-  // Оновлення waterRatio на основі waterConsumed
+export default function WaterRatioPanel({
+  dailyNorm = 2000,
+  openModal,
+  waterConsumed,
+}) {
   const waterRatio = Math.min(
     Math.round((waterConsumed / dailyNorm) * 100),
     100
@@ -74,15 +59,6 @@ export default function WaterRatioPanel({ dailyNorm = 2000 }) {
         </svg>
         Add Water
       </button>
-
-      {isModalOpen && (
-        <Modal title="Add Water" onClose={closeModal}>
-          <TodayListModal
-            onClose={closeModal}
-            onAddWater={addWater} // Передаємо функцію для додавання води
-          />
-        </Modal>
-      )}
     </div>
   );
 }

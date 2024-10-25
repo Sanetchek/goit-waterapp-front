@@ -17,6 +17,8 @@
   border-radius: 10px;
   min-width: 280px;
   max-width: 1008px;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 .modalHeader {

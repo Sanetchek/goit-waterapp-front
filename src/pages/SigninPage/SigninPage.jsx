@@ -1,16 +1,14 @@
-import SignInForm from 'components/AuthForm/SigninPage/SigninForm';
+import React from 'react';
+import AuthContainer from '../../components/AuthContainer/AuthContainer';
+import SignInForm from '../../components/AuthForm/SigninPage/SigninForm';
 import css from './SigninPage.module.css';
-import frameImage from '../../assets/images/SigninPage/Frame.svg';
 
 export default function SigninPage() {
   return (
-    <section className={css.container}>
-      <div className={css.modal}>
-        <h1 className={css.title}>Sign In</h1>
+    <AuthContainer>
+      <div className={css.container}>
         <SignInForm />
       </div>
-
-      <img className={css.frame} src={frameImage} alt="Bottle of water" />
-    </section>
+    </AuthContainer>
   );
 }

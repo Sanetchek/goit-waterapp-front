@@ -1,4 +1,3 @@
-
 import React, { Suspense, lazy, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
@@ -19,6 +18,9 @@ const WellcomePage = lazy(() =>
 const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
 const SignupPage = lazy(() => import('../../pages/SignupPage/SignupPage'));
 const SigninPage = lazy(() => import('../../pages/SigninPage/SigninPage'));
+const ForgotPasswordPage = lazy(() =>
+  import('../../pages/ForgotPasswordPage/ForgotPasswordPage')
+);
 const NotFoundPage = lazy(() =>
   import('../../pages/NotFoundPage/NotFoundPage')
 );
@@ -46,19 +48,21 @@ export const App = () => {
         <Routes>
           <Route
             path="/"
-            element={
-              isLoggedIn ? (
-                <HomePage />
-              ) : (
-                <WellcomePage />
-              )
-            }
+            element={isLoggedIn ? <HomePage /> : <WellcomePage />}
           />
-          <Route path="/home" element={<HomePage />} />
           <Route
             path="/signin"
             element={
               <RestrictedRoute component={<SigninPage />} redirectTo="/" />
+            }
+          />
+          <Route
+            path="/forgot-password"
+            element={
+              <RestrictedRoute
+                component={<ForgotPasswordPage />}
+                redirectTo="/"
+              />
             }
           />
           <Route
