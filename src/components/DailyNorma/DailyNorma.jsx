@@ -31,8 +31,8 @@ export default function DailyNorma() {
     <div className={css.normaContainer}>
       <h2 className={css.title}>My daily norma</h2>
       <div className={css.normWater}>
-        {dailyNorm}L{' '}
-        <button onClick={openModal} className={css.editBtn}>
+        {dailyNorm}L
+        <button className={css.editBtn} onClick={openModal}>
           Edit
         </button>
       </div>

@@ -1,3 +1,5 @@
+import { createSelector } from "@reduxjs/toolkit";
+
 export const selectIsAuthenticated = state => state.auth.isLoggedIn;
 
 export const selectIsRefreshing = state => state.auth.isRefreshing;
@@ -18,3 +20,5 @@ export const selectUserSportTime = (state) => state.auth.user.sportTime;
 export const selectUserThemeColor = (state) => state.auth.user.themeColor;
 export const selectUserWeight = (state) => state.auth.user.weight;
 export const selectUserAvatar = (state) => state.auth.user.avatar;
+
+export const visibleWaterNorm = createSelector([selectUserDailyNormWater], (dailyNormWater) => dailyNormWater);

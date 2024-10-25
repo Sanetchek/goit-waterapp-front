@@ -7,16 +7,17 @@ import {
   updateAvatar,
   getUser
 } from './operations';
-
-const initialState = {
-  user: null,
-  loading: false,
-  error: null,
-};
+import {
+  logout
+} from '../auth/operations';
 
 const userSlice = createSlice({
   name: 'user',
-  initialState,
+  initialState: {
+    user: null,
+    loading: false,
+    error: null,
+  },
   reducers: {},
   extraReducers: builder => {
     builder
@@ -58,6 +59,11 @@ const userSlice = createSlice({
       .addCase(updateAvatar.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+      .addCase(logout.fulfilled, state => {
+        state.user = null;
+        state.loading = false;
+        state.error = null;
       });
   },
 });

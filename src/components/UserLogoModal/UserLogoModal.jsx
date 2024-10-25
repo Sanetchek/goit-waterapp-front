@@ -7,7 +7,7 @@ const UserLogoModal = ({ onClose }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   // const handleDelete = () => {
   //   console.log("Entry deleted");
-  //   setIsModalOpen(false); 
+  //   setIsModalOpen(false);
   // };
   return (
     <div className={css.dropdownMenu}>

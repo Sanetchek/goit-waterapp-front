@@ -7,9 +7,12 @@ import clsx from 'clsx';
 import UserLogoModal from '../UserLogoModal/UserLogoModal';
 
 export default function HeaderUserSignIn() {
+  const userAuthError = useSelector(selectors.selectAuthError);
+  const userAuthLoading = useSelector(selectors.selectAuthLoading);
   const username = useSelector(selectors.selectUserName);
   const userAvatar = useSelector(selectors.selectUserAvatar);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   const handleClose = () => {
     setIsDropdownOpen(false);
   };
@@ -27,11 +30,16 @@ export default function HeaderUserSignIn() {
   };
 
   // Get the first letter of the username
-  const firstLetter = username ? username.charAt(0).toUpperCase() : '';
+  const firstLetter =
+    !userAuthLoading && !userAuthError && username
+      ? username.charAt(0).toUpperCase()
+      : '';
 
   return (
     <div className={css.button}>
-      <span className={css.userName}>{username}</span>
+      <span className={css.userName}>
+        {!userAuthLoading && !userAuthError && username}
+      </span>
       <span className={css.userAva}>
         {userAvatar ? (
           <img src={userAvatar} alt="avatar" />
@@ -44,12 +52,15 @@ export default function HeaderUserSignIn() {
           </div>
         )}
       </span>
-      <svg className={svgClass} width="20" height="16" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+      <svg
+        className={svgClass}
+        width="20"
+        height="16"
+        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+      >
         <use href={`${snippets}#icon-chevron-down`}></use>
       </svg>
-      {isDropdownOpen && (
-        <UserLogoModal onClose={handleClose} />
-      )}
+      {isDropdownOpen && <UserLogoModal onClose={handleClose} />}
     </div>
   );
 }

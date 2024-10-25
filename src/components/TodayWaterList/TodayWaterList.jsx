@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import * as selectors from '../../redux/water/selectors.js';
+import snippets from "../../assets/images/snippets.svg";
 
 import styles from './TodayWaterList.module.css';
-import { FaPlus } from 'react-icons/fa';
 
 import WaterListRow from './WaterListRow/WaterListRow';
 
@@ -24,7 +24,9 @@ export default function TodayWaterList() {
 
       <div className={styles.addButtonContainer}>
         <button className={styles.addButton}>
-          <FaPlus className="icon" />
+          <svg className="icon" width="24" height="24">
+            <use href={`${snippets}#icon-plus`}></use>
+          </svg>
           <span className={styles.addText}>Add water</span>
         </button>
       </div>

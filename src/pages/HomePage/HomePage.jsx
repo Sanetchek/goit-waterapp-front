@@ -23,6 +23,8 @@ import clsx from 'clsx';
 const DAY_COUNT = 31;
 
 export default function HomePage() {
+  const userAuthLoading = useSelector(selectors.selectAuthLoading);
+  const userAuthError = useSelector(selectors.selectAuthError);
   const userDailyNormWater = useSelector(selectors.selectUserDailyNormWater);
   const dispatch = useDispatch();
 
@@ -35,9 +37,7 @@ export default function HomePage() {
 
   // Modal state and handlers
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isModalOpenEdit, setIsModalOpenEdit] = useState(false);
   const [waterConsumed, setWaterConsumed] = useState(Array(DAY_COUNT).fill(0));
-  const [currentVolume, setCurrentVolume] = useState(0);
 
   const toggleModal = setModalOpen => () => {
     setModalOpen(prev => !prev);
@@ -52,23 +52,12 @@ export default function HomePage() {
         : newWaterConsumed[dayIndex] + Number(amount);
       return newWaterConsumed;
     });
-    if (isEdit) {
-      setCurrentVolume(0);
-    }
   };
 
   const handleSave = data => {
     handleWaterChange(data.amount);
     toggleModal(setIsModalOpen)();
-    const response = dispatch(addWaterVolume(data));
-    console.log(response);
-  };
-
-  const handleEditSave = data => {
-    console.log('Water data edited:', data);
-    // handleWaterChange(data.amount, true);
-    // toggleModal(setIsModalOpenEdit)();
-    // dispatch(addWaterVolume(data));
+    dispatch(addWaterVolume(data));
   };
 
   const renderModal = () => {
@@ -76,23 +65,6 @@ export default function HomePage() {
       return (
         <Modal title="Add Water" onClose={toggleModal(setIsModalOpen)}>
           <TodayListModal title="Choose a value:" onSave={handleSave} />
-        </Modal>
-      );
-    }
-    if (isModalOpenEdit) {
-      return (
-        <Modal
-          title="Edit the entered amount of water"
-          onClose={toggleModal(setIsModalOpenEdit)}
-        >
-          <TodayListModal
-            title="Correct entered data:"
-            onSave={handleEditSave}
-            previousWaterData={{
-              amount: Number(currentVolume.volume),
-              time: currentVolume.time,
-            }}
-          />
         </Modal>
       );
     }
@@ -122,21 +94,20 @@ export default function HomePage() {
               <img className={css.photo} src={botleImage1x} alt="Bottle" />
             </picture>
           </div>
-          <WaterRatioPanel
-            dailyNorm={userDailyNormWater}
-            openModal={toggleModal(setIsModalOpen)}
-            waterConsumed={waterConsumed[new Date().getDate() - 1]}
-          />
+          {!userAuthLoading && !userAuthError && (
+            <WaterRatioPanel
+              dailyNorm={userDailyNormWater}
+              openModal={toggleModal(setIsModalOpen)}
+              waterConsumed={waterConsumed[new Date().getDate() - 1]}
+            />
+          )}
         </div>
-        <WaterListWithCalendar
-          dailyNorm={userDailyNormWater}
-          openModal={toggleModal(setIsModalOpen)}
-          waterConsumed={waterConsumed}
-          onEdit={volume => {
-            setCurrentVolume(volume);
-            toggleModal(setIsModalOpenEdit)();
-          }}
-        />
+        {!userAuthLoading && !userAuthError && (
+          <WaterListWithCalendar
+            userDailyNormWater={userDailyNormWater}
+            waterConsumed={waterConsumed}
+          />
+        )}
       </div>
       {renderModal()}
     </section>

@@ -11,7 +11,7 @@ import styles from './WaterListWithCalendar.module.css';
 const WaterListWithCalendar = ({ waterConsumed, userDailyNormWater }) => {
   const waterIsLoading = useSelector(waterSelectors.selectIsLoading);
   const waterIsError = useSelector(waterSelectors.selectError);
-  const waterNotes = useSelector(waterSelectors.selectTodaysWaterNotes) || []; // Fallback to an empty array
+  const waterNotes = useSelector(waterSelectors.selectTodaysWaterNotes) || [];
   const dispatch = useDispatch();
 
   useEffect(() => {

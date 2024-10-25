@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './DeleteEntry.module.css';
-// import snippets from '../../../assets/images/snippets.svg';
 
 const DeleteEntry = ({ onCancel, onDelete }) => {
 

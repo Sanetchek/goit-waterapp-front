@@ -43,6 +43,21 @@ const waterSlice = createSlice({
       state.editWaterModalOpen = false;
       state.currentWaterVolume = null;
     },
+    updateWaterNotes(state, action) {
+      const { id, notes } = action.payload;
+      const volume = state.volumes.find(volume => volume.id === id || volume._id === id);
+      if (volume) {
+        volume.notes = notes; // Update the notes for the specific volume
+      }
+    },
+    addWaterNote(state, action) {
+      const { note } = action.payload;
+      state.today.notes.push(note); // Add a new note to today's notes
+    },
+    deleteWaterNote(state, action) {
+      const { noteId } = action.payload;
+      state.today.notes = state.today.notes.filter(note => note.id !== noteId); // Remove the note by ID
+    },
   },
   extraReducers: builder => {
     builder
@@ -123,6 +138,8 @@ export const {
   closeAddWaterModal,
   openEditWaterModal,
   closeEditWaterModal,
+  addWaterNote,
+  deleteWaterNote,
 } = waterSlice.actions;
 
 export const waterReducer = waterSlice.reducer;
