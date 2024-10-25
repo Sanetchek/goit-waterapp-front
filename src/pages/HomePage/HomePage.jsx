@@ -23,7 +23,9 @@ export default function HomePage() {
 
   // Modal state and handlers
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpenEdit, setIsModalOpenEdit] = useState(false);
   const [waterConsumed, setWaterConsumed] = useState(Array(31).fill(0));
+  const [currentVolume, setCurrentVolume] = useState(0);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -31,6 +33,16 @@ export default function HomePage() {
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const openModalEdit = volume => {
+    setCurrentVolume(volume);
+    setIsModalOpenEdit(true);
+  };
+
+  const closeModalEdit = () => {
+    setIsModalOpenEdit(false);
+    setCurrentVolume(0);
   };
 
   const addWater = amount => {
@@ -43,9 +55,24 @@ export default function HomePage() {
     closeModal();
   };
 
+  const editWater = amount => {
+    const dayIndex = new Date().getDate() - 1;
+    setWaterConsumed(prev => {
+      const newWaterConsumed = [...prev];
+      newWaterConsumed[dayIndex] = Number(amount);
+      return newWaterConsumed;
+    });
+    closeModalEdit();
+  };
+
   const handleSave = data => {
     console.log('Water data saved:', data);
     addWater(data.waterVolume);
+  };
+
+  const handleEditSave = data => {
+    console.log('Water data edited:', data);
+    editWater(data.waterVolume);
   };
 
   return (
@@ -77,17 +104,30 @@ export default function HomePage() {
             waterConsumed={waterConsumed[new Date().getDate() - 1]}
           />
         </div>
-        {/* Pass openModal to WaterListWithCalendar */}
         <WaterListWithCalendar
           dailyNorm={userDailyNormWater}
           openModal={openModal}
           waterConsumed={waterConsumed}
+          onEdit={openModalEdit}
         />
       </div>
 
       {isModalOpen && (
         <Modal title="Add Water" onClose={closeModal}>
           <TodayListModal title="Choose a value:" onSave={handleSave} />
+        </Modal>
+      )}
+
+      {isModalOpenEdit && (
+        <Modal
+          title="Edit the entered amount of water"
+          onClose={closeModalEdit}
+        >
+          <TodayListModal
+            title="Correct entered data:"
+            onSave={handleEditSave}
+            initialValue={currentVolume}
+          />
         </Modal>
       )}
     </section>

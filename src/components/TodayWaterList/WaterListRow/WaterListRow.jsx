@@ -3,7 +3,7 @@ import { CiTrash } from 'react-icons/ci';
 import styles from './WaterListRow.module.css';
 import icons from '../../../assets/images/snippets.svg';
 
-export default function WaterListRow({ rowData, onDelete }) {
+export default function WaterListRow({ rowData, onDelete, onEdit }) {
   return (
     <div className={styles.listItem}>
       <svg className={styles.icon}>
@@ -12,7 +12,7 @@ export default function WaterListRow({ rowData, onDelete }) {
       <p className={styles.volume}>{rowData.volume} ml</p>
       <p className={styles.time}>{rowData.time}</p>
 
-      <button className={styles.editButton} aria-label="Edit">
+      <button className={styles.editButton} aria-label="Edit" onClick={onEdit}>
         <FaEdit className={styles.editIcon} />
       </button>
 
