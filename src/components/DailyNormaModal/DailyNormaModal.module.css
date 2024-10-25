@@ -1,73 +1,85 @@
-.textBlue{
-    color: #407BFF;
-    font-size: 18px;
-    line-height: 24px;
-    font-weight: 400;
-}
-p{
-    color: #2F2F2F;
-    font-size: 16px;
-    line-height: 20px;
-    font-weight: 400;
+.textBlue {
+  color: #407BFF;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 400;
 }
 
-.descriptionContainer{
-    padding: 10px;
-border: 1px solid #D7E3FF;
-    border-radius: 10px;
+p {
+  color: #2F2F2F;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 400;
 }
 
-.descriptionText{
-padding: 0;
-margin: 0;
-font-size: 12px;
-    line-height: 16px;
-    font-weight: 400;
-    color: #8F8F8F;
+.descriptionContainer {
+  padding: 10px;
+  border: 1px solid #D7E3FF;
+  border-radius: 10px;
 }
 
-h2{
-    color: #2F2F2F;
-    font-size: 18px;
-    line-height: 20px;
-    font-weight: 500;
-    margin-bottom: 16px;
+.descriptionText {
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  color: #8F8F8F;
 }
 
-.btnSave{
-    width: 100%;
-    border-radius: 10px;
-    line-height: 20px;
-    font-size: 16px;
-        padding: 10px 30px;
-        font-weight: 500;
-        text-align: center;
-    color: #fff;
-        background: #407bff;
-        box-shadow: 0 4px 8px 0 rgba(64, 123, 255, 0.34);
+h2 {
+  color: #2F2F2F;
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 500;
+  margin-bottom: 16px;
 }
 
-.modalContent{
-    max-width: 256px;
+.btnSave {
+  width: 100%;
+  border-radius: 10px;
+  line-height: 20px;
+  font-size: 16px;
+  margin-top: 24px;
+  padding: 10px 30px;
+  font-weight: 500;
+  text-align: center;
+  color: #fff;
+  background: #407bff;
+  box-shadow: 0 4px 8px 0 rgba(64, 123, 255, 0.34);
+}
+
+.modalContent {
+  max-width: 256px;
+}
+
+.errorMessage {
+  margin: 0;
+  color: #d8000c;
+  white-space: nowrap;
+  font-size: 12px;
 }
 
 /* Для планшетів (від 768px до 1439px) */
 @media screen and (min-width: 768px) {
-    .btnSave {display: block;
-            width: 160px;
-            line-height: 24px;
-            font-size: 18px;
-            margin-left: auto;
-        }
-        .modalContent{
+  .btnSave {
+    display: block;
+    width: 160px;
+    line-height: 24px;
+    font-size: 18px;
+    margin-left: auto;
+  }
+
+  .modalContent {
     max-width: 704px;
-}
+  }
 }
 
 
 /* Для десктопів (понад 1440px) */
 @media screen and (min-width: 1440px) {
-.modalContent {
-        max-width: 592px;
-    }   
+  .modalContent {
+    max-width: 592px;
+
+  }
 }

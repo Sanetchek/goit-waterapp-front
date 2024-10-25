@@ -13,6 +13,7 @@ const slice = createSlice({
   name: 'auth',
   initialState: {
     user: {
+      _id: null,
       name: null,
       email: null,
       gender: null,
@@ -65,6 +66,7 @@ const slice = createSlice({
       })
       .addCase(logout.fulfilled, (state, action) => {
         state.user = {
+          _id: null,
           name: null,
           email: null,
           gender: null,
