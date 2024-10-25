@@ -17,12 +17,15 @@ import clsx from 'clsx';
 
 export default function HomePage() {
   const userDailyNormWater = useSelector(selectors.selectUserDailyNormWater);
+
   const containerClass = clsx(css.homeContainer, css.pageBackground);
   const contentClass = clsx('mainContainer', css.container);
 
   // Modal state and handlers
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [waterConsumed, setWaterConsumed] = useState(0);
+  const [isModalOpenEdit, setIsModalOpenEdit] = useState(false);
+  const [waterConsumed, setWaterConsumed] = useState(Array(31).fill(0));
+  const [currentVolume, setCurrentVolume] = useState(0);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -32,14 +35,44 @@ export default function HomePage() {
     setIsModalOpen(false);
   };
 
+  const openModalEdit = volume => {
+    setCurrentVolume(volume);
+    setIsModalOpenEdit(true);
+  };
+
+  const closeModalEdit = () => {
+    setIsModalOpenEdit(false);
+    setCurrentVolume(0);
+  };
+
   const addWater = amount => {
-    setWaterConsumed(prev => prev + Number(amount));
+    const dayIndex = new Date().getDate() - 1;
+    setWaterConsumed(prev => {
+      const newWaterConsumed = [...prev];
+      newWaterConsumed[dayIndex] += Number(amount);
+      return newWaterConsumed;
+    });
     closeModal();
+  };
+
+  const editWater = amount => {
+    const dayIndex = new Date().getDate() - 1;
+    setWaterConsumed(prev => {
+      const newWaterConsumed = [...prev];
+      newWaterConsumed[dayIndex] = Number(amount);
+      return newWaterConsumed;
+    });
+    closeModalEdit();
   };
 
   const handleSave = data => {
     console.log('Water data saved:', data);
     addWater(data.waterVolume);
+  };
+
+  const handleEditSave = data => {
+    console.log('Water data edited:', data);
+    editWater(data.waterVolume);
   };
 
   return (
@@ -68,11 +101,15 @@ export default function HomePage() {
           <WaterRatioPanel
             dailyNorm={userDailyNormWater}
             openModal={openModal}
-            waterConsumed={waterConsumed}
+            waterConsumed={waterConsumed[new Date().getDate() - 1]}
           />
         </div>
-        {/* Pass openModal to WaterListWithCalendar */}
-        <WaterListWithCalendar openModal={openModal} />
+        <WaterListWithCalendar
+          dailyNorm={userDailyNormWater}
+          openModal={openModal}
+          waterConsumed={waterConsumed}
+          onEdit={openModalEdit}
+        />
       </div>
 
       {isModalOpen && (
@@ -81,6 +118,19 @@ export default function HomePage() {
             title="Choose a value:"
             onSave={handleSave}
             // previousWaterData={{ amount: 150, time: '14:00' }}
+          />
+        </Modal>
+      )}
+
+      {isModalOpenEdit && (
+        <Modal
+          title="Edit the entered amount of water"
+          onClose={closeModalEdit}
+        >
+          <TodayListModal
+            title="Correct entered data:"
+            onSave={handleEditSave}
+            initialValue={currentVolume}
           />
         </Modal>
       )}

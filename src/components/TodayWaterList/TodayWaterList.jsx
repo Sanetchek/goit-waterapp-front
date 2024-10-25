@@ -5,7 +5,7 @@ import WaterListRow from './WaterListRow/WaterListRow';
 import { FaPlus } from 'react-icons/fa';
 import DeleteEntryModal from './DeleteEntryModal/DeleteEntryModal';
 
-export default function TodayWaterList({ openModal }) {
+export default function TodayWaterList({ openModal, onEdit }) {
   const [waterList, setWaterList] = useState(waterData);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [entryToDelete, setEntryToDelete] = useState(null);
@@ -25,37 +25,39 @@ export default function TodayWaterList({ openModal }) {
     handleCloseModal();
   };
 
+  const handleEdit = entry => {
+    if (typeof onEdit === 'function') {
+      onEdit(entry);
+    } else {
+      console.error('onEdit is not a function');
+    }
+  };
+
   return (
     <div className={`${styles.listContainer} ${styles.todayWaterList}`}>
       <div className={styles.scrollContainer}>
         <ul className={styles.waterList}>
           {waterList.map(rowData => (
             <li className={styles.waterItem} key={rowData.id}>
-              <WaterListRow rowData={rowData} onDelete={handleDelete} />
+              <WaterListRow
+                rowData={rowData}
+                onDelete={handleDelete}
+                onEdit={() => handleEdit(rowData)}
+              />
             </li>
           ))}
         </ul>
       </div>
 
-      {waterList.length === 0 ? (
-        <div className={styles.emptyState}>
-          <div className={styles.addButtonContainer}>
-            {/* Use openModal to open the modal when "Add Water" is clicked */}
-            <button className={styles.addButton} onClick={openModal}>
-              <FaPlus className="icon" />
-              <span className={styles.addText}>Add water</span>
-            </button>
-          </div>
-        </div>
-      ) : (
-        <div className={styles.addButtonContainer}>
-          {/* Use openModal to open the modal */}
-          <button className={styles.addButton} onClick={openModal}>
-            <FaPlus className="icon" />
-            <span className={styles.addText}>Add water</span>
-          </button>
-        </div>
-      )}
+      <div className={styles.addButtonContainer}>
+        <button
+          className={styles.addButton}
+          onClick={() => openModal('Add Water Entry', null, false)}
+        >
+          <FaPlus className="icon" />
+          <span className={styles.addText}>Add water</span>
+        </button>
+      </div>
 
       {isModalOpen && (
         <DeleteEntryModal

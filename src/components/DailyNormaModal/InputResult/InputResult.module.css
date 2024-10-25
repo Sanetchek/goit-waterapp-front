@@ -1,10 +1,10 @@
-.label{
-        color: #2F2F2F;
-                font-size: 18px;
-                line-height: 20px;
-                font-weight: 500;
+.label {
+  color: #2F2F2F;
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 500;
 }
-.input{
-        margin-top: 16px;
-        margin-bottom: 24px;
+
+.input {
+  margin-top: 16px;
 }
