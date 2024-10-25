@@ -8,7 +8,11 @@ import TodayWaterList from '../TodayWaterList/TodayWaterList';
 
 import styles from './WaterListWithCalendar.module.css';
 
-const WaterListWithCalendar = ({ waterConsumed, userDailyNormWater }) => {
+const WaterListWithCalendar = ({
+  waterConsumed,
+  userDailyNormWater,
+  openModal,
+}) => {
   const waterIsLoading = useSelector(waterSelectors.selectIsLoading);
   const waterIsError = useSelector(waterSelectors.selectError);
   const waterNotes = useSelector(waterSelectors.selectTodaysWaterNotes) || [];
@@ -23,7 +27,7 @@ const WaterListWithCalendar = ({ waterConsumed, userDailyNormWater }) => {
       <h2 className={styles.todayText}>Today</h2>
       <div className={styles.waterList}>
         {!waterIsLoading && !waterIsError && waterNotes.length > 0 && (
-          <TodayWaterList />
+          <TodayWaterList openModal={openModal} />
         )}
       </div>
       <div className={styles.calendar}>

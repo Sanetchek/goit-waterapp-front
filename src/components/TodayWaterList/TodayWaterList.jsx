@@ -7,7 +7,7 @@ import styles from './TodayWaterList.module.css';
 
 import WaterListRow from './WaterListRow/WaterListRow';
 
-export default function TodayWaterList() {
+export default function TodayWaterList({ openModal }) {
   const todaysWaterList = useSelector(selectors.selectTodaysWaterNotes);
 
   return (
@@ -23,8 +23,8 @@ export default function TodayWaterList() {
       </div>
 
       <div className={styles.addButtonContainer}>
-        <button className={styles.addButton}>
-          <svg className="icon" width="24" height="24">
+        <button className={styles.addButton} onClick={openModal}>
+          <svg className={styles.icon} width="24" height="24">
             <use href={`${snippets}#icon-plus`}></use>
           </svg>
           <span className={styles.addText}>Add water</span>
