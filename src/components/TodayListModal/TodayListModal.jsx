@@ -4,32 +4,35 @@ import { useSelector } from 'react-redux';
 import * as selectors from '../../redux/auth/selectors.js';
 import css from './TodayListModal.module.css';
 import snippet from '../../assets/images/snippets.svg';
-import dayjs from 'dayjs';
+
+function getAmPm(time) {
+  const [hours] = time.split(':').map(Number);
+  return hours >= 12 ? 'PM' : 'AM';
+}
+
+function getCurrentTime() {
+  const date = new Date();
+  const minutes = Math.round(date.getMinutes() / 5) * 5;
+  return `${date.getHours()}:${minutes < 10 ? `0${minutes}` : minutes}`;
+}
+
+const generateTimeOptions = () => {
+  const options = [];
+  for (let h = 0; h < 24; h++) {
+    for (let m = 0; m < 60; m += 5) {
+      const hour = h < 10 ? `0${h}` : h;
+      const minute = m < 10 ? `0${m}` : m;
+      options.push(`${hour}:${minute}`);
+    }
+  }
+  return options;
+};
 
 const TodayListModal = ({ title = '', onSave, previousWaterData }) => {
+  console.log('Received previousWaterData:', previousWaterData);
   const userDailyNormWater = useSelector(selectors.selectUserDailyNormWater);
   const initialWaterAmount = previousWaterData ? previousWaterData.amount : 0;
-  const initialTime = previousWaterData
-    ? previousWaterData.time
-    : getCurrentTime();
-
-  function getCurrentTime() {
-    return dayjs()
-      .minute(Math.floor(dayjs().minute() / 5) * 5)
-      .format('HH:mm');
-  }
-
-  const generateTimeOptions = () => {
-    const options = [];
-    for (let h = 0; h < 24; h++) {
-      for (let m = 0; m < 60; m += 5) {
-        const hour = h < 10 ? `0${h}` : h;
-        const minute = m < 10 ? `0${m}` : m;
-        options.push(`${hour}:${minute}`);
-      }
-    }
-    return options;
-  };
+  const initialTime = previousWaterData ? previousWaterData.time : getCurrentTime();
 
   return (
     <Formik
@@ -48,10 +51,14 @@ const TodayListModal = ({ title = '', onSave, previousWaterData }) => {
           selectedDate.getTime() - selectedDate.getTimezoneOffset() * 60000
         );
 
+        // Format date to 'YYYY-MM-DDTHH:mm'
+        const formattedDate = `${localDate.getFullYear()}-${String(localDate.getMonth() + 1).padStart(2, '0')}-${String(localDate.getDate()).padStart(2, '0')}T${String(localDate.getHours()).padStart(2, '0')}:${String(localDate.getMinutes()).padStart(2, '0')}`;
+
+
         const dataToSave = {
           dailyNorm: userDailyNormWater, // Get the daily norm from Redux
           amount: values.waterVolume,
-          date: localDate.toISOString(), // Format date as ISO string in local timezone
+          date: formattedDate, // Format date as ISO string in local timezone
         };
 
         onSave(dataToSave);
@@ -161,8 +168,3 @@ const TodayListModal = ({ title = '', onSave, previousWaterData }) => {
 };
 
 export default TodayListModal;
-
-function getAmPm(time) {
-  const [hours] = time.split(':').map(Number);
-  return hours >= 12 ? 'PM' : 'AM';
-}
