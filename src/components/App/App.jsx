@@ -2,7 +2,6 @@ import React, { Suspense, lazy, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import * as selectors from '../../redux/auth/selectors.js';
 
 import Loading from '../Loading/Loading';
 import Layout from '../Layout/Layout';
@@ -31,7 +30,6 @@ export const App = () => {
   const isRefreshing = useSelector(selectIsRefreshing);
   const isLoggedIn = useSelector(selectIsAuthenticated);
   const [username, setUsername] = useState('');
-  const userDailyNormWater = useSelector(selectors.selectUserDailyNormWater);
 
   useEffect(() => {
     dispatch(refreshUser());
@@ -45,7 +43,7 @@ export const App = () => {
     <Loading />
   ) : (
     <Layout username={username}>
-      {userDailyNormWater}{' '}
+      {' '}
       <Suspense fallback={<Loading />}>
         <Routes>
           <Route
