@@ -7,9 +7,9 @@ import {toast} from 'react-hot-toast';
 
 import { selectUser, selectUserAvatar } from "redux/auth/selectors";
 
-import svg from '../../assets/images/sippets.svg';
+import svg from '../../assets/images/snippets.svg';
 import css from './UserSettingsForm.module.css';
-import {icons} from '../../assets/images/sippets.svg';
+import {icons} from '../../assets/images/snippets.svg';
 
 import { selectUser, selectUserAvatar } from "../../redux/auth/selectors";
 import css from './UserSettingsForm.module.css';

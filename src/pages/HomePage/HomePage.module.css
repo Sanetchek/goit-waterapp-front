@@ -3,23 +3,36 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
+  justify-content: center;
+  position: relative;
+  /* align-items: center; */
+}
+
+.homeContainer {
+  padding-top: 24px;
 }
 
 .pageBackground {
   background-image: url('/src/assets/images/mob/background_element_home_screen_mob.png'),
     url('/src/assets/images/mob/background_element_home_screen_mob@2x.png');
   background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center top;
+  background-size: cover;
 }
 
 .title {
   display: none;
 }
+
 @media screen and (min-width: 768px) {
   .pageBackground {
     background-image: url('/src/assets/images/tablet/background_element_home_screen_tablet.png'),
       url('/src/assets/images/tablet/background_element_home_screen_tablet@2x.png');
+  }
+
+  .imageModal {
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
   }
 }
 
@@ -29,13 +42,16 @@
     flex-direction: row;
   }
 
+  .homeContainer {
+    padding-top: 20px;
+  }
+
   .box {
-    position: relative;
-    width: 592px;
+    /* position: relative; */
+    max-width: 592px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
     padding-top: 32px;
     padding-bottom: 16px;
   }
@@ -45,6 +61,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    /* position: relative; */
   }
 
   .pageBackground {

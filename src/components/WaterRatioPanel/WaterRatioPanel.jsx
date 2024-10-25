@@ -1,27 +1,12 @@
-import React, { useState } from 'react';
-import icon from '../../assets/images/sippets.svg';
-import TodayListModal from '../TodayWaterList/TodayWaterList.jsx';
+import React from 'react';
+import icon from '../../assets/images/snippets.svg';
 import css from './WaterRatioPanel.module.css';
-import Modal from 'components/Modal/Modal.jsx';
-// onChange={e => setWaterConsumed((e.target.value / 100) * dailyNorm)}
 
-export default function WaterRatioPanel({ dailyNorm = 2000 }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [waterConsumed, setWaterConsumed] = useState(0);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const addWater = amount => {
-    setWaterConsumed(prev => prev + Number(amount));
-    closeModal();
-  };
-
+export default function WaterRatioPanel({
+  dailyNorm = 2000,
+  openModal,
+  waterConsumed,
+}) {
   const waterRatio = Math.min(
     Math.round((waterConsumed / dailyNorm) * 100),
     100
@@ -49,20 +34,22 @@ export default function WaterRatioPanel({ dailyNorm = 2000 }) {
         </div>
         <div className={css.valueContainer}>
           <div className={css.borderWrapper}>
-            <span className={css.percent}>
-              <span className="devider">|</span>
-              <span className="waterPercent">0%</span>
-            </span>
+            <div className={css.afterBefor}>
+              <span className={css.devider}>|</span>
+              <span className={css.percent}>0%</span>
+            </div>
             {waterConsumed > 0 && (
-              <span className={`${css.percent} ${css.percentToday}`}>
-                <span className="devider">|</span>
-                <span className="waterPercent">{waterRatio}%</span>
-              </span>
+              <div className={css.afterBefor}>
+                <span className={css.devider}>|</span>
+                <span className={`${css.percent} ${css.percentToday}`}>
+                  {waterRatio}%
+                </span>
+              </div>
             )}
-            <span className={css.percent}>
-              <span className="devider">|</span>
-              <span className="waterPercent">100%</span>
-            </span>
+            <div className={css.afterBefor}>
+              <span className={css.devider}>|</span>
+              <span className={css.percent}>100%</span>
+            </div>
           </div>
         </div>
       </div>
@@ -72,15 +59,6 @@ export default function WaterRatioPanel({ dailyNorm = 2000 }) {
         </svg>
         Add Water
       </button>
-
-      {isModalOpen && (
-        <Modal title="Add Water" onClose={closeModal}>
-          <TodayListModal
-            onClose={closeModal}
-            onAddWater={addWater} // Передаємо функцію для додавання води
-          />
-        </Modal>
-      )}
     </div>
   );
 }

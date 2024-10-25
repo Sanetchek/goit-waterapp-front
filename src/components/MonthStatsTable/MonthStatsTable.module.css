@@ -113,6 +113,7 @@
 }
 
 .dayWrapper {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -190,4 +191,72 @@
 
 .zeroPercentage {
   border: 2px solid #ffffff;
+}
+
+.popup {
+  position: absolute;
+  top: -190px;
+  left: -8px;
+  /* default position */
+}
+
+.dayWrapper:nth-child(5n + 2) .popup {
+  left: -65px;
+}
+
+.dayWrapper:nth-child(5n + 3) .popup {
+  left: -124px;
+}
+
+.dayWrapper:nth-child(5n + 4) .popup {
+  left: -182px;
+}
+
+.dayWrapper:nth-child(5n + 5) .popup {
+  left: -240px;
+}
+
+
+@media screen and (min-width: 768px) {
+  .dayWrapper:nth-child(12n + 1) .popup {
+      left: -20px;
+    }
+  
+    .dayWrapper:nth-child(12n + 2) .popup {
+      left: -77px;
+    }
+
+    .dayWrapper:nth-child(12n + 10) .popup {
+    left: -130px;
+  }
+
+  .dayWrapper:nth-child(12n + 11) .popup {
+    left: -187px;
+  }
+
+  .dayWrapper:nth-child(12n + 12) .popup {
+    left: -244px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+.dayWrapper:nth-child(10n + 1) .popup {
+    left: -20px;
+  }
+
+  .dayWrapper:nth-child(10n + 2) .popup {
+    left: -77px;
+  }
+
+  .dayWrapper:nth-child(10n + 8) .popup {
+    left: -130px;
+  }
+
+  .dayWrapper:nth-child(10n + 9) .popup {
+    left: -187px;
+  }
+
+  .dayWrapper:nth-child(10n + 10) .popup {
+    left: -244px;
+  }
 }

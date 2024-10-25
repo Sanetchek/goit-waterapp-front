@@ -3,39 +3,47 @@ import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import styles from './MonthStatsTable.module.css';
 import clsx from 'clsx';
 import Loading from '../Loading/Loading';
-import DaysGeneralStats from '../DaysGeneralStats/DaysGeneralStats'; // імпорт
+import DaysGeneralStats from '../DaysGeneralStats/DaysGeneralStats';
 
-const fetchDataForMonth = (year, month) => {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      const daysInMonth = new Date(year, month + 1, 0).getDate();
-      const data = Array.from({ length: daysInMonth }, (_, i) => ({
-        id: i + 1,
-        percentage: Math.floor(Math.random() * 101),
-        date: `${i + 1}/${month + 1}/${year}`, // Додає дату
-        dailyNorm: 2, // Денна норма води
-        servings: Math.floor(Math.random() * 10), // Додає к-сть порцій
-      }));
-      resolve(data);
-    }, 1000);
-  });
-};
-
-const MonthStatsTable = () => {
+const MonthStatsTable = ({ waterConsumed, dailyNorm = 1500 }) => {
   const today = new Date();
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
   const [currentMonth, setCurrentMonth] = useState(today.getMonth());
   const [currentMonthData, setCurrentMonthData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedDayData, setSelectedDayData] = useState(null); // Для вибору дня
+  const [selectedDayId, setSelectedDayId] = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
-    fetchDataForMonth(currentYear, currentMonth).then(data => {
-      setCurrentMonthData(data);
-      setIsLoading(false);
+    fetchDataForMonth(currentYear, currentMonth, waterConsumed, dailyNorm);
+  }, [currentYear, currentMonth, waterConsumed, dailyNorm]);
+
+  const fetchDataForMonth = (year, month, consumed, norm) => {
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const data = Array.from({ length: daysInMonth }, (_, i) => {
+      const dayWaterConsumption = consumed[i] || 0;
+      const percentage = Math.min(
+        Math.round((dayWaterConsumption / norm) * 100),
+        100
+      );
+
+      // console.log(
+      //   `Day: ${
+      //     i + 1
+      //   }, Water Consumed: ${dayWaterConsumption}, Daily Norm: ${norm}, Percentage: ${percentage}`
+      // );
+
+      return {
+        id: i + 1,
+        percentage,
+        date: `${i + 1}/${month + 1}/${year}`,
+        servings: Math.floor(dayWaterConsumption / 250),
+      };
     });
-  }, [currentYear, currentMonth]);
+
+    setCurrentMonthData(data);
+    setIsLoading(false);
+  };
 
   const handlePrevMonth = () => {
     setCurrentMonth(prev => {
@@ -58,12 +66,29 @@ const MonthStatsTable = () => {
     }
   };
 
-const handleDayClick = day => {
-    setSelectedDayData(day); // Вибраний день
-  };
+  const handleDayClick = dayId => {
+    const selectedDayData = currentMonthData.find(day => day.id === dayId);
 
-  const closeModal = () => {
-    setSelectedDayData(null); // Закриття модального вікна
+    if (selectedDayId?.dayId === dayId) {
+      setSelectedDayId(null);
+    } else {
+      const dayNumber = selectedDayData.id; // Assuming this is what you meant
+      const monthName = new Date(currentYear, currentMonth).toLocaleString(
+        'en-US',
+        {
+          month: 'long',
+        }
+      );
+
+      setSelectedDayId({
+        dayId,
+        dayNumber, // Now defined
+        monthName, // Now defined
+        dailyNorm: selectedDayData.dailyNorm,
+        percentage: selectedDayData.percentage,
+        servings: selectedDayData.servings,
+      });
+    }
   };
 
   return (
@@ -110,12 +135,20 @@ const handleDayClick = day => {
                   [styles.zeroPercentage]: day.percentage === 0,
                 });
                 return (
-                  <li key={day.id} className={styles.dayWrapper} onClick={() => handleDayClick(day)} // Відкриття модалки
+                  <li
+                    key={day.id}
+                    className={styles.dayWrapper}
+                    onClick={() => handleDayClick(day.id)}
                   >
                     <div className={circleClass}>
                       <p className={styles.calendarDay}>{day.id}</p>
                     </div>
                     <p className={styles.percentageText}>{day.percentage}%</p>
+                    <div className={styles.popup}>
+                    {selectedDayId && selectedDayId.dayId === day.id && (
+                      <DaysGeneralStats selectedDayData={selectedDayId} />
+                      )}
+                    </div>
                   </li>
                 );
               })}
@@ -123,12 +156,6 @@ const handleDayClick = day => {
           )}
         </div>
       </div>
-       {selectedDayData && (
-        <DaysGeneralStats
-    selectedDayData={selectedDayData} // Передавання данних
-    onClose={closeModal}
-  />
-      )}
     </>
   );
 };

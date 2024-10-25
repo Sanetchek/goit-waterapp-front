@@ -36,11 +36,9 @@
 @media screen and (min-width: 768px) {
   .normaContainer {
     position: absolute;
-    left: 0;
+    left: 10%;
   }
 }
 
 @media screen and (min-width: 1440px) {
-  /* .modalContainer {
-    /* left: 20%; */
 }
