@@ -4,8 +4,12 @@ import waterData from './WaterData';
 import WaterListRow from './WaterListRow/WaterListRow';
 import { FaPlus } from 'react-icons/fa';
 import DeleteEntryModal from './DeleteEntryModal/DeleteEntryModal';
+import { useDispatch } from 'react-redux';
 
 export default function TodayWaterList({ openModal, onEdit }) {
+  // const dispatch = useDispatch();
+  // const waterData = dispatch();
+
   const [waterList, setWaterList] = useState(waterData);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [entryToDelete, setEntryToDelete] = useState(null);

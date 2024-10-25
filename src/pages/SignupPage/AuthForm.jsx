@@ -103,16 +103,16 @@ const AuthForm = () => {
               />
               <span onClick={togglePasswordVisibility}>
                 {showPassword ? (
+                  <svg className="icon-eye passwordEye" width="16" height="16">
+                    <use href={`${snippets}#icon-eye`}></use>
+                  </svg>
+                ) : (
                   <svg
                     className="icon-eye-slash passwordEye"
                     width="16"
                     height="16"
                   >
                     <use href={`${snippets}#icon-eye-slash`}></use>
-                  </svg>
-                ) : (
-                  <svg className="icon-eye passwordEye" width="16" height="16">
-                    <use href={`${snippets}#icon-eye`}></use>
                   </svg>
                 )}
               </span>
@@ -140,16 +140,16 @@ const AuthForm = () => {
               />
               <span onClick={toggleRepeatPasswordVisibility}>
                 {showRepeatPassword ? (
+                  <svg className="icon-eye passwordEye" width="16" height="16">
+                    <use href={`${snippets}#icon-eye`}></use>
+                  </svg>
+                ) : (
                   <svg
                     className="icon-eye-slash passwordEye"
                     width="16"
                     height="16"
                   >
                     <use href={`${snippets}#icon-eye-slash`}></use>
-                  </svg>
-                ) : (
-                  <svg className="icon-eye passwordEye" width="16" height="16">
-                    <use href={`${snippets}#icon-eye`}></use>
                   </svg>
                 )}
               </span>
