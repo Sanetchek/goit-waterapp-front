@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import DailyNorma from '../../components/DailyNorma/DailyNorma.jsx';
 import WaterRatioPanel from '../../components/WaterRatioPanel/WaterRatioPanel.jsx';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as selectors from '../../redux/auth/selectors.js';
 import css from './HomePage.module.css';
 import botleImage1x from '../../assets/images/desktop/botle_home_screen.png';
@@ -14,11 +14,13 @@ import WaterListWithCalendar from '../../components/WaterListWithCalendar/WaterL
 import Modal from 'components/Modal/Modal.jsx';
 import TodayListModal from 'components/TodayListModal/TodayListModal.jsx';
 import clsx from 'clsx';
+import { addWaterVolume } from '../../redux/water/operations.js';
 
 const DAY_COUNT = 31;
 
 export default function HomePage() {
   const userDailyNormWater = useSelector(selectors.selectUserDailyNormWater);
+  const dispatch = useDispatch();
 
   const containerClass = clsx(css.homeContainer, css.pageBackground);
   const contentClass = clsx('mainContainer', css.container);
@@ -48,15 +50,17 @@ export default function HomePage() {
   };
 
   const handleSave = data => {
-    console.log('Water data saved:', data);
     handleWaterChange(data.amount);
     toggleModal(setIsModalOpen)();
+    const response = dispatch(addWaterVolume(data));
+    console.log(response);
   };
 
   const handleEditSave = data => {
     console.log('Water data edited:', data);
-    handleWaterChange(data.amount, true);
-    toggleModal(setIsModalOpenEdit)();
+    // handleWaterChange(data.amount, true);
+    // toggleModal(setIsModalOpenEdit)();
+    // dispatch(addWaterVolume(data));
   };
 
   const renderModal = () => {
