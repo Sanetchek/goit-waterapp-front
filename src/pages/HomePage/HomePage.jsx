@@ -106,6 +106,7 @@ export default function HomePage() {
           <WaterListWithCalendar
             userDailyNormWater={userDailyNormWater}
             waterConsumed={waterConsumed}
+            openModal={toggleModal(setIsModalOpen)}
           />
         )}
       </div>
