@@ -66,15 +66,15 @@ const MonthStatsTable = () => {
     const selectedDayData = currentMonthData.find(day => day.id === dayId);
 
   if (selectedDayId?.dayId === dayId) {
-    setSelectedDayId(null); // Скинути вибір
+    setSelectedDayId(null);
   } else {
     setSelectedDayId({
       dayId,
       dayNumber,
       monthName,
-      dailyNorm: selectedDayData.dailyNorm, // Додати dailyNorm
-      percentage: selectedDayData.percentage, // Додати percentage
-      servings: selectedDayData.servings, // Додати servings
+      dailyNorm: selectedDayData.dailyNorm,
+      percentage: selectedDayData.percentage,
+      servings: selectedDayData.servings,
     });
   }
 };
@@ -129,9 +129,11 @@ const MonthStatsTable = () => {
                       <p className={styles.calendarDay}>{day.id}</p>
                     </div>
                     <p className={styles.percentageText}>{day.percentage}%</p>
+                    <div className={styles.popup}>
                     {selectedDayId && selectedDayId.dayId === day.id && (
-  <DaysGeneralStats selectedDayData={selectedDayId} />
-)}
+                      <DaysGeneralStats selectedDayData={selectedDayId} />
+                      )}
+                      </div>
                   </li>
                 );
               })}
