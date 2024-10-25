@@ -1,10 +1,7 @@
-<<<<<<< Updated upstream
 import UserSettingsForm from '../UserSettingsForm/UserSettingsForm';
 import {icons} from '../../assets/images/sippets.svg'
-=======
 import UserSettingsForm from '../UserSettingsForm/UserSettingsForm.jsx';
 import svg from '../../assets/images/snippets.svg'
->>>>>>> Stashed changes
 import css from './UserSettingsModal.module.css';
 
 const UserSettingsModal = ({onClose}) => {

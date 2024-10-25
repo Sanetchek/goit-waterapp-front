@@ -90,7 +90,7 @@ const UserSettingsForm = ({onclose}) => {
 
 <<<<<<< Updated upstream
   return (
-    
+
   )
 }
 =======
