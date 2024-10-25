@@ -1,5 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { updateUser, updateAvatar } from './operations';
+// redux/slice.js
+import {
+  createSlice
+} from '@reduxjs/toolkit';
+import {
+  updateUser,
+  updateAvatar,
+  getUser
+} from './operations';
 
 const initialState = {
   user: null,
@@ -13,6 +20,19 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
+      // Get user by ID
+      .addCase(getUser.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.loading = false;
+      })
+      .addCase(getUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
       // Update user profile
       .addCase(updateUser.pending, state => {
         state.loading = true;
