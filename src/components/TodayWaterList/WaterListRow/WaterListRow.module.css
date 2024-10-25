@@ -59,8 +59,8 @@ button.deleteButton {
 
 .editButton .editIcon {
   color: #9ebbff;
-  width: 12px;
-  height: 12px;
+  width: 16px;
+  height: 16px;
   transition: color 0.3s ease;
 }
 
@@ -70,8 +70,8 @@ button.deleteButton {
 
 .deleteButton .deleteIcon {
   color: #ef5050;
-  width: 12px;
-  height: 12px;
+  width: 16px;
+  height: 16px;
   transition: color 0.3s ease;
 }
 
