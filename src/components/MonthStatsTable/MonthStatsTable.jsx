@@ -68,13 +68,23 @@ const MonthStatsTable = ({ waterConsumed, dailyNorm = 1500 }) => {
 
   const handleDayClick = dayId => {
     const selectedDayData = currentMonthData.find(day => day.id === dayId);
+
     if (selectedDayId?.dayId === dayId) {
       setSelectedDayId(null);
     } else {
+      const dayNumber = selectedDayData.id; // Assuming this is what you meant
+      const monthName = new Date(currentYear, currentMonth).toLocaleString(
+        'en-US',
+        {
+          month: 'long',
+        }
+      );
+
       setSelectedDayId({
         dayId,
-        dayNumber: selectedDayData.id,
-        dailyNorm: dailyNorm,
+        dayNumber, // Now defined
+        monthName, // Now defined
+        dailyNorm: selectedDayData.dailyNorm,
         percentage: selectedDayData.percentage,
         servings: selectedDayData.servings,
       });
@@ -134,9 +144,11 @@ const MonthStatsTable = ({ waterConsumed, dailyNorm = 1500 }) => {
                       <p className={styles.calendarDay}>{day.id}</p>
                     </div>
                     <p className={styles.percentageText}>{day.percentage}%</p>
+                    <div className={styles.popup}>
                     {selectedDayId && selectedDayId.dayId === day.id && (
                       <DaysGeneralStats selectedDayData={selectedDayId} />
-                    )}
+                      )}
+                    </div>
                   </li>
                 );
               })}

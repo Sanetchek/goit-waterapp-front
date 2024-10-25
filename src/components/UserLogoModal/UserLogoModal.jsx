@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import css from './UserLogoModal.module.css'
 import snippets from '../../assets/images/snippets.svg';
 import UserLogoutModal from '../UserLogoutModal/UserLogoutModal';
+// import UserSettingsModal from 'components/UserSettingsModal/UserSettingsModal.jsx';
 
 const UserLogoModal = ({ onClose }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -32,4 +33,9 @@ const UserLogoModal = ({ onClose }) => {
   )
 }
 
-export default UserLogoModal
+export default UserLogoModal;
+
+//  {isModalOpen && (
+//         <UserSettingsModal onClose={() => setIsModalOpen(false)} />
+//       )}
+//   onClick={() => setIsModalOpen(true)}

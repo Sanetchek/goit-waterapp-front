@@ -18,7 +18,7 @@ const DaysGeneralStats = ({ selectedDayData}) => {
           How many servings of water: <span className={css.span}>{selectedDayData.servings}</span>
         </p>
       </div>
-    </div>
+      </div>
   );
 };
 
