@@ -19,7 +19,7 @@ const UserLogoutModal = ({ onClose, onDelete }) => {
             Cancel
           </button>
           <button className={css.deleteButton} onClick={handleClick}>
-            Delete
+            Logout
           </button>
         </div>
       </div>
