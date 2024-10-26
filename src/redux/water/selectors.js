@@ -8,7 +8,11 @@ export const selectError = state => state.water.error;
 
 export const selectDailyNorm = state => state.water.dailyNorm;
 
+export const selectTodaysWater = state => state.water.today;
+
 export const selectTodaysWaterNotes = state => state.water.today.notes;
+
+export const selectTodaysWaterDailyNorm = state => state.water.today.dailyNorm;
 
 export const selectTodaysWaterPercentage = state => state.water.today.percentage;
 
