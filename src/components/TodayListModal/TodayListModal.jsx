@@ -40,26 +40,28 @@ const TodayListModal = ({ title = '', onSave, previousWaterData }) => {
         selectedTime: initialTime,
       }}
       onSubmit={values => {
+        // Get the current date
         const currentDate = new Date();
-        const selectedDate = new Date(currentDate);
+
+        // Split the selected time (HH:mm) into hours and minutes
         const [hours, minutes] = values.selectedTime.split(':').map(Number);
-        selectedDate.setHours(hours, minutes, 0, 0); // Set hours and minutes
 
-        // Adjust the date for the local timezone
-        const localDate = new Date(
-          selectedDate.getTime() - selectedDate.getTimezoneOffset() * 60000
-        );
+        // Set the hours and minutes on the current date
+        currentDate.setHours(hours, minutes, 0, 0); // Set hours, minutes, and reset seconds/milliseconds
 
-        // Format date to 'YYYY-MM-DDTHH:mm'
-        const formattedDate = `${localDate.getFullYear()}-${String(localDate.getMonth() + 1).padStart(2, '0')}-${String(localDate.getDate()).padStart(2, '0')}T${String(localDate.getHours()).padStart(2, '0')}:${String(localDate.getMinutes()).padStart(2, '0')}`;
+        // Format date to 'YYYY-MM-DDTHH:mm' in local timezone
+        const formattedDate = `${currentDate.getFullYear()}-${String(
+          currentDate.getMonth() + 1
+        ).padStart(2, '0')}-${String(currentDate.getDate()).padStart(2, '0')}T${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
 
-
+        // Create the data object to save
         const dataToSave = {
           dailyNorm: userDailyNormWater, // Get the daily norm from Redux
           amount: values.waterVolume,
           date: formattedDate, // Format date as ISO string in local timezone
         };
 
+        // Call the onSave function with the data
         onSave(dataToSave);
       }}
     >
