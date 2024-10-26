@@ -70,9 +70,8 @@ const AuthForm = () => {
       {({ errors, touched }) => (
         <Form className={styles.authForm}>
           <h1 className={styles.signUpTitle}>Sign Up</h1>
-
-          <label className={styles.fieldLabel}>
-            Enter your email
+          <div className={styles.field}>
+            <label className={styles.fieldLabel}>Enter your email</label>
             <Field
               type="email"
               name="email"
@@ -87,10 +86,10 @@ const AuthForm = () => {
               component="div"
               className={styles.errorMessage}
             />
-          </label>
+          </div>
 
-          <label className={styles.fieldLabel}>
-            Enter your password
+          <div className={styles.field}>
+            <label className={styles.fieldLabel}>Enter your password</label>
             <div className={styles.passwordContainer}>
               <Field
                 type={showPassword ? 'text' : 'password'}
@@ -103,15 +102,11 @@ const AuthForm = () => {
               />
               <span onClick={togglePasswordVisibility}>
                 {showPassword ? (
-                  <svg className="icon-eye passwordEye" width="16" height="16">
+                  <svg className={styles.eyeIcon} width="16" height="16">
                     <use href={`${snippets}#icon-eye`}></use>
                   </svg>
                 ) : (
-                  <svg
-                    className="icon-eye-slash passwordEye"
-                    width="16"
-                    height="16"
-                  >
+                  <svg className={styles.eyeIcon} width="16" height="16">
                     <use href={`${snippets}#icon-eye-slash`}></use>
                   </svg>
                 )}
@@ -122,10 +117,10 @@ const AuthForm = () => {
               component="div"
               className={styles.errorMessage}
             />
-          </label>
+          </div>
 
-          <label className={styles.fieldLabel}>
-            Repeat password
+          <div className={styles.field}>
+            <label className={styles.fieldLabel}>Repeat password</label>
             <div className={styles.passwordContainer}>
               <Field
                 type={showRepeatPassword ? 'text' : 'password'}
@@ -140,15 +135,11 @@ const AuthForm = () => {
               />
               <span onClick={toggleRepeatPasswordVisibility}>
                 {showRepeatPassword ? (
-                  <svg className="icon-eye passwordEye" width="16" height="16">
+                  <svg className={styles.eyeIcon} width="16" height="16">
                     <use href={`${snippets}#icon-eye`}></use>
                   </svg>
                 ) : (
-                  <svg
-                    className="icon-eye-slash passwordEye"
-                    width="16"
-                    height="16"
-                  >
+                  <svg className={styles.eyeIcon} width="16" height="16">
                     <use href={`${snippets}#icon-eye-slash`}></use>
                   </svg>
                 )}
@@ -159,7 +150,7 @@ const AuthForm = () => {
               component="div"
               className={styles.errorMessage}
             />
-          </label>
+          </div>
 
           <button
             type="submit"
