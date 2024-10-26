@@ -4,13 +4,6 @@ import {useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import { userSettingsFormSchema } from "./UserSettingsFormSchema";
 import {toast} from 'react-hot-toast';
-
-import { selectUser, selectUserAvatar } from "redux/auth/selectors";
-
-import svg from '../../assets/images/snippets.svg';
-import css from './UserSettingsForm.module.css';
-import {icons} from '../../assets/images/snippets.svg';
-
 import { selectUser, selectUserAvatar } from "../../redux/auth/selectors";
 import css from './UserSettingsForm.module.css';
 import svg from '../../assets/images/snippets.svg';
@@ -88,12 +81,6 @@ const UserSettingsForm = ({onclose}) => {
     }
   };
 
-<<<<<<< Updated upstream
-  return (
-
-  )
-}
-=======
   const gender = watch('gender');
 
     const [showPassword, setShowPassword] = useState(false);
@@ -272,4 +259,3 @@ const UserSettingsForm = ({onclose}) => {
 };
 
 export default UserSettingsForm;
->>>>>>> Stashed changes

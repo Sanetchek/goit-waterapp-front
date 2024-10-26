@@ -1,6 +1,4 @@
 import UserSettingsForm from '../UserSettingsForm/UserSettingsForm';
-import {icons} from '../../assets/images/snippets.svg'
-import UserSettingsForm from '../UserSettingsForm/UserSettingsForm.jsx';
 import svg from '../../assets/images/snippets.svg'
 import css from './UserSettingsModal.module.css';
 
