@@ -10,6 +10,8 @@ const UserLogoModal = ({ onClose }) => {
   //   console.log("Entry deleted");
   //   setIsModalOpen(false);
   // };
+
+
   return (
     <div className={css.dropdownMenu}>
       <ul className={css.listCon}>
