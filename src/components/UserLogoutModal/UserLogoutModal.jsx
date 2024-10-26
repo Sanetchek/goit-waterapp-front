@@ -11,15 +11,15 @@ const UserLogoutModal = ({ onClose, onDelete }) => {
   };
 
   return (
-    <Modal title="Delete entry" onClose={onClose}>
+    <Modal title="Log out" onClose={onClose}>
       <div className={css.modalContent}>
-        <p className={css.exitConfirmText}>Are you sure you want to delete the entry?</p>
+        <p className={css.exitConfirmText}>Do you really want to leave?</p>
         <div className={css.buttons}>
           <button className={css.cancelButton} onClick={onClose}>
             Cancel
           </button>
           <button className={css.deleteButton} onClick={handleClick}>
-            Logout
+          Log out
           </button>
         </div>
       </div>
