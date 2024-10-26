@@ -8,7 +8,7 @@ import styles from './TodayWaterList.module.css';
 import WaterListRow from './WaterListRow/WaterListRow';
 
 export default function TodayWaterList({ openModal }) {
-  const todaysWaterList = useSelector(selectors.selectTodaysWaterNotes);
+  const todaysWaterList = useSelector(selectors.selectVisibleWaterNotes);
 
   return (
     <div className={`${styles.listContainer} ${styles.todayWaterList}`}>

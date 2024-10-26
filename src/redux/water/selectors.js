@@ -14,9 +14,10 @@ export const selectTodaysWaterPercentage = state => state.water.today.percentage
 
 export const selectTodaysWaterAmount = state => state.water.today.totalAmount;
 
-export const visibleWaterNotes = createSelector(
+export const selectVisibleWaterNotes = createSelector(
   [selectTodaysWaterNotes],
   (notes) => {
-    return notes;
+    return notes.slice().sort((a, b) => new Date(a.date) - new Date(b.date));
   }
 );
+
