@@ -1,8 +1,9 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import * as waterSelectors from '../../redux/water/selectors';
 
 import MonthStatsTable from '../MonthStatsTable/MonthStatsTable';
 import TodayWaterList from '../TodayWaterList/TodayWaterList';
+import Loading from '../Loading/Loading';
 
 import styles from './WaterListWithCalendar.module.css';
 
@@ -19,6 +20,10 @@ const WaterListWithCalendar = ({
     <div className={styles.container}>
       <h2 className={styles.todayText}>Today</h2>
       <div className={styles.waterList}>
+        {waterIsLoading && <Loading />}
+        {!waterIsLoading && waterIsError && (
+          <div className={styles.error}>Error loading water data</div>
+        )}
         {!waterIsLoading && !waterIsError && waterNotes.length > 0 && (
           <TodayWaterList openModal={openModal} />
         )}

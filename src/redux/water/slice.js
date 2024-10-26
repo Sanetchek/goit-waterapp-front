@@ -98,8 +98,37 @@ const waterSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload;
       })
+      .addCase(addWaterVolume.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
       .addCase(addWaterVolume.fulfilled, (state, action) => {
         state.volumes.push(action.payload);
+        const notes = state.today.notes;
+        notes.push(action.payload.data);
+
+        const totalAmount = notes.reduce((sum, note) => sum + note.amount, 0);
+        const dailyNorm = action.payload.dailyNorm;
+
+        // Check if totalAmount and dailyNorm are valid numbers
+        const percentage = dailyNorm ? ((totalAmount / dailyNorm) * 100).toFixed(2) : null;
+
+        // Set state with appropriate values
+        state.today = {
+          percentage: percentage !== undefined ? percentage : null,
+          totalAmount: totalAmount || null,
+          dailyNorm: dailyNorm || null,
+          notes,
+        };
+        state.isLoading = false;
+      })
+      .addCase(addWaterVolume.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(updateWaterVolume.pending, state => {
+        state.isLoading = true;
+        state.error = null;
       })
       .addCase(updateWaterVolume.fulfilled, (state, action) => {
         const index = state.volumes.findIndex(
@@ -109,15 +138,77 @@ const waterSlice = createSlice({
         if (index !== -1) {
           state.volumes[index] = action.payload;
         }
+
+        const notes = state.today.notes;
+        notes.push(action.payload.data);
+
+        const totalAmount = notes.reduce((sum, note) => sum + note.amount, 0);
+        const dailyNorm = action.payload.dailyNorm;
+
+        // Check if totalAmount and dailyNorm are valid numbers
+        const percentage = dailyNorm ? ((totalAmount / dailyNorm) * 100).toFixed(2) : null;
+
+        // Set state with appropriate values
+        state.today = {
+          percentage: percentage !== undefined ? percentage : null,
+          totalAmount: totalAmount || null,
+          dailyNorm: dailyNorm || null,
+          notes,
+        };
+        state.isLoading = false;
+      })
+      .addCase(updateWaterVolume.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(deleteWaterVolume.pending, state => {
+        state.isLoading = true;
+        state.error = null;
       })
       .addCase(deleteWaterVolume.fulfilled, (state, action) => {
+        // Filter out the deleted water volume from the volumes array
         state.volumes = state.volumes.filter(
-          volume =>
-          volume.id !== action.payload && volume._id !== action.payload
+          volume => volume.id !== action.payload && volume._id !== action.payload
         );
+
+        // Find the ID of the note to delete from today's notes
+        const noteIdToDelete = action.payload; // Assuming action.payload contains the note ID to delete
+
+        // Remove the note from today's notes
+        const updatedNotes = state.today.notes.filter(note => note._id !== noteIdToDelete);
+
+        // Calculate the total amount from the updated notes
+        const totalAmount = updatedNotes.reduce((sum, note) => sum + note.amount, 0);
+        const dailyNorm = state.today.dailyNorm; // Ensure you're using the correct dailyNorm
+
+        // Check if dailyNorm is valid and calculate percentage
+        const percentage = dailyNorm ? ((totalAmount / dailyNorm) * 100).toFixed(2) : null;
+
+        // Set state with appropriate values
+        state.today = {
+          percentage: percentage !== undefined ? percentage : null,
+          totalAmount: totalAmount || null,
+          dailyNorm: dailyNorm || null,
+          notes: updatedNotes, // Update the notes to the filtered notes
+        };
+
+        state.isLoading = false;
+      })
+      .addCase(deleteWaterVolume.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(updateDailyWaterNorm.pending, state => {
+        state.isLoading = true;
+        state.error = null;
       })
       .addCase(updateDailyWaterNorm.fulfilled, (state, action) => {
         state.dailyNorm = action.payload.dailyNorm;
+        state.isLoading = false;
+      })
+      .addCase(updateDailyWaterNorm.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
       })
       .addCase(logout.fulfilled, state => {
         state.volumes = [];

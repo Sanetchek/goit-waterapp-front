@@ -55,7 +55,6 @@ export default function HomePage() {
   };
 
   const handleSave = data => {
-    console.log(data);
     handleWaterChange(data.amount);
     toggleModal(setIsModalOpen)();
     dispatch(addWaterVolume(data));
