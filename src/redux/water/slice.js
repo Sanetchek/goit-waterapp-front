@@ -97,10 +97,11 @@ const waterSlice = createSlice({
       })
       .addCase(addWaterVolume.fulfilled, (state, action) => {
         const notes = state.today.notes;
+        const data = action.payload.data;
         notes.push(action.payload.data);
 
         const totalAmount = notes.reduce((sum, note) => sum + note.amount, 0);
-        const dailyNorm = action.payload.dailyNorm;
+        const dailyNorm = data.dailyNorm;
 
         // Check if totalAmount and dailyNorm are valid numbers
         const percentage = dailyNorm ? ((totalAmount / dailyNorm) * 100).toFixed(2) : null;

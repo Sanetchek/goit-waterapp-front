@@ -84,9 +84,7 @@ export default function HomePage() {
           </div>
           {!userAuthLoading && !userAuthError && (
             <WaterRatioPanel
-              dailyNorm={userDailyNormWater}
               openModal={toggleModal(setIsModalOpen)}
-              waterConsumed={waterConsumed[new Date().getDate() - 1]}
             />
           )}
         </div>
