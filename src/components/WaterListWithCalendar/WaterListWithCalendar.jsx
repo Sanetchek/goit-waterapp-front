@@ -1,6 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { fetchTodayWaterConsumption } from '../../redux/water/operations';
 import * as waterSelectors from '../../redux/water/selectors';
 
 import MonthStatsTable from '../MonthStatsTable/MonthStatsTable';
@@ -16,11 +14,6 @@ const WaterListWithCalendar = ({
   const waterIsLoading = useSelector(waterSelectors.selectIsLoading);
   const waterIsError = useSelector(waterSelectors.selectError);
   const waterNotes = useSelector(waterSelectors.selectTodaysWaterNotes) || [];
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchTodayWaterConsumption());
-  }, [dispatch]);
 
   return (
     <div className={styles.container}>
