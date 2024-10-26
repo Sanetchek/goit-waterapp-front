@@ -1,3 +1,7 @@
+.modalBody {
+  width: 232px;
+}
+
 .deleteBtn {
   color: #fff;
   background: #ef5050;
@@ -11,6 +15,7 @@
   margin-right: auto;
   font-size: 18px;
 }
+
 .cancelBtn {
   border-radius: 10px;
   padding: 8px 30px;
@@ -41,12 +46,14 @@
   color: #2f2f2f;
   margin: 0;
 }
+
 .btnContainer {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column-reverse;
   gap: 24px;
 }
+
 .modalOverlay {
   position: fixed;
   top: 0;
@@ -94,27 +101,24 @@
 }
 
 @media (min-width: 768px) {
-  .modalContent {
-    width: 592px;
+  .modalBody {
+    width: 544px;
   }
+
   .deleteBtn {
     margin-left: 0;
     margin-right: 0;
     width: auto;
   }
+
   .cancelBtn {
     margin-left: 0;
     margin-right: 0;
     width: auto;
   }
+
   .btnContainer {
     display: flex;
     flex-direction: row;
-  }
-}
-
-@media (min-width: 1440px) {
-  .modalContent {
-    width: 592px;
   }
 }

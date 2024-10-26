@@ -2,9 +2,13 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styles from './WaterListRow.module.css';
 import icons from '../../../assets/images/snippets.svg';
-import DeleteEntryModal from '../DeleteEntry/DeleteEntry';
 import Modal from '../../Modal/Modal';
-import { deleteWaterVolume } from '../../../redux/water/operations';
+import DeleteEntryModal from '../DeleteEntry/DeleteEntry';
+import TodayListModal from '../../TodayListModal/TodayListModal';
+import {
+  deleteWaterVolume,
+  updateWaterVolume,
+} from '../../../redux/water/operations';
 
 export default function WaterListRow({ rowData }) {
   const { _id, amount, date } = rowData || {};
@@ -12,6 +16,7 @@ export default function WaterListRow({ rowData }) {
   const time = date ? date.split('T')[1] : 'No time available';
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalEditIsOpen, setModalEditIsOpen] = useState(false);
   const dispatch = useDispatch();
 
   const openDeleteModal = () => {
@@ -22,13 +27,22 @@ export default function WaterListRow({ rowData }) {
     setModalIsOpen(false);
   };
 
+  const openEditModal = () => {
+    setModalEditIsOpen(true);
+  };
+
+  const closeEditModal = () => {
+    setModalEditIsOpen(false);
+  };
+
   const handleDelete = waterId => {
     dispatch(deleteWaterVolume(waterId));
     closeDeleteModal();
   };
 
-  const handleEdit = waterId => {
-    console.log(waterId);
+  const handleEdit = (waterId, data) => {
+    dispatch(updateWaterVolume({ id: waterId, updatedData: data }));
+    closeEditModal();
   };
 
   return (
@@ -42,7 +56,7 @@ export default function WaterListRow({ rowData }) {
       <button
         className={styles.editButton}
         aria-label="Edit"
-        onClick={() => handleEdit(_id)}
+        onClick={openEditModal}
       >
         <svg className={styles.editIcon} width="16" height="16">
           <use href={`${icons}#icon-pencil`} />
@@ -64,6 +78,21 @@ export default function WaterListRow({ rowData }) {
           <DeleteEntryModal
             onCancel={closeDeleteModal}
             onDelete={() => handleDelete(_id)} // Pass function reference
+          />
+        </Modal>
+      )}
+      {modalEditIsOpen && (
+        <Modal
+          title="Edit the entered amount of water"
+          onClose={closeEditModal}
+        >
+          <TodayListModal
+            title="Correct entered data:"
+            onSave={(values) => handleEdit(_id, values)}
+            previousWaterData={{
+              amount,
+              time
+             }}
           />
         </Modal>
       )}
