@@ -4,6 +4,8 @@ import GenderRadioGroup from './GenderRadioGroup/GenderRadioGroup';
 import InputField from './InputField/InputField';
 import WaterResult from './WaterResult/WaterResult';
 import InputResult from './InputResult/InputResult';
+import { selectUserGender } from '../../redux/auth/selectors';
+import { useSelector } from 'react-redux';
 
 // Move the function outside the component
 const calculateWaterNorma = (gender, weight, activityTime) => {
@@ -13,7 +15,8 @@ const calculateWaterNorma = (gender, weight, activityTime) => {
 };
 
 export default function DailyNormaModal({ onClose, onSave }) {
-  const [gender, setGender] = useState('woman');
+  const userGender = useSelector(selectUserGender);
+  const [gender, setGender] = useState(userGender || 'woman');
   const [weight, setWeight] = useState('');
   const [activityTime, setActivityTime] = useState('');
   const [waterResult, setWaterResult] = useState(0);
