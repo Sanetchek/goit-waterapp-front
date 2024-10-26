@@ -3,31 +3,20 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  max-width: 1440px;
+  max-width: 100%;
   width: 100%;
   margin: 0 auto;
-  padding-top: 80px;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio: 2),
-(min-resolution: 2dppx),
-(min-resolution: 192dpi) {
+  (min-resolution: 2dppx),
+  (min-resolution: 192dpi) {
   .container {
     display: flex;
     flex-direction: column;
     align-items: center;
     background-image: url('../../assets/images/mob/background_element_sign_in_mob@2x.png');
   }
-}
-
-.titel {
-  margin: 0;
-  padding-bottom: 16px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 500;
-  font-size: 26px;
-  line-height: 1.23077;
-  color: #2f2f2f;
 }
 
 .frame {
@@ -49,16 +38,17 @@
 
   .container {
     display: flex;
-    padding-top: 104px;
+    flex-direction: row;
     padding-left: 32px;
     align-items: flex-start;
+    justify-content: space-evenly;
     background-image: url('../../assets/images/tablet/background-signin-1x.png');
     z-index: -1;
   }
 
   @media screen and (-webkit-min-device-pixel-ratio: 2),
-  (min-resolution: 2dppx),
-  (min-resolution: 192dpi) {
+    (min-resolution: 2dppx),
+    (min-resolution: 192dpi) {
     .container {
       background-image: url('../../assets/images/tablet/background-signin-2x.png');
     }
@@ -68,10 +58,10 @@
     width: 736px;
     height: 548px;
     position: relative;
-    left: -230px;
+    left: -290px;
     z-index: 0;
-    padding-top: 52px;
     object-fit: contain;
+    margin-top: 52px;
   }
 }
 
@@ -79,21 +69,19 @@
   .frame {
     width: 916px;
     height: 618px;
-    padding-top: 20px;
     right: 51px;
     left: 0;
-    top: 40px;
+    margin-top: 0;
   }
 
   .container {
-    padding-top: 80px;
     flex-direction: row-reverse;
     background-image: url('../../assets/images/desktop/Background-signin-1x.png');
   }
 
   @media screen and (-webkit-min-device-pixel-ratio: 2),
-  (min-resolution: 2dppx),
-  (min-resolution: 192dpi) {
+    (min-resolution: 2dppx),
+    (min-resolution: 192dpi) {
     .container {
       background-image: url('../../assets/images/desktop/Background-signin-2x.png');
     }

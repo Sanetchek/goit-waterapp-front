@@ -89,7 +89,7 @@ export default function SignInForm() {
           <button className={css.button} type="submit">
             Sign In
           </button>
-          <div className={css.link}>
+          <div className={css.linkConteiner}>
             <Link className={css.link} to={'/forgot-password'} state={location}>
               Forgot password?
             </Link>
