@@ -68,11 +68,16 @@ const slice = createSlice({
         state.isRefreshing = true;
       })
       .addCase(refreshUser.fulfilled, (state, action) => {
+        state.loading = false;
         state.user = action.payload.user;
+        state.token = action.payload.token;
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })
       .addCase(refreshUser.rejected, state => {
+        state.user = {};
+        state.token = null;
+        state.isLoggedIn = false;
         state.isRefreshing = false;
       })
       .addCase(forgotPassword.pending, state => {
