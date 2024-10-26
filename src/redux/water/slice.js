@@ -96,21 +96,21 @@ const waterSlice = createSlice({
         state.error = null;
       })
       .addCase(addWaterVolume.fulfilled, (state, action) => {
-        const notes = state.today.notes;
-        const data = action.payload.data;
+        const notes = [...state.today.notes]; // Make a copy of current notes
         notes.push(action.payload.data);
 
+        // Recalculate totalAmount from updated notes array
         const totalAmount = notes.reduce((sum, note) => sum + note.amount, 0);
-        const dailyNorm = data.dailyNorm;
+        const dailyNorm = action.payload.data.dailyNorm || state.today.dailyNorm; // Use existing dailyNorm if not provided in payload
 
-        // Check if totalAmount and dailyNorm are valid numbers
-        const percentage = dailyNorm ? ((totalAmount / dailyNorm) * 100).toFixed(2) : null;
+        // Calculate percentage only if dailyNorm is a valid number
+        const percentage = dailyNorm ? ((totalAmount / dailyNorm) * 100) : null;
 
-        // Set state with appropriate values
+        // Update state with recalculated values
         state.today = {
-          percentage: percentage !== undefined ? percentage : null,
-          totalAmount: totalAmount || null,
-          dailyNorm: dailyNorm || null,
+          percentage: percentage !== undefined ? percentage : state.today.percentage,
+          totalAmount: totalAmount || state.today.totalAmount,
+          dailyNorm: dailyNorm || state.today.dailyNorm,
           notes,
         };
         state.isLoading = false;
@@ -201,6 +201,23 @@ const waterSlice = createSlice({
       })
       .addCase(updateDailyWaterNorm.fulfilled, (state, action) => {
         state.dailyNorm = action.payload.dailyNorm;
+
+        const notes = [...state.today.notes];
+
+        // Recalculate totalAmount from updated notes array
+        const totalAmount = notes.reduce((sum, note) => sum + note.amount, 0);
+        const dailyNorm = action.payload.data.dailyNormWater || state.today.dailyNorm; // Use existing dailyNorm if not provided in payload
+
+        // Calculate percentage only if dailyNorm is a valid number
+        const percentage = dailyNorm ? ((totalAmount / dailyNorm) * 100) : null;
+
+        // Update state with recalculated values
+        state.today = {
+          percentage: percentage !== undefined ? percentage : state.today.percentage,
+          totalAmount: totalAmount || state.today.totalAmount,
+          dailyNorm: dailyNorm || state.today.dailyNorm,
+          notes,
+        };
         state.isLoading = false;
       })
       .addCase(updateDailyWaterNorm.rejected, (state, action) => {

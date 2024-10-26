@@ -29,7 +29,7 @@ const generateTimeOptions = () => {
 };
 
 const TodayListModal = ({ title = '', onSave, previousWaterData }) => {
-  const userDailyNormWater = useSelector(selectors.selectUserDailyNormWater);
+  const userDailyNormWater = useSelector(selectors.selectVisibleWaterNorm);
   const initialWaterAmount = previousWaterData ? previousWaterData.amount : 0;
   const initialTime = previousWaterData ? previousWaterData.time : getCurrentTime();
 

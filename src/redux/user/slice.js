@@ -40,6 +40,7 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(updateUser.fulfilled, (state, action) => {
+        console.log(action.payload);
         state.user = action.payload;
         state.loading = false;
       })

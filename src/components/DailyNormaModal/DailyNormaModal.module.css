@@ -1,3 +1,7 @@
+.modalContent {
+  width: 256px;
+}
+
 .textBlue {
   color: #407BFF;
   font-size: 18px;
@@ -5,17 +9,26 @@
   font-weight: 400;
 }
 
-p {
+.formulaWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.formulaLabel {
   color: #2F2F2F;
   font-size: 16px;
   line-height: 20px;
   font-weight: 400;
+  margin: 0;
 }
 
 .descriptionContainer {
   padding: 10px;
   border: 1px solid #D7E3FF;
   border-radius: 10px;
+  margin-bottom: 24px;
 }
 
 .descriptionText {
@@ -27,11 +40,12 @@ p {
   color: #8F8F8F;
 }
 
-h2 {
+.calcutatorTitle {
   color: #2F2F2F;
   font-size: 18px;
   line-height: 20px;
   font-weight: 500;
+  margin: 0;
   margin-bottom: 16px;
 }
 
@@ -49,10 +63,6 @@ h2 {
   box-shadow: 0 4px 8px 0 rgba(64, 123, 255, 0.34);
 }
 
-.modalContent {
-  max-width: 256px;
-}
-
 .errorMessage {
   margin: 0;
   color: #d8000c;
@@ -60,7 +70,36 @@ h2 {
   font-size: 12px;
 }
 
-/* Для планшетів (від 768px до 1439px) */
+.genderWrapper {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 16px;
+}
+
+.genderLabel,
+.fieldLabel,
+.resultLabel {
+  color: #2F2F2F;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+.genderInput {
+  color: #407BFF;
+  margin-right: 8px;
+}
+
+.fieldWrapper,
+.resultWrapper {
+  margin-bottom: 16px;
+}
+
+.fieldInput,
+.resultInput {
+  margin-top: 8px;
+}
+
 @media screen and (min-width: 768px) {
   .btnSave {
     display: block;
@@ -71,15 +110,16 @@ h2 {
   }
 
   .modalContent {
-    max-width: 704px;
+    width: 656px;
+  }
+
+  .formulaWrap {
+    flex-direction: row;
   }
 }
 
-
-/* Для десктопів (понад 1440px) */
 @media screen and (min-width: 1440px) {
   .modalContent {
-    max-width: 592px;
-
+    width: 544px;
   }
 }

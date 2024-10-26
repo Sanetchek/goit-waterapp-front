@@ -25,7 +25,6 @@ export const fetchTodayWaterConsumption = createAsyncThunk(
   'water/fetchTodayConsumption',
   async (_, thunkAPI) => {
     try {
-      const reduxState = thunkAPI.getState();
       const response = await axios.get('/water/today');
       return response.data;
     } catch (error) {
