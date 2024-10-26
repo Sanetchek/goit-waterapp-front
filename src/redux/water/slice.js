@@ -43,13 +43,6 @@ const waterSlice = createSlice({
       state.editWaterModalOpen = false;
       state.currentWaterVolume = null;
     },
-    updateWaterNotes(state, action) {
-      const { id, notes } = action.payload;
-      const volume = state.volumes.find(volume => volume.id === id || volume._id === id);
-      if (volume) {
-        volume.notes = notes; // Update the notes for the specific volume
-      }
-    },
     addWaterNote(state, action) {
       const { note } = action.payload;
       state.today.notes.push(note); // Add a new note to today's notes
@@ -103,7 +96,6 @@ const waterSlice = createSlice({
         state.error = null;
       })
       .addCase(addWaterVolume.fulfilled, (state, action) => {
-        state.volumes.push(action.payload);
         const notes = state.today.notes;
         notes.push(action.payload.data);
 
@@ -131,30 +123,39 @@ const waterSlice = createSlice({
         state.error = null;
       })
       .addCase(updateWaterVolume.fulfilled, (state, action) => {
-        const index = state.volumes.findIndex(
-          volume =>
-          volume.id === action.payload.id || volume._id === action.payload._id
-        );
-        if (index !== -1) {
-          state.volumes[index] = action.payload;
+        const updatedNote = action.payload.data;
+        const {
+          _id,
+          amount,
+          dailyNorm
+        } = updatedNote;
+
+        // Check if note with the same _id already exists
+        const noteIndex = state.today.notes.findIndex(note => note._id === _id);
+
+        if (noteIndex !== -1) {
+          // Update the existing note if found
+          state.today.notes[noteIndex] = updatedNote;
+        } else {
+          // Otherwise, add the new note
+          state.today.notes.push(updatedNote);
         }
 
-        const notes = state.today.notes;
-        notes.push(action.payload.data);
+        // Recalculate totalAmount from updated notes
+        const totalAmount = state.today.notes.reduce((sum, note) => sum + note.amount, 0);
 
-        const totalAmount = notes.reduce((sum, note) => sum + note.amount, 0);
-        const dailyNorm = action.payload.dailyNorm;
-
-        // Check if totalAmount and dailyNorm are valid numbers
+        // Recalculate percentage based on updated totalAmount and dailyNorm
         const percentage = dailyNorm ? ((totalAmount / dailyNorm) * 100).toFixed(2) : null;
 
-        // Set state with appropriate values
+        // Update the today state with recalculated values
         state.today = {
+          ...state.today, // Preserve existing properties in today
           percentage: percentage !== undefined ? percentage : null,
           totalAmount: totalAmount || null,
           dailyNorm: dailyNorm || null,
-          notes,
+          notes: [...state.today.notes], // Ensure a new array reference for notes
         };
+
         state.isLoading = false;
       })
       .addCase(updateWaterVolume.rejected, (state, action) => {
@@ -166,11 +167,6 @@ const waterSlice = createSlice({
         state.error = null;
       })
       .addCase(deleteWaterVolume.fulfilled, (state, action) => {
-        // Filter out the deleted water volume from the volumes array
-        state.volumes = state.volumes.filter(
-          volume => volume.id !== action.payload && volume._id !== action.payload
-        );
-
         // Find the ID of the note to delete from today's notes
         const noteIdToDelete = action.payload; // Assuming action.payload contains the note ID to delete
 
@@ -212,6 +208,7 @@ const waterSlice = createSlice({
       })
       .addCase(logout.fulfilled, state => {
         state.volumes = [];
+        state.today = {};
         state.dailyNorm = null;
         state.todayConsumption = null;
         state.monthlyConsumption = null;

@@ -14,8 +14,8 @@ export default function TodayWaterList({ openModal }) {
     <div className={`${styles.listContainer} ${styles.todayWaterList}`}>
       <div className={styles.scrollContainer}>
         <ul className={styles.waterList}>
-          {todaysWaterList.map(note => (
-            <li className={styles.waterItem} key={note._id}>
+          {todaysWaterList.map((note, index) => (
+            <li className={styles.waterItem} key={`${note._id}-${index}`}>
               <WaterListRow rowData={note} />
             </li>
           ))}

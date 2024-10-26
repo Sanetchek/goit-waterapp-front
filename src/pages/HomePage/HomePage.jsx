@@ -43,19 +43,7 @@ export default function HomePage() {
     setModalOpen(prev => !prev);
   };
 
-  const handleWaterChange = (amount, isEdit = false) => {
-    const dayIndex = new Date().getDate() - 1;
-    setWaterConsumed(prev => {
-      const newWaterConsumed = [...prev];
-      newWaterConsumed[dayIndex] = isEdit
-        ? Number(amount)
-        : newWaterConsumed[dayIndex] + Number(amount);
-      return newWaterConsumed;
-    });
-  };
-
   const handleSave = data => {
-    handleWaterChange(data.amount);
     toggleModal(setIsModalOpen)();
     dispatch(addWaterVolume(data));
   };
