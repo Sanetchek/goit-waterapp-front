@@ -1,0 +1,427 @@
+.passwordTitle {
+  font-weight: 500;
+  font-size: 22px;
+}
+
+.imageTitle {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  color: black;
+}
+.formWrapper {
+  padding: 40px 0;
+}
+
+.imageWrapper {
+  /* padding: 20px 85px 40px; */
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.imagecontainer {
+  width: 75px;
+  height: 75px;
+}
+
+.image {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.upload {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.imageInput {
+  display: none;
+}
+
+.uploadIcon {
+  stroke: #2f2f2f;
+  fill: transparent;
+
+  width: 18px;
+  height: 18px;
+  stroke: #407BFF;
+}
+
+.text {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+
+  color: #407BFF;
+  ;
+}
+
+.inputTitle {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+
+  color: #2f2f2f;
+
+  margin-bottom: 14px;
+}
+
+.genderInputWrapper {
+  display: flex;
+  gap: 20px;
+
+  margin-bottom: 25px;
+}
+
+.genderButton {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.genderInput {
+  display: none;
+}
+
+.iconWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ .radioIcon {
+  stroke: #9b9de1;
+  fill: transparent;
+}
+
+.radioIcon:checked {
+  fill: #9be1a0;
+}
+
+.userInroWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  margin-bottom: 24px;
+}
+
+.userInputWrap {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 21px;
+}
+
+.userInputTitle {
+  display: block;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+
+  color: #2f2f2f;
+  margin-bottom: 8px;
+}
+
+.userInput {
+  border: 1px solid rgba(47, 47, 47, 0.15);
+  border-radius: 15px;
+  width: 392px;
+  max-height: 44px;
+  padding: 14px 16px;
+  color: #2f2f2f;
+}
+
+.userInput.error {
+  border-color: #ef5050;
+  color: #ef5050;
+}
+
+.accentText {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: #9be1a0;
+}
+
+.iconImportant {
+  fill: #9be1a0;
+}
+
+.accentTextL {
+  font-size: 14px;
+  line-height: 1.29;
+  color: #9be1a0;
+  font-weight: 700;
+}
+
+.submitButton {
+  border-radius: 30px;
+  padding: 14px 40px;
+  width: 116px;
+  height: 46px;
+  background-color: #9be1a0;
+
+  font-weight: 700;
+
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+
+  transition: 0.5s;
+}
+
+.submitButton:hover, .submitButton:focus {
+  /* background-color: #87D28D; */
+  box-shadow: inset 0 0 0 2em #87D28D;
+}
+
+.error {
+  color: #ef5050;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.header {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 100%;
+  letter-spacing: -0.01em;
+  color: #323f47;
+}
+.label {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  color: #2f2f2f;
+}
+
+.formGroupPassword {
+  display: flex;
+  flex-direction: column;
+  width: 311px;
+  padding-top: 16px;
+}
+.input {
+  border-radius: 6px;
+  border: 1px solid rgba(47, 47, 47, 0.15);
+  outline: none;
+  display: flex;
+  width: 311px;
+  max-height: 44px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 129%;
+  padding-left: 12px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  letter-spacing: -0.01em;
+  background-color: transparent;
+  padding-right: 40px;
+  color: #2f2f2f;
+}
+.input::placeholder {
+  color: #407BFF;
+}
+.input.error {
+  border-color: #ef5050;
+  color: #ef5050;
+}
+.errorMessage {
+  padding-top: 10px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  color: #ef5050;
+}
+
+.inputWrapper {
+  position: relative;
+  padding-top: 8px;
+}
+.submitButton {
+  border-radius: 30px;
+  padding: 16px 129px;
+  width: 311px;
+  height: 50px;
+  background-color: #9be1a0;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  color: #323f47;
+  display: flex;
+  justify-content: center;
+}
+.submitButton:hover,
+.submitButton:focus {
+  background-color: #87d28d;
+}
+.buttonWrapper {
+  padding-top: 32px;
+}
+
+.passwordToggleIcon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-30%);
+  cursor: pointer;
+  display: none;
+}
+
+@media only screen and (min-width: 768px) {
+  .imagecontainer {
+    width: 100px;
+    height: 100px;
+  }
+
+  .image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .uploadIcon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .text {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .inputTitle {
+    font-size: 18px;
+    line-height: 1.33;
+  }
+
+  /* .radioIcon {
+    stroke: #9be1a0;
+    fill: transparent;
+  } */
+
+  /* .radioIcon:checked {
+    fill: #9be1a0;
+  } */
+
+  .userInputTitle {
+    font-size: 18px;
+    line-height: 1.33;
+  }
+
+  .userInput {
+    padding: 16px;
+  }
+
+  .flexWrap {
+    display: flex;
+
+    gap: 28px;
+  }
+
+  .accentText {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .iconImportant {
+    fill: #9be1a0;
+
+    width: 22px;
+    height: 22px;
+  }
+
+  .submitButton {
+    padding: 16px 50px;
+    width: 141px;
+    height: 56px;
+
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .error {
+    font-size: 14px;
+  }
+
+  .header {
+    font-size: 36px;
+    line-height: 106%;
+    letter-spacing: -0.01em;
+  }
+  .label {
+    font-size: 16px;
+    line-height: 150%;
+  }
+  .input {
+    width: 436px;
+    height: 56px;
+    font-size: 16px;
+    line-height: 150%;
+    padding-right: 40px;
+  }
+
+  .formGroupPassword {
+    width: 434px;
+    padding-top: 20px;
+  }
+
+  .passwordToggleIcon {
+    display: block;
+    fill: #407BFF;
+  }
+  .submitButton {
+    padding: 18px 150px;
+    width: 436px;
+    height: 60px;
+    font-size: 16px;
+    line-height: 150%;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .settingsWrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+  }
+  .userWrapper {
+    width: 392px;
+  }
+
+  .userInput.userSettings {
+    width: 392px;
+  }
+
+  .formFlexWrapper {
+    display: flex;
+    gap: 40px;
+  }
+
+  .formFlexItem {
+    flex-basis: calc((100% - 40px) / 2);
+  }
+
+  .accentTextL {
+    font-size: 15px;
+    line-height: 1.3;
+  }
+
+  .passwordWrapper {
+    margin-top: 133px;
+  }
+}

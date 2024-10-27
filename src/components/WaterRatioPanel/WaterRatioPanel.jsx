@@ -1,31 +1,17 @@
-import React, { useState } from 'react';
-import icon from '../../assets/images/sippets.svg';
-import TodayListModal from '../TodayListModal/TodayListModal';
+import React from 'react';
+import icon from '../../assets/images/snippets.svg';
 import css from './WaterRatioPanel.module.css';
-import Modal from 'components/Modal/Modal.jsx';
+import { useSelector } from 'react-redux';
+import * as waterSelectors from '../../redux/water/selectors';
 
-export default function WaterRatioPanel({ dailyNorm = 2000 }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [waterConsumed, setWaterConsumed] = useState(0);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const addWater = amount => {
-    setWaterConsumed(prev => prev + Number(amount));
-    closeModal();
-  };
-
-  // Оновлення waterRatio на основі waterConsumed
-  const waterRatio = Math.min(
-    Math.round((waterConsumed / dailyNorm) * 100),
-    100
+export default function WaterRatioPanel({
+  openModal,
+}) {
+  const todaysWaterPercentage = useSelector(
+    waterSelectors.selectTodaysWaterPercentage
   );
+
+  const waterRatio = Math.floor(todaysWaterPercentage) || 0;
 
   return (
     <div className={css.box}>
@@ -53,7 +39,7 @@ export default function WaterRatioPanel({ dailyNorm = 2000 }) {
               <span className={css.devider}>|</span>
               <span className={css.percent}>0%</span>
             </div>
-            {waterConsumed > 0 && (
+            {waterRatio > 0 && (
               <div className={css.afterBefor}>
                 <span className={css.devider}>|</span>
                 <span className={`${css.percent} ${css.percentToday}`}>
@@ -74,12 +60,6 @@ export default function WaterRatioPanel({ dailyNorm = 2000 }) {
         </svg>
         Add Water
       </button>
-
-      {isModalOpen && (
-        <Modal title="Add Water" onClose={closeModal}>
-          <TodayListModal />
-        </Modal>
-      )}
     </div>
   );
 }

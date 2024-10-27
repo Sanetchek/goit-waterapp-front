@@ -7,7 +7,19 @@ input[type='password'] {
   src: local('Roboto');
   unicode-range: U+002A;
 }
-
+.form {
+  padding-bottom: 66px;
+}
+.title {
+  font-family: 'Roboto', sans-serif;
+  padding-top: 24px;
+  margin: 0;
+  padding-bottom: 16px;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 1.23077;
+  color: #2f2f2f;
+}
 .field {
   margin-bottom: 16px;
   width: 280px;
@@ -107,8 +119,16 @@ input[type='password'] {
   line-height: 1.25;
   color: #ef5050;
 }
+.linkConteiner {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 
 @media screen and (min-width: 768px) {
+  .title {
+    padding-top: 40px;
+  }
   .field {
     width: 336px;
   }
@@ -121,6 +141,9 @@ input[type='password'] {
   }
 }
 @media screen and (min-width: 1440px) {
+  .title {
+    padding-top: 113px;
+  }
   .field {
     width: 384px;
   }

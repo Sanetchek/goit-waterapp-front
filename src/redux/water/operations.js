@@ -1,10 +1,12 @@
 import axios from 'axios';
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { toast } from 'react-hot-toast';
+import {
+  createAsyncThunk
+} from '@reduxjs/toolkit';
+import {
+  toast
+} from 'react-hot-toast';
 
-axios.defaults.baseURL = 'http://localhost:5050/';
-
-// Отримання усіх записів води
+// Fetch all water volumes
 export const fetchWaterVolumes = createAsyncThunk(
   'water/fetchVolumes',
   async (_, thunkAPI) => {
@@ -18,7 +20,38 @@ export const fetchWaterVolumes = createAsyncThunk(
   }
 );
 
-// Додавання води
+// Fetch today's water consumption
+export const fetchTodayWaterConsumption = createAsyncThunk(
+  'water/fetchTodayConsumption',
+  async (_, thunkAPI) => {
+    try {
+      const response = await axios.get('/water/today');
+      return response.data;
+    } catch (error) {
+      toast.error('Failed to fetch today\'s water consumption.');
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+// Fetch monthly water consumption by year and month
+export const fetchMonthlyWaterConsumption = createAsyncThunk(
+  'water/fetchMonthlyConsumption',
+  async ({
+    year,
+    month
+  }, thunkAPI) => {
+    try {
+      const response = await axios.get(`/water/month/${year}/${month}`);
+      return response.data;
+    } catch (error) {
+      toast.error('Failed to fetch monthly water consumption.');
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+// Add water volume
 export const addWaterVolume = createAsyncThunk(
   'water/addVolume',
   async (volumeData, thunkAPI) => {
@@ -27,16 +60,20 @@ export const addWaterVolume = createAsyncThunk(
       toast.success('Water volume added successfully.');
       return response.data;
     } catch (error) {
+      console.error('Error adding water volume:', error.response.data);
       toast.error('Failed to add water volume.');
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
-// оновлення запису випитої води по айді
+// Update water volume by ID
 export const updateWaterVolume = createAsyncThunk(
   'water/updateVolume',
-  async ({ id, updatedData }, thunkAPI) => {
+  async ({
+    id,
+    updatedData
+  }, thunkAPI) => {
     try {
       const response = await axios.patch(`/water/${id}`, updatedData);
       toast.success('Water volume updated successfully.');
@@ -48,7 +85,7 @@ export const updateWaterVolume = createAsyncThunk(
   }
 );
 
-// видалення запису про споживання води по айді
+// Delete water volume by ID
 export const deleteWaterVolume = createAsyncThunk(
   'water/deleteVolume',
   async (id, thunkAPI) => {
@@ -63,7 +100,7 @@ export const deleteWaterVolume = createAsyncThunk(
   }
 );
 
-// оновлення норми води  (dailyNorm)
+// Update daily water norm
 export const updateDailyWaterNorm = createAsyncThunk(
   'water/updateDailyNorm',
   async (dailyNormData, thunkAPI) => {

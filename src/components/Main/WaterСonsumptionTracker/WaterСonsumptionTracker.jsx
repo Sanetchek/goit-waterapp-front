@@ -1,15 +1,9 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import css from './WaterСonsumptionTracker.module.css';
-import snippets from '../../../assets/images/sippets.svg';
+import snippets from '../../../assets/images/snippets.svg';
 
 export default function WaterConsumptionTracker() {
-  const navigate = useNavigate();
-
-  const handleTryTrackerClick = () => {
-    navigate('/signup');
-  };
-
   return (
     <div className={css.boxComsamption}>
       <div className={css.headerWrapper}>
@@ -39,9 +33,9 @@ export default function WaterConsumptionTracker() {
           </li>
         </ul>
       </div>
-      <button className={css.tryBtn} onClick={handleTryTrackerClick}>
+      <Link to="/signup" className={css.tryBtn}>
         Try tracker
-      </button>
+      </Link>
     </div>
   );
 }
