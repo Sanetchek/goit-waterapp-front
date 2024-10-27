@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkreact_homework_template=self.webpackChunkreact_homework_template||[]).push([[924],{4924:(e,t,a)=>{a.d(t,{A:()=>s});a(5043);const s=a.p+"static/media/sippets.f9290ba02265754937d24a80676ee58d.svg"}}]);
-//# sourceMappingURL=924.429380e8.chunk.js.map
