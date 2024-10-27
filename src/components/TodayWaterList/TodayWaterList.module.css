@@ -10,54 +10,6 @@
   flex-direction: column;
 }
 
-.emptyState {
-  height: 200px;
-}
-
-.addButtonContainer {
-  display: flex;
-  align-items: center;
-  padding: 5px;
-}
-
-.icon {
-  fill: #407bff;
-}
-
-.addButton {
-  display: inline-flex;
-  align-items: center;
-  border: none;
-  background: none;
-  color: #407bff;
-  font-size: 16px;
-  cursor: pointer;
-  margin-right: 5px;
-  line-height: 1;
-  padding: 0;
-  outline: none;
-}
-
-.addButton:focus {
-  outline: none;
-  box-shadow: none;
-}
-
-.addText {
-  color: #407bff;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.25;
-  margin-left: 5px;
-  vertical-align: middle;
-}
-.buttonContainer {
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
-  padding: 5px;
-}
-
 .scrollContainer {
   overflow-y: auto;
   flex: 1;
@@ -83,18 +35,7 @@
 }
 
 @media (min-width: 768px) {
-  .addText {
-    font-size: 18px;
-    line-height: 1.33;
-    margin-top: 5px;
-  }
-  .addButton {
-    font-size: 18px;
-  }
 }
 
 @media (min-width: 1440px) {
-  .addText {
-    margin-top: 3px;
-  }
 }

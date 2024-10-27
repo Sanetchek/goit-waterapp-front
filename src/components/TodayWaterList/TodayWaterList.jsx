@@ -1,13 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import * as selectors from '../../redux/water/selectors.js';
-import snippets from "../../assets/images/snippets.svg";
+import WaterListRow from './WaterListRow/WaterListRow';
 
 import styles from './TodayWaterList.module.css';
 
-import WaterListRow from './WaterListRow/WaterListRow';
-
-export default function TodayWaterList({ openModal }) {
+export default function TodayWaterList() {
   const todaysWaterList = useSelector(selectors.selectVisibleWaterNotes);
 
   return (
@@ -20,15 +18,6 @@ export default function TodayWaterList({ openModal }) {
             </li>
           ))}
         </ul>
-      </div>
-
-      <div className={styles.addButtonContainer}>
-        <button className={styles.addButton} onClick={openModal}>
-          <svg className={styles.icon} width="24" height="24">
-            <use href={`${snippets}#icon-plus`}></use>
-          </svg>
-          <span className={styles.addText}>Add water</span>
-        </button>
       </div>
     </div>
   );
