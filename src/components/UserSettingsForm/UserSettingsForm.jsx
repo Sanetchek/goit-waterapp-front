@@ -87,10 +87,15 @@ const UserSettingsForm = ({onclose}) => {
   const gender = watch('gender');
 
     const [showPassword, setShowPassword] = useState(false);
+    const [showNewPassword, setShowNewPassword] = useState(false);
     const [showRepeatPassword, setShowRepeatPassword] = useState(false);
 
     const togglePasswordVisibility = () => {
       setShowPassword(!showPassword);
+    };
+
+    const toggleNewPasswordVisibility = () => {
+      setShowNewPassword(!showNewPassword);
     };
 
     const toggleRepeatPasswordVisibility = () => {
@@ -236,18 +241,18 @@ const UserSettingsForm = ({onclose}) => {
         <div className={css.inputWrapper}>
           <input
           className={`${css.input} ${errors.password ? css.error : ''}`}
-          type={showPassword ? 'text' : 'password'}
+          type={showNewPassword ? 'text' : 'newPassword'}
           name="newPassword"
           placeholder="Password"
-          {...register('password')}
+          {...register('newPassword')}
           />
           <svg
           className={css.passwordToggleIcon}
-          onClick={togglePasswordVisibility}
+          onClick={toggleNewPasswordVisibility}
           width="20px"
           height="20px"
           >
-            <use xlinkHref={`${svg}#${showPassword ? 'icon-eye' : 'icon-eye-slash'}`} />
+            <use xlinkHref={`${svg}#${showNewPassword ? 'icon-eye' : 'icon-eye-slash'}`} />
           </svg>
         </div>
         {errors.password && <p className={css.errorMessage}>{errors.password.message}</p>}
@@ -258,7 +263,7 @@ const UserSettingsForm = ({onclose}) => {
         <div className={css.inputWrapper}>
           <input
           className={`${css.input} ${errors.repeatPassword ? css.error : ''}`}
-          type={showRepeatPassword ? 'text' : 'password'}
+          type={showRepeatPassword ? 'text' : 'repestPassword'}
           placeholder="Password"
           name="repeatPassword"
           {...register('repeatPassword')}
@@ -281,6 +286,7 @@ const UserSettingsForm = ({onclose}) => {
       <button
       className={`css.submitButton css.text`}
       type="submit"
+      onSubmit={updateUser}
       >
         Save
       </button>

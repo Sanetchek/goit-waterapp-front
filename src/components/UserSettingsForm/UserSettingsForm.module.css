@@ -165,12 +165,14 @@
   font-weight: 700;
 }
 
-.submitButton {
-  border-radius: 30px;
+button .submitButton {
+  display: flex;
+  border-radius: 10px;
+  border: 1px solid black;
   padding: 14px 40px;
   width: 116px;
   height: 46px;
-  background-color: #9be1a0;
+  background-color: #4050fe;
 
   font-weight: 700;
 
@@ -182,8 +184,7 @@
 }
 
 .submitButton:hover, .submitButton:focus {
-  /* background-color: #87D28D; */
-  box-shadow: inset 0 0 0 2em #87D28D;
+  box-shadow: inset 0 0 0 2em #ffffff;
 }
 
 .error {
