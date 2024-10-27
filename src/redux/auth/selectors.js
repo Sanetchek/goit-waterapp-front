@@ -20,10 +20,3 @@ export const selectUserSportTime = (state) => state.auth.user.sportTime;
 export const selectUserThemeColor = (state) => state.auth.user.themeColor;
 export const selectUserWeight = (state) => state.auth.user.weight;
 export const selectUserAvatar = (state) => state.auth.user.avatar;
-
-export const selectVisibleWaterNorm = createSelector(
-  [selectUserDailyNormWater],
-  (waterNorm) => {
-    return waterNorm != null ? waterNorm : 0;
-  }
-);
