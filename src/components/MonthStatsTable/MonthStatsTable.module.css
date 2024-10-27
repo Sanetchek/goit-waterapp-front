@@ -25,6 +25,7 @@
   color: #2f2f2f;
   text-align: left;
 }
+
 .loadingContainer {
   min-height: 500px;
   display: flex;
@@ -59,6 +60,7 @@
   display: flex;
   align-items: center;
 }
+
 .prevButton:focus,
 .nextButton:focus {
   outline: none;
@@ -82,41 +84,8 @@
   justify-items: center;
 }
 
-.dayItem {
-  cursor: pointer;
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  border: none;
-  border-radius: 50%;
-  text-align: center;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #2f2f2f;
-  background-color: #fff;
-}
-
-.calendarDay {
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1.29;
-  color: #2f2f2f;
-}
-
-.percentageText {
-  color: #9ebbff;
-  font-weight: 400;
-  font-size: 10px;
-  line-height: 1.6;
-}
-
-.dayWrapper {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.itemWrapper {
+  width: calc((100% - 104px) / 5);
 }
 
 @media (min-width: 768px) {
@@ -136,20 +105,28 @@
   .calendarContainer {
     justify-content: center;
   }
+
   .selectedDay {
     font-size: 26px;
     line-height: 1.23;
   }
+
   .calendarDay {
     font-size: 16px;
     line-height: 1.25;
   }
+
   .percentageText {
     font-size: 13px;
     line-height: 1.54;
   }
+
   .loadingContainer {
     min-height: 300px;
+  }
+
+  .itemWrapper {
+    width: calc((100% - 216px) / 10);
   }
 }
 
@@ -157,106 +134,5 @@
   .daysList {
     justify-content: space-between;
     gap: 22px 22px;
-  }
-}
-
-.dayItem {
-  cursor: pointer;
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  border-radius: 50%;
-  text-align: center;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #2f2f2f;
-  background-color: #fff;
-  border: 2px solid transparent;
-}
-
-.lowPercentage {
-  border: 2px solid #ff9d43;
-}
-
-.fullPercentage {
-  border: 2px solid #ffffff;
-}
-
-.percentageText {
-  margin-top: 4px;
-  margin-bottom: 0;
-}
-
-.zeroPercentage {
-  border: 2px solid #ffffff;
-}
-
-.popup {
-  position: absolute;
-  top: -190px;
-  left: -8px;
-  /* default position */
-}
-
-.dayWrapper:nth-child(5n + 2) .popup {
-  left: -65px;
-}
-
-.dayWrapper:nth-child(5n + 3) .popup {
-  left: -124px;
-}
-
-.dayWrapper:nth-child(5n + 4) .popup {
-  left: -182px;
-}
-
-.dayWrapper:nth-child(5n + 5) .popup {
-  left: -240px;
-}
-
-
-@media screen and (min-width: 768px) {
-  .dayWrapper:nth-child(12n + 1) .popup {
-      left: -20px;
-    }
-  
-    .dayWrapper:nth-child(12n + 2) .popup {
-      left: -77px;
-    }
-
-    .dayWrapper:nth-child(12n + 10) .popup {
-    left: -130px;
-  }
-
-  .dayWrapper:nth-child(12n + 11) .popup {
-    left: -187px;
-  }
-
-  .dayWrapper:nth-child(12n + 12) .popup {
-    left: -244px;
-  }
-}
-
-@media screen and (min-width: 1440px) {
-.dayWrapper:nth-child(10n + 1) .popup {
-    left: -20px;
-  }
-
-  .dayWrapper:nth-child(10n + 2) .popup {
-    left: -77px;
-  }
-
-  .dayWrapper:nth-child(10n + 8) .popup {
-    left: -130px;
-  }
-
-  .dayWrapper:nth-child(10n + 9) .popup {
-    left: -187px;
-  }
-
-  .dayWrapper:nth-child(10n + 10) .popup {
-    left: -244px;
   }
 }

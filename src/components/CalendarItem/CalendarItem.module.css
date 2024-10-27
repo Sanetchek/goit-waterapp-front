@@ -1,0 +1,59 @@
+.dayWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dayItem {
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2f2f2f;
+  background-color: #fff;
+}
+
+.lowPercentage {
+  border: 2px solid #ff9d43;
+}
+
+.fullPercentage {
+  border: 2px solid #ffffff;
+}
+
+.percentageText {
+  margin-top: 4px;
+  margin-bottom: 0;
+}
+
+.zeroPercentage {
+  border: 2px solid #ffffff;
+}
+
+.calendarDay {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.29;
+  color: #2f2f2f;
+}
+
+.percentageText {
+  color: #9ebbff;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.popup {
+  position: absolute;
+  top: -190px;
+  left: -8px;
+}

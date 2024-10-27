@@ -7,14 +7,13 @@ import Loading from '../Loading/Loading';
 import snippets from '../../assets/images/snippets.svg';
 import styles from './WaterListWithCalendar.module.css';
 
-const WaterListWithCalendar = ({
-  waterConsumed,
-  userDailyNormWater,
-  openModal,
-}) => {
+const WaterListWithCalendar = ({ openModal }) => {
   const waterIsLoading = useSelector(waterSelectors.selectIsLoading);
   const waterIsError = useSelector(waterSelectors.selectError);
   const waterNotes = useSelector(waterSelectors.selectTodaysWaterNotes) || [];
+  const monthlyConsumption =
+    useSelector(waterSelectors.selectMonthlyWaterData) || [];
+  const monthlyWaterlist = monthlyConsumption?.data || [];
 
   return (
     <div className={styles.container}>
@@ -54,10 +53,13 @@ const WaterListWithCalendar = ({
         )}
       </div>
       <div className={styles.calendar}>
-        <MonthStatsTable
-          waterConsumed={waterConsumed}
-          dailyNorm={userDailyNormWater}
-        />
+        {waterIsLoading && <Loading />}
+        {!waterIsLoading && waterIsError && (
+          <div className={styles.error}>Error loading water data</div>
+        )}
+        {!waterIsLoading && !waterIsError && monthlyWaterlist.length > 0 && (
+          <MonthStatsTable monthlyWaterlist={monthlyWaterlist} />
+        )}
       </div>
     </div>
   );
