@@ -241,7 +241,7 @@ const UserSettingsForm = ({onclose}) => {
         <div className={css.inputWrapper}>
           <input
           className={`${css.input} ${errors.password ? css.error : ''}`}
-          type={showNewPassword ? 'text' : 'newPassword'}
+          type={showNewPassword ? 'text' : 'password'}
           name="newPassword"
           placeholder="Password"
           {...register('newPassword')}
@@ -263,7 +263,7 @@ const UserSettingsForm = ({onclose}) => {
         <div className={css.inputWrapper}>
           <input
           className={`${css.input} ${errors.repeatPassword ? css.error : ''}`}
-          type={showRepeatPassword ? 'text' : 'repestPassword'}
+          type={showRepeatPassword ? 'text' : 'password'}
           placeholder="Password"
           name="repeatPassword"
           {...register('repeatPassword')}
@@ -280,16 +280,17 @@ const UserSettingsForm = ({onclose}) => {
           <p className={css.errorMessage}>{errors.repeatPassword.message}</p>
         )}
       </div>
-      </div>
-      </div>
 
+      </div>
+      </div>
       <button
-      className={`css.submitButton css.text`}
-      type="submit"
-      onSubmit={updateUser}
+        className={`css.submitButton css.text`}
+        type="submit"
+        onSubmit={handleSubmit}
       >
         Save
       </button>
+
     </form>
   );
 };

@@ -165,14 +165,17 @@
   font-weight: 700;
 }
 
-button .submitButton {
-  display: flex;
+.submitButton {
+  position: relative;
+  right: 40px;
+  bottom: 40px;
+  display: flex !important;
   border-radius: 10px;
-  border: 1px solid black;
+  border: 1px solid black !important;
   padding: 14px 40px;
   width: 116px;
   height: 46px;
-  background-color: #4050fe;
+  background-color: #4050fe !important;
 
   font-weight: 700;
 
@@ -254,6 +257,8 @@ button .submitButton {
   padding-top: 8px;
 }
 .submitButton {
+  margin-top: 24px;
+  align-self: end;
   border-radius: 30px;
   padding: 16px 129px;
   width: 311px;
@@ -264,8 +269,6 @@ button .submitButton {
   line-height: 129%;
   letter-spacing: -0.01em;
   color: #323f47;
-  display: flex;
-  justify-content: center;
 }
 .submitButton:hover,
 .submitButton:focus {
