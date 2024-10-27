@@ -7,6 +7,7 @@
   box-shadow: 0px 4px 8px rgba(236, 242, 255, 0.8);
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .todayText {
@@ -22,7 +23,52 @@
 .waterList {
   margin-bottom: 24px;
 }
+.addButtonContainer {
+  display: flex;
+  align-items: center;
+}
 
+.icon {
+  fill: #407bff;
+}
+
+.addButton {
+  display: inline-flex;
+  align-items: center;
+  border: none;
+  background: none;
+  color: #407bff;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 5px;
+  line-height: 1;
+  padding: 0;
+  outline: none;
+}
+
+.addButton:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.addText {
+  color: #407bff;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.25;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+
+.emptyContainer {
+  height: 200px;
+}
+.buttonContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  padding: 5px;
+}
 @media (min-width: 768px) {
   .container {
     max-width: 704px;
@@ -34,11 +80,22 @@
     font-size: 26px;
     margin-bottom: 16px;
   }
+  .addText {
+    font-size: 18px;
+    line-height: 1.33;
+    margin-top: 5px;
+  }
+  .addButton {
+    font-size: 18px;
+  }
 }
 
 @media (min-width: 1440px) {
   .container {
     max-width: 592px;
     border-radius: 20px;
+  }
+  .addText {
+    margin-top: 3px;
   }
 }

@@ -9,6 +9,32 @@ body {
   background-color: transparent !important;
 }
 
+/* Scroll Bar Style */
+
+/* width */
+*::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+*::-webkit-scrollbar-thumb {
+  background: rgba(136, 136, 136, 0.5);
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(85, 85, 85, 0.9);
+}
+
+/* End of Scroll Bar Style */
+
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

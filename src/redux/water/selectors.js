@@ -18,6 +18,8 @@ export const selectTodaysWaterPercentage = state => state.water.today.percentage
 
 export const selectTodaysWaterAmount = state => state.water.today.totalAmount;
 
+export const selectMonthlyWaterData = state => state.water.monthlyConsumption;
+
 export const selectVisibleWaterNotes = createSelector(
   [selectTodaysWaterNotes],
   (notes) => {

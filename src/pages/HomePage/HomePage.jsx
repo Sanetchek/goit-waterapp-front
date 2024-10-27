@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react';
 import DailyNorma from '../../components/DailyNorma/DailyNorma.jsx';
 import WaterRatioPanel from '../../components/WaterRatioPanel/WaterRatioPanel.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchTodayWaterConsumption } from '../../redux/water/operations';
-import { addWaterVolume } from '../../redux/water/operations.js';
+import {
+  fetchTodayWaterConsumption,
+  fetchMonthlyWaterConsumption,
+  addWaterVolume,
+} from '../../redux/water/operations';
 import * as selectors from '../../redux/auth/selectors.js';
 
 import css from './HomePage.module.css';
@@ -19,25 +22,28 @@ import WaterListWithCalendar from '../../components/WaterListWithCalendar/WaterL
 import Modal from 'components/Modal/Modal.jsx';
 import TodayListModal from 'components/TodayListModal/TodayListModal.jsx';
 import clsx from 'clsx';
-
-const DAY_COUNT = 31;
+import { getUser } from '../../redux/user/operations.js';
 
 export default function HomePage() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.getMonth() + 1;
   const userAuthLoading = useSelector(selectors.selectAuthLoading);
   const userAuthError = useSelector(selectors.selectAuthError);
-  const userDailyNormWater = useSelector(selectors.selectUserDailyNormWater);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(getUser());
     dispatch(fetchTodayWaterConsumption());
-  }, [dispatch]);
+    dispatch(fetchMonthlyWaterConsumption({ year, month }));
+  }, [dispatch, year, month]);
 
   const containerClass = clsx(css.homeContainer, css.pageBackground);
   const contentClass = clsx('mainContainer', css.container);
 
   // Modal state and handlers
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [waterConsumed, setWaterConsumed] = useState(Array(DAY_COUNT).fill(0));
 
   const toggleModal = setModalOpen => () => {
     setModalOpen(prev => !prev);
@@ -83,17 +89,11 @@ export default function HomePage() {
             </picture>
           </div>
           {!userAuthLoading && !userAuthError && (
-            <WaterRatioPanel
-              openModal={toggleModal(setIsModalOpen)}
-            />
+            <WaterRatioPanel openModal={toggleModal(setIsModalOpen)} />
           )}
         </div>
         {!userAuthLoading && !userAuthError && (
-          <WaterListWithCalendar
-            userDailyNormWater={userDailyNormWater}
-            waterConsumed={waterConsumed}
-            openModal={toggleModal(setIsModalOpen)}
-          />
+          <WaterListWithCalendar openModal={toggleModal(setIsModalOpen)} />
         )}
       </div>
       {renderModal()}

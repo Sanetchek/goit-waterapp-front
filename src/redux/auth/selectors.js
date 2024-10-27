@@ -1,5 +1,3 @@
-import { createSelector } from "@reduxjs/toolkit";
-
 export const selectIsAuthenticated = state => state.auth.isLoggedIn;
 
 export const selectIsRefreshing = state => state.auth.isRefreshing;
