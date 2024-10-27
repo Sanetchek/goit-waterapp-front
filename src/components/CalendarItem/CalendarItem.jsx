@@ -13,25 +13,37 @@ export default function CalendarItem({ dayObject, onPopupToggle, isActive }) {
   });
 
   const popupRef = useRef(null);
-  const [popupStyle, setPopupStyle] = useState({});
+  const [popupStyle, setPopupStyle] = useState({
+    left: '50%', // Start centered
+    transform: 'translateX(-50%)', // Center the popup horizontally
+  });
 
   useEffect(() => {
     if (isActive && popupRef.current) {
-      const popupRect = popupRef.current.getBoundingClientRect();
-      const screenWidth = window.innerWidth;
+      // Use setTimeout to ensure the popup is fully rendered
+      setTimeout(() => {
+        const popupWidth = popupRef.current.getBoundingClientRect().width;
+        const popupRect = popupRef.current.getBoundingClientRect();
+        const screenWidth = window.innerWidth;
 
-      // Determine space on the left and right of the popup
-      const spaceOnLeft = popupRect.left;
-      const spaceOnRight = screenWidth - popupRect.right;
+        // Determine space on the left and right of the popup
+        const spaceOnLeft = popupRect.left;
+        const spaceOnRight = screenWidth - popupRect.right;
 
-      // Calculate the popup's new position
-      if (spaceOnRight < popupRect.width && spaceOnLeft >= popupRect.width) {
-        // Move to the left if there's not enough space on the right
-        setPopupStyle({ left: `${popupRect.width}px`, right: 'unset' }); // Adjust based on your needs
-      } else {
-        // Default position
-        setPopupStyle({ right: '8px', left: 'unset' });
-      }
+        if (spaceOnLeft < 0) {
+          console.log(1);
+          setPopupStyle({ left: '-20px', right: 'unset' });
+        } else if (spaceOnRight < 0) {
+          console.log(2);
+          setPopupStyle({ left: 'unset', right: '-20px' });
+        } else if (spaceOnRight < popupWidth && spaceOnLeft >= popupWidth) {
+          console.log(3);
+          setPopupStyle({ left: 'unset', right: '8px' });
+        } else if (spaceOnLeft < popupWidth && spaceOnRight >= popupWidth) {
+          console.log(4);
+          setPopupStyle({ left: '8px', right: 'unset' });
+        }
+      }, 0); // Set timeout to ensure DOM updates
     }
   }, [isActive]);
 
@@ -46,7 +58,7 @@ export default function CalendarItem({ dayObject, onPopupToggle, isActive }) {
         <div
           ref={popupRef}
           className={css.popup}
-          style={{ ...popupStyle, position: 'absolute', top: '-190px' }} // Top position can be adjusted as needed
+          style={{ ...popupStyle }} // Adjust top position as needed
           onClick={e => e.stopPropagation()}
         >
           <DaysGeneralStats selectedDayData={dayObject} />
