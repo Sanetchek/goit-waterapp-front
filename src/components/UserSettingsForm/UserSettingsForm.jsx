@@ -98,6 +98,10 @@ const UserSettingsForm = ({onclose}) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      <div className={css.settingsWrapper}>
+      <div className={css.userWrapper}>
+
+        <p className={css.imageTitle}>Your Photo</p>
       <div className={css.imageWrapper}>
         <div className={css.imageContainer}>
           <img className={css.image} src={preview} alt="User avatar" width="75" height="75" />
@@ -133,7 +137,7 @@ const UserSettingsForm = ({onclose}) => {
               {errors.gender && <p className={css.error}>{errors.gender.message}</p>}
               <span className={css.iconWrapper}>
                 <svg className={css.radioIcon} width="18" height="18">
-                  <use xlinkHref={`${svg}#icon-checkbox-${
+                  <use xlinkHref={`${svg}#icon-circle${
                     gender === 'man' ? 'checked' : 'unchecked'
                   }`}></use>
                 </svg>
@@ -151,7 +155,7 @@ const UserSettingsForm = ({onclose}) => {
                   Your name
                 </label>
                 <input
-                className={`css.userInput css.text errors.name ? css.error : ''`}
+                className={`${css.userInput} ${css.userSettings} ${css.text} ${errors.name ? css.error : ''}`}
                 type="text"
                 name="name"
                 id="name"
@@ -166,7 +170,7 @@ const UserSettingsForm = ({onclose}) => {
                   Email
                 </label>
                 <input
-                className={`${css.userInput} ${css.text} ${errors.email ? css.error : ''}`}
+                className={`${css.userInput} ${css.userSettings} ${css.text} ${errors.email ? css.error : ''}`}
                 type="text"
                 name="email"
                 id="email"
@@ -179,8 +183,10 @@ const UserSettingsForm = ({onclose}) => {
           </div>
         </div>
       </div>
+      </div>
 
-      <h2 className={css.header}>Password</h2>
+      <div className={css.passwordWrapper}>
+      <h2 className={css.passwordTitle}>Password</h2>
 
       <div className={css.formGroupPassword}>
         <label className={css.label}>Outdated password:</label>
@@ -189,7 +195,7 @@ const UserSettingsForm = ({onclose}) => {
           className={`${css.input} ${errors.password ? css.error : ''}`}
           type={showPassword ? 'text' : 'password'}
           nanme="outdatedPassword"
-          placeholder="Enter your password"
+          placeholder="Password"
           {...register('password')}
           />
           <svg className={css.passwordToggleIcon}
@@ -210,7 +216,7 @@ const UserSettingsForm = ({onclose}) => {
           className={`${css.input} ${errors.password ? css.error : ''}`}
           type={showPassword ? 'text' : 'password'}
           name="newPassword"
-          placeholder="Enter new password"
+          placeholder="Password"
           {...register('password')}
           />
           <svg
@@ -231,7 +237,7 @@ const UserSettingsForm = ({onclose}) => {
           <input
           className={`${css.input} ${errors.repeatPassword ? css.error : ''}`}
           type={showRepeatPassword ? 'text' : 'password'}
-          placeholder="Repeat new password"
+          placeholder="Password"
           name="repeatPassword"
           {...register('repeatPassword')}
           />
@@ -246,6 +252,8 @@ const UserSettingsForm = ({onclose}) => {
         {errors.repeatPassword && (
           <p className={css.errorMessage}>{errors.repeatPassword.message}</p>
         )}
+      </div>
+      </div>
       </div>
 
       <button
