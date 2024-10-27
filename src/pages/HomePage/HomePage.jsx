@@ -34,7 +34,6 @@ export default function HomePage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getUser());
     dispatch(fetchTodayWaterConsumption());
     dispatch(fetchMonthlyWaterConsumption({ year, month }));
   }, [dispatch, year, month]);
