@@ -8,6 +8,7 @@ import { selectUser, selectUserAvatar } from "../../redux/auth/selectors";
 import css from './UserSettingsForm.module.css';
 import svg from '../../assets/images/snippets.svg';
 import { updateUser } from "../../redux/user/operations";
+import image from '../../assets/images/grey.jpg'
 
 const UserSettingsForm = ({onclose}) => {
   const dispatch = useDispatch();
@@ -22,6 +23,8 @@ const UserSettingsForm = ({onclose}) => {
   useEffect(() => {
     if (currentAvatar) {
       setPreview(currentAvatar);
+    } else {
+      setPreview(image);
     }
   }, [currentAvatar]);
 
@@ -84,10 +87,15 @@ const UserSettingsForm = ({onclose}) => {
   const gender = watch('gender');
 
     const [showPassword, setShowPassword] = useState(false);
+    const [showNewPassword, setShowNewPassword] = useState(false);
     const [showRepeatPassword, setShowRepeatPassword] = useState(false);
 
     const togglePasswordVisibility = () => {
       setShowPassword(!showPassword);
+    };
+
+    const toggleNewPasswordVisibility = () => {
+      setShowNewPassword(!showNewPassword);
     };
 
     const toggleRepeatPasswordVisibility = () => {
@@ -131,18 +139,37 @@ const UserSettingsForm = ({onclose}) => {
               className={css.genderInput}
               type="radio"
               name="gender"
+              value="man"
+              {...register('gender')}
+              />
+              {errors.gender && <p className={css.error}>{errors.gender.message}</p>}
+              <span className={css.iconWrapper}>
+                <svg className={css.radioIcon} width="18" height="18">
+                  <use xlinkHref={`${svg}#icon-plus-circle${
+                    gender === 'man' ? 'checked' : 'unchecked'
+                  }`}></use>
+                </svg>
+              </span>
+              Man
+            </label>
+
+            <label className={`${css.genderButton} ${css.text}`}>
+              <input
+              className={css.genderInput}
+              type="radio"
+              name="gender"
               value="woman"
               {...register('gender')}
               />
               {errors.gender && <p className={css.error}>{errors.gender.message}</p>}
               <span className={css.iconWrapper}>
                 <svg className={css.radioIcon} width="18" height="18">
-                  <use xlinkHref={`${svg}#icon-circle${
-                    gender === 'man' ? 'checked' : 'unchecked'
+                  <use xlinkHref={`${svg}#icon-plus-circle${
+                    gender === 'woman' ? 'checked' : 'unchecked'
                   }`}></use>
                 </svg>
               </span>
-              Man
+              Woman
             </label>
           </div>
         </div>
@@ -214,18 +241,18 @@ const UserSettingsForm = ({onclose}) => {
         <div className={css.inputWrapper}>
           <input
           className={`${css.input} ${errors.password ? css.error : ''}`}
-          type={showPassword ? 'text' : 'password'}
+          type={showNewPassword ? 'text' : 'newPassword'}
           name="newPassword"
           placeholder="Password"
-          {...register('password')}
+          {...register('newPassword')}
           />
           <svg
           className={css.passwordToggleIcon}
-          onClick={togglePasswordVisibility}
+          onClick={toggleNewPasswordVisibility}
           width="20px"
           height="20px"
           >
-            <use xlinkHref={`${svg}#${showPassword ? 'icon-eye' : 'icon-eye-slash'}`} />
+            <use xlinkHref={`${svg}#${showNewPassword ? 'icon-eye' : 'icon-eye-slash'}`} />
           </svg>
         </div>
         {errors.password && <p className={css.errorMessage}>{errors.password.message}</p>}
@@ -236,7 +263,7 @@ const UserSettingsForm = ({onclose}) => {
         <div className={css.inputWrapper}>
           <input
           className={`${css.input} ${errors.repeatPassword ? css.error : ''}`}
-          type={showRepeatPassword ? 'text' : 'password'}
+          type={showRepeatPassword ? 'text' : 'repestPassword'}
           placeholder="Password"
           name="repeatPassword"
           {...register('repeatPassword')}
@@ -259,6 +286,7 @@ const UserSettingsForm = ({onclose}) => {
       <button
       className={`css.submitButton css.text`}
       type="submit"
+      onSubmit={updateUser}
       >
         Save
       </button>

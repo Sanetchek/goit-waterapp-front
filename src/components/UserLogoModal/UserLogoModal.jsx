@@ -6,6 +6,7 @@ import UserSettingsModal from 'components/UserSettingsModal/UserSettingsModal.js
 
 const UserLogoModal = ({ onClose }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   // const handleDelete = () => {
   //   console.log("Entry deleted");
   //   setIsModalOpen(false);
@@ -15,7 +16,7 @@ const UserLogoModal = ({ onClose }) => {
   return (
     <div className={css.dropdownMenu}>
       <ul className={css.listCon}>
-        <li className={css.menuItem} onClick={() => setIsModalOpen(true)}>
+        <li className={css.menuItem} onClick={() => setModalOpen(true)}>
           <svg className={css.icon} width="16" height="16" viewBox="0 0 24 24">
             <use href={`${snippets}#icon-settings`}></use>
           </svg>
@@ -28,8 +29,8 @@ const UserLogoModal = ({ onClose }) => {
           Log out
         </li>
       </ul>
-      {isModalOpen && (
-        <UserSettingsModal onClose={() => setIsModalOpen(false)} />
+      {modalOpen && (
+        <UserSettingsModal onClose={() => setModalOpen(false)} />
       )}
       {isModalOpen && (
         <UserLogoutModal onClose={() => setIsModalOpen(false)} />
