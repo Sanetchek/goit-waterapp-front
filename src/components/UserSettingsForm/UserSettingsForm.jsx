@@ -131,18 +131,37 @@ const UserSettingsForm = ({onclose}) => {
               className={css.genderInput}
               type="radio"
               name="gender"
+              value="man"
+              {...register('gender')}
+              />
+              {errors.gender && <p className={css.error}>{errors.gender.message}</p>}
+              <span className={css.iconWrapper}>
+                <svg className={css.radioIcon} width="18" height="18">
+                  <use xlinkHref={`${svg}#icon-plus-circle${
+                    gender === 'man' ? 'checked' : 'unchecked'
+                  }`}></use>
+                </svg>
+              </span>
+              Man
+            </label>
+
+            <label className={`${css.genderButton} ${css.text}`}>
+              <input
+              className={css.genderInput}
+              type="radio"
+              name="gender"
               value="woman"
               {...register('gender')}
               />
               {errors.gender && <p className={css.error}>{errors.gender.message}</p>}
               <span className={css.iconWrapper}>
                 <svg className={css.radioIcon} width="18" height="18">
-                  <use xlinkHref={`${svg}#icon-circle${
-                    gender === 'man' ? 'checked' : 'unchecked'
+                  <use xlinkHref={`${svg}#icon-plus-circle${
+                    gender === 'woman' ? 'checked' : 'unchecked'
                   }`}></use>
                 </svg>
               </span>
-              Man
+              Woman
             </label>
           </div>
         </div>
