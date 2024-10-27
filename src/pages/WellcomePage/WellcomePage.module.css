@@ -25,10 +25,23 @@
     background-image: url('../../../public/images/Main-imgs/Main-bg-mobile@2x.png');
   }
 }
+@media screen and (min-width: 439px) {
+  .mainContainer {
+    margin-left: auto;
+    margin-right: auto;
+    width: 439px;
+  }
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .mainContainer {
+    background-image: url('../../../public/images/Main-imgs/Main-bg-mobile@2x.png');
+  }
+}
 
 @media screen and (min-width: 768px) {
   .mainContainer {
     min-width: 768px;
+    width: 100%;
 
     padding-left: 32px;
     padding-right: 32px;
