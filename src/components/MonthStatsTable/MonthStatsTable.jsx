@@ -1,114 +1,67 @@
 import { useState, useEffect } from 'react';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
-import styles from './MonthStatsTable.module.css';
-import clsx from 'clsx';
-import Loading from '../Loading/Loading';
+import css from './MonthStatsTable.module.css';
+import { useDispatch } from 'react-redux';
+import { fetchMonthlyWaterConsumption } from '../../redux/water/operations';
+
 import DaysGeneralStats from '../DaysGeneralStats/DaysGeneralStats';
+import CalendarItem from '../CalendarItem/CalendarItem';
 
-const MonthStatsTable = ({ waterConsumed, dailyNorm = 1500 }) => {
-  const today = new Date();
-  const [currentYear, setCurrentYear] = useState(today.getFullYear());
-  const [currentMonth, setCurrentMonth] = useState(today.getMonth());
-  const [currentMonthData, setCurrentMonthData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [selectedDayId, setSelectedDayId] = useState(null);
+const MonthStatsTable = ({ monthlyWaterlist }) => {
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    setIsLoading(true);
-    fetchDataForMonth(currentYear, currentMonth, waterConsumed, dailyNorm);
-  }, [currentYear, currentMonth, waterConsumed, dailyNorm]);
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
+  const [activePopup, setActivePopup] = useState(null);
 
-  const fetchDataForMonth = (year, month, consumed, norm) => {
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-    const data = Array.from({ length: daysInMonth }, (_, i) => {
-      const dayWaterConsumption = consumed[i] || 0;
-      const percentage = Math.min(
-        Math.round((dayWaterConsumption / norm) * 100),
-        100
-      );
-
-      // console.log(
-      //   `Day: ${
-      //     i + 1
-      //   }, Water Consumed: ${dayWaterConsumption}, Daily Norm: ${norm}, Percentage: ${percentage}`
-      // );
-
-      return {
-        id: i + 1,
-        percentage,
-        date: `${i + 1}/${month + 1}/${year}`,
-        servings: Math.floor(dayWaterConsumption / 250),
-      };
-    });
-
-    setCurrentMonthData(data);
-    setIsLoading(false);
+  const handlePopupToggle = dayObject => {
+    setActivePopup(prev => (prev === dayObject ? null : dayObject));
   };
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     await dispatch(
+  //       fetchMonthlyWaterConsumption({ year: currentYear, month: currentMonth })
+  //     );
+  //   };
+
+  //   fetchData();
+  // }, [dispatch, currentYear, currentMonth]);
 
   const handlePrevMonth = () => {
     setCurrentMonth(prev => {
       const newMonth = prev === 0 ? 11 : prev - 1;
-      if (prev === 0) setCurrentYear(yearPrev => yearPrev - 1);
+      if (prev === 0) setCurrentYear(year => year - 1);
       return newMonth;
     });
   };
 
   const handleNextMonth = () => {
-    if (
-      currentYear < today.getFullYear() ||
-      (currentYear === today.getFullYear() && currentMonth < today.getMonth())
-    ) {
-      setCurrentMonth(prev => {
-        const newMonth = prev === 11 ? 0 : prev + 1;
-        if (prev === 11) setCurrentYear(yearPrev => yearPrev + 1);
-        return newMonth;
-      });
-    }
-  };
-
-  const handleDayClick = dayId => {
-    const selectedDayData = currentMonthData.find(day => day.id === dayId);
-
-    if (selectedDayId?.dayId === dayId) {
-      setSelectedDayId(null);
-    } else {
-      const dayNumber = selectedDayData.id; // Assuming this is what you meant
-      const monthName = new Date(currentYear, currentMonth).toLocaleString(
-        'en-US',
-        {
-          month: 'long',
-        }
-      );
-
-      setSelectedDayId({
-        dayId,
-        dayNumber, // Now defined
-        monthName, // Now defined
-        dailyNorm: selectedDayData.dailyNorm,
-        percentage: selectedDayData.percentage,
-        servings: selectedDayData.servings,
-      });
-    }
+    setCurrentMonth(prev => {
+      const newMonth = prev === 11 ? 0 : prev + 1;
+      if (prev === 11) setCurrentYear(year => year + 1);
+      return newMonth;
+    });
   };
 
   return (
     <>
-      <div className={styles.navigation}>
-        <h3 className={styles.selectedDay}>Month</h3>
-        <div className={styles.monthYear}>
-          <button className={styles.prevButton} onClick={handlePrevMonth}>
+      <div className={css.navigation}>
+        <h3 className={css.selectedDay}>Month</h3>
+        <div className={css.monthYear}>
+          <button className={css.prevButton} onClick={handlePrevMonth}>
             <IoIosArrowBack />
           </button>
-          <p className={styles.month}>
+          <p className={css.month}>
             {new Date(currentYear, currentMonth).toLocaleString('en-US', {
               month: 'long',
             })}
           </p>
-          <p className={styles.year}>{currentYear}</p>
-          {currentYear < today.getFullYear() ||
-          (currentYear === today.getFullYear() &&
-            currentMonth < today.getMonth()) ? (
-            <button className={styles.nextButton} onClick={handleNextMonth}>
+          <p className={css.year}>{currentYear}</p>
+          {currentYear < new Date().getFullYear() ||
+          (currentYear === new Date().getFullYear() &&
+            currentMonth < new Date().getMonth()) ? (
+            <button className={css.nextButton} onClick={handleNextMonth}>
               <IoIosArrowForward />
             </button>
           ) : (
@@ -117,43 +70,20 @@ const MonthStatsTable = ({ waterConsumed, dailyNorm = 1500 }) => {
         </div>
       </div>
 
-      <div className={styles.calendarContainer}>
-        <div
-          className={clsx(styles.containerDay, {
-            [styles.loadingContainer]: isLoading,
-          })}
-        >
-          {isLoading ? (
-            <Loading />
-          ) : (
-            <ul className={styles.daysList}>
-              {currentMonthData.map(day => {
-                const circleClass = clsx(styles.dayItem, {
-                  [styles.lowPercentage]:
-                    day.percentage > 0 && day.percentage < 100,
-                  [styles.fullPercentage]: day.percentage >= 100,
-                  [styles.zeroPercentage]: day.percentage === 0,
-                });
-                return (
-                  <li
-                    key={day.id}
-                    className={styles.dayWrapper}
-                    onClick={() => handleDayClick(day.id)}
-                  >
-                    <div className={circleClass}>
-                      <p className={styles.calendarDay}>{day.id}</p>
-                    </div>
-                    <p className={styles.percentageText}>{day.percentage}%</p>
-                    <div className={styles.popup}>
-                    {selectedDayId && selectedDayId.dayId === day.id && (
-                      <DaysGeneralStats selectedDayData={selectedDayId} />
-                      )}
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-          )}
+      <div className={css.calendarContainer}>
+        <div className={css.containerDay}>
+          <ul className={css.daysList}>
+            {monthlyWaterlist.length > 0 &&
+              monthlyWaterlist.map(day => (
+                <li className={css.itemWrapper} key={day.key}>
+                  <CalendarItem
+                    dayObject={day}
+                    onPopupToggle={handlePopupToggle}
+                    isActive={activePopup === day}
+                  />
+                </li>
+              ))}
+          </ul>
         </div>
       </div>
     </>
