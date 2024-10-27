@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useSelector } from 'react-redux';
-import * as selectors from '../../redux/auth/selectors.js';
+import * as selectors from '../../redux/water/selectors.js';
 import css from './TodayListModal.module.css';
 import snippet from '../../assets/images/snippets.svg';
 
@@ -12,8 +12,18 @@ function getAmPm(time) {
 
 function getCurrentTime() {
   const date = new Date();
-  const minutes = Math.round(date.getMinutes() / 5) * 5;
-  return `${date.getHours()}:${minutes < 10 ? `0${minutes}` : minutes}`;
+  let minutes = Math.round(date.getMinutes() / 5) * 5;
+
+  // Check if rounding minutes goes up to 60
+  if (minutes === 60) {
+    minutes = 0; // Reset minutes to 0
+    date.setHours(date.getHours() + 1); // Increment the hour
+  }
+
+  const hours = date.getHours();
+  return `${hours < 10 ? `0${hours}` : hours}:${
+    minutes < 10 ? `0${minutes}` : minutes
+  }`;
 }
 
 const generateTimeOptions = () => {
@@ -29,7 +39,7 @@ const generateTimeOptions = () => {
 };
 
 const TodayListModal = ({ title = '', onSave, previousWaterData }) => {
-  const userDailyNormWater = useSelector(selectors.selectVisibleWaterNorm);
+  const userDailyNormWater = useSelector(selectors.selectTodaysWaterDailyNorm);
   const initialWaterAmount = previousWaterData ? previousWaterData.amount : 0;
   const initialTime = previousWaterData ? previousWaterData.time : getCurrentTime();
 
