@@ -8,6 +8,7 @@ import { selectUser, selectUserAvatar } from "../../redux/auth/selectors";
 import css from './UserSettingsForm.module.css';
 import svg from '../../assets/images/snippets.svg';
 import { updateUser } from "../../redux/user/operations";
+import image from '../../assets/images/grey.jpg'
 
 const UserSettingsForm = ({onclose}) => {
   const dispatch = useDispatch();
@@ -22,6 +23,8 @@ const UserSettingsForm = ({onclose}) => {
   useEffect(() => {
     if (currentAvatar) {
       setPreview(currentAvatar);
+    } else {
+      setPreview(image);
     }
   }, [currentAvatar]);
 
