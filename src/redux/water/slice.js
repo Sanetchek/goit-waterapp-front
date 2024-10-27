@@ -127,7 +127,6 @@ const waterSlice = createSlice({
         const updatedNote = action.payload.data;
         const {
           _id,
-          amount,
           dailyNorm
         } = updatedNote;
 

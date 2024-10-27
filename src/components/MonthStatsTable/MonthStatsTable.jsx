@@ -1,20 +1,20 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState } from 'react';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import css from './MonthStatsTable.module.css';
-import { useDispatch } from 'react-redux';
-import { fetchMonthlyWaterConsumption } from '../../redux/water/operations';
+// import { useDispatch } from 'react-redux';
+// import { fetchMonthlyWaterConsumption } from '../../redux/water/operations';
 
-import DaysGeneralStats from '../DaysGeneralStats/DaysGeneralStats';
+// import DaysGeneralStats from '../DaysGeneralStats/DaysGeneralStats';
 import CalendarItem from '../CalendarItem/CalendarItem';
 
 const MonthStatsTable = ({ monthlyWaterlist }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const date = new Date();
 
   const [currentYear, setCurrentYear] = useState(date.getFullYear());
   const [currentMonth, setCurrentMonth] = useState(date.getMonth()+1);
   const [activePopup, setActivePopup] = useState(null);
-  const [fetched, setFetched] = useState(false);
+  // const [fetched, setFetched] = useState(false);
 
   const handlePopupToggle = dayObject => {
     setActivePopup(prev => (prev === dayObject ? null : dayObject));
@@ -38,16 +38,16 @@ const MonthStatsTable = ({ monthlyWaterlist }) => {
     });
   };
 
-//   useEffect(() => {
-//   const dataExists =
-//     monthlyWaterlist?.year === currentYear &&
-//     monthlyWaterlist?.month === currentMonth;
+  // useEffect(() => {
+  //   const dataExists =
+  //     monthlyWaterlist?.year === currentYear &&
+  //     monthlyWaterlist?.month === currentMonth;
 
-//   if (!dataExists) {
-//     console.log("Fetching data for year:", currentYear, "month:", currentMonth);
-//     dispatch(fetchMonthlyWaterConsumption({ year: currentYear, month: currentMonth }));
-//   }
-// }, [dispatch, currentYear, currentMonth, monthlyWaterlist]);
+  //   if (!dataExists) {
+  //     console.log("Fetching data for year:", currentYear, "month:", currentMonth);
+  //     dispatch(fetchMonthlyWaterConsumption({ year: currentYear, month: currentMonth }));
+  //   }
+  // }, [dispatch, currentYear, currentMonth, monthlyWaterlist]);
 
   return (
     <>
