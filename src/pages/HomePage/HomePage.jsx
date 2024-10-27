@@ -22,6 +22,7 @@ import WaterListWithCalendar from '../../components/WaterListWithCalendar/WaterL
 import Modal from 'components/Modal/Modal.jsx';
 import TodayListModal from 'components/TodayListModal/TodayListModal.jsx';
 import clsx from 'clsx';
+import { getUser } from '../../redux/user/operations.js';
 
 export default function HomePage() {
   const today = new Date();
@@ -29,12 +30,14 @@ export default function HomePage() {
   const month = today.getMonth() + 1;
   const userAuthLoading = useSelector(selectors.selectAuthLoading);
   const userAuthError = useSelector(selectors.selectAuthError);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(getUser());
     dispatch(fetchTodayWaterConsumption());
     dispatch(fetchMonthlyWaterConsumption({ year, month }));
-  }, [dispatch]);
+  }, [dispatch, year, month]);
 
   const containerClass = clsx(css.homeContainer, css.pageBackground);
   const contentClass = clsx('mainContainer', css.container);

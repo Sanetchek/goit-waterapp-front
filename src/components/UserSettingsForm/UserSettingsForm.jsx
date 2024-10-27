@@ -1,297 +1,295 @@
-import { useRef, useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {useForm} from 'react-hook-form';
-import {yupResolver} from '@hookform/resolvers/yup';
-import { userSettingsFormSchema } from "./UserSettingsFormSchema";
-import {toast} from 'react-hot-toast';
-import { selectUser, selectUserAvatar } from "../../redux/auth/selectors";
+import { useEffect, useRef, useState, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { userSettingsFormSchema } from './UserSettingsFormSchema';
+import { toast } from 'react-hot-toast';
+import { selectUser } from '../../redux/auth/selectors';
 import css from './UserSettingsForm.module.css';
 import svg from '../../assets/images/snippets.svg';
-import { updateUser } from "../../redux/user/operations";
-import image from '../../assets/images/grey.jpg'
+import { updateUser, updateAvatar } from '../../redux/user/operations';
 
-const UserSettingsForm = ({onclose}) => {
+const UserSettingsForm = ({ onClose }) => {
   const dispatch = useDispatch();
 
-  const currentUser = useSelector(selectUser);
+  const currentUser = useSelector(selectUser) || {};
+  const { _id, name, email, gender, avatar } = currentUser;
 
-  const currentAvatar = useSelector(selectUserAvatar);
   const fileInputRef = useRef(null);
 
-  const [preview, setPreview] = useState(currentAvatar);
+  const [preview, setPreview] = useState(avatar || null); // Start with null to trigger the placeholder
+  const [showPassword, setShowPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showRepeatPassword, setShowRepeatPassword] = useState(false);
 
   useEffect(() => {
-    if (currentAvatar) {
-      setPreview(currentAvatar);
+    if (avatar) {
+      setPreview(avatar);
     } else {
-      setPreview(image);
+      setPreview(null); // Set to null if no avatar
     }
-  }, [currentAvatar]);
+  }, [avatar]);
 
-  const onFileChange = event => {
-    const selectedAvatar = event.target.files[0];
-    if (selectedAvatar) {
-      const objectURL = URL.createObjectURL(selectedAvatar);
-      setPreview(objectURL);
-    }
-  };
+  const onFileChange = useCallback(
+    async event => {
+      const selectedAvatar = event.target.files[0];
+      if (selectedAvatar) {
+        const objectURL = URL.createObjectURL(selectedAvatar);
+        setPreview(objectURL);
 
-  const {
-    register,
-    handleSubmit,
-    formState: {errors},
-    trigger,
-    watch,
-  } = useForm({
-    resolver: yupResolver(userSettingsFormSchema),
-    defaultValues: {
-      name: currentUser?.name,
-      email: currentUser?.email,
-      gender: currentUser?.gender || 'woman',
-      password: currentUser?.password,
-      newPassword: currentUser?.newPassword,
-      newPasswordRepeat: currentUser?.newPasswordRepeat,
-    },
-  });
-
-  const onSubmit = async formData=>{
-    try {
-      const data = new FormData();
-      data.append('name', formData.name);
-      data.append('email', formData.email);
-      data.append('gender', formData.gender);
-      data.append('password', formData.password);
-      data.append('newPassword', formData.newPassword);
-      data.append('newPasswordRepeat', formData.newPasswordRepeat);
-
-      if (fileInputRef.current.files[0]) {
-        data.append('avatar', fileInputRef.current.files[0]);
+        // Dispatch the updateAvatar action
+        try {
+          await dispatch(updateAvatar(selectedAvatar));
+          toast.success('Avatar updated successfully!');
+        } catch (error) {
+          toast.error('Error updating avatar. Please try again.');
+          console.error(error);
+        }
       }
-      onclose();
+    },
+    [dispatch]
+  );
 
-      await dispatch(updateUser(data)).unwrap();
-
-      toast.success('We successfully updated your data on server', {
-        autoClose: 5000,
-      });
-    } catch (error) {
-      console.log(error);
-
-      toast.error(
-        `Error: ${error.message}`,
-        {duration: 8000}
-      );
-    }
+  const initialValues = {
+    name,
+    email,
+    gender: gender || 'woman',
+    password: '',
+    newPassword: '',
+    repeatPassword: '',
   };
 
-  const gender = watch('gender');
+  const handleSubmit = async values => {
+    console.log(values);
+    dispatch(updateUser({_id, values}));
+  };
 
-    const [showPassword, setShowPassword] = useState(false);
-    const [showNewPassword, setShowNewPassword] = useState(false);
-    const [showRepeatPassword, setShowRepeatPassword] = useState(false);
+  const togglePasswordVisibility = setter => () => {
+    setter(prev => !prev);
+  };
 
-    const togglePasswordVisibility = () => {
-      setShowPassword(!showPassword);
-    };
-
-    const toggleNewPasswordVisibility = () => {
-      setShowNewPassword(!showNewPassword);
-    };
-
-    const toggleRepeatPasswordVisibility = () => {
-      setShowRepeatPassword(!showRepeatPassword);
-    };
-
-
+  // Get the first letter of the username
+  const firstLetter = name ? name.charAt(0).toUpperCase() : '';
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className={css.settingsWrapper}>
-      <div className={css.userWrapper}>
-
-        <p className={css.imageTitle}>Your Photo</p>
-      <div className={css.imageWrapper}>
-        <div className={css.imageContainer}>
-          <img className={css.image} src={preview} alt="User avatar" width="75" height="75" />
-        </div>
-        <label className={css.upload}>
-          <input
-          className={css.imageInput}
-          type="file"
-          accept="image/*"
-          onChange={onFileChange}
-          ref={fileInputRef}
-          />
-          <svg className={css.uploadIcon} width="18" height="18">
-            <use xlinkHref={`${svg}#icon-upload`}></use>
-          </svg>
-          <p className={css.text}>Upload a photo</p>
-        </label>
-      </div>
-
-      <div className={css.formWrapper}>
-        <div>
-          <h2 className={css.inputTitle}>Your gender identity</h2>
-
-          <div className={css.genderInputWrapper}>
-            <label className={`${css.genderButton} ${css.text}`}>
-              <input
-              className={css.genderInput}
-              type="radio"
-              name="gender"
-              value="man"
-              {...register('gender')}
-              />
-              {errors.gender && <p className={css.error}>{errors.gender.message}</p>}
-              <span className={css.iconWrapper}>
-                <svg className={css.radioIcon} width="18" height="18">
-                  <use xlinkHref={`${svg}#icon-plus-circle${
-                    gender === 'man' ? 'checked' : 'unchecked'
-                  }`}></use>
-                </svg>
-              </span>
-              Man
-            </label>
-
-            <label className={`${css.genderButton} ${css.text}`}>
-              <input
-              className={css.genderInput}
-              type="radio"
-              name="gender"
-              value="woman"
-              {...register('gender')}
-              />
-              {errors.gender && <p className={css.error}>{errors.gender.message}</p>}
-              <span className={css.iconWrapper}>
-                <svg className={css.radioIcon} width="18" height="18">
-                  <use xlinkHref={`${svg}#icon-plus-circle${
-                    gender === 'woman' ? 'checked' : 'unchecked'
-                  }`}></use>
-                </svg>
-              </span>
-              Woman
-            </label>
-          </div>
-        </div>
-
-        <div className={css.formFlexWrapper}>
-          <div className={css.formFlexItem}>
-            <div className={css.userInfoWrapper}>
-              <div className={css.userInputWrap}>
-                <label className={css.userInputTitle} htmlFor="name">
-                  Your name
+    <Formik
+      initialValues={initialValues}
+      validationSchema={userSettingsFormSchema}
+      onSubmit={handleSubmit}
+    >
+      {({ setFieldValue, isSubmitting }) => (
+        <Form>
+          <div className={css.settingsWrapper}>
+            <div className={css.userWrapper}>
+              <p className={css.imageTitle}>Your Photo</p>
+              <div className={css.imageWrapper}>
+                <div className={css.imageContainer}>
+                  {preview ? (
+                    <img
+                      className={css.image}
+                      src={preview}
+                      alt="User avatar"
+                      width="75"
+                      height="75"
+                    />
+                  ) : (
+                    <div className={css.placeholder}>{firstLetter}</div> // Placeholder block
+                  )}
+                </div>
+                <label className={css.upload}>
+                  <input
+                    className={css.imageInput}
+                    type="file"
+                    accept="image/*"
+                    onChange={event => {
+                      onFileChange(event);
+                      setFieldValue('avatar', event.currentTarget.files[0]); // Set avatar in Formik values
+                    }}
+                    ref={fileInputRef}
+                  />
+                  <svg className={css.uploadIcon} width="18" height="18">
+                    <use xlinkHref={`${svg}#icon-upload`}></use>
+                  </svg>
+                  <p className={css.text}>Upload a photo</p>
                 </label>
-                <input
-                className={`${css.userInput} ${css.userSettings} ${css.text} ${errors.name ? css.error : ''}`}
-                type="text"
-                name="name"
-                id="name"
-                {...register('name')}
-                onBlur={() => trigger('name')}
-                />
-                {errors.name && <p className={css.error}>{errors.name.message}</p>}
               </div>
 
-              <div className={css.userInputWrap}>
-                <label className={css.userInputTitle} htmlFor="email">
-                  Email
-                </label>
-                <input
-                className={`${css.userInput} ${css.userSettings} ${css.text} ${errors.email ? css.error : ''}`}
-                type="text"
-                name="email"
-                id="email"
-                {...register('email')}
-                onBlur={() => trigger('email')}
-                />
-                {errors.email && <p className={css.error}>{errors.email.message}</p>}
+              <div className={css.formWrapper}>
+                <div>
+                  <h2 className={css.inputTitle}>Your gender identity</h2>
+                  <div className={css.genderInputWrapper}>
+                    <label className={`${css.genderButton} ${css.text}`}>
+                      <Field
+                        type="radio"
+                        name="gender"
+                        value="woman"
+                        className={css.genderInput}
+                      />
+                      Woman
+                    </label>
+
+                    <label className={`${css.genderButton} ${css.text}`}>
+                      <Field
+                        type="radio"
+                        name="gender"
+                        value="man"
+                        className={css.genderInput}
+                      />
+                      Man
+                    </label>
+                  </div>
+                  <ErrorMessage
+                    name="gender"
+                    component="p"
+                    className={css.error}
+                  />
+                </div>
+
+                <div className={css.formFlexWrapper}>
+                  <div className={css.formFlexItem}>
+                    <div className={css.userInfoWrapper}>
+                      <div className={css.userInputWrap}>
+                        <label className={css.userInputTitle} htmlFor="name">
+                          Your name
+                        </label>
+                        <Field
+                          type="text"
+                          name="name"
+                          id="name"
+                          className={`${css.userInput} ${css.userSettings} ${css.text}`}
+                        />
+                        <ErrorMessage
+                          name="name"
+                          component="p"
+                          className={css.error}
+                        />
+                      </div>
+
+                      <div className={css.userInputWrap}>
+                        <label className={css.userInputTitle} htmlFor="email">
+                          Email
+                        </label>
+                        <Field
+                          type="text"
+                          name="email"
+                          id="email"
+                          className={`${css.userInput} ${css.userSettings} ${css.text}`}
+                        />
+                        <ErrorMessage
+                          name="email"
+                          component="p"
+                          className={css.error}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className={css.passwordWrapper}>
+              <h2 className={css.passwordTitle}>Password</h2>
+
+              <div className={css.formGroupPassword}>
+                <label className={css.label}>Outdated password:</label>
+                <div className={css.inputWrapper}>
+                  <Field
+                    type={showPassword ? 'text' : 'password'}
+                    name="password"
+                    className={`${css.input}`}
+                    placeholder="Password"
+                  />
+                  <svg
+                    className={css.passwordToggleIcon}
+                    onClick={togglePasswordVisibility(setShowPassword)}
+                    width="20px"
+                    height="20px"
+                  >
+                    <use
+                      xlinkHref={`${svg}#${
+                        showPassword ? 'icon-eye' : 'icon-eye-slash'
+                      }`}
+                    />
+                  </svg>
+                  <ErrorMessage
+                    name="password"
+                    component="p"
+                    className={css.errorMessage}
+                  />
+                </div>
+              </div>
+
+              <div className={css.formGroupPassword}>
+                <label className={css.label}>New Password:</label>
+                <div className={css.inputWrapper}>
+                  <Field
+                    type={showNewPassword ? 'text' : 'password'}
+                    name="newPassword"
+                    className={`${css.input}`}
+                    placeholder="Password"
+                  />
+                  <svg
+                    className={css.passwordToggleIcon}
+                    onClick={togglePasswordVisibility(setShowNewPassword)}
+                    width="20px"
+                    height="20px"
+                  >
+                    <use
+                      xlinkHref={`${svg}#${
+                        showNewPassword ? 'icon-eye' : 'icon-eye-slash'
+                      }`}
+                    />
+                  </svg>
+                  <ErrorMessage
+                    name="newPassword"
+                    component="p"
+                    className={css.errorMessage}
+                  />
+                </div>
+              </div>
+
+              <div className={css.formGroupPassword}>
+                <label className={css.label}>Repeat new password:</label>
+                <div className={css.inputWrapper}>
+                  <Field
+                    type={showRepeatPassword ? 'text' : 'password'}
+                    name="repeatPassword"
+                    className={`${css.input}`}
+                    placeholder="Password"
+                  />
+                  <svg
+                    className={css.passwordToggleIcon}
+                    onClick={togglePasswordVisibility(setShowRepeatPassword)}
+                    width="20px"
+                    height="20px"
+                  >
+                    <use
+                      xlinkHref={`${svg}#${
+                        showRepeatPassword ? 'icon-eye' : 'icon-eye-slash'
+                      }`}
+                    />
+                  </svg>
+                  <ErrorMessage
+                    name="repeatPassword"
+                    component="p"
+                    className={css.errorMessage}
+                  />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      </div>
 
-      <div className={css.passwordWrapper}>
-      <h2 className={css.passwordTitle}>Password</h2>
-
-      <div className={css.formGroupPassword}>
-        <label className={css.label}>Outdated password:</label>
-        <div className={css.inputWrapper}>
-          <input
-          className={`${css.input} ${errors.password ? css.error : ''}`}
-          type={showPassword ? 'text' : 'password'}
-          nanme="outdatedPassword"
-          placeholder="Password"
-          {...register('password')}
-          />
-          <svg className={css.passwordToggleIcon}
-          onClick={togglePasswordVisibility}
-          width="20px"
-          height="20px"
-          >
-            <use xlinkHref={`${svg}#${showPassword ? 'icon-eye' : 'icon-eye-slash'}`}/>
-          </svg>
-        </div>
-        {errors.password && <p className={css.errorMessage}>{errors.password.message}</p>}
-      </div>
-
-      <div className={css.formGroupPassword}>
-        <label className={css.label}>New Password:</label>
-        <div className={css.inputWrapper}>
-          <input
-          className={`${css.input} ${errors.password ? css.error : ''}`}
-          type={showNewPassword ? 'text' : 'password'}
-          name="newPassword"
-          placeholder="Password"
-          {...register('newPassword')}
-          />
-          <svg
-          className={css.passwordToggleIcon}
-          onClick={toggleNewPasswordVisibility}
-          width="20px"
-          height="20px"
-          >
-            <use xlinkHref={`${svg}#${showNewPassword ? 'icon-eye' : 'icon-eye-slash'}`} />
-          </svg>
-        </div>
-        {errors.password && <p className={css.errorMessage}>{errors.password.message}</p>}
-      </div>
-
-      <div className={css.formGroupPassword}>
-        <label className={css.label}>Repeat new password:</label>
-        <div className={css.inputWrapper}>
-          <input
-          className={`${css.input} ${errors.repeatPassword ? css.error : ''}`}
-          type={showRepeatPassword ? 'text' : 'password'}
-          placeholder="Password"
-          name="repeatPassword"
-          {...register('repeatPassword')}
-          />
-          <svg className={css.passwordToggleIcon}
-          onClick={toggleRepeatPasswordVisibility}
-          width="20px"
-          height="20px"
-          >
-            <use xlinkHref={`${svg}#${showRepeatPassword ? 'icon-eye' : 'icon-eye-slash'}`} />
-          </svg>
-        </div>
-        {errors.repeatPassword && (
-          <p className={css.errorMessage}>{errors.repeatPassword.message}</p>
-        )}
-      </div>
-
-      </div>
-      </div>
-      <button
-        className={`css.submitButton css.text`}
-        type="submit"
-        onSubmit={handleSubmit}
-      >
-        Save
-      </button>
-
-    </form>
+          <div className={css.btnWrapper}>
+            <button
+              type="submit"
+              className="btn btn-blue"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Saving...' : 'Save changes'}
+            </button>
+          </div>
+        </Form>
+      )}
+    </Formik>
   );
 };
 
