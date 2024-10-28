@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.abb6455c.css",
+    "main.css": "/static/css/main.bb35674a.css",
     "main.js": "/static/js/main.dd64770d.js",
     "static/css/134.e4cfb582.chunk.css": "/static/css/134.e4cfb582.chunk.css",
     "static/js/134.8dd61ab0.chunk.js": "/static/js/134.8dd61ab0.chunk.js",
@@ -37,7 +37,7 @@
     "static/media/bottle_home_screen_tablet.png": "/static/media/bottle_home_screen_tablet.a49098681a2b673dda5a.png",
     "static/media/Main-bg-mobile.png": "/static/media/Main-bg-mobile.cc55445fbfaa27ac9bf2.png",
     "index.html": "/index.html",
-    "main.abb6455c.css.map": "/static/css/main.abb6455c.css.map",
+    "main.bb35674a.css.map": "/static/css/main.bb35674a.css.map",
     "main.dd64770d.js.map": "/static/js/main.dd64770d.js.map",
     "134.e4cfb582.chunk.css.map": "/static/css/134.e4cfb582.chunk.css.map",
     "134.8dd61ab0.chunk.js.map": "/static/js/134.8dd61ab0.chunk.js.map",
@@ -55,7 +55,7 @@
     "755.da01a309.chunk.css.map": "/static/css/755.da01a309.chunk.css.map"
   },
   "entrypoints": [
-    "static/css/main.abb6455c.css",
+    "static/css/main.bb35674a.css",
     "static/js/main.dd64770d.js"
   ]
 }
