@@ -53,7 +53,7 @@ const UserSettingsForm = ({ onClose }) => {
       Object.entries(values).filter(
         ([key, value]) =>
           value !== '' &&
-          !['avatar', 'repeatPassword', 'password'].includes(key) // Exclude specified fields
+          !['avatar', 'repeatPassword', 'password', 'oldPassword'].includes(key) // Exclude specified fields
       )
     );
 
