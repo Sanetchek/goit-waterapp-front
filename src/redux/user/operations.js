@@ -6,17 +6,13 @@ import axios from 'axios';
 // Fetch user by ID
 export const getUser = createAsyncThunk(
   'user/getUser',
-  async (userId, {
-    rejectWithValue
-  }) => {
+  async (userId, thunkAPI) => {
     try {
       const response = await axios.get(`/user/${userId}`);
       return response.data;
     } catch (error) {
-      return rejectWithValue(
-        error.response && error.response.data.message ?
-        error.response.data.message :
-        error.message
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || error.message
       );
     }
   }
@@ -28,17 +24,14 @@ export const updateUser = createAsyncThunk(
   async ({
     userId,
     userData
-  }, {
-    rejectWithValue
-  }) => {
+  }, thunkAPI) => {
     try {
       const response = await axios.put(`/user/${userId}`, userData);
       return response.data;
     } catch (error) {
-      return rejectWithValue(
-        error.response && error.response.data.message ?
-        error.response.data.message :
-        error.message
+      console.error('Update user error:', error);
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || error.message
       );
     }
   }
@@ -50,24 +43,20 @@ export const updateAvatar = createAsyncThunk(
   async ({
     userId,
     avatarFile
-  }, {
-    rejectWithValue
-  }) => {
+  }, thunkAPI) => {
     try {
       const formData = new FormData();
       formData.append('avatar', avatarFile);
 
       const response = await axios.patch(`/user/${userId}`, formData, {
         headers: {
-          'Content-Type': 'multipart/form-data'
+          'Content-Type': 'multipart/form-data',
         },
       });
       return response.data;
     } catch (error) {
-      return rejectWithValue(
-        error.response && error.response.data.message ?
-        error.response.data.message :
-        error.message
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || error.message
       );
     }
   }

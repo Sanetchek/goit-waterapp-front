@@ -175,11 +175,66 @@ ul {
   margin-right: auto;
 }
 
+.popup {
+  position: absolute;
+  top: -202px;
+  width: 280px;
+  height: 188px;
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.itemWrapper {
+  width: calc((100% - 104px) / 5);
+}
+
+.itemWrapper:nth-child(5n + 1) .popup {
+  left: -24px;
+}
+
+.itemWrapper:nth-child(5n + 2) .popup {
+  left: -82px;
+}
+
+.itemWrapper:nth-child(5n + 4) .popup {
+  left: -198px;
+}
+
+.itemWrapper:nth-child(5n + 5) .popup {
+  left: -256px;
+}
+
 @media screen and (min-width: 768px) {
   .mainContainer {
     max-width: 768px;
     padding-left: 32px;
     padding-right: 32px;
+  }
+
+  .popup {
+    width: 292px;
+    top: -188px;
+  }
+
+  .itemWrapper {
+    width: calc((100% - 216px) / 10);
+  }
+
+  .itemWrapper:nth-child(10n + 1) .popup,
+  .itemWrapper:nth-child(10n + 2) .popup,
+  .itemWrapper:nth-child(10n + 3) .popup,
+  .itemWrapper:nth-child(10n + 4) .popup {
+    left: 25px;
+  }
+
+  .itemWrapper:nth-child(10n + 5) .popup,
+  .itemWrapper:nth-child(10n + 6) .popup,
+  .itemWrapper:nth-child(10n + 7) .popup,
+  .itemWrapper:nth-child(10n + 8) .popup,
+  .itemWrapper:nth-child(10n + 9) .popup,
+  .itemWrapper:nth-child(10n + 10) .popup {
+    left: unset;
+    right: 25px;
   }
 }
 

@@ -213,21 +213,21 @@
   min-height: 36px;
 }
 
-/* .amPmIndicator {
+.iconColor {
+  fill: #407BFF;
+}
+
+.waterLooc {
+  color: #407BFF;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.amPmIndicator {
   font-size: 12px;
-} */
+  margin-left: 10px;
+}
 
-/* .waterIndicator {
-  font-size: 18px;
-  color: #407BFF;
-  margin-right: 10px;
-} */
-
-/* .stepOutput {
-  justify-content: center;
-  color: #407BFF;
-  font-family: Roboto;
-  font-size: 18px;
-  font-weight: 700;
-  margin-top: 24px;
-} */
+.amSide {
+  margin-left: 6px;
+}

@@ -23,7 +23,7 @@ export default function ForgotPasswordForm() {
       validationSchema={UserSchema}
     >
       {({ errors, touched }) => (
-        <Form className={css.form} style={{ paddingTop: '36px' }}>
+        <Form className={css.form} style={{ paddingTop: '113px' }}>
           <div className={css.field}>
             <label className={css.label}>Enter your email</label>
             <Field

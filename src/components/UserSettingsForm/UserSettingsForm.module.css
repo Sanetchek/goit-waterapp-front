@@ -215,6 +215,8 @@
 }
 
 .buttonWrapper {
+  max-width: fit-content;
+  margin-left: auto;
   padding-top: 32px;
 }
 

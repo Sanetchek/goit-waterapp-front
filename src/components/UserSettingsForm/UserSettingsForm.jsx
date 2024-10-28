@@ -10,12 +10,10 @@ import { updateUser, updateAvatar } from '../../redux/user/operations';
 
 const UserSettingsForm = ({ onClose }) => {
   const dispatch = useDispatch();
-
   const currentUser = useSelector(selectUser) || {};
   const { _id, name, email, gender, avatar } = currentUser;
 
   const fileInputRef = useRef(null);
-
   const [preview, setPreview] = useState(avatar || null); // Start with null to trigger the placeholder
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
@@ -35,10 +33,11 @@ const UserSettingsForm = ({ onClose }) => {
       if (selectedAvatar) {
         const objectURL = URL.createObjectURL(selectedAvatar);
         setPreview(objectURL);
-
-        // Dispatch the updateAvatar action
+        // Dispatch the updateAvatar action with userId and avatarFile
         try {
-          await dispatch(updateAvatar(selectedAvatar));
+          await dispatch(
+            updateAvatar({ userId: _id, avatarFile: selectedAvatar })
+          );
           toast.success('Avatar updated successfully!');
         } catch (error) {
           toast.error('Error updating avatar. Please try again.');
@@ -46,21 +45,28 @@ const UserSettingsForm = ({ onClose }) => {
         }
       }
     },
-    [dispatch]
+    [dispatch, _id] // Added _id to dependencies
   );
 
-  const initialValues = {
-    name,
-    email,
-    gender: gender || 'woman',
-    password: '',
-    newPassword: '',
-    repeatPassword: '',
-  };
-
   const handleSubmit = async values => {
-    console.log(values);
-    dispatch(updateUser({_id, values}));
+    const filteredValues = Object.fromEntries(
+      Object.entries(values).filter(
+        ([key, value]) =>
+          value !== '' &&
+          !['avatar', 'repeatPassword'].includes(key) // Exclude specified fields
+      )
+    );
+
+    console.log(filteredValues);
+
+    // Dispatch the updateUser action with userId and filtered values
+    try {
+      await dispatch(updateUser({ userId: _id, userData: filteredValues }));
+      toast.success('User updated successfully!');
+    } catch (error) {
+      toast.error('Error updating user. Please try again.');
+      console.error(error);
+    }
   };
 
   const togglePasswordVisibility = setter => () => {
@@ -69,6 +75,15 @@ const UserSettingsForm = ({ onClose }) => {
 
   // Get the first letter of the username
   const firstLetter = name ? name.charAt(0).toUpperCase() : '';
+
+  const initialValues = {
+    name,
+    email,
+    gender: gender || 'woman',
+    oldPassword: '',
+    password: '',
+    repeatPassword: '',
+  };
 
   return (
     <Formik
@@ -194,7 +209,7 @@ const UserSettingsForm = ({ onClose }) => {
                 <div className={css.inputWrapper}>
                   <Field
                     type={showPassword ? 'text' : 'password'}
-                    name="password"
+                    name="oldPassword"
                     className={`${css.input}`}
                     placeholder="Password"
                   />
@@ -211,7 +226,7 @@ const UserSettingsForm = ({ onClose }) => {
                     />
                   </svg>
                   <ErrorMessage
-                    name="password"
+                    name="oldPassword"
                     component="p"
                     className={css.errorMessage}
                   />
@@ -223,7 +238,7 @@ const UserSettingsForm = ({ onClose }) => {
                 <div className={css.inputWrapper}>
                   <Field
                     type={showNewPassword ? 'text' : 'password'}
-                    name="newPassword"
+                    name="password"
                     className={`${css.input}`}
                     placeholder="Password"
                   />
@@ -240,7 +255,7 @@ const UserSettingsForm = ({ onClose }) => {
                     />
                   </svg>
                   <ErrorMessage
-                    name="newPassword"
+                    name="password"
                     component="p"
                     className={css.errorMessage}
                   />
@@ -278,13 +293,13 @@ const UserSettingsForm = ({ onClose }) => {
             </div>
           </div>
 
-          <div className={css.btnWrapper}>
+          <div className={css.buttonWrapper}>
             <button
               type="submit"
-              className="btn btn-blue"
+              className={`btn btn-blue ${css.button}`}
               disabled={isSubmitting}
             >
-              {isSubmitting ? 'Saving...' : 'Save changes'}
+              Save
             </button>
           </div>
         </Form>
