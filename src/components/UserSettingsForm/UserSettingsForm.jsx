@@ -53,7 +53,9 @@ const UserSettingsForm = ({ onClose }) => {
   const handleSubmit = async values => {
     const filteredValues = Object.fromEntries(
       Object.entries(values).filter(
-        ([key, value]) => value !== '' && key !== 'avatar' // Exclude avatar
+        ([key, value]) =>
+          value !== '' &&
+          !['avatar', 'repeatPassword', 'password'].includes(key) // Exclude specified fields
       )
     );
 
@@ -80,8 +82,8 @@ const UserSettingsForm = ({ onClose }) => {
     name,
     email,
     gender: gender || 'woman',
+    oldPpassword: '',
     password: '',
-    newPassword: '',
     repeatPassword: '',
   };
 
@@ -209,7 +211,7 @@ const UserSettingsForm = ({ onClose }) => {
                 <div className={css.inputWrapper}>
                   <Field
                     type={showPassword ? 'text' : 'password'}
-                    name="password"
+                    name="oldPassword"
                     className={`${css.input}`}
                     placeholder="Password"
                   />
@@ -226,7 +228,7 @@ const UserSettingsForm = ({ onClose }) => {
                     />
                   </svg>
                   <ErrorMessage
-                    name="password"
+                    name="oldPassword"
                     component="p"
                     className={css.errorMessage}
                   />
@@ -238,7 +240,7 @@ const UserSettingsForm = ({ onClose }) => {
                 <div className={css.inputWrapper}>
                   <Field
                     type={showNewPassword ? 'text' : 'password'}
-                    name="newPassword"
+                    name="password"
                     className={`${css.input}`}
                     placeholder="Password"
                   />
@@ -255,7 +257,7 @@ const UserSettingsForm = ({ onClose }) => {
                     />
                   </svg>
                   <ErrorMessage
-                    name="newPassword"
+                    name="password"
                     component="p"
                     className={css.errorMessage}
                   />
