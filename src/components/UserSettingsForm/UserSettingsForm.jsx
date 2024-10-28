@@ -35,10 +35,11 @@ const UserSettingsForm = ({ onClose }) => {
       if (selectedAvatar) {
         const objectURL = URL.createObjectURL(selectedAvatar);
         setPreview(objectURL);
-
-        // Dispatch the updateAvatar action
+        // Dispatch the updateAvatar action with userId and avatarFile
         try {
-          await dispatch(updateAvatar(selectedAvatar));
+          await dispatch(
+            updateAvatar({ userId: _id, avatarFile: selectedAvatar })
+          );
           toast.success('Avatar updated successfully!');
         } catch (error) {
           toast.error('Error updating avatar. Please try again.');
@@ -46,8 +47,34 @@ const UserSettingsForm = ({ onClose }) => {
         }
       }
     },
-    [dispatch]
+    [dispatch, _id] // Added _id to dependencies
   );
+
+  const handleSubmit = async values => {
+    const filteredValues = Object.fromEntries(
+      Object.entries(values).filter(
+        ([key, value]) => value !== '' && key !== 'avatar' // Exclude avatar
+      )
+    );
+
+    console.log(filteredValues);
+
+    // Dispatch the updateUser action with userId and filtered values
+    try {
+      await dispatch(updateUser({ userId: _id, userData: filteredValues }));
+      toast.success('User updated successfully!');
+    } catch (error) {
+      toast.error('Error updating user. Please try again.');
+      console.error(error);
+    }
+  };
+
+  const togglePasswordVisibility = setter => () => {
+    setter(prev => !prev);
+  };
+
+  // Get the first letter of the username
+  const firstLetter = name ? name.charAt(0).toUpperCase() : '';
 
   const initialValues = {
     name,
@@ -57,18 +84,6 @@ const UserSettingsForm = ({ onClose }) => {
     newPassword: '',
     repeatPassword: '',
   };
-
-  const handleSubmit = async values => {
-    console.log(values);
-    dispatch(updateUser({_id, values}));
-  };
-
-  const togglePasswordVisibility = setter => () => {
-    setter(prev => !prev);
-  };
-
-  // Get the first letter of the username
-  const firstLetter = name ? name.charAt(0).toUpperCase() : '';
 
   return (
     <Formik
