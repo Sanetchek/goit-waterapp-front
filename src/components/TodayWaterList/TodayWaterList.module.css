@@ -4,7 +4,7 @@
 }
 
 .listContainer {
-  max-height: 216px;
+  max-height: 180px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
