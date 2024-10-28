@@ -53,7 +53,7 @@ const UserSettingsForm = ({ onClose }) => {
       Object.entries(values).filter(
         ([key, value]) =>
           value !== '' &&
-          !['avatar', 'repeatPassword', 'password', 'oldPassword'].includes(key) // Exclude specified fields
+          !['avatar', 'repeatPassword'].includes(key) // Exclude specified fields
       )
     );
 
@@ -81,7 +81,6 @@ const UserSettingsForm = ({ onClose }) => {
     email,
     gender: gender || 'woman',
     oldPassword: '',
-    oldPpassword: '',
     password: '',
     repeatPassword: '',
   };
