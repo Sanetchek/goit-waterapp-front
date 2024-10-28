@@ -5,7 +5,7 @@ import WaterListRow from './WaterListRow/WaterListRow';
 
 import styles from './TodayWaterList.module.css';
 
-export default function TodayWaterList() {
+export default function TodayWaterList({ currentYear, currentMonth }) {
   const todaysWaterList = useSelector(selectors.selectVisibleWaterNotes);
 
   return (
@@ -14,7 +14,11 @@ export default function TodayWaterList() {
         <ul className={styles.waterList}>
           {todaysWaterList.map((note, index) => (
             <li className={styles.waterItem} key={`${note._id}-${index}`}>
-              <WaterListRow rowData={note} />
+              <WaterListRow
+                rowData={note}
+                currentYear={currentYear}
+                currentMonth={currentMonth}
+              />
             </li>
           ))}
         </ul>

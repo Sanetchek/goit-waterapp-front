@@ -8,9 +8,10 @@ import TodayListModal from '../../TodayListModal/TodayListModal';
 import {
   deleteWaterVolume,
   updateWaterVolume,
+  fetchMonthlyWaterConsumption,
 } from '../../../redux/water/operations';
 
-export default function WaterListRow({ rowData }) {
+export default function WaterListRow({ rowData, currentYear, currentMonth }) {
   const { _id, amount, date } = rowData || {};
 
   const time = date ? date.split('T')[1] : 'No time available';
@@ -19,29 +20,26 @@ export default function WaterListRow({ rowData }) {
   const [modalEditIsOpen, setModalEditIsOpen] = useState(false);
   const dispatch = useDispatch();
 
-  const openDeleteModal = () => {
-    setModalIsOpen(true);
-  };
-
-  const closeDeleteModal = () => {
-    setModalIsOpen(false);
-  };
-
-  const openEditModal = () => {
-    setModalEditIsOpen(true);
-  };
-
-  const closeEditModal = () => {
-    setModalEditIsOpen(false);
-  };
+  const openDeleteModal = () => setModalIsOpen(true);
+  const closeDeleteModal = () => setModalIsOpen(false);
+  const openEditModal = () => setModalEditIsOpen(true);
+  const closeEditModal = () => setModalEditIsOpen(false);
 
   const handleDelete = waterId => {
-    dispatch(deleteWaterVolume(waterId));
+    dispatch(deleteWaterVolume(waterId)).then(() => {
+      dispatch(
+        fetchMonthlyWaterConsumption({ year: currentYear, month: currentMonth })
+      );
+    });
     closeDeleteModal();
   };
 
   const handleEdit = (waterId, data) => {
-    dispatch(updateWaterVolume({ id: waterId, updatedData: data }));
+    dispatch(updateWaterVolume({ id: waterId, updatedData: data })).then(() => {
+      dispatch(
+        fetchMonthlyWaterConsumption({ year: currentYear, month: currentMonth })
+      );
+    });
     closeEditModal();
   };
 
@@ -77,7 +75,7 @@ export default function WaterListRow({ rowData }) {
         <Modal title="Delete Entry" onClose={closeDeleteModal}>
           <DeleteEntryModal
             onCancel={closeDeleteModal}
-            onDelete={() => handleDelete(_id)} // Pass function reference
+            onDelete={() => handleDelete(_id)}
           />
         </Modal>
       )}
@@ -88,11 +86,8 @@ export default function WaterListRow({ rowData }) {
         >
           <TodayListModal
             title="Correct entered data:"
-            onSave={(values) => handleEdit(_id, values)}
-            previousWaterData={{
-              amount,
-              time
-             }}
+            onSave={values => handleEdit(_id, values)}
+            previousWaterData={{ amount, time }}
           />
         </Modal>
       )}
