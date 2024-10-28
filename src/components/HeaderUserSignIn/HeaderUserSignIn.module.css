@@ -21,6 +21,12 @@
   margin: 0 4px 0 8px;
 }
 
+.avatarImage {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+
 .avatarPlaceholder {
   width: 28px;
   height: 28px;
