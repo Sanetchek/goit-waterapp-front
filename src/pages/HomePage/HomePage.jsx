@@ -46,11 +46,7 @@ export default function HomePage() {
 
   const handleSave = data => {
     toggleModal(setIsModalOpen)();
-    dispatch(addWaterVolume(data)).then(() => {
-      dispatch(
-        fetchMonthlyWaterConsumption({ year: currentYear, month: currentMonth })
-      );
-    });
+    dispatch(addWaterVolume(data))
   };
 
   const renderModal = () => {
@@ -98,14 +94,6 @@ export default function HomePage() {
             currentMonth={currentMonth}
             setCurrentYear={setCurrentYear}
             setCurrentMonth={setCurrentMonth}
-            refreshMonthlyData={() =>
-              dispatch(
-                fetchMonthlyWaterConsumption({
-                  year: currentYear,
-                  month: currentMonth,
-                })
-              )
-            }
           />
         )}
       </div>
