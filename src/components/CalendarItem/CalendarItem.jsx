@@ -1,4 +1,3 @@
-import { useState, useEffect, useRef } from 'react';
 import css from './CalendarItem.module.css';
 import clsx from 'clsx';
 import DaysGeneralStats from 'components/DaysGeneralStats/DaysGeneralStats';
