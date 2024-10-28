@@ -1,5 +1,6 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
 import { useSelector } from 'react-redux';
 import * as selectors from '../../redux/water/selectors.js';
 import css from './TodayListModal.module.css';
@@ -38,10 +39,19 @@ const generateTimeOptions = () => {
   return options;
 };
 
+const validationSchema = Yup.object().shape({
+  waterVolume: Yup.number()
+    .min(1, 'The value must be greater than 0')
+    .max(5000, 'The maximum value is 5000')
+    .required('The value must be greater than 0'),
+});
+
 const TodayListModal = ({ title = '', onSave, previousWaterData }) => {
   const userDailyNormWater = useSelector(selectors.selectTodaysWaterDailyNorm);
   const initialWaterAmount = previousWaterData ? previousWaterData.amount : 0;
-  const initialTime = previousWaterData ? previousWaterData.time : getCurrentTime();
+  const initialTime = previousWaterData
+    ? previousWaterData.time
+    : getCurrentTime();
 
   return (
     <Formik
@@ -49,17 +59,13 @@ const TodayListModal = ({ title = '', onSave, previousWaterData }) => {
         waterVolume: initialWaterAmount,
         selectedTime: initialTime,
       }}
+      validationSchema={validationSchema}
       onSubmit={values => {
         // Get the current date
         const currentDate = new Date();
-
-        // Split the selected time (HH:mm) into hours and minutes
         const [hours, minutes] = values.selectedTime.split(':').map(Number);
+        currentDate.setHours(hours, minutes, 0, 0);
 
-        // Set the hours and minutes on the current date
-        currentDate.setHours(hours, minutes, 0, 0); // Set hours, minutes, and reset seconds/milliseconds
-
-        // Format date to 'YYYY-MM-DDTHH:mm' in local timezone
         const formattedDate = `${currentDate.getFullYear()}-${String(
           currentDate.getMonth() + 1
         ).padStart(2, '0')}-${String(currentDate.getDate()).padStart(
@@ -70,18 +76,16 @@ const TodayListModal = ({ title = '', onSave, previousWaterData }) => {
           '0'
         )}`;
 
-        // Create the data object to save
         const dataToSave = {
           dailyNorm: userDailyNormWater, // Get the daily norm from Redux
           amount: values.waterVolume,
           date: formattedDate, // Format date as ISO string in local timezone
         };
-
         // Call the onSave function with the data
         onSave(dataToSave);
       }}
     >
-      {({ values, setFieldValue }) => (
+      {({ values, setFieldValue, errors, touched }) => (
         <Form className={css.waterContent}>
           <div className={css.previousData}>
             {previousWaterData && (
@@ -93,8 +97,7 @@ const TodayListModal = ({ title = '', onSave, previousWaterData }) => {
                   {previousWaterData.amount} ml
                 </span>
                 <span className={css.amPmIndicator}>
-                  {previousWaterData.time}{' '}
-                  {getAmPm(previousWaterData.time)}
+                  {previousWaterData.time} {getAmPm(previousWaterData.time)}
                 </span>
               </div>
             )}
@@ -109,9 +112,10 @@ const TodayListModal = ({ title = '', onSave, previousWaterData }) => {
                 type="button"
                 className={css.roundButton}
                 onClick={() => {
-                  const newAmount = Math.max(0, values.waterVolume - 50); // Заборонити значення нижче 0
+                  const newAmount = Math.max(1, values.waterVolume - 50);
                   setFieldValue('waterVolume', newAmount);
                 }}
+                disabled={values.waterVolume <= 1} // Забороняємо зменшення, коли значення менше або рівне 1
               >
                 -
               </button>
@@ -120,7 +124,7 @@ const TodayListModal = ({ title = '', onSave, previousWaterData }) => {
                 type="button"
                 className={css.roundButton}
                 onClick={() => {
-                  const newAmount = Math.min(5000, values.waterVolume + 50); // Заборонити значення більше 5000
+                  const newAmount = Math.min(5000, values.waterVolume + 50);
                   setFieldValue('waterVolume', newAmount);
                 }}
               >
@@ -144,28 +148,29 @@ const TodayListModal = ({ title = '', onSave, previousWaterData }) => {
               type="number"
               name="waterVolume"
               className={css.waterInput}
-              min={0} // Заборонити від'ємне введення
-              max={5000} // Заборонити значення більше 5000
+              min={1}
+              max={5000}
               onFocus={e => {
                 if (e.target.value === '0') {
-                  setFieldValue('waterVolume', ''); // Очищати поле при фокусі, якщо значення 0
+                  setFieldValue('waterVolume', '');
                 }
               }}
               onChange={e => {
                 let value = e.target.value;
 
-                // Дозволити порожнє значення
                 if (value === '') {
                   setFieldValue('waterVolume', '');
                   return;
                 }
 
-                // Перевірка на допустимий діапазон
-                value = Math.max(0, Math.min(5000, Number(value)));
+                value = Math.max(1, Math.min(5000, Number(value)));
 
                 setFieldValue('waterVolume', value);
               }}
             />
+            {errors.waterVolume && touched.waterVolume ? (
+              <div className={css.error}>{errors.waterVolume}</div>
+            ) : null}
           </div>
 
           <div className={css.modalActions}>
