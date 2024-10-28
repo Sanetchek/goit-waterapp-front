@@ -62,7 +62,13 @@ const TodayListModal = ({ title = '', onSave, previousWaterData }) => {
         // Format date to 'YYYY-MM-DDTHH:mm' in local timezone
         const formattedDate = `${currentDate.getFullYear()}-${String(
           currentDate.getMonth() + 1
-        ).padStart(2, '0')}-${String(currentDate.getDate()).padStart(2, '0')}T${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+        ).padStart(2, '0')}-${String(currentDate.getDate()).padStart(
+          2,
+          '0'
+        )}T${String(hours).padStart(2, '0')}:${String(minutes).padStart(
+          2,
+          '0'
+        )}`;
 
         // Create the data object to save
         const dataToSave = {
@@ -80,11 +86,14 @@ const TodayListModal = ({ title = '', onSave, previousWaterData }) => {
           <div className={css.previousData}>
             {previousWaterData && (
               <div className={css.waterInfoContainer}>
-                <svg className="icon-glass" width="24" height="24">
+                <svg className={css.iconColor} width="24" height="24">
                   <use href={`${snippet}#icon-glass`}></use>
                 </svg>
-                {previousWaterData.amount} ml {previousWaterData.time}
+                <span className={css.waterLooc}>
+                  {previousWaterData.amount} ml
+                </span>
                 <span className={css.amPmIndicator}>
+                  {previousWaterData.time}{' '}
                   {getAmPm(previousWaterData.time)}
                 </span>
               </div>
