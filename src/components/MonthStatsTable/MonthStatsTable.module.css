@@ -84,10 +84,6 @@
   justify-items: center;
 }
 
-.itemWrapper {
-  width: calc((100% - 104px) / 5);
-}
-
 @media (min-width: 768px) {
   .daysList {
     display: flex;
@@ -123,10 +119,6 @@
 
   .loadingContainer {
     min-height: 300px;
-  }
-
-  .itemWrapper {
-    width: calc((100% - 216px) / 10);
   }
 }
 
