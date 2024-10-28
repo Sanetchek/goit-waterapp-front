@@ -22,7 +22,9 @@
 
 .waterList {
   margin-bottom: 24px;
+  height: 212px;
 }
+
 .addButtonContainer {
   display: flex;
   align-items: center;

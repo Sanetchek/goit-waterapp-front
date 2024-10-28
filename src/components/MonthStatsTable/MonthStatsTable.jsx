@@ -71,7 +71,7 @@ const MonthStatsTable = ({
           <ul className={css.daysList}>
             {monthlyWaterlist.length > 0 &&
               monthlyWaterlist.map(day => (
-                <li className={css.itemWrapper} key={day.key}>
+                <li className='itemWrapper' key={day.key}>
                   <CalendarItem
                     dayObject={day}
                     onPopupToggle={handlePopupToggle}
