@@ -10,12 +10,10 @@ import { updateUser, updateAvatar } from '../../redux/user/operations';
 
 const UserSettingsForm = ({ onClose }) => {
   const dispatch = useDispatch();
-
   const currentUser = useSelector(selectUser) || {};
   const { _id, name, email, gender, avatar } = currentUser;
 
   const fileInputRef = useRef(null);
-
   const [preview, setPreview] = useState(avatar || null); // Start with null to trigger the placeholder
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
@@ -82,6 +80,7 @@ const UserSettingsForm = ({ onClose }) => {
     name,
     email,
     gender: gender || 'woman',
+    oldPassword: '',
     oldPpassword: '',
     password: '',
     repeatPassword: '',
@@ -295,13 +294,13 @@ const UserSettingsForm = ({ onClose }) => {
             </div>
           </div>
 
-          <div className={css.btnWrapper}>
+          <div className={css.buttonWrapper}>
             <button
               type="submit"
-              className="btn btn-blue"
+              className={`btn btn-blue ${css.button}`}
               disabled={isSubmitting}
             >
-              {isSubmitting ? 'Saving...' : 'Save changes'}
+              Save
             </button>
           </div>
         </Form>
