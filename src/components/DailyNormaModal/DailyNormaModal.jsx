@@ -14,7 +14,7 @@ const calculateWaterNorma = (gender, weight, activityTime) => {
 
 // Form validation schema
 const validationSchema = Yup.object().shape({
-  waterToDrink: Yup.number().required('Enter how much water you will drink'),
+  waterToDrink: Yup.number().min(1, 'Weight must be greater than 0').required('Enter how much water you will drink'),
 });
 
 export default function DailyNormaModal({ onClose, onSave }) {
