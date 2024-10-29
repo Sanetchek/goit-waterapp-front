@@ -128,3 +128,9 @@
     gap: 22px 22px;
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  .selectedDay {
+    color: #fff;
+  }
+}

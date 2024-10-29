@@ -42,3 +42,9 @@
 .svgChevron {
   fill: #407bff;
 }
+
+@media (prefers-color-scheme: dark) {
+  .userName {
+    color: #fff;
+  }
+}

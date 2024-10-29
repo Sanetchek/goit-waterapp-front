@@ -15,7 +15,7 @@
     gap: 24px;
     margin-top: 24px;
   }
-  
+
   .cancelButton {
     background-color: #D7E3FF;
     color: #407BFF;
@@ -24,11 +24,11 @@
     border-radius: 5px;
     cursor: pointer;
   }
-  
+
   .cancelButton:hover {
     background-color: #D7E3FF;
   }
-  
+
   .deleteButton {
     background-color: #EF5050;
     color: #fff;
@@ -38,11 +38,11 @@
     cursor: pointer;
     box-shadow: 2px 4px 10px 2px rgb(64 123 255 / 34%);
   }
-  
+
   .deleteButton:hover {
     background-color: #EF5050;
   }
-  
+
 @media screen and (min-width: 320px) {
     .modalContent {
         width: 232px;
@@ -77,7 +77,7 @@
     }
     .cancelButton {
         width: 160px;
-        
+
     }
     .deleteButton {
         width: 160px;
@@ -90,3 +90,20 @@
         flex-direction: row;
   }
 }
+
+
+@media (prefers-color-scheme: dark) {
+  .cancelButton {
+    background-color: #2A3052;
+    border: #2A3052;
+    color: #5082F2;
+  }
+  .exitConfirmText {
+    color: #D5DFF5;
+  }
+  .deleteButton {
+    box-shadow: 2px 4px 10px 2px rgba(36, 36, 36, 0.34);
+    color: #1C1D26;
+  }
+}
+

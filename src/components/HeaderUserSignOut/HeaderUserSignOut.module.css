@@ -12,3 +12,10 @@
   line-height: 1.25;
   color: #407bff;
 }
+
+
+@media (prefers-color-scheme: dark) {
+  .iconUser {
+    fill: #fff !important;
+  }
+}

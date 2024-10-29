@@ -50,3 +50,14 @@ button.modalClose {
 .modalClose svg {
   fill: blue;
 }
+
+@media (prefers-color-scheme: dark) {
+  .modalContent {
+    background-color: #1c1d26;
+    border: #1c1d26;
+    color: #D5DFF5;
+  }
+  .modalHeader h2 {
+    color: #D5DFF5;
+  }
+}

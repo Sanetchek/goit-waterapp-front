@@ -153,3 +153,18 @@ input[type='password'] {
     line-height: 1.33333;
   }
 }
+
+
+@media (prefers-color-scheme: dark) {
+  input {
+    background-color: #1C1D26;
+    border: 2px solid #2F3875 !important;
+  }
+  label,
+  .title {
+    color: #D5DFF5 !important;
+  }
+  button {
+    color: #1C1D26 !important;
+  }
+}
