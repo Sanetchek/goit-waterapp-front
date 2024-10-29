@@ -61,7 +61,6 @@ const UserSettingsForm = ({ onClose }) => {
     try {
       await dispatch(updateUser({ userId: _id, userData: filteredValues }));
       toast.success('User updated successfully!');
-      window.location.reload();
     } catch (error) {
       toast.error('Error updating user. Please try again.');
       console.error(error);
