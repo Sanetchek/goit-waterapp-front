@@ -51,9 +51,7 @@ const UserSettingsForm = ({ onClose }) => {
   const handleSubmit = async values => {
     const filteredValues = Object.fromEntries(
       Object.entries(values).filter(
-        ([key, value]) =>
-          value !== '' &&
-          !['avatar', 'repeatPassword'].includes(key) // Exclude specified fields
+        ([key, value]) => value !== '' && key !== 'avatar' // Exclude specified fields - поки прибрав !['avatar', 'repeatPassword'].includes(key)
       )
     );
 
