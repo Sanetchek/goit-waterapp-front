@@ -61,7 +61,7 @@ export const refreshUser = createAsyncThunk(
     condition: (_, thunkAPI) => {
       const reduxState = thunkAPI.getState();
       return reduxState.auth.token !== null;
-    }
+    },
   }
 );
 
@@ -74,6 +74,25 @@ export const forgotPassword = createAsyncThunk(
       });
       setAuthHead(response.data.token);
       toast.success('Reset password email was successfully sent.');
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      const errorMessage =
+        error.response?.data?.message || 'Reset password failed, try again.';
+      console.log(errorMessage);
+      toast.error(errorMessage);
+      return thunkAPI.rejectWithValue(errorMessage);
+    }
+  }
+);
+
+export const resetPassword = createAsyncThunk(
+  'auth/reset-pwd',
+  async ({ password, token }, thunkAPI) => {
+    try {
+      const response = await axios.post('auth/reset-pwd', { password, token });
+      setAuthHead(response.data.token);
+      toast.success('Password has been successfully reset.');
       console.log(response.data);
       return response.data;
     } catch (error) {

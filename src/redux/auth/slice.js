@@ -1,12 +1,11 @@
-import {
-  createSlice
-} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import {
   signup,
   signin,
   logout,
   refreshUser,
   forgotPassword,
+  resetPassword,
 } from './operations';
 
 const slice = createSlice({
@@ -18,6 +17,7 @@ const slice = createSlice({
     isRefreshing: false,
     loading: false,
     error: null,
+    resetPassword: false,
   },
   extraReducers: builder => {
     builder
@@ -94,6 +94,26 @@ const slice = createSlice({
         state.loading = false;
         state.isRefreshing = false;
         state.error = action.payload;
+      })
+      .addCase(resetPassword.pending, state => {
+        state.isRefreshing = true;
+        state.isLoggedIn = false;
+        state.loading = true;
+        state.error = false;
+      })
+      .addCase(resetPassword.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload.user;
+        state.token = action.payload.token;
+        state.isLoggedIn = true;
+        state.isRefreshing = false;
+        state.resetPassword = true;
+      })
+      .addCase(resetPassword.rejected, (state, action) => {
+        state.loading = false;
+        state.isRefreshing = false;
+        state.error = action.payload;
+        state.resetPassword = false;
       });
   },
 });
