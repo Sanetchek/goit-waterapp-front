@@ -103,8 +103,8 @@ const slice = createSlice({
       })
       .addCase(resetPassword.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = action.payload.user;
-        state.token = action.payload.token;
+        // state.user = action.payload.user;
+        // state.token = action.payload.token;
         state.isLoggedIn = true;
         state.isRefreshing = false;
         state.resetPassword = true;
