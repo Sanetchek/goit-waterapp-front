@@ -4,6 +4,7 @@ import snippets from '../../assets/images/snippets.svg';
 import Modal from '../Modal/Modal';
 import UserLogoutModal from '../UserLogoutModal/UserLogoutModal';
 import UserSettingsForm from '../UserSettingsForm/UserSettingsForm';
+import clsx from 'clsx';
 
 const UserLogoModal = ({ onClose }) => {
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
@@ -25,16 +26,20 @@ const UserLogoModal = ({ onClose }) => {
     setIsLogoutModalOpen(false);
   };
 
+  const modalClasses = clsx('dropdown', css.dropdownMenu);
+  const menuClasses = clsx('user-menu', css.listCon);
+  const menuItemClasses = clsx('user-menu-item', css.menuItem);
+
   return (
-    <div className={css.dropdownMenu}>
-      <ul className={css.listCon}>
-        <li className={css.menuItem} onClick={openSettingsModal}>
+    <div className={modalClasses}>
+      <ul className={menuClasses}>
+        <li className={menuItemClasses} onClick={openSettingsModal}>
           <svg className={css.icon} width="16" height="16" viewBox="0 0 24 24">
             <use href={`${snippets}#icon-settings`}></use>
           </svg>
           Settings
         </li>
-        <li className={css.menuItem} onClick={openLogoutModal}>
+        <li className={menuItemClasses} onClick={openLogoutModal}>
           <svg className={css.icon} width="16" height="16" viewBox="0 0 24 24">
             <use href={`${snippets}#icon-logout`}></use>
           </svg>
