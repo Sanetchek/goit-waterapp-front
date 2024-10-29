@@ -6,19 +6,19 @@
     width: 150px;
     z-index: 4;
     padding: 16px;
-    top: 30px; 
+    top: 30px;
     right: 0;
   }
-  
+
   .listCon {
     list-style: none;
     display: flex;
     flex-direction: column;
     margin: 0;
     gap: 16px;
-    
+
   }
-  
+
   .menuItem {
     display: flex;
     align-items: center;
@@ -27,15 +27,22 @@
     transition: background-color 0.2s ease;
     color: #407BFF;
   }
-  
+
   /* .menuItem:hover {
     background-color: #f0f0f0;
   } */
-  
+
   .icon {
     margin-right: 8px;
     fill: #407BFF;
     width: 16px;
     height: 16px;
   }
-  
+
+  @media (prefers-color-scheme: dark) {
+    .dropdownMenu {
+      background-color: #1c1d26;
+      border: #1c1d26;
+      color: #5082F2;
+    }
+  }

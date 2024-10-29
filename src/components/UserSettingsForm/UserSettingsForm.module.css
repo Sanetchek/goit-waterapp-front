@@ -364,6 +364,24 @@
   }
 
   .passwordWrapper {
-    margin-top: 124px;
+    margin-top: 104px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .cancelButton {
+    background-color: #2A3052;
+    border: #2A3052;
+    color: #5082F2;
+  }
+  .userInputTitle,
+  .inputTitle,
+  .imageTitle,
+  .label {
+    color: #D5DFF5;
+  }
+  .input,
+  .userInput{
+    border: 1px solid #2A3052 !important;
   }
 }

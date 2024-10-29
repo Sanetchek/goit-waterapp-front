@@ -1,13 +1,22 @@
 .layout {
   overflow-x: hidden;
   height: 100vh;
-}
-
-.light {
   background-color: #fff;
 }
 
-.dark {
-  background-color: #1c1d26;
-  color: #fff;
+@media (prefers-color-scheme: dark) {
+  .layout {
+    color: #fff;
+    background-color: #1c1d26;
+  }
+  input {
+    background-color: #1c1d26;
+    color: #2F3875;
+  }
+  h2 {
+    color: #fff;
+  }
+  label {
+    color: #fff;
+  }
 }

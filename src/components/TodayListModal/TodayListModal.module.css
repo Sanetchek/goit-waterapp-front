@@ -235,3 +235,23 @@
 .error {
   color: red;
 }
+
+@media (prefers-color-scheme: dark) {
+  .stepInput span,
+  .roundButton:hover {
+    background-color: #2A3052;
+  }
+  .roundButton,
+  .waterInfoContainer,
+  select {
+    background-color: #1c1d26;
+  }
+  .roundButton,
+  select,
+  .waterInput {
+    border: 2px solid #2A3052 !important;
+  }
+  .saveButtonStyle {
+    color: #1c1d26;
+  }
+}

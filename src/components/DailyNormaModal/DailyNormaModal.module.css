@@ -123,3 +123,16 @@
     width: 544px;
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  .formulaLabel,
+  .calcutatorTitle,
+  .genderLabel,
+  .fieldLabel,
+  .resultLabel  {
+    color: #D5DFF5;
+  }
+  .btnSave {
+    color: #1c1d26;
+  }
+}

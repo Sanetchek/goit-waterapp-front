@@ -9,6 +9,7 @@ body {
   background-color: transparent !important;
 }
 
+
 /* Scroll Bar Style */
 
 /* width */
@@ -243,5 +244,19 @@ ul {
     max-width: 1440px;
     padding-left: 112px;
     padding-right: 112px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1C1D26 !important;
+  }
+  button.btn.btn-blue {
+    border: #1c1d26;
+    color: #1C1D26;
+    box-shadow: 0 4px 8px 0 rgba(11, 21, 44, 0.34);
+  }
+  .modalHeader h2 {
+    color: #D5DFF5;
   }
 }

@@ -42,3 +42,14 @@
 
 @media screen and (min-width: 1440px) {
 }
+
+@media (prefers-color-scheme: dark) {
+  .normaContainer {
+    background-color: #1C1D26;
+    border: #1c1d26;
+    box-shadow: 0 4px 8px 0 rgba(2, 4, 9, 0.34);
+  }
+  .title {
+    color: #D5DFF5;
+  }
+}

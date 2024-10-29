@@ -154,3 +154,20 @@
     /* max-width: 178px; */
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  .addWaterButton {
+    border: #1c1d26;
+    box-shadow: 0 4px 8px 0 rgba(2, 4, 9, 0.34);
+    color: #1c1d26;
+  }
+  .icon {
+    stroke: #1c1d26;
+  }
+  .slider {
+    background: #2A3052 !important;
+  }
+  .slider::-webkit-slider-thumb {
+    background: #2F3875 !important;
+  }
+}
