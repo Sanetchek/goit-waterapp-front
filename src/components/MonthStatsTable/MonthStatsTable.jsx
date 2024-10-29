@@ -40,6 +40,20 @@ const MonthStatsTable = ({
     fetchData();
   }, [currentYear, currentMonth]);
 
+  useEffect(() => {
+    const handleClickOutside = event => {
+      if (activePopup && !event.target.closest('.popup')) {
+        setActivePopup(null);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [activePopup]);
+
   return (
     <>
       <div className={css.navigation}>
@@ -71,7 +85,7 @@ const MonthStatsTable = ({
           <ul className={css.daysList}>
             {monthlyWaterlist.length > 0 &&
               monthlyWaterlist.map(day => (
-                <li className='itemWrapper' key={day.key}>
+                <li className="itemWrapper" key={day.key}>
                   <CalendarItem
                     dayObject={day}
                     onPopupToggle={handlePopupToggle}
