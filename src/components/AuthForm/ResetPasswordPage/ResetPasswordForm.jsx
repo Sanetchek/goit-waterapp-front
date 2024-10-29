@@ -21,8 +21,7 @@ export default function ResetPasswordForm({ token }) {
   const dispatch = useDispatch();
 
   const handleSubmit = async (values, actions) => {
-    const data = await dispatch(resetPassword({ password: values.password, token }));
-    console.log(data);
+    await dispatch(resetPassword({ password: values.password, token }));
     actions.resetForm();
   };
   const navigate = useNavigate();
