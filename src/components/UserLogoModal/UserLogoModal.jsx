@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import css from './UserLogoModal.module.css';
 import snippets from '../../assets/images/snippets.svg';
 import Modal from '../Modal/Modal';
-import UserLogoutModal from '../UserLogoutModal/UserLogoutModal';
-import UserSettingsForm from '../UserSettingsForm/UserSettingsForm';
 import clsx from 'clsx';
+
+const UserSettingsForm = lazy(() =>
+  import('../UserSettingsForm/UserSettingsForm')
+);
+const UserLogoutModal = lazy(() =>
+  import('../UserLogoutModal/UserLogoutModal')
+);
 
 const UserLogoModal = ({ onClose }) => {
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
@@ -32,14 +37,22 @@ const UserLogoModal = ({ onClose }) => {
 
   return (
     <div className={modalClasses}>
-      <ul className={menuClasses}>
-        <li className={menuItemClasses} onClick={openSettingsModal}>
+      <ul className={menuClasses} role="menu" aria-label="User Menu">
+        <li
+          className={menuItemClasses}
+          role="menuitem"
+          onClick={openSettingsModal}
+        >
           <svg className={css.icon} width="16" height="16" viewBox="0 0 24 24">
             <use href={`${snippets}#icon-settings`}></use>
           </svg>
           Settings
         </li>
-        <li className={menuItemClasses} onClick={openLogoutModal}>
+        <li
+          className={menuItemClasses}
+          role="menuitem"
+          onClick={openLogoutModal}
+        >
           <svg className={css.icon} width="16" height="16" viewBox="0 0 24 24">
             <use href={`${snippets}#icon-logout`}></use>
           </svg>
@@ -47,11 +60,17 @@ const UserLogoModal = ({ onClose }) => {
         </li>
       </ul>
       {isSettingsModalOpen && (
-        <Modal title="Settings" onClose={closeSettingsModal}>
-          <UserSettingsForm onClose={closeSettingsModal} />
-        </Modal>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Modal title="Settings" onClose={closeSettingsModal}>
+            <UserSettingsForm onClose={closeSettingsModal} />
+          </Modal>
+        </Suspense>
       )}
-      {isLogoutModalOpen && <UserLogoutModal onClose={closeLogoutModal} />}
+      {isLogoutModalOpen && (
+        <Suspense fallback={<div>Loading...</div>}>
+          <UserLogoutModal onClose={closeLogoutModal} />
+        </Suspense>
+      )}
     </div>
   );
 };
