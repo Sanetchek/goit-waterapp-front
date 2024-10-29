@@ -248,6 +248,9 @@ ul {
 }
 
 @media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1C1D26 !important;
+  }
   button.btn.btn-blue {
     border: #1c1d26;
     color: #1C1D26;
