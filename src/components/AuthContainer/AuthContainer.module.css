@@ -8,6 +8,12 @@
   margin: 0 auto;
 }
 
+@media (prefers-color-scheme: dark) {
+  .container {
+    background-image: url('/src/assets/images/mob/Dark_theme_bottle_home_screen_mobile.avif');
+  }
+}
+
 @media screen and (-webkit-min-device-pixel-ratio: 2),
   (min-resolution: 2dppx),
   (min-resolution: 192dpi) {
@@ -17,12 +23,33 @@
     align-items: center;
     background-image: url('../../assets/images/mob/background_element_sign_in_mob@2x.png');
   }
+  @media (prefers-color-scheme: dark) {
+    .container {
+      background-image: url('/src/assets/images/mob/Dark_theme_background_sign_in_mobile_2x.avif');
+    }
+  }
+}
+
+.darkFrame {
+  display: none;
 }
 
 .frame {
   text-align: center;
   width: 280px;
   object-fit: cover;
+}
+
+@media (prefers-color-scheme: dark) {
+  .frame {
+    display: none;
+  }
+  .darkFrame {
+    display: flex;
+    text-align: center;
+    width: 280px;
+    object-fit: cover;
+  }
 }
 
 .modal {
@@ -45,12 +72,22 @@
     background-image: url('../../assets/images/tablet/background-signin-1x.png');
     z-index: -1;
   }
+  @media (prefers-color-scheme: dark) {
+    .container {
+      background-image: url('/src/assets/images/tablet/Dark_theme_background_sign_in_tablet.avif');
+    }
+  }
 
   @media screen and (-webkit-min-device-pixel-ratio: 2),
     (min-resolution: 2dppx),
     (min-resolution: 192dpi) {
     .container {
       background-image: url('../../assets/images/tablet/background-signin-2x.png');
+    }
+    @media (prefers-color-scheme: dark) {
+      .container {
+        background-image: url('/src/assets/images/tablet/Dark_theme_background_sign_in_tablet_2x.avif');
+      }
     }
   }
 
@@ -62,6 +99,23 @@
     z-index: 0;
     object-fit: contain;
     margin-top: 52px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .frame {
+      display: none;
+    }
+    .darkFrame {
+      display: flex;
+      text-align: center;
+      width: 736px;
+      height: 548px;
+      position: relative;
+      left: -290px;
+      z-index: 0;
+      object-fit: contain;
+      margin-top: 52px;
+    }
   }
 }
 
@@ -78,12 +132,37 @@
     flex-direction: row-reverse;
     background-image: url('../../assets/images/desktop/Background-signin-1x.png');
   }
+  @media (prefers-color-scheme: dark) {
+    .container {
+      background-image: url('/src/assets/images/desktop/Dark_theme_bubbles_Background_element_Main_Page_desktop.avif');
+    }
+    .frame {
+      display: none;
+    }
+    .darkFrame {
+      display: flex;
+      text-align: center;
+      width: 916px;
+      height: 618px;
+      position: relative;
+      right: 51px;
+      left: 0;
+      z-index: 0;
+      object-fit: contain;
+      margin-top: o;
+    }
+  }
 
   @media screen and (-webkit-min-device-pixel-ratio: 2),
     (min-resolution: 2dppx),
     (min-resolution: 192dpi) {
     .container {
       background-image: url('../../assets/images/desktop/Background-signin-2x.png');
+    }
+  }
+  @media (prefers-color-scheme: dark) {
+    .container {
+      background-image: url('/src/assets/images/desktop/Dark_theme_bubbles_Background_element_Main_Page_desktop_2x.avif');
     }
   }
 

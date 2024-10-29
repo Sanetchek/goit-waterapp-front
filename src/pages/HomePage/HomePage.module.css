@@ -19,6 +19,24 @@
   background-size: cover;
 }
 
+.darkBottle {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .pageBackground {
+    background-image: url('/src/assets/images/mob/Dark_theme_Background_element_Home_screen_mobile.avif'),
+    url('/src/assets/images/mob/background_element_home_screen_mob@2x.png');
+  }
+  .bottle {
+    display: none;
+  }
+  .darkBottle {
+    display: flex;
+    width: 100%;
+  }
+}
+
 .title {
   display: none;
 }
@@ -27,6 +45,13 @@
   .pageBackground {
     background-image: url('/src/assets/images/tablet/background_element_home_screen_tablet.png'),
       url('/src/assets/images/tablet/background_element_home_screen_tablet@2x.png');
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .pageBackground {
+      background-image: url('/src/assets/images/tablet/Dark_theme_Background_element_Home_Screen_tablet.avif'),
+      url('/src/assets/images/tablet/Dark_theme_Background_element_Home_Screen_tablet_2x.avif');
+    }
   }
 
   .imageModal {
@@ -69,8 +94,11 @@
       url('/src/assets/images/desktop/background_element_main_page@2x.png');
   }
 
-  .pageBackground {
-    background-image: url('/src/assets/images/desktop/background_element_main_page.png'),
-      url('/src/assets/images/desktop/background_element_main_page@2x.png');
+
+  @media (prefers-color-scheme: dark) {
+    .pageBackground {
+      background-image: url('/src/assets/images/desktop/Dark_theme_Background_element_Home_screen_desktop.avif'),
+      url('/src/assets/images/desktop/Dark_theme_Background_element_Home_screen_desktop_2x.avif');
+    }
   }
 }

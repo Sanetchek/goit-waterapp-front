@@ -41,3 +41,14 @@
   line-height: 24px;
   color: #407BFF;
 }
+
+@media (prefers-color-scheme: dark) {
+  .popup {
+    background-color: #2A3052;
+    border: #2A3052;
+    box-shadow: 2px 4px 10px 2px rgba(36, 36, 36, 0.34);
+  }
+  .text {
+    color: #D5DFF5;
+  }
+}

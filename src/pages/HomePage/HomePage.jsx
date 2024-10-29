@@ -20,6 +20,13 @@ import Modal from 'components/Modal/Modal.jsx';
 import TodayListModal from 'components/TodayListModal/TodayListModal.jsx';
 import clsx from 'clsx';
 
+import DarkBottleDesktop from '../../assets/images/desktop/Dark_bottle_home_desc.avif';
+import DarkBottleDesktop2x from '../../assets/images/desktop/Dark_bottle_home_desc_2x.avif';
+import DarkBottleTablet from '../../assets/images/tablet/Dark_bottle_home_tab.avif';
+import DarkBottleTaablet2x from '../../assets/images/tablet/Dark_bottle_home_tab_2x.avif';
+import DarkBottleMobile from '../../assets/images/mob/Dark_bottle_home_mob.avif';
+import DarkBottleMobile2x from '../../assets/images/mob/Dark_bottle_home_mob_2x.avif'
+
 export default function HomePage() {
   const today = new Date();
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
@@ -67,7 +74,7 @@ export default function HomePage() {
           <div className={css.imageModal}>
             <h1 className={css.title}>HomePage</h1>
             <DailyNorma />
-            <picture>
+            <picture className={css.bottle}>
               <source
                 srcSet={`${botleImage1x} 1x, ${botleImage2x} 2x`}
                 media="(min-width: 1440px)"
@@ -81,6 +88,21 @@ export default function HomePage() {
                 media="(max-width: 767px)"
               />
               <img className={css.photo} src={botleImage1x} alt="Bottle" />
+            </picture>
+            <picture className={css.darkBottle}>
+              <source
+              srcSet={`${DarkBottleDesktop} 1x, ${DarkBottleDesktop2x} 2x`}
+              media="(min-width: 1440px)"
+              />
+              <source
+              srcSet={`${DarkBottleTablet} 1x, ${DarkBottleTaablet2x} 2x`}
+              media="(min-width: 768px) and (max-width: 1439px)"
+              />
+              <source
+              srcSet={`${DarkBottleMobile} 1x, ${DarkBottleMobile2x} 2x`}
+              media="(max-width: 767px)"
+              />
+              <img className={css.darkBootle} src={DarkBottleDesktop} alt="Bottle" />
             </picture>
           </div>
           {!userAuthLoading && !userAuthError && (

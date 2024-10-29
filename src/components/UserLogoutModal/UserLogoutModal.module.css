@@ -98,6 +98,9 @@
     border: #2A3052;
     color: #5082F2;
   }
+  .cancelButton:hover {
+    background-color: #1C1D26;
+  }
   .exitConfirmText {
     color: #D5DFF5;
   }
