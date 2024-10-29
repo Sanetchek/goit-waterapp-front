@@ -1,5 +1,5 @@
 import { Form, Formik, Field, ErrorMessage } from 'formik';
-
+import { toast } from 'react-hot-toast';
 import css from '../SigninPage/SigninForm.module.css';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
@@ -14,6 +14,7 @@ export default function ForgotPasswordForm() {
   const handleSubmit = (values, actions) => {
     dispatch(forgotPassword(values));
     actions.resetForm();
+    toast.success('The reset password link was sent to your email!');
   };
 
   return (
