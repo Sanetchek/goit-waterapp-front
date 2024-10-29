@@ -9,7 +9,7 @@ export default function HeaderLogo() {
     <Link to="/" className={css.logo}>
       <picture>
         <source srcSet={`${logo2x} 2x, ${logo} 1x`} />
-        <img className={css.logoImage} src={logo} alt="Logo" />
+        <img className={css.logoImage} src={logo} alt="Logo" width="102" height="48" />
       </picture>
     </Link>
   );
