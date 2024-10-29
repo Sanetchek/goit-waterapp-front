@@ -1,19 +1,11 @@
 import React from 'react';
 import AppBar from '../AppBar/AppBar';
-// import css from './Layout.module.css';
-// import { useSelector } from 'react-redux';
-// import { selectUserThemeColor } from '../../redux/auth/selectors';
-// import clsx from 'clsx';
+import css from './Layout.module.css';
 
 const Layout = ({ children, username }) => {
-  // const themeColor = useSelector(selectUserThemeColor);
-  // const layoutClasses = clsx(
-  //   css.layout,
-  //   themeColor === 'dark' ? css.dark : css.light
-  // );
 
   return (
-    <div>
+    <div className={css.layout}>
       <AppBar username={username} />
       <main>{children}</main>
     </div>
