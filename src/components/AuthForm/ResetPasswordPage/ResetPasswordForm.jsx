@@ -16,8 +16,9 @@ export default function ResetPasswordForm({ token }) {
   const [passwordVisible, setPasswordVisible] = useState(true);
   const dispatch = useDispatch();
 
-  const handleSubmit = (values, actions) => {
-    dispatch(resetPassword({ password: values.password, token }));
+  const handleSubmit = async (values, actions) => {
+    const data = await dispatch(resetPassword({ password: values.password, token }));
+    console.log(data);
     actions.resetForm();
   };
   const togglePasswordVisibility = () => {
