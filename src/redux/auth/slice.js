@@ -45,6 +45,7 @@ const slice = createSlice({
         state.token = action.payload.token;
         state.isLoggedIn = true;
         state.isRefreshing = false;
+        state.resetPassword = false;
       })
       .addCase(signin.rejected, (state, action) => {
         state.loading = false;

@@ -73,7 +73,7 @@ export const App = () => {
             element={
               <RestrictedRoute
                 component={<ResetPasswordPage />}
-                redirectTo="/"
+                redirectTo="/signin"
               />
             }
           />

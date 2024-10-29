@@ -3,8 +3,12 @@ import css from '../SigninPage/SigninForm.module.css';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { resetPassword } from '../../../redux/auth/operations';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import snippets from '../../../assets/images/snippets.svg';
+import { useSelector } from 'react-redux';
+import { selectPasswordReset } from '../../../redux/auth/selectors';
+import { useNavigate } from 'react-router-dom';
+
 const UserSchema = Yup.object().shape({
   password: Yup.string()
     .required('Required')
@@ -21,6 +25,16 @@ export default function ResetPasswordForm({ token }) {
     console.log(data);
     actions.resetForm();
   };
+  const navigate = useNavigate();
+
+  const passwordReset = useSelector(selectPasswordReset);
+
+  useEffect(() => {
+    if (passwordReset) {
+      navigate('/signin');
+    }
+  }, [passwordReset, navigate]);
+
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
