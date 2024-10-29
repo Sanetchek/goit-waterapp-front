@@ -71,7 +71,12 @@ export default function HeaderUserSignIn() {
         </span>
         <span className={css.userAva}>
           {userAvatar ? (
-            <img src={userAvatar} alt="avatar" className={css.avatarImage} />
+            <img
+              src={userAvatar}
+              loading="lazy"
+              alt="avatar"
+              className={css.avatarImage}
+            />
           ) : (
             <div
               className={css.avatarPlaceholder}
