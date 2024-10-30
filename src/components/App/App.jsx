@@ -21,6 +21,9 @@ const SigninPage = lazy(() => import('../../pages/SigninPage/SigninPage'));
 const ForgotPasswordPage = lazy(() =>
   import('../../pages/ForgotPasswordPage/ForgotPasswordPage')
 );
+const ResetPasswordPage = lazy(() =>
+  import('../../pages/ResetPasswordPage/ResetPasswordPage')
+);
 const NotFoundPage = lazy(() =>
   import('../../pages/NotFoundPage/NotFoundPage')
 );
@@ -62,6 +65,15 @@ export const App = () => {
               <RestrictedRoute
                 component={<ForgotPasswordPage />}
                 redirectTo="/"
+              />
+            }
+          />
+          <Route
+            path="/reset-password"
+            element={
+              <RestrictedRoute
+                component={<ResetPasswordPage />}
+                redirectTo="/signin"
               />
             }
           />

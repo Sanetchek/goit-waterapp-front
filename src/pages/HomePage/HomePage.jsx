@@ -87,7 +87,12 @@ export default function HomePage() {
                 srcSet={`${mobileImage1x} 1x, ${mobileImage2x} 2x`}
                 media="(max-width: 767px)"
               />
-              <img className={css.photo} src={botleImage1x} alt="Bottle" />
+              <img
+                className={css.photo}
+                loading="lazy"
+                src={botleImage1x}
+                alt="Bottle"
+              />
             </picture>
             <picture className={css.darkBottle}>
               <source

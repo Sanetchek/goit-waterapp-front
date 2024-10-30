@@ -6,11 +6,6 @@ import * as selectors from '../../redux/water/selectors.js';
 import css from './TodayListModal.module.css';
 import snippet from '../../assets/images/snippets.svg';
 
-function getAmPm(time) {
-  const [hours] = time.split(':').map(Number);
-  return hours >= 12 ? 'PM' : 'AM';
-}
-
 function getCurrentTime() {
   const date = new Date();
   let minutes = Math.round(date.getMinutes() / 5) * 5;
@@ -97,7 +92,7 @@ const TodayListModal = ({ title = '', onSave, previousWaterData }) => {
                   {previousWaterData.amount} ml
                 </span>
                 <span className={css.amPmIndicator}>
-                  {previousWaterData.time} {getAmPm(previousWaterData.time)}
+                  {previousWaterData.time}
                 </span>
               </div>
             )}

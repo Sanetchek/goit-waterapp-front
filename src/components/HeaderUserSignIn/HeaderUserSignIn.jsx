@@ -18,6 +18,23 @@ export default function HeaderUserSignIn() {
     setIsDropdownOpen(false);
   };
 
+  useEffect(() => {
+    const handleClickOutside = event => {
+      const button = document.querySelector(`.${css.button}`);
+      const dropdown = event.target.closest('.dropdown');
+
+      // Close the dropdown if click is outside of both button and dropdown
+      if (isDropdownOpen && !dropdown && !button.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isDropdownOpen]);
+
   const svgClass = clsx('icon-chevron-down', css.svgChevron);
 
   // Function to generate a random color
@@ -47,14 +64,19 @@ export default function HeaderUserSignIn() {
     <div className={css.buttonWrap}>
       <div
         className={css.button}
-        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+        onClick={() => setIsDropdownOpen(prev => !prev)}
       >
         <span className={css.userName}>
           {!userAuthLoading && !userAuthError && username}
         </span>
         <span className={css.userAva}>
           {userAvatar ? (
-            <img src={userAvatar} alt="avatar" className={css.avatarImage} />
+            <img
+              src={userAvatar}
+              loading="lazy"
+              alt="avatar"
+              className={css.avatarImage}
+            />
           ) : (
             <div
               className={css.avatarPlaceholder}
