@@ -3,6 +3,7 @@
 }
 
 svg[class="icon-x"] {
+  fill: #407BFF;
   transform: rotate(360deg);
   transition: all 0.5s;
   transition-timing-function: cubic-bezier(1, 0.8, 0.5, 1);
@@ -156,6 +157,7 @@ svg[class="icon-x"]:hover {
     border: 2px solid #233d73;
   }
   svg[class="icon-x"] {
+    fill: #5082F2;
     transform: rotate(360deg);
 	  transition: all 0.5s;
 	  transition-timing-function: cubic-bezier(1, 0.8, 0.5, 1);
