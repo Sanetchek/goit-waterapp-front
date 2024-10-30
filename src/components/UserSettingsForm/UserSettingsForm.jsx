@@ -6,7 +6,7 @@ import { toast } from 'react-hot-toast';
 import { selectUser } from '../../redux/auth/selectors';
 import css from './UserSettingsForm.module.css';
 import svg from '../../assets/images/snippets.svg';
-import { updateUser, updateAvatar } from '../../redux/user/operations';
+import { updateUser, updateAvatar, getUser } from '../../redux/user/operations';
 
 const UserSettingsForm = ({ onClose }) => {
   const dispatch = useDispatch();
@@ -19,6 +19,12 @@ const UserSettingsForm = ({ onClose }) => {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
 
+  const updateHeader = async () => {
+    console.log('Оновлення заголовка...'); // Лог перед виконанням
+    await dispatch(getUser()); // Оновлюємо заголовок
+    console.log('Заголовок оновлено.'); // Лог після виконання
+  };
+
   useEffect(() => {
     if (avatar) {
       setPreview(avatar);
@@ -30,6 +36,8 @@ const UserSettingsForm = ({ onClose }) => {
   const onFileChange = useCallback(
     async event => {
       const selectedAvatar = event.target.files[0];
+      console.log(selectedAvatar);
+
       if (selectedAvatar) {
         const objectURL = URL.createObjectURL(selectedAvatar);
         setPreview(objectURL);
@@ -55,12 +63,13 @@ const UserSettingsForm = ({ onClose }) => {
       )
     );
 
-    console.log(filteredValues);
-
     // Dispatch the updateUser action with userId and filtered values
     try {
       await dispatch(updateUser({ userId: _id, userData: filteredValues }));
       toast.success('User updated successfully!');
+      updateHeader();
+      onClose();
+      console.log('Модалка закрита, заголовок оновлено.'); // Лог після закриття
     } catch (error) {
       toast.error('Error updating user. Please try again.');
       console.error(error);

@@ -1,24 +1,20 @@
 // redux/slice.js
-import {
-  createSlice
-} from '@reduxjs/toolkit';
-import {
-  updateUser,
-  updateAvatar,
-  getUser
-} from './operations';
-import {
-  logout
-} from '../auth/operations';
+import { createSlice } from '@reduxjs/toolkit';
+import { updateUser, updateAvatar, getUser } from './operations';
+import { logout } from '../auth/operations';
 
 const userSlice = createSlice({
   name: 'user',
   initialState: {
-    user: null,
+    user: { name: '' },
     loading: false,
     error: null,
   },
-  reducers: {},
+  reducers: {
+    updateUserName: (state, action) => {
+      state.user.name = action.payload;
+    },
+  },
   extraReducers: builder => {
     builder
       // Get user by ID
@@ -68,4 +64,5 @@ const userSlice = createSlice({
   },
 });
 
+export const { updateUserName } = userSlice.actions;
 export default userSlice.reducer;

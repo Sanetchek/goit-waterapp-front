@@ -34,7 +34,6 @@ const UserLogoModal = ({ onClose }) => {
   const modalClasses = clsx('dropdown', css.dropdownMenu);
   const menuClasses = clsx('user-menu', css.listCon);
   const menuItemClasses = clsx('user-menu-item', css.menuItem);
-
   return (
     <div className={modalClasses}>
       <ul className={menuClasses} role="menu" aria-label="User Menu">
