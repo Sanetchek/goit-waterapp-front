@@ -278,6 +278,10 @@ ul {
     color: #1C1D26;
     box-shadow: 0 4px 8px 0 rgba(11, 21, 44, 0.34);
   }
+
+  button.btn.btn-blue:hover {
+    border: 2px solid #233d73;
+  }
   .modalHeader h2 {
     color: #D5DFF5;
   }
