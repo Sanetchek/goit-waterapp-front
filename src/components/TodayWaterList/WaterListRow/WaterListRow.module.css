@@ -82,4 +82,10 @@ button:focus {
   .time {
     color: #D5DFF5;
   }
+  .listItem {
+    border-bottom: 1px solid #2A3052;
+  }
+  .listItem:hover {
+    background-color: #2A3052;
+  }
 }

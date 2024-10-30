@@ -23,7 +23,7 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(getUser.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.user = action.payload.data;
         state.loading = false;
       })
       .addCase(getUser.rejected, (state, action) => {
@@ -36,7 +36,6 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(updateUser.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.user = action.payload;
         state.loading = false;
       })

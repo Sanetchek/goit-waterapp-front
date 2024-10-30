@@ -7,6 +7,11 @@
   background-position: bottom;
 }
 
+@media (prefers-color-scheme: dark) {
+  .wellcomeContainer {
+    background-image: url('/src/assets/images/mob/Dark_theme_Background_Main_Page_mobile.avif');
+  }
+}
 .mainWrapperBg {
   display: flex;
   justify-content: center;
@@ -16,7 +21,16 @@
   .wellcomeContainer {
     background-image: url('../../assets/images/mob/background_main_page_mob@2x.png');
   }
+
+  @media (prefers-color-scheme: dark) {
+  .wellcomeContainer {
+    background-image: url('/src/assets/images/mob/Dark_theme_Background_Main_Page_mobile_2x.avif');
+  }
 }
+}
+
+
+
 @media screen and (min-width: 439px) {
   .wellcomeContainer {
     width: 439px;
@@ -27,6 +41,12 @@
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .wellcomeContainer {
     background-image: url('../../assets/images/mob/background_main_page_mob@2x.png');
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .wellcomeContainer {
+      background-image: url('/src/assets/images/mob/Dark_theme_Background_Main_Page_mobile_2x.avif');
+    }
   }
 }
 
@@ -41,14 +61,30 @@
 
     background-image: url('../../assets/images/tablet/background_main_page_tablet.png');
   }
+
+  @media (prefers-color-scheme: dark) {
+  .wellcomeContainer {
+    background-image: url('/src/assets/images/tablet/Dark_theme_Background_Main_Page_tablet.avif');
+  }
 }
+}
+
+
 
 @media (-webkit-min-device-pixel-ratio: 2),
   (min-resolution: 192dpi) and (min-width: 768px) {
   .wellcomeContainer {
     background-image: url('../../assets/images/tablet/background_main_page_tablet@2x.png');
   }
+
+  @media (prefers-color-scheme: dark) {
+  .wellcomeContainer {
+    background-image: url('/src/assets/images/tablet/Dark_theme_Background_Main_Page_tablet_2x.avif');
+  }
 }
+}
+
+
 
 @media screen and (min-width: 1440px) {
   .wellcomeContainer {
@@ -71,7 +107,18 @@
     display: flex;
     justify-content: center;
   }
+
+  @media (prefers-color-scheme: dark) {
+  .wellcomeContainer {
+    background-image: url('/src/assets/images/desktop/Dark_theme_Background_element_Sign_up_desktop.avif');
+  }
+  .mainWrapperBg {
+    background-image: url('/src/assets/images/desktop/Dark_theme_bubbles_Background_element_Main_Page_desktop.avif');
+  }
 }
+}
+
+
 
 @media (-webkit-min-device-pixel-ratio: 2),
   (min-resolution: 192dpi) and (min-width: 1440px) {
@@ -82,4 +129,15 @@
   .mainWrapperBg {
     background-image: url('../../../public/images/Main-imgs/Main-bubbles-bg-desk@2x.png');
   }
+
+  @media (prefers-color-scheme: dark) {
+  .wellcomeContainer {
+    background-image: url('/src/assets/images/desktop/Dark_theme_Background_element_Sign_up_desktop_2x.avif');
+  }
+  .mainWrapperBg {
+    background-image: url('/src/assets/images/desktop/Dark_theme_bubbles_Background_element_Main_Page_desktop_2x.avif');
+  }
 }
+}
+
+

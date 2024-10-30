@@ -45,4 +45,7 @@
       border: #1c1d26;
       color: #5082F2;
     }
+    li[role="menuitem"]:hover {
+      filter: drop-shadow(2px -2px 1px #5082F2);
+    }
   }

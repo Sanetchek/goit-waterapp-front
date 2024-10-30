@@ -24,7 +24,7 @@ export default function HeaderUserSignIn() {
 
   useEffect(() => {
     const handleClickOutside = event => {
-      const button = document.querySelector(`.${css.button}`);
+      const button = document.querySelector('.headerButton');
       const dropdown = event.target.closest('.dropdown');
       // Close the dropdown if click is outside of both button and dropdown
       if (isDropdownOpen && !dropdown && !button.contains(event.target)) {
@@ -66,7 +66,7 @@ export default function HeaderUserSignIn() {
   return (
     <div className={css.buttonWrap}>
       <div
-        className={css.button}
+        className={`headerButton ${css.button}`}
         onClick={() => setIsDropdownOpen(prev => !prev)}
       >
         <span className={css.userName}>
@@ -74,7 +74,12 @@ export default function HeaderUserSignIn() {
         </span>
         <span className={css.userAva}>
           {userAvatar ? (
-            <img src={userAvatar} alt="avatar" className={css.avatarImage} />
+            <img
+              src={userAvatar}
+              loading="lazy"
+              alt="avatar"
+              className={css.avatarImage}
+            />
           ) : (
             <div
               className={css.avatarPlaceholder}
