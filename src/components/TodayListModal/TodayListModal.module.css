@@ -169,6 +169,11 @@
 
 .roundButton:hover {
   background-color: #e0eaff;
+  scale: 1.1;
+  filter: drop-shadow(0 0 0.75rem #407BFF);
+  color: #407BFF;
+  font-size: 24px;
+  font-weight: 700;
 }
 
 .stepInput span {
@@ -242,10 +247,19 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .stepInput span,
+  .stepInput span {
+    background-color: #2A3052;
+    scale: 1.1;
+  }
   .roundButton:hover {
     background-color: #2A3052;
+    scale: 1.1;
+    filter: drop-shadow(0 0 0.75rem #D5DFF5);
+    color: #D5DFF5 !important;
+    font-size: 24px;
+    font-weight: 700;
   }
+
   .roundButton {
     color: #5082F2 !important;
   }
