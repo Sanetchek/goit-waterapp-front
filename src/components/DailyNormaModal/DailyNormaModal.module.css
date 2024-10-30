@@ -74,7 +74,10 @@ svg[class="icon-x"]:hover {
   background: #407bff;
   box-shadow: 0 4px 8px 0 rgba(64, 123, 255, 0.34);
 }
-
+.btnSave:hover {
+  scale: 1.01;
+  box-shadow: 0 4px 14px 0 rgba(64, 123, 255, 0.54);
+}
 .errorMessage {
   margin: 0;
   color: #d8000c;
