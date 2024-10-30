@@ -241,6 +241,9 @@
   .roundButton:hover {
     background-color: #2A3052;
   }
+  .roundButton {
+    color: #5082F2 !important;
+  }
   .roundButton,
   .waterInfoContainer,
   select {
