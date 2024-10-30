@@ -95,11 +95,12 @@
 @media (prefers-color-scheme: dark) {
   .cancelButton {
     background-color: #2A3052;
-    border: #2A3052;
+    border: 2px solid #2A3052;
     color: #5082F2;
   }
   .cancelButton:hover {
     background-color: #1C1D26;
+    border: 2px solid #5082F2;
   }
   .exitConfirmText {
     color: #D5DFF5;
