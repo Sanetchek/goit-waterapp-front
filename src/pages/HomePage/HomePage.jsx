@@ -107,7 +107,7 @@ export default function HomePage() {
               srcSet={`${DarkBottleMobile} 1x, ${DarkBottleMobile2x} 2x`}
               media="(max-width: 767px)"
               />
-              <img className={css.darkBootle} src={DarkBottleDesktop} alt="Bottle" />
+              <img className={css.darkBootle} loading="lazy" src={DarkBottleDesktop} alt="Bottle" />
             </picture>
           </div>
           {!userAuthLoading && !userAuthError && (

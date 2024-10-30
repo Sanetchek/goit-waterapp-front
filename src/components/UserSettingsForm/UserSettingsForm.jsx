@@ -100,6 +100,7 @@ const UserSettingsForm = ({ onClose }) => {
                     <img
                       className={css.image}
                       src={preview}
+                      loading="lazy"
                       alt="User avatar"
                       width="75"
                       height="75"
