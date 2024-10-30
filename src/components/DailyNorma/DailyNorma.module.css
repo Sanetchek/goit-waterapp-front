@@ -5,7 +5,7 @@
   max-width: 168px;
   box-shadow: 0 4px 8px 0 rgba(158, 187, 255, 0.12);
   background: #fff;
-  z-index: 10;
+  z-index: 3;
 }
 
 .title {
