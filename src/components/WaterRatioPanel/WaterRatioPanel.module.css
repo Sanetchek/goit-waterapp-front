@@ -117,6 +117,15 @@
 .addWaterButton:hover {
   background-color: #305edc;
   box-shadow: 0 4px 8px 0 rgba(64, 123, 255, 0.34);
+  font-size: 20px;
+  font-weight: 700;
+}
+.addWaterButton:hover .icon {
+  transform: rotate(0deg);
+  transition-delay: 0;
+  transition: all 0.5s;
+  scale: 1.1;
+  filter: drop-shadow(3px -2px 2px rgba(2, 4, 9, 0.34));
 }
 
 .icon {
@@ -126,6 +135,10 @@
   width: 24px;
   height: 24px;
   margin-right: 10px;
+
+  transform: rotate(180deg);
+  transition: all 0.5s;
+  transition-timing-function: cubic-bezier(1, 0.8, 0.5, 1);
 }
 
 @media screen and (min-width: 768px) {
@@ -163,6 +176,16 @@
   }
   .icon {
     stroke: #1c1d26;
+    transform: rotate(180deg);
+    transition: all 0.5s;
+    transition-timing-function: cubic-bezier(1, 0.8, 0.5, 1);
+  }
+  .addWaterButton:hover .icon {
+    transform: rotate(0deg);
+    transition-delay: 0;
+    transition: all 0.5s;
+    scale: 1.1;
+    filter: drop-shadow(2px -1px 1px rgba(236, 242, 255, 0.8));
   }
   .slider {
     background: #2A3052 !important;

@@ -23,6 +23,10 @@
   display: none;
 }
 
+.bottle {
+  filter: drop-shadow(0px 4px 8px rgba(65, 67, 71, 0.282));
+}
+
 @media (prefers-color-scheme: dark) {
   .pageBackground {
     background-image: url('/src/assets/images/mob/Dark_theme_Background_element_Home_screen_mobile.avif'),
@@ -34,6 +38,7 @@
   .darkBottle {
     display: flex;
     width: 100%;
+    filter: drop-shadow(0px 4px 8px rgba(236, 242, 255, 0.294));
   }
 }
 

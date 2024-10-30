@@ -2,6 +2,18 @@
   width: 256px;
 }
 
+svg[class="icon-x"] {
+  transform: rotate(360deg);
+  transition: all 0.5s;
+  transition-timing-function: cubic-bezier(1, 0.8, 0.5, 1);
+}
+svg[class="icon-x"]:hover {
+  transform: rotate(0deg);
+  transition-delay: 0;
+  transition: all 0.5s;
+  filter: drop-shadow(2px -2px 2px #233d73);
+}
+
 .textBlue {
   color: #407BFF;
   font-size: 18px;
@@ -62,7 +74,10 @@
   background: #407bff;
   box-shadow: 0 4px 8px 0 rgba(64, 123, 255, 0.34);
 }
-
+.btnSave:hover {
+  scale: 1.01;
+  box-shadow: 0 4px 14px 0 rgba(64, 123, 255, 0.54);
+}
 .errorMessage {
   margin: 0;
   color: #d8000c;
@@ -139,7 +154,16 @@
     box-shadow: 2px 4px 10px 2px rgba(30, 108, 244, 0.34);
     border: 2px solid #233d73;
   }
+  svg[class="icon-x"] {
+    transform: rotate(360deg);
+	  transition: all 0.5s;
+	  transition-timing-function: cubic-bezier(1, 0.8, 0.5, 1);
+  }
   svg[class="icon-x"]:hover {
     fill: #D5DFF5;
+    transform: rotate(0deg);
+	  transition-delay: 0;
+	  transition: all 0.5s;
+    filter: drop-shadow(2px -2px 2px #D5DFF5);
   }
 }

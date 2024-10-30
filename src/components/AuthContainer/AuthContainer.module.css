@@ -38,6 +38,7 @@
   text-align: center;
   width: 280px;
   object-fit: cover;
+  filter: drop-shadow(0px 4px 8px rgba(65, 67, 71, 0.282));
 }
 
 @media (prefers-color-scheme: dark) {
@@ -49,6 +50,7 @@
     text-align: center;
     width: 280px;
     object-fit: cover;
+    filter: drop-shadow(0px 4px 8px rgba(236, 242, 255, 0.294));
   }
 }
 
