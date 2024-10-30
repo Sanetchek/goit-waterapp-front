@@ -21,12 +21,10 @@ export const userSettingsFormSchema = yup.object().shape({
   newPassword: yup
     .string()
     .min(8, 'The password must contain at least 4 symbols!')
-    .max(64, 'The password must contain no more than 8 characters!')
-    .required('Please enter a new password!'),
+    .max(64, 'The password must contain no more than 8 characters!'),
   newPasswordRepeat: yup
     .string()
     .min(8, 'The password must contain at least 4 symbols!')
     .max(64, 'The password must contain no more than 8 characters!')
-    .required('Please confirm your new password!')
     .oneOf([yup.ref('newPassword'), null], 'Passwords must match!'),
 });
