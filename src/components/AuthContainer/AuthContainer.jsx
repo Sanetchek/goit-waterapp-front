@@ -12,7 +12,7 @@ const AuthContainer = ({ children }) => {
       <div className={styles.modal}>{children}</div>
       <picture>
         <img className={styles.frame} src={bottle} loading="lazy" alt="signin" srcSet={`${bottlex2} 2x, ${bottle} 1x`}/>
-        <img className={styles.darkFrame} src={darkBottle} loading="lazy" alt="signin" srcset={`${darkBottlex2} 2x, ${darkBottle} 1x`} />
+        <img className={styles.darkFrame} src={darkBottle} loading="lazy" alt="signin" srcSet={`${darkBottlex2} 2x, ${darkBottle} 1x`} />
       </picture>
     </section>
   );
