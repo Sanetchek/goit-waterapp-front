@@ -27,6 +27,8 @@
 
   .cancelButton:hover {
     background-color: #D7E3FF;
+    border: 2px solid #5082F2;
+    box-shadow: 2px 4px 10px 2px rgba(30, 108, 244, 0.34);
   }
 
   .deleteButton {
@@ -40,7 +42,8 @@
   }
 
   .deleteButton:hover {
-    background-color: #EF5050;
+    border: 2px solid #000000;
+    box-shadow: 2px 4px 10px 2px rgba(0, 0, 0, 0.568);
   }
 
 @media screen and (min-width: 320px) {
@@ -100,6 +103,7 @@
     box-shadow: 2px 4px 10px 2px rgba(36, 36, 36, 0.34);
   }
   .cancelButton:hover {
+    color: #D5DFF5 !important;
     background-color: #1C1D26;
     border: 2px solid #5082F2;
     box-shadow: 2px 4px 10px 2px rgba(30, 108, 244, 0.34);

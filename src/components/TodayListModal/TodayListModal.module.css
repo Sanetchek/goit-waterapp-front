@@ -213,6 +213,11 @@
   min-height: 36px;
 }
 
+.saveButtonStyle:hover {
+  scale: 1.01;
+  box-shadow: 0 4px 14px 0 rgba(64, 123, 255, 0.54);
+}
+
 .iconColor {
   fill: #407BFF;
 }

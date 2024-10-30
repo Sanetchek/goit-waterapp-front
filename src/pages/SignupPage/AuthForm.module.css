@@ -107,6 +107,8 @@
 
 .eyeIcon:hover {
   opacity: 1;
+  scale: 1.2;
+  filter: drop-shadow(2px -1px 1px #233d73);
 }
 
 @media (min-width: 768px) {

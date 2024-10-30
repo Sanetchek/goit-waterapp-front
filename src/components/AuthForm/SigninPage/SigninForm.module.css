@@ -57,6 +57,10 @@ input[type='password'] {
   color: #407bff;
   outline: none;
 }
+.password:hover {
+  scale: 1.2 !important;
+  filter: drop-shadow(2px -1px 1px #233d73) !important;
+}
 
 .button {
   display: block;
@@ -75,6 +79,10 @@ input[type='password'] {
   color: #fff;
   border: none;
   margin-bottom: 16px;
+}
+.button:hover {
+  box-shadow: 0 4px 8px 0 rgba(64, 123, 255, 0.34);
+  scale: 1.01;
 }
 .link {
   font-family: 'Roboto', sans-serif;
@@ -166,5 +174,9 @@ input[type='password'] {
   }
   button {
     color: #1C1D26 !important;
+  }
+  .button:hover {
+    box-shadow: 0 4px 8px 0 rgba(64, 123, 255, 0.34);
+    scale: 1.01;
   }
 }

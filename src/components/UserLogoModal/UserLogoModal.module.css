@@ -10,6 +10,10 @@
     right: 0;
   }
 
+  li[role="menuitem"]:hover {
+    filter: drop-shadow(2px -1px 1px #5082F2);
+  }
+
   .listCon {
     list-style: none;
     display: flex;

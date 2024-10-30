@@ -9,7 +9,6 @@ body {
   background-color: transparent !important;
 }
 
-
 /* HTML: <div class="loader"></div>
 .loader {
   font-weight: bold;
@@ -94,6 +93,7 @@ button.btn.btn-red {
 
 button.btn.btn-blue:hover,
 button.btn.btn-red:hover {
+  scale: 1.01;
   box-shadow: 0 4px 14px 0 rgba(64, 123, 255, 0.54);
 }
 
