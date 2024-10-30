@@ -60,14 +60,14 @@ const UserLogoModal = ({ onClose }) => {
         </li>
       </ul>
       {isSettingsModalOpen && (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense>
           <Modal title="Settings" onClose={closeSettingsModal}>
             <UserSettingsForm onClose={closeSettingsModal} />
           </Modal>
         </Suspense>
       )}
       {isLogoutModalOpen && (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense>
           <UserLogoutModal onClose={closeLogoutModal} />
         </Suspense>
       )}
