@@ -11,8 +11,8 @@ const AuthContainer = ({ children }) => {
     <section className={styles.container}>
       <div className={styles.modal}>{children}</div>
       <picture>
-        <img className={styles.frame} src={bottle} alt="signin" srcSet={`${bottlex2} 2x, ${bottle} 1x`}/>
-        <img className={styles.darkFrame} src={darkBottle} alt="signin" srcset={`${darkBottlex2} 2x, ${darkBottle} 1x`} />
+        <img className={styles.frame} src={bottle} loading="lazy" alt="signin" srcSet={`${bottlex2} 2x, ${bottle} 1x`}/>
+        <img className={styles.darkFrame} src={darkBottle} loading="lazy" alt="signin" srcset={`${darkBottlex2} 2x, ${darkBottle} 1x`} />
       </picture>
     </section>
   );
