@@ -20,9 +20,7 @@ const UserSettingsForm = ({ onClose }) => {
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
 
   const updateHeader = async () => {
-    console.log('Оновлення заголовка...'); // Лог перед виконанням
     await dispatch(getUser()); // Оновлюємо заголовок
-    console.log('Заголовок оновлено.'); // Лог після виконання
   };
 
   useEffect(() => {
@@ -68,8 +66,8 @@ const UserSettingsForm = ({ onClose }) => {
       await dispatch(updateUser({ userId: _id, userData: filteredValues }));
       toast.success('User updated successfully!');
       updateHeader();
+      console.log('Форма відправлена', values);
       onClose();
-      console.log('Модалка закрита, заголовок оновлено.'); // Лог після закриття
     } catch (error) {
       toast.error('Error updating user. Please try again.');
       console.error(error);

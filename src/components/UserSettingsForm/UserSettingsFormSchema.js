@@ -11,17 +11,22 @@ export const userSettingsFormSchema = yup.object().shape({
     .required('Please enter your email address.')
     .matches(/^[^@]+@[^@]+\.[^@]+$/, 'Please enter a valid email address.')
     .email('Invalid email.'),
-  gender: yup.string().oneOf(['woman', 'man', ''], 'Gender must be either "woman" or "man".'),
+  gender: yup
+    .string()
+    .oneOf(['woman', 'man', ''], 'Gender must be either "woman" or "man".'),
   password: yup
     .string()
     .min(4, 'The passsword must contain at least 4 symbols!')
     .max(8, 'The password must contain no more than 8 characters!'),
   newPassword: yup
     .string()
-    .min(4, 'The passsword must contain at least 4 symbols!')
-    .max(8, 'The password must contain no more than 8 characters!'),
+    .min(4, 'The password must contain at least 4 symbols!')
+    .max(8, 'The password must contain no more than 8 characters!')
+    .required('Please enter a new password!'),
   newPasswordRepeat: yup
     .string()
-    .min(4, 'The passsword must contain at least 4 symbols!')
-    .max(8, 'The password must contain no more than 8 characters!'),
+    .min(4, 'The password must contain at least 4 symbols!')
+    .max(8, 'The password must contain no more than 8 characters!')
+    .required('Please confirm your new password!')
+    .oneOf([yup.ref('newPassword'), null], 'Passwords must match!'),
 });
