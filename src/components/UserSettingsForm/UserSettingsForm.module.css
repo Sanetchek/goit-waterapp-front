@@ -36,15 +36,6 @@
   cursor: pointer;
 }
 
-.upload:hover {
-  scale: 1.1;
-  filter: drop-shadow(2px -1px 1px rgba(0, 0, 0, 0.8));
-}
-
-.upload:hover .uploadIcon {
-  scale: 1.1;
-}
-
 .imageInput {
   display: none;
 }
@@ -238,11 +229,6 @@
   display: none;
 }
 
-.passwordToggleIcon:hover {
-  scale: 1.2;
-  filter: drop-shadow(2px -1px 1px #233d73);
-}
-
 .btnWrapper {
   max-width: fit-content;
   margin-left: auto;
@@ -397,17 +383,5 @@
   .input,
   .userInput{
     border: 1px solid #2A3052 !important;
-  }
-  .upload:hover {
-    scale: 1.1;
-    filter: drop-shadow(2px -2px 2px #5082F2);
-  }
-
-  .upload:hover .uploadIcon {
-    scale: 1.1;
-  }
-  .passwordToggleIcon:hover {
-    scale: 1.2;
-    filter: drop-shadow(2px -1px 1px #5082F2);
   }
 }
