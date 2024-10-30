@@ -19,10 +19,13 @@ export default function HeaderUserSignIn() {
   };
 
   useEffect(() => {
+    console.log("Оновлене ім'я користувача в заголовку:", username);
+  }, [username]);
+
+  useEffect(() => {
     const handleClickOutside = event => {
       const button = document.querySelector(`.${css.button}`);
       const dropdown = event.target.closest('.dropdown');
-
       // Close the dropdown if click is outside of both button and dropdown
       if (isDropdownOpen && !dropdown && !button.contains(event.target)) {
         setIsDropdownOpen(false);
