@@ -53,7 +53,11 @@ export default function HomePage() {
 
   const handleSave = data => {
     toggleModal(setIsModalOpen)();
-    dispatch(addWaterVolume(data))
+    dispatch(addWaterVolume(data)).then(() => {
+      dispatch(
+        fetchMonthlyWaterConsumption({ year: currentYear, month: currentMonth })
+      );
+    });
   };
 
   const renderModal = () => {

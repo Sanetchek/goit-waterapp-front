@@ -7,6 +7,8 @@ import DeleteEntryModal from '../DeleteEntry/DeleteEntry';
 import TodayListModal from '../../TodayListModal/TodayListModal';
 import {
   deleteWaterVolume,
+  fetchMonthlyWaterConsumption,
+  fetchTodayWaterConsumption,
   updateWaterVolume,
 } from '../../../redux/water/operations';
 
@@ -26,11 +28,33 @@ export default function WaterListRow({ rowData, currentYear, currentMonth }) {
 
   const handleDelete = waterId => {
     dispatch(deleteWaterVolume(waterId))
+      .then(() => {
+        dispatch(fetchTodayWaterConsumption());
+      })
+      .then(() => {
+        dispatch(
+          fetchMonthlyWaterConsumption({
+            year: currentYear,
+            month: currentMonth,
+          })
+        );
+      });
     closeDeleteModal();
   };
 
   const handleEdit = (waterId, data) => {
     dispatch(updateWaterVolume({ id: waterId, updatedData: data }))
+      .then(() => {
+        dispatch(fetchTodayWaterConsumption());
+      })
+      .then(() => {
+        dispatch(
+          fetchMonthlyWaterConsumption({
+            year: currentYear,
+            month: currentMonth,
+          })
+        );
+      });
     closeEditModal();
   };
 
