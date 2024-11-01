@@ -217,6 +217,7 @@ const waterSlice = createSlice({
           dailyNorm: dailyNorm || state.today.dailyNorm,
           notes,
         };
+
         state.isLoading = false;
       })
       .addCase(updateDailyWaterNorm.rejected, (state, action) => {

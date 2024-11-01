@@ -27,18 +27,7 @@ const MonthStatsTable = ({
     onMonthChange(newYear, newMonth);
   };
 
-  useEffect(() => {
-    const fetchData = () => {
-      console.log(
-        'Fetching data for year:',
-        currentYear,
-        'month:',
-        currentMonth
-      );
-    };
-
-    fetchData();
-  }, [currentYear, currentMonth]);
+  useEffect(() => {}, [currentYear, currentMonth]);
 
   useEffect(() => {
     const handleClickOutside = event => {

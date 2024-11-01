@@ -20,3 +20,7 @@ export const selectUserWeight = state => state.auth.user.weight;
 export const selectUserAvatar = state => state.auth?.user?.avatar || null;
 
 export const selectPasswordReset = state => state.auth.resetPassword;
+
+export const selectLoading = state => state.user.loading;
+
+export const selectError = state => state.user.error;

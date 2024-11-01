@@ -18,9 +18,7 @@ export default function HeaderUserSignIn() {
     setIsDropdownOpen(false);
   };
 
-  useEffect(() => {
-    console.log("Оновлене ім'я користувача в заголовку:", username);
-  }, [username]);
+  useEffect(() => {}, [username]);
 
   useEffect(() => {
     const handleClickOutside = event => {

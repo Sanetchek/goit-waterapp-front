@@ -73,7 +73,7 @@ export default function HomePage() {
         <div className={css.box}>
           <div className={css.imageModal}>
             <h1 className={css.title}>HomePage</h1>
-            <DailyNorma />
+            <DailyNorma year={currentYear} month={currentMonth} />
             <picture className={css.bottle}>
               <source
                 srcSet={`${botleImage1x} 1x, ${botleImage2x} 2x`}
@@ -96,18 +96,23 @@ export default function HomePage() {
             </picture>
             <picture className={css.darkBottle}>
               <source
-              srcSet={`${DarkBottleDesktop} 1x, ${DarkBottleDesktop2x} 2x`}
-              media="(min-width: 1440px)"
+                srcSet={`${DarkBottleDesktop} 1x, ${DarkBottleDesktop2x} 2x`}
+                media="(min-width: 1440px)"
               />
               <source
-              srcSet={`${DarkBottleTablet} 1x, ${DarkBottleTaablet2x} 2x`}
-              media="(min-width: 768px) and (max-width: 1439px)"
+                srcSet={`${DarkBottleTablet} 1x, ${DarkBottleTaablet2x} 2x`}
+                media="(min-width: 768px) and (max-width: 1439px)"
               />
               <source
-              srcSet={`${DarkBottleMobile} 1x, ${DarkBottleMobile2x} 2x`}
-              media="(max-width: 767px)"
+                srcSet={`${DarkBottleMobile} 1x, ${DarkBottleMobile2x} 2x`}
+                media="(max-width: 767px)"
               />
-              <img className={css.darkBootle} loading="lazy" src={DarkBottleDesktop} alt="Bottle" />
+              <img
+                className={css.darkBootle}
+                loading="lazy"
+                src={DarkBottleDesktop}
+                alt="Bottle"
+              />
             </picture>
           </div>
           {!userAuthLoading && !userAuthError && (

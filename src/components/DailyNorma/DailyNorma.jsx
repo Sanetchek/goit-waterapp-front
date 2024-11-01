@@ -4,9 +4,9 @@ import css from './DailyNorma.module.css';
 import Modal from 'components/Modal/Modal.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import * as selectors from '../../redux/water/selectors.js';
-import { updateDailyWaterNorm } from '../../redux/water/operations.js';
+import { fetchMonthlyWaterConsumption, updateDailyWaterNorm } from '../../redux/water/operations.js';
 
-export default function DailyNorma() {
+export default function DailyNorma({ year, month }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
   const todaysWaterDailyNorm = useSelector(selectors.selectTodaysWaterDailyNorm);
@@ -22,7 +22,9 @@ export default function DailyNorma() {
 
   const handleSave = (newNorm) => {
     const ml = newNorm * 1000;
-    dispatch(updateDailyWaterNorm({ dailyNormWater: ml }));
+    dispatch(updateDailyWaterNorm({ dailyNormWater: ml })).then(() => {
+      dispatch(fetchMonthlyWaterConsumption({ year, month }));
+    });
   };
 
   return (

@@ -6,7 +6,11 @@ import {
   refreshUser,
   forgotPassword,
   resetPassword,
+  getUser,
+  updateUser,
+  updateAvatar,
 } from './operations';
+import { updateDailyWaterNorm } from '../water/operations';
 
 const slice = createSlice({
   name: 'auth',
@@ -112,6 +116,48 @@ const slice = createSlice({
         state.isRefreshing = false;
         state.error = action.payload;
         state.resetPassword = false;
+      })
+      .addCase(getUser.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.user = action.payload.data;
+        state.loading = false;
+      })
+      .addCase(getUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      // Update user profile
+      .addCase(updateUser.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.user = action.payload.data;
+        state.loading = false;
+      })
+      .addCase(updateUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      // Update avatar
+      .addCase(updateAvatar.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateAvatar.fulfilled, (state, action) => {
+        state.user = action.payload.data;
+        state.loading = false;
+      })
+      .addCase(updateAvatar.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(updateDailyWaterNorm.fulfilled, (state, action) => {
+        state.user = action.payload.data;
+        state.loading = false;
       });
   },
 });

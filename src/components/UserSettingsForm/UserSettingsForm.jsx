@@ -6,7 +6,7 @@ import { toast } from 'react-hot-toast';
 import { selectUser } from '../../redux/auth/selectors';
 import css from './UserSettingsForm.module.css';
 import svg from '../../assets/images/snippets.svg';
-import { updateUser, updateAvatar, getUser } from '../../redux/user/operations';
+import { updateUser, updateAvatar, getUser } from '../../redux/auth/operations';
 
 const UserSettingsForm = ({ onClose }) => {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const UserSettingsForm = ({ onClose }) => {
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
 
   const updateHeader = async () => {
-    await dispatch(getUser());
+    await dispatch(getUser(_id));
   };
 
   useEffect(() => {
@@ -34,7 +34,6 @@ const UserSettingsForm = ({ onClose }) => {
   const onFileChange = useCallback(
     async event => {
       const selectedAvatar = event.target.files[0];
-      console.log('Selected file:', selectedAvatar);
 
       if (selectedAvatar) {
         const objectURL = URL.createObjectURL(selectedAvatar);
@@ -233,12 +232,12 @@ const UserSettingsForm = ({ onClose }) => {
                         }`}
                       />
                     </svg>
-                    <ErrorMessage
-                      name="oldPassword"
-                      component="p"
-                      className={css.errorMessage}
-                    />
                   </div>
+                  <ErrorMessage
+                    name="oldPassword"
+                    component="p"
+                    className={css.errorMessage}
+                  />
                 </div>
 
                 <div className={css.formGroupPassword}>
@@ -262,12 +261,12 @@ const UserSettingsForm = ({ onClose }) => {
                         }`}
                       />
                     </svg>
-                    <ErrorMessage
-                      name="password"
-                      component="p"
-                      className={css.errorMessage}
-                    />
                   </div>
+                  <ErrorMessage
+                    name="password"
+                    component="p"
+                    className={css.errorMessage}
+                  />
                 </div>
 
                 <div className={css.formGroupPassword}>
@@ -291,12 +290,12 @@ const UserSettingsForm = ({ onClose }) => {
                         }`}
                       />
                     </svg>
-                    <ErrorMessage
-                      name="repeatPassword"
-                      component="p"
-                      className={css.errorMessage}
-                    />
                   </div>
+                  <ErrorMessage
+                    name="repeatPassword"
+                    component="p"
+                    className={css.errorMessage}
+                  />
                 </div>
               </div>
             </div>
